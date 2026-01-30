@@ -1,0 +1,20 @@
+{
+  "wd-gee_V1.0_occurr": {
+    "description": "Inland water surface from Landsat – monthly occurrences (30m)",
+    "coverage": "Africa",
+    "available_period": "2019-current",
+    "ref": null
+  },
+  "wd-gee_V1.0_avg": {
+    "description": "Long Term average occurrences (30m)",
+    "coverage": "Africa",
+    "available_period": "1985-2015 (LTA)",
+    "ref": null
+  },
+  "theia-wl_1.0_n.a.": {
+    "description": "Water level over lakes and rivers (CSV Point data)",
+    "coverage": null,
+    "available_period": null,
+    "ref": null
+  }
+}

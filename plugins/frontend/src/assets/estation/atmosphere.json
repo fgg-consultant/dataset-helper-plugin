@@ -1,0 +1,115 @@
+{
+  "cams-bcaod550_1.0_subdaily": {
+    "description": "CAMS subdaily forecast of Black Carbon Aerosol Optical Depth at 550nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-bcaod550_1.0_daily": {
+    "description": "CAMS daily observation of Black Carbon Aerosol Optical Depth at 550nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-bcaod550_1.0_monthly": {
+    "description": "CAMS monthly Black Carbon Aerosol Optical Depth at 550nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+
+  "cams-duaod550_1.0_subdaily": {
+    "description": "CAMS subdaily forecast of Dust aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-duaod550_1.0_daily": {
+    "description": "CAMS daily observation of Dust aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-duaod550_1.0_monthly": {
+    "description": "CAMS monthly Dust aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+
+  "cams-omaod550_1.0_subdaily": {
+    "description": "CAMS subdaily forecast of Organic matter aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-omaod550_1.0_daily": {
+    "description": "CAMS daily observation of Organic matter aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-omaod550_1.0_monthly": {
+    "description": "CAMS monthly Organic matter aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+
+  "cams-pm10_1.0_subdaily": {
+    "description": "CAMS subdaily forecast of Particulate Matter 10um",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-pm10_1.0_daily": {
+    "description": "CAMS daily observation of Particulate Matter 10um",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-pm10_1.0_monthly": {
+    "description": "CAMS monthly Particulate Matter 10um",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+
+  "cams-pm2p5_1.0_subdaily": {
+    "description": "CAMS subdaily forecast of Particulate Matter 2.5um",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-pm2p5_1.0_daily": {
+    "description": "CAMS daily observation of Particulate Matter 2.5um",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-pm2p5_1.0_monthly": {
+    "description": "CAMS monthly Particulate Matter 2.5um",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+
+  "cams-aod550_1.0_subdaily": {
+    "description": "CAMS subdaily forecast of Total aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-aod550_1.0_daily": {
+    "description": "CAMS daily observation of Total aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  },
+  "cams-aod550_1.0_monthly": {
+    "description": "CAMS monthly Total aerosol optical depth at 550 nm",
+    "coverage": "ACP",
+    "available_period": "Refer ADS",
+    "ref": null
+  }
+}

@@ -1,0 +1,767 @@
+{% extends "wagtailadmin/base.html" %}
+{% load static %}
+{% block titletag %}Dataset Helper{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<script type="module" crossorigin src="/static/dataset_helper_plugin/assets/index-BfSNY7gh.js"></script>
+<link rel="stylesheet" crossorigin href="/static/dataset_helper_plugin/assets/index-CPL5XMMd.css">
+
+<style>
+    .tabs {
+        display: flex;
+        gap: 0;
+        margin-bottom: 0;
+        border-bottom: 2px solid #e5e7eb;
+    }
+
+    .tab-button {
+        padding: 12px 24px;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6b7280;
+        transition: all 0.2s;
+    }
+
+    .tab-button:hover {
+        color: #374151;
+        background: #f9fafb;
+    }
+
+    .tab-button.active {
+        color: #059669;
+        border-bottom-color: #059669;
+    }
+
+    .tab-content {
+        display: none;
+        padding: 20px 0;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .bulk-import-container {
+        max-width: 900px;
+    }
+
+    .json-textarea {
+        width: 100%;
+        min-height: 400px;
+        font-family: monospace;
+        font-size: 13px;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        resize: vertical;
+    }
+
+    .json-textarea:focus {
+        outline: none;
+        border-color: #059669;
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    }
+
+    .import-button {
+        padding: 10px 24px;
+        background: #059669;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.2s;
+    }
+
+    .import-button:hover {
+        background: #047857;
+    }
+
+    .import-button:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+    }
+
+    .danger-button {
+        padding: 10px 24px;
+        background: #dc2626;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.2s;
+    }
+
+    .danger-button:hover {
+        background: #b91c1c;
+    }
+
+    .danger-button:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+    }
+
+    .danger-zone {
+        margin-top: 40px;
+        padding: 20px;
+        border: 2px solid #fca5a5;
+        border-radius: 8px;
+        background: #fef2f2;
+    }
+
+    .danger-zone h3 {
+        color: #991b1b;
+        margin-top: 0;
+    }
+
+    .results-panel {
+        margin-top: 20px;
+        padding: 16px;
+        border-radius: 6px;
+        display: none;
+    }
+
+    .results-panel.visible {
+        display: block;
+    }
+
+    .results-panel.success {
+        background: #d1fae5;
+        border: 1px solid #6ee7b7;
+    }
+
+    .results-panel.error {
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+    }
+
+    .results-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+        margin-top: 12px;
+    }
+
+    .result-stat {
+        background: white;
+        padding: 12px;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .result-stat .number {
+        font-size: 24px;
+        font-weight: bold;
+        color: #059669;
+    }
+
+    .result-stat .label {
+        font-size: 12px;
+        color: #6b7280;
+    }
+
+    .errors-list {
+        margin-top: 12px;
+        padding: 12px;
+        background: white;
+        border-radius: 4px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .errors-list li {
+        font-size: 13px;
+        color: #dc2626;
+        margin-bottom: 4px;
+    }
+
+    .sample-config {
+        margin-top: 16px;
+        padding: 12px;
+        background: #f3f4f6;
+        border-radius: 6px;
+    }
+
+    .sample-config summary {
+        cursor: pointer;
+        font-weight: 500;
+        color: #374151;
+    }
+
+    .sample-config pre {
+        margin-top: 12px;
+        padding: 12px;
+        background: #1f2937;
+        color: #e5e7eb;
+        border-radius: 4px;
+        overflow-x: auto;
+        font-size: 12px;
+    }
+
+    .loading-spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #ffffff;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin-right: 8px;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% include "wagtailadmin/shared/header.html" with title="Dataset helper" icon="globe" %}
+
+<div class="nice-padding">
+    <!-- Tab Navigation -->
+    <div class="tabs">
+        <button class="tab-button active" data-tab="wms-wizard">WMS Wizard</button>
+        <button class="tab-button" data-tab="datasets-list">Existing Datasets</button>
+        <button class="tab-button" data-tab="bulk-import">Bulk Import</button>
+    </div>
+
+    <!-- WMS Wizard Tab (Vue App) -->
+    <div id="wms-wizard" class="tab-content active">
+        <div id="app"></div>
+    </div>
+
+    <!-- Existing Datasets Tab -->
+    <div id="datasets-list" class="tab-content">
+        <!-- Categories Section -->
+        <h2>Categories</h2>
+        {% if categories %}
+        <table class="listing" style="margin-bottom: 30px;">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Icon</th>
+                <th>Subcategories</th>
+                <th>Active</th>
+                <th>Public</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.title }}</td>
+                <td><code>{{ category.icon }}</code></td>
+                <td>{{ category.sub_categories.count }}</td>
+                <td>{{ category.active|yesno:'Yes,No' }}</td>
+                <td>{{ category.public|yesno:'Yes,No' }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No categories found.</p>
+        {% endif %}
+
+        <!-- Datasets Section -->
+        <h2>Datasets</h2>
+        {% if datasets %}
+        <table class="listing">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Type</th>
+                <th>Published</th>
+                <th>Public</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dataset in datasets %}
+            <tr>
+                <td>{{ dataset.title }}</td>
+                <td>{{ dataset.category }}</td>
+                <td>{{ dataset.sub_category }}</td>
+                <td>{{ dataset.get_layer_type_display }}</td>
+                <td>{{ dataset.published|yesno:'Yes,No' }}</td>
+                <td>{{ dataset.public|yesno:'Yes,No' }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No datasets found.</p>
+        {% endif %}
+    </div>
+
+    <!-- Bulk Import Tab -->
+    <div id="bulk-import" class="tab-content">
+        <div class="bulk-import-container">
+            <h2>Bulk Import</h2>
+            <p>Import multiple categories, subcategories, and datasets from a JSON configuration file.</p>
+
+            <details class="sample-config">
+                <summary>View sample JSON format</summary>
+                <pre>{
+  "categories": [
+    {
+      "title": "Vegetation",
+      "icon": "leaf",
+      "subcategories": [
+        {
+          "title": "NDVI Products",
+          "datasets": [
+            {
+              "title": "NDVI from CGLS (1km)",
+              "description": "Normalized Difference Vegetation Index",
+              "multi_temporal": true,
+              "metadata": {
+                "title": "NDVI from CGLS",
+                "function": "Vegetation greenness indicator",
+                "resolution": "1km",
+                "geographic_coverage": "Africa",
+                "source": "Copernicus Global Land Service",
+                "frequency_of_update": "Dekadal"
+              },
+              "layers": [
+                {
+                  "type": "wms",
+                  "title": "NDVI Default",
+                  "layer_name": "vgt-ndvi_vgt-pv-olci_ndvi",
+                  "wms_url": "https://estation.jrc.ec.europa.eu/geoserver/wms",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+                <div style="margin-top: 12px; display: flex; gap: 12px;">
+                    <button id="copy-sample-button" class="import-button" style="background: #2563eb;" onclick="copySampleJson()">
+                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span id="copy-button-text">Copy</span>
+                    </button>
+                </div>
+            </details>
+
+            <div style="margin-top: 20px;">
+                <label for="json-config" style="display: block; margin-bottom: 8px; font-weight: 500;">
+                    JSON Configuration
+                </label>
+                <textarea id="json-config" class="json-textarea" placeholder="Paste your JSON configuration here..."></textarea>
+            </div>
+
+            <div style="margin-top: 16px; display: flex; gap: 12px; align-items: center;">
+                <button id="import-button" class="import-button" onclick="runBulkImport()">
+                    Import
+                </button>
+                <button id="validate-button" class="import-button" style="background: #6b7280;" onclick="validateJson()">
+                    Validate JSON
+                </button>
+                <span id="validation-message" style="font-size: 14px;"></span>
+            </div>
+
+            <div id="results-panel" class="results-panel">
+                <h3 id="results-title"></h3>
+                <div id="results-summary" class="results-summary"></div>
+                <div id="errors-container" style="display: none;">
+                    <h4 style="margin-top: 16px;">Warnings / Skipped Items:</h4>
+                    <ul id="errors-list" class="errors-list"></ul>
+                </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="danger-zone">
+                <h3>Danger Zone</h3>
+                <p style="margin-bottom: 16px;">
+                    This will permanently delete <strong>all datasets, subcategories, and categories</strong>.
+                    This action cannot be undone.
+                </p>
+                <button id="clear-all-button" class="danger-button" onclick="clearAll()">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                    Clear All Datasets & Categories
+                </button>
+                <div id="clear-results-panel" class="results-panel" style="margin-top: 16px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  // Get CSRF token from cookie
+  function getCookie(name) {
+    let cookieValue = null
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';')
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim()
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+          break
+        }
+      }
+    }
+    return cookieValue
+  }
+
+  // Sample JSON for copying
+  const sampleJson = {
+    "categories": [
+      {
+        "title": "Vegetation",
+        "icon": "leaf",
+        "subcategories": [
+          {
+            "title": "NDVI Products",
+            "datasets": [
+              {
+                "title": "NDVI from CGLS (1km)",
+                "description": "Normalized Difference Vegetation Index",
+                "multi_temporal": true,
+                "metadata": {
+                  "title": "NDVI from CGLS",
+                  "function": "Vegetation greenness indicator",
+                  "resolution": "1km",
+                  "geographic_coverage": "Africa",
+                  "source": "Copernicus Global Land Service",
+                  "frequency_of_update": "Dekadal"
+                },
+                "layers": [
+                  {
+                    "type": "wms",
+                    "title": "NDVI Default",
+                    "layer_name": "vgt-ndvi_vgt-pv-olci_ndvi",
+                    "wms_url": "https://estation.jrc.ec.europa.eu/geoserver/wms",
+                    "default": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+
+  // Copy sample JSON to clipboard
+  async function copySampleJson() {
+    const buttonText = document.getElementById('copy-button-text')
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(sampleJson, null, 2))
+      buttonText.textContent = 'Copied!'
+      setTimeout(() => {
+        buttonText.textContent = 'Copy'
+      }, 2000)
+    } catch (err) {
+      buttonText.textContent = 'Failed'
+      setTimeout(() => {
+        buttonText.textContent = 'Copy'
+      }, 2000)
+    }
+  }
+
+  // Tab switching logic
+  document.querySelectorAll('.tab-button').forEach(button => {
+    button.addEventListener('click', function() {
+      // Remove active class from all buttons and contents
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'))
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'))
+
+      // Add active class to clicked button and corresponding content
+      this.classList.add('active')
+      const tabId = this.getAttribute('data-tab')
+      document.getElementById(tabId).classList.add('active')
+    })
+  })
+
+  // Validate JSON
+  function validateJson() {
+    const textarea = document.getElementById('json-config')
+    const message = document.getElementById('validation-message')
+
+    try {
+      const config = JSON.parse(textarea.value)
+
+      if (!config.categories || !Array.isArray(config.categories) || config.categories.length === 0) {
+        message.innerHTML = '<span style="color: #dc2626;">Missing or empty categories array</span>'
+        return null
+      }
+
+      // Count items
+      let categoryCount = config.categories.length
+      let subcategoryCount = 0
+      let datasetCount = 0
+      let layerCount = 0
+
+      config.categories.forEach(cat => {
+        if (cat.subcategories) {
+          subcategoryCount += cat.subcategories.length
+          cat.subcategories.forEach(sub => {
+            if (sub.datasets) {
+              datasetCount += sub.datasets.length
+              sub.datasets.forEach(ds => {
+                if (ds.layers) {
+                  layerCount += ds.layers.length
+                }
+              })
+            }
+          })
+        }
+      })
+
+      message.innerHTML = `<span style="color: #059669;">Valid: ${categoryCount} categories, ${subcategoryCount} subcategories, ${datasetCount} datasets, ${layerCount} layers</span>`
+      return config
+
+    } catch (e) {
+      message.innerHTML = `<span style="color: #dc2626;">Invalid JSON: ${e.message}</span>`
+      return null
+    }
+  }
+
+  // Run bulk import
+  async function runBulkImport() {
+    const config = validateJson()
+    if (!config) return
+
+    const button = document.getElementById('import-button')
+    const resultsPanel = document.getElementById('results-panel')
+
+    // Show loading state
+    button.disabled = true
+    button.innerHTML = '<span class="loading-spinner"></span>Importing...'
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:bulk_import" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(config),
+        credentials: 'include'
+      })
+
+      const data = await response.json()
+
+      // Show results
+      resultsPanel.classList.add('visible')
+
+      if (data.status === 'success') {
+        resultsPanel.classList.remove('error')
+        resultsPanel.classList.add('success')
+        document.getElementById('results-title').textContent = data.message
+
+        // Show stats
+        document.getElementById('results-summary').innerHTML = `
+          <div class="result-stat">
+            <div class="number">${data.categories_created}</div>
+            <div class="label">Categories</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">${data.subcategories_created}</div>
+            <div class="label">Subcategories</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">${data.datasets_created}</div>
+            <div class="label">Datasets</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">${data.layers_created}</div>
+            <div class="label">Layers</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">${data.metadata_created || 0}</div>
+            <div class="label">Metadata</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">${data.datasets_skipped}</div>
+            <div class="label">Skipped</div>
+          </div>
+        `
+
+        // Show errors/warnings if any
+        if (data.errors && data.errors.length > 0) {
+          document.getElementById('errors-container').style.display = 'block'
+          document.getElementById('errors-list').innerHTML = data.errors.map(e => `<li>${e}</li>`).join('')
+        } else {
+          document.getElementById('errors-container').style.display = 'none'
+        }
+
+      } else {
+        resultsPanel.classList.remove('success')
+        resultsPanel.classList.add('error')
+        document.getElementById('results-title').textContent = 'Import Failed'
+        document.getElementById('results-summary').innerHTML = `<p>${data.message}</p>`
+        document.getElementById('errors-container').style.display = 'none'
+      }
+
+    } catch (error) {
+      resultsPanel.classList.add('visible', 'error')
+      resultsPanel.classList.remove('success')
+      document.getElementById('results-title').textContent = 'Import Error'
+      document.getElementById('results-summary').innerHTML = `<p>${error.message}</p>`
+    }
+
+    // Reset button
+    button.disabled = false
+    button.innerHTML = 'Import'
+  }
+
+  // Clear all datasets and categories
+  async function clearAll() {
+    const confirmed = confirm(
+      'Are you sure you want to delete ALL datasets, subcategories, and categories?\n\n' +
+      'This action CANNOT be undone!'
+    )
+
+    if (!confirmed) return
+
+    // Double confirmation for safety
+    const doubleConfirmed = confirm(
+      'This is your LAST CHANCE to cancel.\n\n' +
+      'Click OK to permanently delete all data, or Cancel to abort.'
+    )
+
+    if (!doubleConfirmed) return
+
+    const button = document.getElementById('clear-all-button')
+    const resultsPanel = document.getElementById('clear-results-panel')
+
+    // Show loading state
+    button.disabled = true
+    button.innerHTML = '<span class="loading-spinner"></span>Clearing...'
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:clear_all" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        credentials: 'include'
+      })
+
+      const data = await response.json()
+
+      resultsPanel.classList.add('visible')
+
+      if (data.status === 'success') {
+        resultsPanel.classList.remove('error')
+        resultsPanel.classList.add('success')
+        resultsPanel.innerHTML = `
+          <h4 style="color: #059669; margin-top: 0;">All data cleared successfully!</h4>
+          <div class="results-summary">
+            <div class="result-stat">
+              <div class="number">${data.deleted.categories}</div>
+              <div class="label">Categories Deleted</div>
+            </div>
+            <div class="result-stat">
+              <div class="number">${data.deleted.subcategories}</div>
+              <div class="label">Subcategories Deleted</div>
+            </div>
+            <div class="result-stat">
+              <div class="number">${data.deleted.datasets}</div>
+              <div class="label">Datasets Deleted</div>
+            </div>
+            <div class="result-stat">
+              <div class="number">${data.deleted.wms_layers}</div>
+              <div class="label">WMS Layers Deleted</div>
+            </div>
+          </div>
+          <p style="margin-top: 16px;">
+            <a href="javascript:window.location.reload()" style="color: #059669;">Refresh the page</a> to see the updated state.
+          </p>
+        `
+      } else {
+        resultsPanel.classList.remove('success')
+        resultsPanel.classList.add('error')
+        resultsPanel.innerHTML = `<p style="color: #dc2626;">Error: ${data.message}</p>`
+      }
+
+    } catch (error) {
+      resultsPanel.classList.add('visible', 'error')
+      resultsPanel.classList.remove('success')
+      resultsPanel.innerHTML = `<p style="color: #dc2626;">Error: ${error.message}</p>`
+    }
+
+    // Reset button
+    button.disabled = false
+    button.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        <line x1="10" y1="11" x2="10" y2="17"></line>
+        <line x1="14" y1="11" x2="14" y2="17"></line>
+      </svg>
+      Clear All Datasets & Categories
+    `
+  }
+
+  // Add Dataset form handler (existing Vue integration)
+  window.addEventListener('message', async function (event) {
+    if (event.data.type !== 'vue-add-dataset') return
+    const dataset = event.data.dataset
+    const {name, title} = dataset.layer
+    const datasetTitle = title
+    const layerTitle = title
+    const layerName = name
+    const wmsUrl = dataset.url
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+
+      const response = await fetch('{% url "dataset_helper_plugin:vue_action" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+          title: datasetTitle,
+          category_id: {{ default_category_id|default:'null' }},
+          sub_category_id: {{ default_subcategory_id|default:'null' }},
+          layer_title: layerTitle,
+          layer_name: layerName,
+          wms_url: wmsUrl
+        }),
+        credentials: 'include'
+      })
+
+
+      const data = await response.json()
+
+      if (data.status === 'success') {
+        alert(data.message + '\nDataset ID: ' + data.dataset_id +
+          (data.layer_id ? '\nLayer ID: ' + data.layer_id : ''))
+        // Reload the page to show the new dataset
+        window.location.reload()
+      } else {
+        alert('Error: ' + data.message)
+      }
+    } catch (error) {
+      alert('Error creating dataset: ' + error.message)
+      console.error('Error:', error)
+    }
+  })
+</script>
+{% endblock %}

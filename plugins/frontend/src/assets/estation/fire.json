@@ -1,0 +1,8 @@
+{
+  "modis-firms_V6.1_1day": {
+    "description": "Daily Active Fires at 1 km resolution",
+    "coverage": "Africa",
+    "available_period": "2021-current",
+    "ref": null
+  }
+}

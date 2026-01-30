@@ -1,0 +1,246 @@
+{
+  "ascat-swi_V3.1_swi": {
+    "description": "Soil Water Index - Every day product (0.1 degree)",
+    "coverage": "Global",
+    "available_period": "2019-current",
+    "ref": null
+  },
+
+  "cpc-sm_1.0_sm": {
+    "description": "Soil Moisture – Monthly product (0.5 degree)",
+    "coverage": "Global",
+    "available_period": "2012-current",
+    "ref": null
+  },
+
+  "lsasaf-et_Undefined_et": {
+    "description": "Evapotranspiration 30mins product (1km)",
+    "coverage": "MSG-disk",
+    "available_period": "NA",
+    "ref": null
+  },
+
+  "lsasaf-lst_Undefined_lst": {
+    "description": "Land Surface temperature 15mins product (1km)",
+    "coverage": "MSG-disk",
+    "available_period": "NA",
+    "ref": null
+  },
+
+  "era-hourly-ssrd_1.0_ssrd": {
+    "description": "ERA5 hourly Surface solar radiation downwards (25km)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+
+  "era-hourly-10uwind_1.0_10uwind": {
+    "description": "ERA5 hourly 10m u component of wind (25km)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+
+  "era-hourly-10vwind_1.0_10vwind": {
+    "description": "ERA5 hourly 10m v component of wind (25km)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+
+  "s51-monthly-10mws_1.0_10mws": {
+    "description": "Seasonal forecast - ECMWF system 51 - monthly mean of 10m Wind Speed (1 degree)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+
+  "s51-monthly-mslp_1.0_mslp": {
+    "description": "Seasonal forecast - ECMWF system 51 - monthly mean of Mean sea level pressure (1 degree)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+
+  "s51-monthly-ssrd_1.0_ssrd": {
+    "description": "Seasonal forecast - ECMWF system 51 - monthly mean of Surface solar radiation downwards (1 degree)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+
+  "s2-l1c_V1.0_N/A": {
+    "description": "Sentinel 2 L1C products from SentinelSat API",
+    "coverage": "NA",
+    "available_period": "NA",
+    "ref": null
+  },
+
+  "gdo-tws_V1.1.0_twsan": {
+    "description": "GRACE Total Water Storage Anomaly (1deg)",
+    "coverage": "Global",
+    "available_period": "2002-current",
+    "ref": null
+  },
+
+  "gdo-sma_V3.0.1_sma": {
+    "description": "Ensemble Soil Moisture Anomaly (0.1 degree)",
+    "coverage": "Global",
+    "available_period": "2023-current",
+    "ref": null
+  },
+
+  "cdas-dekad-mslp_1.0_mslp": {
+    "description": "NCEP-NCAR CDAS dekad Mean Sea level Pressure (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "cdas-dekad-geopt_1.0_geopt-500": {
+    "description": "NCEP-NCAR CDAS dekad Geopotential height data @ 500 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "cdas-dekad-rhum_1.0_rhum-700": {
+    "description": "NCEP-NCAR CDAS dekad Relative humidity data @ 700 & 850 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "cdas-dekad-rhum_1.0_rhum-850": {
+    "description": "NCEP-NCAR CDAS dekad Relative humidity data @ 700 & 850 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "cdas-dekad-vwind_1.0_vwind-200": {
+    "description": "NCEP-NCAR CDAS dekad V:meridional wind data @ 200, 700, 850 & 925 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "cdas-dekad-vwind_1.0_vwind-700": {
+    "description": "NCEP-NCAR CDAS dekad V:meridional wind data @ 200, 700, 850 & 925 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "cdas-dekad-vwind_1.0_vwind-850": {
+    "description": "NCEP-NCAR CDAS dekad V:meridional wind data @ 200, 700, 850 & 925 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "cdas-dekad-vwind_1.0_vwind-925": {
+    "description": "NCEP-NCAR CDAS dekad V:meridional wind data @ 200, 700, 850 & 925 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "cdas-dekad-uwind_1.0_uwind-200": {
+    "description": "NCEP-NCAR CDAS dekad U: Zonal wind data @ 200, 700, 850 & 925 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "cdas-dekad-uwind_1.0_uwind-700": {
+    "description": "NCEP-NCAR CDAS dekad U: Zonal wind data @ 200, 700, 850 & 925 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "cdas-dekad-uwind_1.0_uwind-850": {
+    "description": "NCEP-NCAR CDAS dekad U: Zonal wind data @ 200, 700, 850 & 925 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "cdas-dekad-uwind_1.0_uwind-925": {
+    "description": "NCEP-NCAR CDAS dekad U: Zonal wind data @ 200, 700, 850 & 925 hPa (2.5 deg)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "era5-hourly-mslp_1.0_mslp": {
+    "description": "ERA5 hourly Mean Sea level Pressure (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "era5-hourly-geopt_1.0_geopt-500": {
+    "description": "ERA5 hourly Geopotential height data @ 500 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "era5-hourly-rhum_1.0_rhum-700": {
+    "description": "ERA5 hourly Relative humidity data @ 700 & 850 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "era5-hourly-rhum_1.0_rhum-850": {
+    "description": "ERA5 hourly Relative humidity data @ 700 & 850 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "era5-hourly-vwind_1.0_vwind-200": {
+    "description": "ERA5 hourly V:meridional wind data @ 200, 700, 850 & 925 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "era5-hourly-vwind_1.0_vwind-700": {
+    "description": "ERA5 hourly V:meridional wind data @ 200, 700, 850 & 925 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "era5-hourly-vwind_1.0_vwind-850": {
+    "description": "ERA5 hourly V:meridional wind data @ 200, 700, 850 & 925 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "era5-hourly-vwind_1.0_vwind-925": {
+    "description": "ERA5 hourly V:meridional wind data @ 200, 700, 850 & 925 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+
+  "era5-hourly-uwind_1.0_uwind-200": {
+    "description": "ERA5 hourly U: Zonal wind data @ 200, 700, 850 & 925 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "era5-hourly-uwind_1.0_uwind-700": {
+    "description": "ERA5 hourly U: Zonal wind data @ 200, 700, 850 & 925 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "era5-hourly-uwind_1.0_uwind-850": {
+    "description": "ERA5 hourly U: Zonal wind data @ 200, 700, 850 & 925 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  },
+  "era5-hourly-uwind_1.0_uwind-925": {
+    "description": "ERA5 hourly U: Zonal wind data @ 200, 700, 850 & 925 hPa (25km)",
+    "coverage": "ACP",
+    "available_period": "1991-current",
+    "ref": null
+  }
+}

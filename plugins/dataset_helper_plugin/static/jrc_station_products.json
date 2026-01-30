@@ -1,0 +1,2951 @@
+{
+  "success": "true",
+  "total": 210,
+  "ServerURL": "localhost",
+  "SRS": [
+    "EPSG:4326",
+    "EPSG:3857"
+  ],
+  "products": [
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_asap-fpar_1.0_zfpar",
+        "localhost/mobile-app/describeLayer?product_code=asap-fpar&version=1.0&sub_product_code=zfpar&mapset=VIIRS-Global-500m"
+      ],
+      "descriptive_name": "JRC/ASAP FPAR : 10day FPAR Z-score",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_asap-fpar_1.0_zfpar",
+      "product_id": "layer_asap-fpar_1.0_zfpar",
+      "resource_url": "https://joint-research-centre.ec.europa.eu/monitoring-agricultural-resources-mars_en",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=asap-fpar&version=1.0&subproductcode=zfpar&mapsetcode=VIIRS-Global-500m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_asap-fpar_1.0_zfpar"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_asap-fpar_1.0_zfparc",
+        "localhost/mobile-app/describeLayer?product_code=asap-fpar&version=1.0&sub_product_code=zfparc&mapset=VIIRS-Global-500m"
+      ],
+      "descriptive_name": "JRC/ASAP FPAR : 10day Z-score of the cumulative FPAR over the growing season period",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_asap-fpar_1.0_zfparc",
+      "product_id": "layer_asap-fpar_1.0_zfparc",
+      "resource_url": "https://joint-research-centre.ec.europa.eu/monitoring-agricultural-resources-mars_en",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=asap-fpar&version=1.0&subproductcode=zfparc&mapsetcode=VIIRS-Global-500m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_asap-fpar_1.0_zfparc"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_asap-fpar_1.0_fpard",
+        "localhost/mobile-app/describeLayer?product_code=asap-fpar&version=1.0&sub_product_code=fpard&mapset=VIIRS-Global-500m"
+      ],
+      "descriptive_name": "JRC/ASAP FPAR : 10day FPAR difference",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_asap-fpar_1.0_fpard",
+      "product_id": "layer_asap-fpar_1.0_fpard",
+      "resource_url": "https://joint-research-centre.ec.europa.eu/monitoring-agricultural-resources-mars_en",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=asap-fpar&version=1.0&subproductcode=fpard&mapsetcode=VIIRS-Global-500m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_asap-fpar_1.0_fpard"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_asap-fpar_1.0_rfparc",
+        "localhost/mobile-app/describeLayer?product_code=asap-fpar&version=1.0&sub_product_code=rfparc&mapset=VIIRS-Global-500m"
+      ],
+      "descriptive_name": "JRC/ASAP FPAR : 10day FAPAR Relative difference over the growing season period",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_asap-fpar_1.0_rfparc",
+      "product_id": "layer_asap-fpar_1.0_rfparc",
+      "resource_url": "https://joint-research-centre.ec.europa.eu/monitoring-agricultural-resources-mars_en",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=asap-fpar&version=1.0&subproductcode=rfparc&mapsetcode=VIIRS-Global-500m&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_asap-fpar_1.0_rfparc"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_asap-fpar_1.0_fpar",
+        "localhost/mobile-app/describeLayer?product_code=asap-fpar&version=1.0&sub_product_code=fpar&mapset=VIIRS-Global-500m"
+      ],
+      "descriptive_name": "JRC/ASAP FPAR : 10day FPAR",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_asap-fpar_1.0_fpar",
+      "product_id": "layer_asap-fpar_1.0_fpar",
+      "resource_url": "https://joint-research-centre.ec.europa.eu/monitoring-agricultural-resources-mars_en",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=asap-fpar&version=1.0&subproductcode=fpar&mapsetcode=VIIRS-Global-500m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_asap-fpar_1.0_fpar"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-fapar_1.0_fpanv",
+        "localhost/mobile-app/describeLayer?product_code=gdo-fapar&version=1.0&sub_product_code=fpanv&mapset=MODIS-ACP-10km"
+      ],
+      "descriptive_name": "JRC/GDO FAPAR : 10day FAPAR Anomaly from VIIRS",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-fapar_1.0_fpanv",
+      "product_id": "layer_gdo-fapar_1.0_fpanv",
+      "resource_url": "https://drought.emergency.copernicus.eu/data/factsheets/factsheet_fapar_viirs.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-fapar&version=1.0&subproductcode=fpanv&mapsetcode=MODIS-ACP-10km&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-fapar_1.0_fpanv"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-fapar_1.0_fparv",
+        "localhost/mobile-app/describeLayer?product_code=gdo-fapar&version=1.0&sub_product_code=fparv&mapset=MODIS-ACP-10km"
+      ],
+      "descriptive_name": "JRC/GDO FAPAR : 10day FAPAR from VIIRS",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-fapar_1.0_fparv",
+      "product_id": "layer_gdo-fapar_1.0_fparv",
+      "resource_url": "https://drought.emergency.copernicus.eu/data/factsheets/factsheet_fapar_viirs.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-fapar&version=1.0&subproductcode=fparv&mapsetcode=MODIS-ACP-10km&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-fapar_1.0_fparv"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-rdri_V2.3.2_rdria",
+        "localhost/mobile-app/describeLayer?product_code=gdo-rdri&version=V2.3.2&sub_product_code=rdria&mapset=GPCC-Global-1deg"
+      ],
+      "descriptive_name": "Risk of Drought Impacts for Agriculture (RDrI-Agri) : Risk of Drought Impacts for Agriculture",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-rdri_V2.3.2_rdria",
+      "product_id": "layer_gdo-rdri_V2.3.2_rdria",
+      "resource_url": "https://www.sciencedirect.com/science/article/pii/S0959378016300565",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-rdri&version=V2.3.2&subproductcode=rdria&mapsetcode=GPCC-Global-1deg&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-rdri_V2.3.2_rdria"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-rdri_V2.3.2_rdria",
+        "localhost/mobile-app/describeLayer?product_code=gdo-rdri&version=V2.3.2&sub_product_code=rdria&mapset=GPCC-Africa-1deg"
+      ],
+      "descriptive_name": "Risk of Drought Impacts for Agriculture (RDrI-Agri) : Risk of Drought Impacts for Agriculture",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-rdri_V2.3.2_rdria",
+      "product_id": "layer_gdo-rdri_V2.3.2_rdria",
+      "resource_url": "https://www.sciencedirect.com/science/article/pii/S0959378016300565",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-rdri&version=V2.3.2&subproductcode=rdria&mapsetcode=GPCC-Africa-1deg&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-rdri_V2.3.2_rdria"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_s3-ba_v3.1_ba-month",
+        "localhost/mobile-app/describeLayer?product_code=s3-ba&version=v3.1&sub_product_code=ba-month&mapset=SPOTV-ACP-300m"
+      ],
+      "descriptive_name": "Sentinel3 Burnt Area 300m : Monthly Burnt Area 300m",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_s3-ba_v3.1_ba-month",
+      "product_id": "layer_s3-ba_v3.1_ba-month",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation/burnt-area-v3-1-monthly-300m",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=s3-ba&version=v3.1&subproductcode=ba-month&mapsetcode=SPOTV-ACP-300m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_s3-ba_v3.1_ba-month"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_s3-ba_v3.1_ba",
+        "localhost/mobile-app/describeLayer?product_code=s3-ba&version=v3.1&sub_product_code=ba&mapset=SPOTV-ACP-300m"
+      ],
+      "descriptive_name": "Sentinel3 Burnt Area 300m : Daily Burnt Area 300m",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_s3-ba_v3.1_ba",
+      "product_id": "layer_s3-ba_v3.1_ba",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation/burnt-area-v3-1-monthly-300m",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=s3-ba&version=v3.1&subproductcode=ba&mapsetcode=SPOTV-ACP-300m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_s3-ba_v3.1_ba"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-dmp_olci-v1.0_dmp",
+        "localhost/mobile-app/describeLayer?product_code=vgt-dmp&version=olci-v1.0&sub_product_code=dmp&mapset=SPOTV-Africa-300m"
+      ],
+      "descriptive_name": "Sentinel3-OLCI DMP 300m : 10 Day DMP 300m",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-dmp_olci-v1.0_dmp",
+      "product_id": "layer_vgt-dmp_olci-v1.0_dmp",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation/dry-matter-productivity-v1-0-300m",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-dmp&version=olci-v1.0&subproductcode=dmp&mapsetcode=SPOTV-Africa-300m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-dmp_olci-v1.0_dmp"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-fapar_olci-v1.0_fapar",
+        "localhost/mobile-app/describeLayer?product_code=vgt-fapar&version=olci-v1.0&sub_product_code=fapar&mapset=SPOTV-Africa-300m"
+      ],
+      "descriptive_name": "Sentinel3-OLCI FAPAR 300m : 10 Day FAPAR 300m",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-fapar_olci-v1.0_fapar",
+      "product_id": "layer_vgt-fapar_olci-v1.0_fapar",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation/fraction-of-absorbed-photosynthetically-active-radiation-v1-0-300m",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-fapar&version=olci-v1.0&subproductcode=fapar&mapsetcode=SPOTV-Africa-300m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-fapar_olci-v1.0_fapar"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-fapar_olci-v1.0_fapar",
+        "localhost/mobile-app/describeLayer?product_code=vgt-fapar&version=olci-v1.0&sub_product_code=fapar&mapset=SPOTV-NorthAmerica-300m"
+      ],
+      "descriptive_name": "Sentinel3-OLCI FAPAR 300m : 10 Day FAPAR 300m",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-fapar_olci-v1.0_fapar",
+      "product_id": "layer_vgt-fapar_olci-v1.0_fapar",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation/fraction-of-absorbed-photosynthetically-active-radiation-v1-0-300m",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-fapar&version=olci-v1.0&subproductcode=fapar&mapsetcode=SPOTV-NorthAmerica-300m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-fapar_olci-v1.0_fapar"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-fcover_olci-v1.0_fcover",
+        "localhost/mobile-app/describeLayer?product_code=vgt-fcover&version=olci-v1.0&sub_product_code=fcover&mapset=SPOTV-Africa-300m"
+      ],
+      "descriptive_name": "Sentinel3-OLCI FCOVER 300m : 10 Day FCOVER 300m",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-fcover_olci-v1.0_fcover",
+      "product_id": "layer_vgt-fcover_olci-v1.0_fcover",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation/fraction-of-green-vegetation-cover-v1-0-300m",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-fcover&version=olci-v1.0&subproductcode=fcover&mapsetcode=SPOTV-Africa-300m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-fcover_olci-v1.0_fcover"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-lai_olci-v1.0_lai",
+        "localhost/mobile-app/describeLayer?product_code=vgt-lai&version=olci-v1.0&sub_product_code=lai&mapset=SPOTV-Africa-300m"
+      ],
+      "descriptive_name": "Sentinel3-OLCI LAI 300m : 10 Day LAI 300m",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-lai_olci-v1.0_lai",
+      "product_id": "layer_vgt-lai_olci-v1.0_lai",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation/leaf-area-index-300m-v1.0",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-lai&version=olci-v1.0&subproductcode=lai&mapsetcode=SPOTV-Africa-300m&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-lai_olci-v1.0_lai"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1monmin",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1monmin&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1monmin",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1monmin",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1monmin&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1monmin"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_10dmin-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=10dmin-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_10dmin-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_10dmin-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=10dmin-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_10dmin-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1monsndvi",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1monsndvi&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered SNDVI",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1monsndvi",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1monsndvi",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1monsndvi&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1monsndvi"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_monthly-ratio",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=monthly-ratio&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered RATIO",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_monthly-ratio",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_monthly-ratio",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=monthly-ratio&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_monthly-ratio"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_ratio-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=ratio-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered RATIO to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_ratio-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_ratio-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=ratio-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_ratio-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1monperc",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1monperc&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered REL DIFF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1monperc",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1monperc",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1monperc&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1monperc"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_10davg-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=10davg-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_10davg-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_10davg-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=10davg-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_10davg-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_10dstd-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=10dstd-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered Standard deviation",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_10dstd-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_10dstd-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=10dstd-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_10dstd-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1monstd",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1monstd&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered STD DEV",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1monstd",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1monstd",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1monstd&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1monstd"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1monmax",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1monmax&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1monmax",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1monmax",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1monmax&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1monmax"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1monicn",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1monicn&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered NGI",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1monicn",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1monicn",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1monicn&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1monicn"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_10dsndvi-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=10dsndvi-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered Standardized",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_10dsndvi-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_10dsndvi-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=10dsndvi-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_10dsndvi-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_10dmed-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=10dmed-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered LT MED",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_10dmed-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_10dmed-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=10dmed-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_10dmed-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_ndvi-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=ndvi-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_ndvi-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_ndvi-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=ndvi-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_ndvi-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_monndvi",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=monndvi&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_monndvi",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_monndvi",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=monndvi&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_monndvi"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_ndv",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=ndv&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_ndv",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_ndv",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=ndv&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_ndv"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1mondiff",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1mondiff&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered LT DIFF",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1mondiff",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1mondiff",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1mondiff&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1mondiff"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1monvci",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1monvci&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI VCI",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1monvci",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1monvci",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1monvci&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1monvci"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_1monavg",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=1monavg&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 1 Month NDVI filtered LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_1monavg",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_1monavg",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=1monavg&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_1monavg"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_icn",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=icn&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI_NGI",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_icn",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_icn",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=icn&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_icn"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_icn-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=icn-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered NGI",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_icn-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_icn-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=icn-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_icn-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_vci-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=vci-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered VCI",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_vci-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_vci-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=vci-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_vci-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_vci",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=vci&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI_VCI",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_vci",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_vci",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=vci&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_vci"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_linearx2diff-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=linearx2diff-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_linearx2diff-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_linearx2diff-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=linearx2diff-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_linearx2diff-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_10dperc-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=10dperc-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered REL DIFF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_10dperc-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_10dperc-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=10dperc-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_10dperc-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_vgt-ndvi_vgt-pv-olci_10dmax-linearx2",
+        "localhost/mobile-app/describeLayer?product_code=vgt-ndvi&version=vgt-pv-olci&sub_product_code=10dmax-linearx2&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "SPOT.VGT/PROBA.V - NDVI : 10 Day NDVI filtered LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_vgt-ndvi_vgt-pv-olci_10dmax-linearx2",
+      "product_id": "layer_vgt-ndvi_vgt-pv-olci_10dmax-linearx2",
+      "resource_url": "https://land.copernicus.eu/en/products/vegetation?tab=vegetation_indices",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=vgt-ndvi&version=vgt-pv-olci&subproductcode=10dmax-linearx2&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_vgt-ndvi_vgt-pv-olci_10dmax-linearx2"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wsi-hp_V1.0_crop",
+        "localhost/mobile-app/describeLayer?product_code=wsi-hp&version=V1.0&sub_product_code=crop&mapset=SPOTV-ACP-1km"
+      ],
+      "descriptive_name": "JRC/MARS WSI-HP : 10 Day WSI-HP Crop",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wsi-hp_V1.0_crop",
+      "product_id": "layer_wsi-hp_V1.0_crop",
+      "resource_url": "https://agricultural-production-hotspots.ec.europa.eu/files/WSI_TECH_REP.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wsi-hp&version=V1.0&subproductcode=crop&mapsetcode=SPOTV-ACP-1km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wsi-hp_V1.0_crop"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wsi-hp_V1.0_pasture",
+        "localhost/mobile-app/describeLayer?product_code=wsi-hp&version=V1.0&sub_product_code=pasture&mapset=SPOTV-ACP-1km"
+      ],
+      "descriptive_name": "JRC/MARS WSI-HP : 10 Day WSI-HP Pasture",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wsi-hp_V1.0_pasture",
+      "product_id": "layer_wsi-hp_V1.0_pasture",
+      "resource_url": "https://agricultural-production-hotspots.ec.europa.eu/files/WSI_TECH_REP.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wsi-hp&version=V1.0&subproductcode=pasture&mapsetcode=SPOTV-ACP-1km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wsi-hp_V1.0_pasture"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wsi-hp_V1.0_crop",
+        "localhost/mobile-app/describeLayer?product_code=wsi-hp&version=V1.0&sub_product_code=crop&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "JRC/MARS WSI-HP : 10 Day WSI-HP Crop",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wsi-hp_V1.0_crop",
+      "product_id": "layer_wsi-hp_V1.0_crop",
+      "resource_url": "https://agricultural-production-hotspots.ec.europa.eu/files/WSI_TECH_REP.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wsi-hp&version=V1.0&subproductcode=crop&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wsi-hp_V1.0_crop"
+    },
+    {
+      "category": "vegetation",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wsi-hp_V1.0_pasture",
+        "localhost/mobile-app/describeLayer?product_code=wsi-hp&version=V1.0&sub_product_code=pasture&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "JRC/MARS WSI-HP : 10 Day WSI-HP Pasture",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wsi-hp_V1.0_pasture",
+      "product_id": "layer_wsi-hp_V1.0_pasture",
+      "resource_url": "https://agricultural-production-hotspots.ec.europa.eu/files/WSI_TECH_REP.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wsi-hp&version=V1.0&subproductcode=pasture&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wsi-hp_V1.0_pasture"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_arc2-rain_2.0_1year",
+        "localhost/mobile-app/describeLayer?product_code=arc2-rain&version=2.0&sub_product_code=1year&mapset=ARC2-Africa-11km"
+      ],
+      "descriptive_name": "ARC2 RFE : 1 Year RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_arc2-rain_2.0_1year",
+      "product_id": "layer_arc2-rain_2.0_1year",
+      "resource_url": "https://www.cpc.ncep.noaa.gov/products/fews/AFR_CLIM/AMS_ARC2a.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=arc2-rain&version=2.0&subproductcode=1year&mapsetcode=ARC2-Africa-11km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_arc2-rain_2.0_1year"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_arc2-rain_2.0_1mon",
+        "localhost/mobile-app/describeLayer?product_code=arc2-rain&version=2.0&sub_product_code=1mon&mapset=ARC2-Africa-11km"
+      ],
+      "descriptive_name": "ARC2 RFE : 1 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_arc2-rain_2.0_1mon",
+      "product_id": "layer_arc2-rain_2.0_1mon",
+      "resource_url": "https://www.cpc.ncep.noaa.gov/products/fews/AFR_CLIM/AMS_ARC2a.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=arc2-rain&version=2.0&subproductcode=1mon&mapsetcode=ARC2-Africa-11km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_arc2-rain_2.0_1mon"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_arc2-rain_2.0_3mon",
+        "localhost/mobile-app/describeLayer?product_code=arc2-rain&version=2.0&sub_product_code=3mon&mapset=ARC2-Africa-11km"
+      ],
+      "descriptive_name": "ARC2 RFE : 3 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_arc2-rain_2.0_3mon",
+      "product_id": "layer_arc2-rain_2.0_3mon",
+      "resource_url": "https://www.cpc.ncep.noaa.gov/products/fews/AFR_CLIM/AMS_ARC2a.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=arc2-rain&version=2.0&subproductcode=3mon&mapsetcode=ARC2-Africa-11km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_arc2-rain_2.0_3mon"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_arc2-rain_2.0_10d",
+        "localhost/mobile-app/describeLayer?product_code=arc2-rain&version=2.0&sub_product_code=10d&mapset=ARC2-Africa-11km"
+      ],
+      "descriptive_name": "ARC2 RFE : 10 Day RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_arc2-rain_2.0_10d",
+      "product_id": "layer_arc2-rain_2.0_10d",
+      "resource_url": "https://www.cpc.ncep.noaa.gov/products/fews/AFR_CLIM/AMS_ARC2a.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=arc2-rain&version=2.0&subproductcode=10d&mapsetcode=ARC2-Africa-11km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_arc2-rain_2.0_10d"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_arc2-rain_2.0_6mon",
+        "localhost/mobile-app/describeLayer?product_code=arc2-rain&version=2.0&sub_product_code=6mon&mapset=ARC2-Africa-11km"
+      ],
+      "descriptive_name": "ARC2 RFE : 6 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_arc2-rain_2.0_6mon",
+      "product_id": "layer_arc2-rain_2.0_6mon",
+      "resource_url": "https://www.cpc.ncep.noaa.gov/products/fews/AFR_CLIM/AMS_ARC2a.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=arc2-rain&version=2.0&subproductcode=6mon&mapsetcode=ARC2-Africa-11km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_arc2-rain_2.0_6mon"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_arc2-rain_2.0_1day",
+        "localhost/mobile-app/describeLayer?product_code=arc2-rain&version=2.0&sub_product_code=1day&mapset=ARC2-Africa-11km"
+      ],
+      "descriptive_name": "ARC2 RFE : 1 Day RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_arc2-rain_2.0_1day",
+      "product_id": "layer_arc2-rain_2.0_1day",
+      "resource_url": "https://www.cpc.ncep.noaa.gov/products/fews/AFR_CLIM/AMS_ARC2a.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=arc2-rain&version=2.0&subproductcode=1day&mapsetcode=ARC2-Africa-11km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_arc2-rain_2.0_1day"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_1monmin",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=1monmin&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_1monmin",
+      "product_id": "layer_chirps-dekad_2.0_1monmin",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=1monmin&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_1monmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_10dmin",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=10dmin&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_10dmin",
+      "product_id": "layer_chirps-dekad_2.0_10dmin",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=10dmin&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_10dmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_10dmax",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=10dmax&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_10dmax",
+      "product_id": "layer_chirps-dekad_2.0_10dmax",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=10dmax&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_10dmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_1monperc",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=1monperc&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_REL DIF to LTA (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_1monperc",
+      "product_id": "layer_chirps-dekad_2.0_1monperc",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=1monperc&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_1monperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_1monmax",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=1monmax&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_1monmax",
+      "product_id": "layer_chirps-dekad_2.0_1monmax",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=1monmax&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_1monmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_10dratio",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=10dratio&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_RATIO to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_10dratio",
+      "product_id": "layer_chirps-dekad_2.0_10dratio",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=10dratio&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_10dratio"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_10davg",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=10davg&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_10davg",
+      "product_id": "layer_chirps-dekad_2.0_10davg",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=10davg&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_10davg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_10d",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=10d&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_10d",
+      "product_id": "layer_chirps-dekad_2.0_10d",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=10d&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_10d"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_1mondiff",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=1mondiff&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_1mondiff",
+      "product_id": "layer_chirps-dekad_2.0_1mondiff",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=1mondiff&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_1mondiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_10ddiff",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=10ddiff&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_10ddiff",
+      "product_id": "layer_chirps-dekad_2.0_10ddiff",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=10ddiff&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_10ddiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_1monnp",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=1monnp&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_NORM DIF to MIN (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_1monnp",
+      "product_id": "layer_chirps-dekad_2.0_1monnp",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=1monnp&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_1monnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_1monavg",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=1monavg&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_1monavg",
+      "product_id": "layer_chirps-dekad_2.0_1monavg",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=1monavg&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_1monavg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_1moncum",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=1moncum&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_1moncum",
+      "product_id": "layer_chirps-dekad_2.0_1moncum",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=1moncum&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_1moncum"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_10dperc",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=10dperc&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_REL DIF to LTA (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_10dperc",
+      "product_id": "layer_chirps-dekad_2.0_10dperc",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=10dperc&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_10dperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_1yearcum-seasonal",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=1yearcum-seasonal&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Year RFE (Seasonal - July to June)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_1yearcum-seasonal",
+      "product_id": "layer_chirps-dekad_2.0_1yearcum-seasonal",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=1yearcum-seasonal&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_1yearcum-seasonal"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_2.0_10dnp",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=2.0&sub_product_code=10dnp&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_NORM DIF to MIN (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_2.0_10dnp",
+      "product_id": "layer_chirps-dekad_2.0_10dnp",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=2.0&subproductcode=10dnp&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_2.0_10dnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_1monmin",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=1monmin&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_1monmin",
+      "product_id": "layer_chirps-dekad_3.0_1monmin",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=1monmin&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_1monmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_10dmin",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=10dmin&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_10dmin",
+      "product_id": "layer_chirps-dekad_3.0_10dmin",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=10dmin&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_10dmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_1monavg",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=1monavg&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_1monavg",
+      "product_id": "layer_chirps-dekad_3.0_1monavg",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=1monavg&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_1monavg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_10d",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=10d&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_10d",
+      "product_id": "layer_chirps-dekad_3.0_10d",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=10d&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_10d"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_10dmax",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=10dmax&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_10dmax",
+      "product_id": "layer_chirps-dekad_3.0_10dmax",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=10dmax&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_10dmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_1monperc",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=1monperc&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_REL DIF to LTA (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_1monperc",
+      "product_id": "layer_chirps-dekad_3.0_1monperc",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=1monperc&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_1monperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_1mondiff",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=1mondiff&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_1mondiff",
+      "product_id": "layer_chirps-dekad_3.0_1mondiff",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=1mondiff&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_1mondiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_10dnp",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=10dnp&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_NORM DIF to MIN (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_10dnp",
+      "product_id": "layer_chirps-dekad_3.0_10dnp",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=10dnp&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_10dnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_10ddiff",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=10ddiff&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_10ddiff",
+      "product_id": "layer_chirps-dekad_3.0_10ddiff",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=10ddiff&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_10ddiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_1monmax",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=1monmax&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_1monmax",
+      "product_id": "layer_chirps-dekad_3.0_1monmax",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=1monmax&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_1monmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_1monnp",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=1monnp&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE_NORM DIF to MIN (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_1monnp",
+      "product_id": "layer_chirps-dekad_3.0_1monnp",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=1monnp&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_1monnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_10dratio",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=10dratio&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_RATIO to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_10dratio",
+      "product_id": "layer_chirps-dekad_3.0_10dratio",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=10dratio&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_10dratio"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_1moncum",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=1moncum&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_1moncum",
+      "product_id": "layer_chirps-dekad_3.0_1moncum",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=1moncum&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_1moncum"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_10davg",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=10davg&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_10davg",
+      "product_id": "layer_chirps-dekad_3.0_10davg",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=10davg&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_10davg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_10dperc",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=10dperc&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 10 Day RFE_REL DIF to LTA (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_10dperc",
+      "product_id": "layer_chirps-dekad_3.0_10dperc",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=10dperc&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_10dperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_chirps-dekad_3.0_1yearcum-seasonal",
+        "localhost/mobile-app/describeLayer?product_code=chirps-dekad&version=3.0&sub_product_code=1yearcum-seasonal&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "CHIRPS - RFE : 1 Year RFE (Seasonal - July to June)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_chirps-dekad_3.0_1yearcum-seasonal",
+      "product_id": "layer_chirps-dekad_3.0_1yearcum-seasonal",
+      "resource_url": "https://chc.ucsb.edu/data/chirps",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=chirps-dekad&version=3.0&subproductcode=1yearcum-seasonal&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_chirps-dekad_3.0_1yearcum-seasonal"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_1monmin",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=1monmin&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 1 Month RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_1monmin",
+      "product_id": "layer_fewsnet-rfe_2.0_1monmin",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=1monmin&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_1monmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_10dmin",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=10dmin&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 10 Day RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_10dmin",
+      "product_id": "layer_fewsnet-rfe_2.0_10dmin",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=10dmin&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_10dmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_10dmax",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=10dmax&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 10 Day RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_10dmax",
+      "product_id": "layer_fewsnet-rfe_2.0_10dmax",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=10dmax&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_10dmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_1monperc",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=1monperc&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 1 Month RFE_REL DIF to LTA (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_1monperc",
+      "product_id": "layer_fewsnet-rfe_2.0_1monperc",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=1monperc&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_1monperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_1monmax",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=1monmax&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 1 Month RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_1monmax",
+      "product_id": "layer_fewsnet-rfe_2.0_1monmax",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=1monmax&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_1monmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_10dratio",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=10dratio&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 10 Day RFE_RATIO to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_10dratio",
+      "product_id": "layer_fewsnet-rfe_2.0_10dratio",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=10dratio&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_10dratio"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_10davg",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=10davg&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 10 Day RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_10davg",
+      "product_id": "layer_fewsnet-rfe_2.0_10davg",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=10davg&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_10davg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_10d",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=10d&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 10 Day RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_10d",
+      "product_id": "layer_fewsnet-rfe_2.0_10d",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=10d&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_10d"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_1mondiff",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=1mondiff&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 1 Month RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_1mondiff",
+      "product_id": "layer_fewsnet-rfe_2.0_1mondiff",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=1mondiff&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_1mondiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_10ddiff",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=10ddiff&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 10 Day RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_10ddiff",
+      "product_id": "layer_fewsnet-rfe_2.0_10ddiff",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=10ddiff&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_10ddiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_1monnp",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=1monnp&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 1 Month RFE_NORM DIF (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_1monnp",
+      "product_id": "layer_fewsnet-rfe_2.0_1monnp",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=1monnp&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_1monnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_1monavg",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=1monavg&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 1 Month RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_1monavg",
+      "product_id": "layer_fewsnet-rfe_2.0_1monavg",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=1monavg&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_1monavg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_1moncum",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=1moncum&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 1 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_1moncum",
+      "product_id": "layer_fewsnet-rfe_2.0_1moncum",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=1moncum&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_1moncum"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_10dperc",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=10dperc&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 10 Day RFE_REL DIF to LTA (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_10dperc",
+      "product_id": "layer_fewsnet-rfe_2.0_10dperc",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=10dperc&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_10dperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_1yearcum-seasonal",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=1yearcum-seasonal&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 1 Year RFE (Seasonal - July to June)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_1yearcum-seasonal",
+      "product_id": "layer_fewsnet-rfe_2.0_1yearcum-seasonal",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=1yearcum-seasonal&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_1yearcum-seasonal"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_fewsnet-rfe_2.0_10dnp",
+        "localhost/mobile-app/describeLayer?product_code=fewsnet-rfe&version=2.0&sub_product_code=10dnp&mapset=FEWSNET-Africa-8km"
+      ],
+      "descriptive_name": "FEWSNET - RFE : 10 Day RFE_NORM DIF to MIN (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_fewsnet-rfe_2.0_10dnp",
+      "product_id": "layer_fewsnet-rfe_2.0_10dnp",
+      "resource_url": "https://fews.net/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=fewsnet-rfe&version=2.0&subproductcode=10dnp&mapsetcode=FEWSNET-Africa-8km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_fewsnet-rfe_2.0_10dnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-spi_1.0_era5-spi-1mon",
+        "localhost/mobile-app/describeLayer?product_code=gdo-spi&version=1.0&sub_product_code=era5-spi-1mon&mapset=CDSC-Global-25km"
+      ],
+      "descriptive_name": "JRC/GDO SPI : ERA5 10-day SPI-1,1-month accumulation period",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-spi_1.0_era5-spi-1mon",
+      "product_id": "layer_gdo-spi_1.0_era5-spi-1mon",
+      "resource_url": "https://drought.emergency.copernicus.eu/data/factsheets/factsheet_spi.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-spi&version=1.0&subproductcode=era5-spi-1mon&mapsetcode=CDSC-Global-25km&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-spi_1.0_era5-spi-1mon"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-spi_1.0_era5-spi-3mon",
+        "localhost/mobile-app/describeLayer?product_code=gdo-spi&version=1.0&sub_product_code=era5-spi-3mon&mapset=CDSC-Global-25km"
+      ],
+      "descriptive_name": "JRC/GDO SPI : ERA5 10-day SPI-3,3-month accumulation period",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-spi_1.0_era5-spi-3mon",
+      "product_id": "layer_gdo-spi_1.0_era5-spi-3mon",
+      "resource_url": "https://drought.emergency.copernicus.eu/data/factsheets/factsheet_spi.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-spi&version=1.0&subproductcode=era5-spi-3mon&mapsetcode=CDSC-Global-25km&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-spi_1.0_era5-spi-3mon"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-spi_1.0_era5-spi-6mon",
+        "localhost/mobile-app/describeLayer?product_code=gdo-spi&version=1.0&sub_product_code=era5-spi-6mon&mapset=CDSC-Global-25km"
+      ],
+      "descriptive_name": "JRC/GDO SPI : ERA5 SPI-6,6-month accumulation period.",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-spi_1.0_era5-spi-6mon",
+      "product_id": "layer_gdo-spi_1.0_era5-spi-6mon",
+      "resource_url": "https://drought.emergency.copernicus.eu/data/factsheets/factsheet_spi.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-spi&version=1.0&subproductcode=era5-spi-6mon&mapsetcode=CDSC-Global-25km&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-spi_1.0_era5-spi-6mon"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gpcc-gpac_V.2022_fg-monthly",
+        "localhost/mobile-app/describeLayer?product_code=gpcc-gpac&version=V.2022&sub_product_code=fg-monthly&mapset=GPCC-Global-1deg"
+      ],
+      "descriptive_name": "GPCC rainfall : FG - 1 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gpcc-gpac_V.2022_fg-monthly",
+      "product_id": "layer_gpcc-gpac_V.2022_fg-monthly",
+      "resource_url": "https://opendata.dwd.de/climate_environment/GPCC/html/gpcc_firstguess_doi_download.html",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gpcc-gpac&version=V.2022&subproductcode=fg-monthly&mapsetcode=GPCC-Global-1deg&yearsToCompare=&WKT=",
+      "unit": "mm/month",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gpcc-gpac_V.2022_fg-monthly"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_rain-spi_V1.0_spi-3mon",
+        "localhost/mobile-app/describeLayer?product_code=rain-spi&version=V1.0&sub_product_code=spi-3mon&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "JRC/MARS SPI : SPI 3months",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_rain-spi_V1.0_spi-3mon",
+      "product_id": "layer_rain-spi_V1.0_spi-3mon",
+      "resource_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6360855/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=rain-spi&version=V1.0&subproductcode=spi-3mon&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_rain-spi_V1.0_spi-3mon"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_rain-spi_V1.0_spi-1mon",
+        "localhost/mobile-app/describeLayer?product_code=rain-spi&version=V1.0&sub_product_code=spi-1mon&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "JRC/MARS SPI : SPI 1month",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_rain-spi_V1.0_spi-1mon",
+      "product_id": "layer_rain-spi_V1.0_spi-1mon",
+      "resource_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6360855/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=rain-spi&version=V1.0&subproductcode=spi-1mon&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_rain-spi_V1.0_spi-1mon"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_1monmin",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=1monmin&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_1monmin",
+      "product_id": "layer_tamsat-rfe_3.0_1monmin",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=1monmin&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_1monmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_10dmin",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=10dmin&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_10dmin",
+      "product_id": "layer_tamsat-rfe_3.0_10dmin",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=10dmin&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_10dmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_10dmax",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=10dmax&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_10dmax",
+      "product_id": "layer_tamsat-rfe_3.0_10dmax",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=10dmax&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_10dmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_1monperc",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=1monperc&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_REL DIF to LTA (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_1monperc",
+      "product_id": "layer_tamsat-rfe_3.0_1monperc",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=1monperc&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_1monperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_1monmax",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=1monmax&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_1monmax",
+      "product_id": "layer_tamsat-rfe_3.0_1monmax",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=1monmax&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_1monmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_10dratio",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=10dratio&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_RATIO to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_10dratio",
+      "product_id": "layer_tamsat-rfe_3.0_10dratio",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=10dratio&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_10dratio"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_10davg",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=10davg&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_10davg",
+      "product_id": "layer_tamsat-rfe_3.0_10davg",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=10davg&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_10davg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_10d",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=10d&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_10d",
+      "product_id": "layer_tamsat-rfe_3.0_10d",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=10d&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_10d"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_1mondiff",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=1mondiff&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_1mondiff",
+      "product_id": "layer_tamsat-rfe_3.0_1mondiff",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=1mondiff&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_1mondiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_10ddiff",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=10ddiff&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_10ddiff",
+      "product_id": "layer_tamsat-rfe_3.0_10ddiff",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=10ddiff&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_10ddiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_1monnp",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=1monnp&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_NORM DIF to MIN (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_1monnp",
+      "product_id": "layer_tamsat-rfe_3.0_1monnp",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=1monnp&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_1monnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_1monavg",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=1monavg&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_1monavg",
+      "product_id": "layer_tamsat-rfe_3.0_1monavg",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=1monavg&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_1monavg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_1moncum",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=1moncum&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_1moncum",
+      "product_id": "layer_tamsat-rfe_3.0_1moncum",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=1moncum&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_1moncum"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_10dperc",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=10dperc&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_REL DIF to LTA (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_10dperc",
+      "product_id": "layer_tamsat-rfe_3.0_10dperc",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=10dperc&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_10dperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.0_10dnp",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.0&sub_product_code=10dnp&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_NORM DIF to MIN (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.0_10dnp",
+      "product_id": "layer_tamsat-rfe_3.0_10dnp",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.0&subproductcode=10dnp&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.0_10dnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_1monmin",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=1monmin&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_1monmin",
+      "product_id": "layer_tamsat-rfe_3.1_1monmin",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=1monmin&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_1monmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_10dmin",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=10dmin&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_10dmin",
+      "product_id": "layer_tamsat-rfe_3.1_10dmin",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=10dmin&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_10dmin"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_10dmax",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=10dmax&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_10dmax",
+      "product_id": "layer_tamsat-rfe_3.1_10dmax",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=10dmax&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_10dmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_1monperc",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=1monperc&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_REL DIF to LTA (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_1monperc",
+      "product_id": "layer_tamsat-rfe_3.1_1monperc",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=1monperc&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_1monperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_1monmax",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=1monmax&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_1monmax",
+      "product_id": "layer_tamsat-rfe_3.1_1monmax",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=1monmax&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_1monmax"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_10dratio",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=10dratio&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_RATIO to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_10dratio",
+      "product_id": "layer_tamsat-rfe_3.1_10dratio",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=10dratio&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_10dratio"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_10davg",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=10davg&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_10davg",
+      "product_id": "layer_tamsat-rfe_3.1_10davg",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=10davg&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_10davg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_10d",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=10d&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_10d",
+      "product_id": "layer_tamsat-rfe_3.1_10d",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=10d&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_10d"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_1mondiff",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=1mondiff&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_1mondiff",
+      "product_id": "layer_tamsat-rfe_3.1_1mondiff",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=1mondiff&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_1mondiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_10ddiff",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=10ddiff&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_10ddiff",
+      "product_id": "layer_tamsat-rfe_3.1_10ddiff",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=10ddiff&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_10ddiff"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_1monnp",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=1monnp&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_NORM DIF to MIN (Computed only when LTA > 20mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_1monnp",
+      "product_id": "layer_tamsat-rfe_3.1_1monnp",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=1monnp&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_1monnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_1monavg",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=1monavg&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_1monavg",
+      "product_id": "layer_tamsat-rfe_3.1_1monavg",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=1monavg&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_1monavg"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_1moncum",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=1moncum&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Month RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_1moncum",
+      "product_id": "layer_tamsat-rfe_3.1_1moncum",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=1moncum&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_1moncum"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_10dperc",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=10dperc&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_REL DIF to LTA (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_10dperc",
+      "product_id": "layer_tamsat-rfe_3.1_10dperc",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=10dperc&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_10dperc"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_10dnp",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=10dnp&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 10 Day RFE_NORM DIF to MIN (Computed only when LTA > 7mm)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_10dnp",
+      "product_id": "layer_tamsat-rfe_3.1_10dnp",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=10dnp&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_10dnp"
+    },
+    {
+      "category": "rainfall",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_tamsat-rfe_3.1_1d",
+        "localhost/mobile-app/describeLayer?product_code=tamsat-rfe&version=3.1&sub_product_code=1d&mapset=TAMSAT-Africa-4km"
+      ],
+      "descriptive_name": "TAMSAT - RFE : 1 Day RFE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_tamsat-rfe_3.1_1d",
+      "product_id": "layer_tamsat-rfe_3.1_1d",
+      "resource_url": "https://research.reading.ac.uk/tamsat/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=tamsat-rfe&version=3.1&subproductcode=1d&mapsetcode=TAMSAT-Africa-4km&yearsToCompare=&WKT=",
+      "unit": "mm",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_tamsat-rfe_3.1_1d"
+    },
+    {
+      "category": "rainfallforecast",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_efi-spi_1.0_1month",
+        "localhost/mobile-app/describeLayer?product_code=efi-spi&version=1.0&sub_product_code=1month&mapset=GPCC-Global-1deg"
+      ],
+      "descriptive_name": "Forecast of Wet and Dry Spells : Wet and Dry Spells 1 month",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_efi-spi_1.0_1month",
+      "product_id": "layer_efi-spi_1.0_1month",
+      "resource_url": "https://journals.ametsoc.org/view/journals/wefo/35/4/wafD190196.xml",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=efi-spi&version=1.0&subproductcode=1month&mapsetcode=GPCC-Global-1deg&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_efi-spi_1.0_1month"
+    },
+    {
+      "category": "rainfallforecast",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_efi-spi_1.0_3month",
+        "localhost/mobile-app/describeLayer?product_code=efi-spi&version=1.0&sub_product_code=3month&mapset=GPCC-Global-1deg"
+      ],
+      "descriptive_name": "Forecast of Wet and Dry Spells : Wet and Dry Spells 3 months",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_efi-spi_1.0_3month",
+      "product_id": "layer_efi-spi_1.0_3month",
+      "resource_url": "https://journals.ametsoc.org/view/journals/wefo/35/4/wafD190196.xml",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=efi-spi&version=1.0&subproductcode=3month&mapsetcode=GPCC-Global-1deg&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_efi-spi_1.0_3month"
+    },
+    {
+      "category": "rainfallforecast",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_efi-spi_1.0_6month",
+        "localhost/mobile-app/describeLayer?product_code=efi-spi&version=1.0&sub_product_code=6month&mapset=GPCC-Global-1deg"
+      ],
+      "descriptive_name": "Forecast of Wet and Dry Spells : Wet and Dry Spells 6 months",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_efi-spi_1.0_6month",
+      "product_id": "layer_efi-spi_1.0_6month",
+      "resource_url": "https://journals.ametsoc.org/view/journals/wefo/35/4/wafD190196.xml",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=efi-spi&version=1.0&subproductcode=6month&mapsetcode=GPCC-Global-1deg&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_efi-spi_1.0_6month"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_1day",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=1day&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 1 Day FIRE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_1day",
+      "product_id": "layer_modis-firms_v6.1_1day",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=1day&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_1day"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kdiff",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kdiff&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kdiff",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kdiff",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kdiff&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kdiff"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcountmax",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcountmax&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcountmax",
+      "product_id": "layer_modis-firms_v6.1_10dcountmax",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcountmax&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcountmax"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcountmin",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcountmin&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcountmin",
+      "product_id": "layer_modis-firms_v6.1_10dcountmin",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcountmin&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcountmin"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kmin",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kmin&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kmin",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kmin",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kmin&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kmin"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcountdiff",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcountdiff&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcountdiff",
+      "product_id": "layer_modis-firms_v6.1_10dcountdiff",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcountdiff&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcountdiff"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10k",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10k&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10k",
+      "product_id": "layer_modis-firms_v6.1_10dcount10k",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10k&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10k"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kavg&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kavg",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kavg",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kavg&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kavg"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kperc",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kperc&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_REL DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kperc",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kperc",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kperc&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kperc"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kratio",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kratio&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_RATIO",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kratio",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kratio",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kratio&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kratio"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kmax",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kmax&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kmax",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kmax",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kmax&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kmax"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcountavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcountavg&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcountavg",
+      "product_id": "layer_modis-firms_v6.1_10dcountavg",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcountavg&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcountavg"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount&mapset=SPOTV-Africa-1km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount",
+      "product_id": "layer_modis-firms_v6.1_10dcount",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount&mapsetcode=SPOTV-Africa-1km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kdiff",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kdiff&mapset=SPOTV-Africa-10km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kdiff",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kdiff",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kdiff&mapsetcode=SPOTV-Africa-10km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kdiff"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kmin",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kmin&mapset=SPOTV-Africa-10km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_LT MIN",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kmin",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kmin",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kmin&mapsetcode=SPOTV-Africa-10km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kmin"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kavg&mapset=SPOTV-Africa-10km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kavg",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kavg",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kavg&mapsetcode=SPOTV-Africa-10km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kavg"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10k",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10k&mapset=SPOTV-Africa-10km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10k",
+      "product_id": "layer_modis-firms_v6.1_10dcount10k",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10k&mapsetcode=SPOTV-Africa-10km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10k"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kperc",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kperc&mapset=SPOTV-Africa-10km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_REL DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kperc",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kperc",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kperc&mapsetcode=SPOTV-Africa-10km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kperc"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kratio",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kratio&mapset=SPOTV-Africa-10km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_RATIO",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kratio",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kratio",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kratio&mapsetcode=SPOTV-Africa-10km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kratio"
+    },
+    {
+      "category": "fire",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-firms_v6.1_10dcount10kmax",
+        "localhost/mobile-app/describeLayer?product_code=modis-firms&version=v6.1&sub_product_code=10dcount10kmax&mapset=SPOTV-Africa-10km"
+      ],
+      "descriptive_name": "MODIS - FIRE : 10 Day FIRE 10km_LT MAX",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-firms_v6.1_10dcount10kmax",
+      "product_id": "layer_modis-firms_v6.1_10dcount10kmax",
+      "resource_url": "https://firms.modaps.eosdis.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-firms&version=v6.1&subproductcode=10dcount10kmax&mapsetcode=SPOTV-Africa-10km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-firms_v6.1_10dcount10kmax"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_occurr",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=occurr&mapset=WD-GEE-CENTRALAFRICA-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB OCCURENCE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_occurr",
+      "product_id": "layer_wd-gee_1.0_occurr",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=occurr&mapsetcode=WD-GEE-CENTRALAFRICA-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_occurr"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_avg",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=avg&mapset=WD-GEE-CENTRALAFRICA-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_avg",
+      "product_id": "layer_wd-gee_1.0_avg",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=avg&mapsetcode=WD-GEE-CENTRALAFRICA-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_avg"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_occurr",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=occurr&mapset=WD-GEE-ECOWAS-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB OCCURENCE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_occurr",
+      "product_id": "layer_wd-gee_1.0_occurr",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=occurr&mapsetcode=WD-GEE-ECOWAS-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_occurr"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_avg",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=avg&mapset=WD-GEE-ECOWAS-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_avg",
+      "product_id": "layer_wd-gee_1.0_avg",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=avg&mapsetcode=WD-GEE-ECOWAS-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_avg"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_occurr",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=occurr&mapset=WD-GEE-IGAD-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB OCCURENCE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_occurr",
+      "product_id": "layer_wd-gee_1.0_occurr",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=occurr&mapsetcode=WD-GEE-IGAD-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_occurr"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_avg",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=avg&mapset=WD-GEE-IGAD-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_avg",
+      "product_id": "layer_wd-gee_1.0_avg",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=avg&mapsetcode=WD-GEE-IGAD-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_avg"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_occurr",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=occurr&mapset=WD-GEE-NORTHAFRICA-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB OCCURENCE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_occurr",
+      "product_id": "layer_wd-gee_1.0_occurr",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=occurr&mapsetcode=WD-GEE-NORTHAFRICA-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_occurr"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_avg",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=avg&mapset=WD-GEE-NORTHAFRICA-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_avg",
+      "product_id": "layer_wd-gee_1.0_avg",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=avg&mapsetcode=WD-GEE-NORTHAFRICA-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_avg"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_occurr",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=occurr&mapset=WD-GEE-SOUTHAFRICA-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB OCCURENCE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_occurr",
+      "product_id": "layer_wd-gee_1.0_occurr",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=occurr&mapsetcode=WD-GEE-SOUTHAFRICA-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_occurr"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_avg",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=avg&mapset=WD-GEE-SOUTHAFRICA-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_avg",
+      "product_id": "layer_wd-gee_1.0_avg",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=avg&mapsetcode=WD-GEE-SOUTHAFRICA-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_avg"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_occurr",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=occurr&mapset=WD-GEE-WESTAFRICA-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB OCCURENCE",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_occurr",
+      "product_id": "layer_wd-gee_1.0_occurr",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=occurr&mapsetcode=WD-GEE-WESTAFRICA-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_occurr"
+    },
+    {
+      "category": "inlandwater",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_wd-gee_1.0_avg",
+        "localhost/mobile-app/describeLayer?product_code=wd-gee&version=1.0&sub_product_code=avg&mapset=WD-GEE-WESTAFRICA-AVG"
+      ],
+      "descriptive_name": "LANDSAT Water Body : 1 Month WB LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_wd-gee_1.0_avg",
+      "product_id": "layer_wd-gee_1.0_avg",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=wd-gee&version=1.0&subproductcode=avg&mapsetcode=WD-GEE-WESTAFRICA-AVG&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_wd-gee_1.0_avg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_monanom",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=monanom&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 1 Month CHLA_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_monanom",
+      "product_id": "layer_modis-chla_v2022.0_monanom",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=monanom&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "mg m^-3",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_monanom"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_8daysavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=8daysavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 8 Day CHLA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_8daysavg",
+      "product_id": "layer_modis-chla_v2022.0_8daysavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=8daysavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "mg m^-3",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_8daysavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_opfish-30dayavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=opfish-30dayavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 30 Day CHLA OPFISH",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_opfish-30dayavg",
+      "product_id": "layer_modis-chla_v2022.0_opfish-30dayavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=opfish-30dayavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_opfish-30dayavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_gradient-norm",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=gradient-norm&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 1 Day CHLA GRADIENT NORMALIZED",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_gradient-norm",
+      "product_id": "layer_modis-chla_v2022.0_gradient-norm",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=gradient-norm&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "mg m^-3 km-1",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_gradient-norm"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_opfish",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=opfish&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 1 Day CHLA OPFISH",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_opfish",
+      "product_id": "layer_modis-chla_v2022.0_opfish",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=opfish&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_opfish"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_gradient",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=gradient&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 1 Day CHLA GRADIENT",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_gradient",
+      "product_id": "layer_modis-chla_v2022.0_gradient",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=gradient&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "mg m^-3 km-1",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_gradient"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_opfish-15dayavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=opfish-15dayavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 15 Day CHLA OPFISH",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_opfish-15dayavg",
+      "product_id": "layer_modis-chla_v2022.0_opfish-15dayavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=opfish-15dayavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_opfish-15dayavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_monclim",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=monclim&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 1 Month CHLA_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_monclim",
+      "product_id": "layer_modis-chla_v2022.0_monclim",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=monclim&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "mg m^-3",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_monclim"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_chla-day",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=chla-day&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 1 Day CHLA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_chla-day",
+      "product_id": "layer_modis-chla_v2022.0_chla-day",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=chla-day&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "mg m^-3",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_chla-day"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_monavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=monavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 1 Month CHLA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_monavg",
+      "product_id": "layer_modis-chla_v2022.0_monavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=monavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "mg m^-3",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_monavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_opfish-3dayavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=opfish-3dayavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 3 Day CHLA OPFISH",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_opfish-3dayavg",
+      "product_id": "layer_modis-chla_v2022.0_opfish-3dayavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=opfish-3dayavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_opfish-3dayavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-chla_v2022.0_opfish-7dayavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-chla&version=v2022.0&sub_product_code=opfish-7dayavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/gradient/OPFish-MODIS : 7 Day CHLA OPFISH",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-chla_v2022.0_opfish-7dayavg",
+      "product_id": "layer_modis-chla_v2022.0_opfish-7dayavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-chla&version=v2022.0&subproductcode=opfish-7dayavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-chla_v2022.0_opfish-7dayavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-kd490_v2022.0_monavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-kd490&version=v2022.0&sub_product_code=monavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Kd490 - MODIS : 1 Month KD490",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-kd490_v2022.0_monavg",
+      "product_id": "layer_modis-kd490_v2022.0_monavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-kd490&version=v2022.0&subproductcode=monavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "m^-1",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-kd490_v2022.0_monavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-kd490_v2022.0_kd490-day",
+        "localhost/mobile-app/describeLayer?product_code=modis-kd490&version=v2022.0&sub_product_code=kd490-day&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Kd490 - MODIS : 1 Day KD490",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-kd490_v2022.0_kd490-day",
+      "product_id": "layer_modis-kd490_v2022.0_kd490-day",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-kd490&version=v2022.0&subproductcode=kd490-day&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "m^-1",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-kd490_v2022.0_kd490-day"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-par_v2022.0_monanom",
+        "localhost/mobile-app/describeLayer?product_code=modis-par&version=v2022.0&sub_product_code=monanom&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "PAR - MODIS : 1 Month PAR_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-par_v2022.0_monanom",
+      "product_id": "layer_modis-par_v2022.0_monanom",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-par&version=v2022.0&subproductcode=monanom&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Einstein m^-2 Day",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-par_v2022.0_monanom"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-par_v2022.0_8daysavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-par&version=v2022.0&sub_product_code=8daysavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "PAR - MODIS : 8 Day PAR",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-par_v2022.0_8daysavg",
+      "product_id": "layer_modis-par_v2022.0_8daysavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-par&version=v2022.0&subproductcode=8daysavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Einstein m^-2 Day",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-par_v2022.0_8daysavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-par_v2022.0_par-day",
+        "localhost/mobile-app/describeLayer?product_code=modis-par&version=v2022.0&sub_product_code=par-day&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "PAR - MODIS : 1 Day PAR",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-par_v2022.0_par-day",
+      "product_id": "layer_modis-par_v2022.0_par-day",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-par&version=v2022.0&subproductcode=par-day&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Einstein m^-2 Day",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-par_v2022.0_par-day"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-par_v2022.0_monclim",
+        "localhost/mobile-app/describeLayer?product_code=modis-par&version=v2022.0&sub_product_code=monclim&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "PAR - MODIS : 1 Month PAR_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-par_v2022.0_monclim",
+      "product_id": "layer_modis-par_v2022.0_monclim",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-par&version=v2022.0&subproductcode=monclim&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Einstein m^-2 Day",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-par_v2022.0_monclim"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-par_v2022.0_monavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-par&version=v2022.0&sub_product_code=monavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "PAR - MODIS : 1 Month PAR",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-par_v2022.0_monavg",
+      "product_id": "layer_modis-par_v2022.0_monavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-par&version=v2022.0&subproductcode=monavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Einstein m^-2 Day",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-par_v2022.0_monavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-sst_v2019.0_sst-day",
+        "localhost/mobile-app/describeLayer?product_code=modis-sst&version=v2019.0&sub_product_code=sst-day&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "SST and Fronts - MODIS : 1 Day SST",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-sst_v2019.0_sst-day",
+      "product_id": "layer_modis-sst_v2019.0_sst-day",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-sst&version=v2019.0&subproductcode=sst-day&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Celsius",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-sst_v2019.0_sst-day"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-sst_v2019.0_monanom",
+        "localhost/mobile-app/describeLayer?product_code=modis-sst&version=v2019.0&sub_product_code=monanom&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "SST and Fronts - MODIS : 1 Month SST_DIF to LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-sst_v2019.0_monanom",
+      "product_id": "layer_modis-sst_v2019.0_monanom",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-sst&version=v2019.0&subproductcode=monanom&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Celsius",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-sst_v2019.0_monanom"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-sst_v2019.0_8daysavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-sst&version=v2019.0&sub_product_code=8daysavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "SST and Fronts - MODIS : 8 Day SST",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-sst_v2019.0_8daysavg",
+      "product_id": "layer_modis-sst_v2019.0_8daysavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-sst&version=v2019.0&subproductcode=8daysavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Celsius",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-sst_v2019.0_8daysavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-sst_v2019.0_sst-fronts",
+        "localhost/mobile-app/describeLayer?product_code=modis-sst&version=v2019.0&sub_product_code=sst-fronts&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "SST and Fronts - MODIS : MODIS - SST fronts",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-sst_v2019.0_sst-fronts",
+      "product_id": "layer_modis-sst_v2019.0_sst-fronts",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-sst&version=v2019.0&subproductcode=sst-fronts&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-sst_v2019.0_sst-fronts"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-sst_v2019.0_monclim",
+        "localhost/mobile-app/describeLayer?product_code=modis-sst&version=v2019.0&sub_product_code=monclim&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "SST and Fronts - MODIS : 1 Month SST_LTA",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-sst_v2019.0_monclim",
+      "product_id": "layer_modis-sst_v2019.0_monclim",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-sst&version=v2019.0&subproductcode=monclim&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Celsius",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-sst_v2019.0_monclim"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_modis-sst_v2019.0_monavg",
+        "localhost/mobile-app/describeLayer?product_code=modis-sst&version=v2019.0&sub_product_code=monavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "SST and Fronts - MODIS : 1 Month SST",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_modis-sst_v2019.0_monavg",
+      "product_id": "layer_modis-sst_v2019.0_monavg",
+      "resource_url": "https://oceancolor.gsfc.nasa.gov/",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=modis-sst&version=v2019.0&subproductcode=monavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "Celsius",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_modis-sst_v2019.0_monavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_olci-wrr_V02.0_chl-oc4me-s3ab",
+        "localhost/mobile-app/describeLayer?product_code=olci-wrr&version=V02.0&sub_product_code=chl-oc4me-s3ab&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/Gradient/OPFish - S3/OLCI : 1 Day CHLA - S3A&B",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_olci-wrr_V02.0_chl-oc4me-s3ab",
+      "product_id": "layer_olci-wrr_V02.0_chl-oc4me-s3ab",
+      "resource_url": "https://data.marine.copernicus.eu/product/OCEANCOLOUR_GLO_BGC_L3_NRT_009_101/description",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=olci-wrr&version=V02.0&subproductcode=chl-oc4me-s3ab&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "mg m^-3",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_olci-wrr_V02.0_chl-oc4me-s3ab"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_olci-wrr_V02.0_opfish-30dayavg",
+        "localhost/mobile-app/describeLayer?product_code=olci-wrr&version=V02.0&sub_product_code=opfish-30dayavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/Gradient/OPFish - S3/OLCI : 30 Day CHLA OPFISH (S3A&B)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_olci-wrr_V02.0_opfish-30dayavg",
+      "product_id": "layer_olci-wrr_V02.0_opfish-30dayavg",
+      "resource_url": "https://data.marine.copernicus.eu/product/OCEANCOLOUR_GLO_BGC_L3_NRT_009_101/description",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=olci-wrr&version=V02.0&subproductcode=opfish-30dayavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_olci-wrr_V02.0_opfish-30dayavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_olci-wrr_V02.0_opfish-15dayavg",
+        "localhost/mobile-app/describeLayer?product_code=olci-wrr&version=V02.0&sub_product_code=opfish-15dayavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/Gradient/OPFish - S3/OLCI : 15 Day CHLA OPFISH (S3A&B)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_olci-wrr_V02.0_opfish-15dayavg",
+      "product_id": "layer_olci-wrr_V02.0_opfish-15dayavg",
+      "resource_url": "https://data.marine.copernicus.eu/product/OCEANCOLOUR_GLO_BGC_L3_NRT_009_101/description",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=olci-wrr&version=V02.0&subproductcode=opfish-15dayavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_olci-wrr_V02.0_opfish-15dayavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_olci-wrr_V02.0_opfish",
+        "localhost/mobile-app/describeLayer?product_code=olci-wrr&version=V02.0&sub_product_code=opfish&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/Gradient/OPFish - S3/OLCI : 1 Day CHLA OPFISH (OCI) S3A&B",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_olci-wrr_V02.0_opfish",
+      "product_id": "layer_olci-wrr_V02.0_opfish",
+      "resource_url": "https://data.marine.copernicus.eu/product/OCEANCOLOUR_GLO_BGC_L3_NRT_009_101/description",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=olci-wrr&version=V02.0&subproductcode=opfish&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_olci-wrr_V02.0_opfish"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_olci-wrr_V02.0_gradient-s3ab",
+        "localhost/mobile-app/describeLayer?product_code=olci-wrr&version=V02.0&sub_product_code=gradient-s3ab&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/Gradient/OPFish - S3/OLCI : 1 Day CHLA Gradient - S3A&B",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_olci-wrr_V02.0_gradient-s3ab",
+      "product_id": "layer_olci-wrr_V02.0_gradient-s3ab",
+      "resource_url": "https://data.marine.copernicus.eu/product/OCEANCOLOUR_GLO_BGC_L3_NRT_009_101/description",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=olci-wrr&version=V02.0&subproductcode=gradient-s3ab&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "re mg m-3 km-1",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_olci-wrr_V02.0_gradient-s3ab"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_olci-wrr_V02.0_opfish-7dayavg",
+        "localhost/mobile-app/describeLayer?product_code=olci-wrr&version=V02.0&sub_product_code=opfish-7dayavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/Gradient/OPFish - S3/OLCI : 7 Day CHLA OPFISH (S3A&B)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_olci-wrr_V02.0_opfish-7dayavg",
+      "product_id": "layer_olci-wrr_V02.0_opfish-7dayavg",
+      "resource_url": "https://data.marine.copernicus.eu/product/OCEANCOLOUR_GLO_BGC_L3_NRT_009_101/description",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=olci-wrr&version=V02.0&subproductcode=opfish-7dayavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_olci-wrr_V02.0_opfish-7dayavg"
+    },
+    {
+      "category": "oceanography",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_olci-wrr_V02.0_opfish-3dayavg",
+        "localhost/mobile-app/describeLayer?product_code=olci-wrr&version=V02.0&sub_product_code=opfish-3dayavg&mapset=MODIS-Global-4km"
+      ],
+      "descriptive_name": "Chla/Gradient/OPFish - S3/OLCI : 3 Day CHLA OPFISH (S3A&B)",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_olci-wrr_V02.0_opfish-3dayavg",
+      "product_id": "layer_olci-wrr_V02.0_opfish-3dayavg",
+      "resource_url": "https://data.marine.copernicus.eu/product/OCEANCOLOUR_GLO_BGC_L3_NRT_009_101/description",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=olci-wrr&version=V02.0&subproductcode=opfish-3dayavg&mapsetcode=MODIS-Global-4km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_olci-wrr_V02.0_opfish-3dayavg"
+    },
+    {
+      "category": "temperature",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_cdas-daily-temperature_1.0_tmax",
+        "localhost/mobile-app/describeLayer?product_code=cdas-daily-temperature&version=1.0&sub_product_code=tmax&mapset=IRI-ACP-0-5deg"
+      ],
+      "descriptive_name": "GTS gridded temperature daily : Gridded temperature daily tmax",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_cdas-daily-temperature_1.0_tmax",
+      "product_id": "layer_cdas-daily-temperature_1.0_tmax",
+      "resource_url": "https://iridl.ldeo.columbia.edu/SOURCES/SOURCES/.NOAA/.NCEP/.CPC/.GTS/.GLOBAL/.gridded/.temperature/.daily/.tmax/index.html",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=cdas-daily-temperature&version=1.0&subproductcode=tmax&mapsetcode=IRI-ACP-0-5deg&yearsToCompare=&WKT=",
+      "unit": "Celsius",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_cdas-daily-temperature_1.0_tmax"
+    },
+    {
+      "category": "temperature",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_cdas-daily-temperature_1.0_tmin",
+        "localhost/mobile-app/describeLayer?product_code=cdas-daily-temperature&version=1.0&sub_product_code=tmin&mapset=IRI-ACP-0-5deg"
+      ],
+      "descriptive_name": "GTS gridded temperature daily : Gridded temperature daily tmin",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_cdas-daily-temperature_1.0_tmin",
+      "product_id": "layer_cdas-daily-temperature_1.0_tmin",
+      "resource_url": "https://iridl.ldeo.columbia.edu/SOURCES/SOURCES/.NOAA/.NCEP/.CPC/.GTS/.GLOBAL/.gridded/.temperature/.daily/.tmax/index.html",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=cdas-daily-temperature&version=1.0&subproductcode=tmin&mapsetcode=IRI-ACP-0-5deg&yearsToCompare=&WKT=",
+      "unit": "Celsius",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_cdas-daily-temperature_1.0_tmin"
+    },
+    {
+      "category": "miscellaneous",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_ascat-swi_V4.0_swi",
+        "localhost/mobile-app/describeLayer?product_code=ascat-swi&version=V4.0&sub_product_code=swi&mapset=ASCAT-Global-12-5km"
+      ],
+      "descriptive_name": "ASCAT/METOP Soill Water Index : ASCAT/METOP - Soil Water Index - T=5",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_ascat-swi_V4.0_swi",
+      "product_id": "layer_ascat-swi_V4.0_swi",
+      "resource_url": "None",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=ascat-swi&version=V4.0&subproductcode=swi&mapsetcode=ASCAT-Global-12-5km&yearsToCompare=&WKT=",
+      "unit": "%",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_ascat-swi_V4.0_swi"
+    },
+    {
+      "category": "miscellaneous",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_cpc-sm_1.0_sm",
+        "localhost/mobile-app/describeLayer?product_code=cpc-sm&version=1.0&sub_product_code=sm&mapset=CPC-Global-50km"
+      ],
+      "descriptive_name": "CPC Soil moisture : CPC Soil moisture",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_cpc-sm_1.0_sm",
+      "product_id": "layer_cpc-sm_1.0_sm",
+      "resource_url": "https://www.cpc.ncep.noaa.gov/products/Soilmst_Monitoring/US/Soilmst/Soilmst.shtml#",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=cpc-sm&version=1.0&subproductcode=sm&mapsetcode=CPC-Global-50km&yearsToCompare=&WKT=",
+      "unit": "None",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_cpc-sm_1.0_sm"
+    },
+    {
+      "category": "miscellaneous",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-smi_V3.0.1_smang",
+        "localhost/mobile-app/describeLayer?product_code=gdo-smi&version=V3.0.1&sub_product_code=smang&mapset=CHIRP-Global-5km"
+      ],
+      "descriptive_name": "Soil Moisture Index (SMI) Anomaly : Soil Moisture Index (SMI) Anomaly",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-smi_V3.0.1_smang",
+      "product_id": "layer_gdo-smi_V3.0.1_smang",
+      "resource_url": "https://drought.emergency.copernicus.eu/data/factsheets/factsheet_soilmoisture.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-smi&version=V3.0.1&subproductcode=smang&mapsetcode=CHIRP-Global-5km&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-smi_V3.0.1_smang"
+    },
+    {
+      "category": "miscellaneous",
+      "describeLayer_url": [
+        "localhost/mobile-app/describeLayer?product_id=layer_gdo-tws_V1.1.0_twsan",
+        "localhost/mobile-app/describeLayer?product_code=gdo-tws&version=V1.1.0&sub_product_code=twsan&mapset=GPCC-Global-1deg"
+      ],
+      "descriptive_name": "GRACE Total Water Storage Anomaly : GRACE Total Water Storage Anomaly",
+      "legend_url": "localhost/mobile-app/legend-html?product_id=layer_gdo-tws_V1.1.0_twsan",
+      "product_id": "layer_gdo-tws_V1.1.0_twsan",
+      "resource_url": "https://drought.emergency.copernicus.eu/data/factsheets/factsheet_grace_tws_anomaly.pdf",
+      "timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=gdo-tws&version=V1.1.0&subproductcode=twsan&mapsetcode=GPCC-Global-1deg&yearsToCompare=&WKT=",
+      "unit": "",
+      "wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_gdo-tws_V1.1.0_twsan"
+    }
+  ]
+}

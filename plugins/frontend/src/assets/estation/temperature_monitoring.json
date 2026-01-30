@@ -1,0 +1,56 @@
+{
+  "era-hourly-2mt_1.0_2mt": {
+    "description": "ERA5 2 meter temperature hourly (25km)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+  "era-hourly-2mt_1.0_2mtmax": {
+    "description": "ERA5 Hourly maximum 2m temperature since previous post processing (25km)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+  "era-hourly-2mt_1.0_2mtmin": {
+    "description": "ERA5 Hourly minimum 2m temperature since previous post processing (25km)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+  "era-monthly-2mt_1.0_2mt": {
+    "description": "ERA5 2 meter temperature monthly (25km)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+  "era-hourly-2mdw_1.0_2mdw": {
+    "description": "ERA5 2 meter dew point temperature hourly (25km)",
+    "coverage": "ACP",
+    "available_period": "Refer CDS",
+    "ref": null
+  },
+  "cdas-daily-temperature_1.0_tmax": {
+    "description": "Gridded daily temperature max (0.5 degree)",
+    "coverage": "ACP",
+    "available_period": "2020-current",
+    "ref": null
+  },
+  "cdas-daily-temperature_1.0_tmin": {
+    "description": "Gridded daily temperature min (0.5 degree)",
+    "coverage": "ACP",
+    "available_period": "2020-current",
+    "ref": null
+  },
+  "cdas-month-temperature_1.0_temp": {
+    "description": "Gridded monthly temperature (0.5 degree)",
+    "coverage": "ACP",
+    "available_period": "2020-current",
+    "ref": null
+  },
+  "cdas-month-temperature_1.0_tanom": {
+    "description": "Gridded temperature monthly anomaly (0.5 degree)",
+    "coverage": "ACP",
+    "available_period": "2020-current",
+    "ref": null
+  }
+}

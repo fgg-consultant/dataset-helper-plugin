@@ -1,0 +1,98 @@
+{
+  "vgt-ndvi_vgt-pv-olci_ndvi": {
+    "description": "NDVI from CGLS (1km)",
+    "coverage": "Africa",
+    "available_period": "1999-current",
+    "ref": null
+  },
+  "vgt-pv-olci_olci-v2.0_ndv": {
+    "description": "NDVI from CGLS (300m)",
+    "coverage": "Africa, Carribean",
+    "available_period": "2020-current",
+    "ref": null
+  },
+  "modis-ndvi_1.0_ndvi": {
+    "description": "NDVI from BOKU university (1km)",
+    "coverage": "Africa",
+    "available_period": "2001-current",
+    "ref": null
+  },
+  "modis-ndvi_1.0_zndvi": {
+    "description": "NDVI from BOKU university (1km)",
+    "coverage": "Africa",
+    "available_period": "2001-current",
+    "ref": null
+  },
+  "modis-ndvi_1.0_ndvid": {
+    "description": "NDVI from BOKU university (1km)",
+    "coverage": "Africa",
+    "available_period": "2001-current",
+    "ref": null
+  },
+  "modis-fapar_1.0_fapar": {
+    "description": "FAPAR products from DRO (0.01 degree)",
+    "coverage": "Africa",
+    "available_period": "2001-2022",
+    "ref": null
+  },
+  "modis-fapar_1.0_10dzscore": {
+    "description": "FAPAR products from DRO (0.01 degree)",
+    "coverage": "Africa",
+    "available_period": "2001-2022",
+    "ref": null
+  },
+  "wsi-hp_V1.0_pasture": {
+    "description": "Water Satisfaction Index from JRC/MARS (1km)",
+    "coverage": "Africa",
+    "available_period": "2003-current",
+    "ref": null
+  },
+  "wsi-hp_V1.0_crop": {
+    "description": "Water Satisfaction Index from JRC/MARS (1km)",
+    "coverage": "Africa",
+    "available_period": "2003-current",
+    "ref": null
+  },
+  "vgt-dmp_olci-v1.0_dmp": {
+    "description": "DMP from CGLS (300m)",
+    "coverage": "Africa, Carribean",
+    "available_period": "2021-current",
+    "ref": null
+  },
+  "vgt-fapar_olci-v1.0_fapar": {
+    "description": "FAPAR from CGLS (300m)",
+    "coverage": "Africa, Carribean",
+    "available_period": "2021-current",
+    "ref": null
+  },
+  "vgt-fcover_olci-v1.0_fcover": {
+    "description": "FCOVER from CGLS (300m)",
+    "coverage": "Africa, Carribean",
+    "available_period": "2021-current",
+    "ref": null
+  },
+  "vgt-lai_olci-v1.0_lai": {
+    "description": "LAI from CGLS (300m)",
+    "coverage": "Africa, Carribean",
+    "available_period": "2021-current",
+    "ref": null
+  },
+  "gdo-rdri_V2.3.2_rdri": {
+    "description": "Risk of Drought Impacts for Agriculture (1deg)",
+    "coverage": "Global",
+    "available_period": "2010-current",
+    "ref": null
+  },
+  "s3-ba_V3.1_ba": {
+    "description": "Daily NRT Burnt Area from CGLS (300m)",
+    "coverage": "Africa, Carribean",
+    "available_period": "2019-present",
+    "ref": null
+  },
+  "s3-ba_V3.1_ba-month": {
+    "description": "Monthly NTC Burnt Area from CGLS (300m)",
+    "coverage": "Africa, Carribean",
+    "available_period": "2023-present",
+    "ref": null
+  }
+}
