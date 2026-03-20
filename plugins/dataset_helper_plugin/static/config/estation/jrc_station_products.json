@@ -8,6 +8,20 @@
   ],
   "products": [
     {
+"category": "vegetation",
+"describeLayer_url": [
+"localhost/mobile-app/describeLayer?product_id=layer_asap-fpar_1.0_fpard",
+"localhost/mobile-app/describeLayer?product_code=asap-fpar&version=1.0&sub_product_code=fpard&mapset=VIIRS-Global-500m"
+],
+"descriptive_name": "JRC/ASAP FPAR : 10day FPAR difference",
+"legend_url": "localhost/mobile-app/legend-html?product_id=layer_asap-fpar_1.0_fpard",
+"product_id": "layer_asap-fpar_1.0_fpard",
+"resource_url": "https://joint-research-centre.ec.europa.eu/monitoring-agricultural-resources-mars_en",
+"timeseries_url": "localhost/analysis/gettimeseriesprofile?productcode=asap-fpar&version=1.0&subproductcode=fpard&mapsetcode=VIIRS-Global-500m&yearsToCompare=&WKT=",
+"unit": "",
+"wms_getmap_url": "localhost/webservices?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/jpg&LAYERS=layer_asap-fpar_1.0_fpard"
+},
+{
       "category": "vegetation",
       "describeLayer_url": [
         "localhost/mobile-app/describeLayer?product_id=layer_asap-fpar_1.0_zfpar",

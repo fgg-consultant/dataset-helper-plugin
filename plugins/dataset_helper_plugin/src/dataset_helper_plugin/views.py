@@ -7,8 +7,12 @@ from django.views.decorators.http import require_POST
 from django.db import transaction
 import json
 
+from .models import CatalogEntry
+from . import services
+
 # Valid layer types from Dataset.DATASET_TYPE_CHOICES
 VALID_LAYER_TYPES = ('raster_file', 'vector_file', 'wms', 'raster_tile', 'vector_tile')
+
 
 def index(request):
     # Retrieve all Dataset objects from the database
@@ -29,6 +33,203 @@ def index(request):
         'default_subcategory_id': default_subcategory.pk if default_subcategory else None,
     }
     return render(request, template_name, context)
+
+
+# ── Catalog API ──────────────────────────────────────────────────────────────
+
+
+def catalog_tree(request):
+    """Return the full catalog as a JSON tree for the UI."""
+    try:
+        tree = services.get_catalog_tree()
+        total = CatalogEntry.objects.count()
+        enabled = CatalogEntry.objects.filter(enabled=True).count()
+        synced = CatalogEntry.objects.exclude(dataset_id=None).filter(enabled=True).count()
+        return JsonResponse({
+            'status': 'success',
+            'total': total,
+            'enabled': enabled,
+            'synced': synced,
+            'categories': tree,
+        })
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
+
+
+@csrf_exempt
+@require_POST
+def catalog_load_config(request):
+    """Load a JSON config into the catalog (CatalogEntry table)."""
+    try:
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError as e:
+            return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+
+        if not isinstance(data, dict):
+            return JsonResponse({'status': 'error', 'message': 'Expected a JSON object'}, status=400)
+
+        stats = services.load_catalog_from_config(data)
+
+        if stats['created'] == 0 and stats['updated'] == 0 and stats['errors']:
+            return JsonResponse({
+                'status': 'error',
+                'message': stats['errors'][0],
+                **stats,
+            }, status=400)
+
+        return JsonResponse({
+            'status': 'success',
+            'message': f"Catalog loaded: {stats['created']} created, {stats['updated']} updated",
+            **stats,
+        })
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
+
+
+@csrf_exempt
+@require_POST
+def catalog_sync(request):
+    """Provision enabled entries to Climweb and deprovision disabled ones."""
+    try:
+        stats = services.sync_catalog_to_climweb()
+        return JsonResponse({
+            'status': 'success',
+            'message': (
+                f"Sync complete: {stats['added']} added, "
+                f"{stats['removed']} removed, "
+                f"{stats['orphans_cleared']} orphans cleared"
+            ),
+            **stats,
+        })
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': f'Sync failed: {e}'}, status=500)
+
+
+@csrf_exempt
+@require_POST
+def catalog_toggle(request, entry_id):
+    """Toggle the enabled flag on a single catalog entry."""
+    try:
+        entry = CatalogEntry.objects.get(id=entry_id)
+    except CatalogEntry.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Entry not found'}, status=404)
+
+    entry.enabled = not entry.enabled
+    entry.save(update_fields=['enabled', 'updated_at'])
+    return JsonResponse({
+        'status': 'success',
+        'id': str(entry.id),
+        'enabled': entry.enabled,
+        'new_status': entry.status,
+    })
+
+
+@csrf_exempt
+@require_POST
+def catalog_reset(request):
+    """Delete all CatalogEntry objects, resetting the catalog to empty."""
+    try:
+        count = CatalogEntry.objects.count()
+        CatalogEntry.objects.all().delete()
+        return JsonResponse({
+            'status': 'success',
+            'message': f'Catalog reset: {count} entries deleted',
+            'deleted': count,
+        })
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': f'Reset failed: {e}'}, status=500)
+
+
+@csrf_exempt
+@require_POST
+def catalog_add_entry(request):
+    """Add a manual catalog entry."""
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError as e:
+        return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+
+    required = ['layer_name', 'wms_url', 'category_title', 'subcategory_title']
+    missing = [f for f in required if not data.get(f)]
+    if missing:
+        return JsonResponse({
+            'status': 'error',
+            'message': f"Missing required fields: {', '.join(missing)}",
+        }, status=400)
+
+    try:
+        entry = services.add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL)
+        return JsonResponse({
+            'status': 'success',
+            'message': f"Entry '{entry.title}' added",
+            'id': str(entry.id),
+            'product_code': entry.product_code,
+        })
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
+
+@csrf_exempt
+@require_POST
+def catalog_wms_capabilities(request):
+    """
+    Fetch layers from a remote WMS GetCapabilities.
+    Expects: { "wms_url": "https://..." }
+    Returns list of layers with name, title, abstract for the UI picker.
+    """
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError as e:
+        return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+
+    wms_url = data.get('wms_url', '').strip()
+    if not wms_url:
+        return JsonResponse({'status': 'error', 'message': 'Missing wms_url'}, status=400)
+
+    # Build proper GetCapabilities URL
+    separator = '&' if '?' in wms_url else '?'
+    caps_url = f"{wms_url}{separator}service=WMS&request=GetCapabilities&version=1.3.0"
+
+    try:
+        from owslib.wms import WebMapService
+        wms = WebMapService(caps_url, version='1.3.0')
+    except ImportError:
+        return JsonResponse({
+            'status': 'error',
+            'message': 'owslib is not installed. Cannot read WMS capabilities.',
+        }, status=500)
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': f'Failed to read WMS capabilities: {e}',
+        }, status=400)
+
+    layers = []
+    for layer_name, layer_meta in wms.contents.items():
+        layer_info = {
+            'name': layer_name,
+            'title': layer_meta.title or layer_name,
+            'abstract': layer_meta.abstract or '',
+        }
+        # Extract bounding box if available
+        if hasattr(layer_meta, 'boundingBoxWGS84') and layer_meta.boundingBoxWGS84:
+            layer_info['bbox'] = list(layer_meta.boundingBoxWGS84)
+        # Extract available SRS/CRS
+        if hasattr(layer_meta, 'crsOptions') and layer_meta.crsOptions:
+            layer_info['crs'] = list(layer_meta.crsOptions)[:5]
+        layers.append(layer_info)
+
+    return JsonResponse({
+        'status': 'success',
+        'wms_url': wms_url,
+        'total': len(layers),
+        'layers': layers,
+    })
+
+
+# ── Legacy endpoints (kept for backward compatibility) ───────────────────────
+
 
 @csrf_exempt
 def vue_action(request):
@@ -422,6 +623,9 @@ def clear_all(request):
             Dataset.objects.all().delete()
             SubCategory.objects.all().delete()
             Category.objects.all().delete()
+
+            # Clear dataset_id references in catalog entries
+            CatalogEntry.objects.exclude(dataset_id=None).update(dataset_id=None)
 
             return JsonResponse({
                 'status': 'success',

@@ -219,6 +219,231 @@
     @keyframes spin {
         to { transform: rotate(360deg); }
     }
+
+    /* Catalog tree styles */
+    .catalog-stats {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 20px;
+        padding: 16px;
+        background: #f9fafb;
+        border-radius: 8px;
+    }
+    .catalog-stat {
+        text-align: center;
+    }
+    .catalog-stat .number {
+        font-size: 28px;
+        font-weight: bold;
+        color: #059669;
+    }
+    .catalog-stat .label {
+        font-size: 12px;
+        color: #6b7280;
+    }
+
+    .catalog-toolbar {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .catalog-tree {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .cat-group {
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .cat-group:last-child {
+        border-bottom: none;
+    }
+
+    .cat-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        background: #f3f4f6;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        user-select: none;
+    }
+    .cat-header:hover {
+        background: #e5e7eb;
+    }
+    .cat-header .arrow {
+        transition: transform 0.2s;
+        font-size: 10px;
+        color: #6b7280;
+    }
+    .cat-header .arrow.open {
+        transform: rotate(90deg);
+    }
+    .cat-header .cat-count {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: normal;
+        color: #6b7280;
+    }
+
+    .subcat-group {
+        border-top: 1px solid #f3f4f6;
+    }
+    .subcat-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px 10px 32px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 13px;
+        color: #374151;
+        user-select: none;
+    }
+    .subcat-header:hover {
+        background: #fafafa;
+    }
+    .subcat-header .subcat-count {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: normal;
+        color: #9ca3af;
+    }
+
+    .entry-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 16px 8px 56px;
+        font-size: 13px;
+        border-top: 1px solid #f9fafb;
+    }
+    .entry-row:hover {
+        background: #fafafa;
+    }
+
+    .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    .status-dot.synced { background: #10b981; }
+    .status-dot.pending_add { background: #f59e0b; }
+    .status-dot.pending_remove { background: #ef4444; }
+    .status-dot.disabled { background: #d1d5db; }
+
+    .entry-title {
+        flex: 1;
+        min-width: 0;
+    }
+    .entry-title .title-text {
+        font-weight: 500;
+    }
+    .entry-title .meta-text {
+        font-size: 11px;
+        color: #9ca3af;
+    }
+
+    .entry-origin {
+        font-size: 11px;
+        padding: 2px 6px;
+        border-radius: 3px;
+        background: #f3f4f6;
+        color: #6b7280;
+        flex-shrink: 0;
+    }
+
+    .catalog-empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: #6b7280;
+    }
+    .catalog-empty h3 {
+        margin-bottom: 8px;
+        color: #374151;
+    }
+
+    .catalog-actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .collapsible-content {
+        display: none;
+    }
+    .collapsible-content.open {
+        display: block;
+    }
+
+    /* Add layer form */
+    .add-layer-form {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: #fafafa;
+        display: none;
+    }
+    .add-layer-form.visible {
+        display: block;
+    }
+    .add-layer-form .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .add-layer-form .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .add-layer-form .form-field.full-width {
+        grid-column: 1 / -1;
+    }
+    .add-layer-form label {
+        font-size: 12px;
+        font-weight: 500;
+        color: #374151;
+    }
+    .add-layer-form input, .add-layer-form textarea {
+        padding: 8px 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+    .add-layer-form input:focus, .add-layer-form textarea:focus {
+        outline: none;
+        border-color: #059669;
+        box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.1);
+    }
+
+    /* Sync results */
+    .sync-results {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 6px;
+        display: none;
+    }
+    .sync-results.visible {
+        display: block;
+    }
+    .sync-results.success {
+        background: #d1fae5;
+        border: 1px solid #6ee7b7;
+    }
+    .sync-results.error {
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+    }
 </style>
 {% endblock %}
 
@@ -228,13 +453,203 @@
 <div class="nice-padding">
     <!-- Tab Navigation -->
     <div class="tabs">
-        <button class="tab-button active" data-tab="wms-wizard">WMS Wizard</button>
+        <button class="tab-button active" data-tab="catalog">Layer Catalog</button>
+        <button class="tab-button" data-tab="wms-wizard">WMS Wizard</button>
         <button class="tab-button" data-tab="datasets-list">Existing Datasets</button>
         <button class="tab-button" data-tab="bulk-import">Bulk Import</button>
     </div>
 
+    <!-- Layer Catalog Tab -->
+    <div id="catalog" class="tab-content active">
+        <div class="catalog-stats" id="catalog-stats">
+            <div class="catalog-stat">
+                <div class="number" id="stat-total">-</div>
+                <div class="label">Total Layers</div>
+            </div>
+            <div class="catalog-stat">
+                <div class="number" id="stat-enabled">-</div>
+                <div class="label">Enabled</div>
+            </div>
+            <div class="catalog-stat">
+                <div class="number" id="stat-synced">-</div>
+                <div class="label">Synced</div>
+            </div>
+        </div>
+
+        <details style="margin-bottom:20px;padding:10px 16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:13px;color:#374151;line-height:1.6;">
+            <summary style="cursor:pointer;font-weight:500;">How to use this page</summary>
+            <div style="margin-top:10px;">
+                This page manages the WMS layers available for your Climweb map viewer.
+                The tree below shows all layers grouped by <strong>Category</strong> and <strong>Subcategory</strong>.
+                <ul style="margin:8px 0 0 16px;padding:0;">
+                    <li>Use the <strong>checkboxes</strong> to enable or disable individual layers.</li>
+                    <li>Status indicators:
+                        <span class="status-dot synced" style="display:inline-block;vertical-align:middle;"></span> synced (already in Climweb),
+                        <span class="status-dot pending_add" style="display:inline-block;vertical-align:middle;"></span> will be added on next load,
+                        <span class="status-dot pending_remove" style="display:inline-block;vertical-align:middle;"></span> will be removed on next load,
+                        <span class="status-dot disabled" style="display:inline-block;vertical-align:middle;"></span> inactive.
+                    </li>
+                    <li>Click <strong>Synchronize with Climweb</strong> to apply your selection — enabled layers are created in the database, disabled ones are removed.</li>
+                    <li>You can extend the catalog by adding layers manually, importing from a remote WMS service, or loading a JSON configuration.</li>
+                </ul>
+            </div>
+        </details>
+
+        <div class="catalog-toolbar">
+            <button class="import-button" onclick="syncCatalog()">
+                Synchronize with Climweb
+            </button>
+            <button class="import-button" style="background: #6b7280;" onclick="toggleAddLayerForm()">
+                + Add Layer
+            </button>
+            <button class="import-button" style="background: #6b7280;" onclick="toggleImportWmsForm()">
+                Import from WMS
+            </button>
+            <button class="import-button" style="background: #2563eb;" onclick="toggleLoadConfigForm()">
+                Load Config JSON
+            </button>
+            <button class="danger-button" onclick="resetCatalog()">
+                Reset Catalog
+            </button>
+        </div>
+
+        <div id="sync-results" class="sync-results"></div>
+
+        <!-- Add Layer Form -->
+        <div id="add-layer-form" class="add-layer-form">
+            <h3 style="margin-top: 0;">Add a Layer</h3>
+            <div class="form-grid">
+                <div class="form-field">
+                    <label>Category *</label>
+                    <input type="text" id="add-category" placeholder="e.g. Rainfall">
+                </div>
+                <div class="form-field">
+                    <label>Subcategory *</label>
+                    <input type="text" id="add-subcategory" placeholder="e.g. Observation">
+                </div>
+                <div class="form-field">
+                    <label>Title</label>
+                    <input type="text" id="add-title" placeholder="Dataset title">
+                </div>
+                <div class="form-field">
+                    <label>WMS Layer Name *</label>
+                    <input type="text" id="add-layer-name" placeholder="WMS LAYERS parameter">
+                </div>
+                <div class="form-field full-width">
+                    <label>WMS Base URL *</label>
+                    <input type="url" id="add-wms-url" placeholder="https://...">
+                </div>
+                <div class="form-field">
+                    <label>Source</label>
+                    <input type="text" id="add-source" placeholder="Data provider">
+                </div>
+                <div class="form-field">
+                    <label>Resolution</label>
+                    <input type="text" id="add-resolution" placeholder="e.g. 1km">
+                </div>
+            </div>
+            <div style="margin-top: 12px; display: flex; gap: 8px;">
+                <button class="import-button" onclick="submitAddLayer()">Add</button>
+                <button class="import-button" style="background: #6b7280;" onclick="toggleAddLayerForm()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Import WMS Form -->
+        <div id="import-wms-form" class="add-layer-form">
+            <h3 style="margin-top: 0;">Import from WMS</h3>
+
+            <!-- Step 1: Enter URL and fetch capabilities -->
+            <div id="wms-step-url">
+                <div class="form-grid">
+                    <div class="form-field full-width">
+                        <label>WMS Service URL *</label>
+                        <input type="url" id="import-wms-url" placeholder="https://example.com/wms">
+                        <span style="font-size:11px;color:#9ca3af;">GetCapabilities will be called automatically</span>
+                    </div>
+                </div>
+                <div style="margin-top: 12px; display: flex; gap: 8px;">
+                    <button class="import-button" onclick="fetchWmsCapabilities()" id="wms-fetch-btn">
+                        Fetch Layers
+                    </button>
+                    <button class="import-button" style="background: #6b7280;" onclick="toggleImportWmsForm()">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Browse and pick layers -->
+            <div id="wms-step-pick" style="display:none;">
+                <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+                    <span id="wms-layers-count" style="font-size:13px;color:#374151;font-weight:500;"></span>
+                    <button style="font-size:12px;color:#6b7280;background:none;border:none;cursor:pointer;text-decoration:underline;" onclick="resetWmsImport()">Change URL</button>
+                </div>
+                <input type="text" id="wms-search" placeholder="Search by layer name, title, or abstract..."
+                    oninput="filterWmsLayers()"
+                    style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:4px;font-size:13px;margin-bottom:8px;">
+                <div id="wms-layers-list" style="max-height:300px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:6px;"></div>
+            </div>
+
+            <!-- Step 3: Configure selected layer -->
+            <div id="wms-step-config" style="display:none;margin-top:16px;padding:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;">
+                <h4 style="margin-top:0;color:#166534;">Configure selected layer</h4>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label>Layer Name</label>
+                        <input type="text" id="wms-cfg-layer-name" readonly style="background:#f3f4f6;">
+                    </div>
+                    <div class="form-field">
+                        <label>Title</label>
+                        <input type="text" id="wms-cfg-title">
+                    </div>
+                    <div class="form-field">
+                        <label>Category *</label>
+                        <input type="text" id="wms-cfg-category" placeholder="e.g. Environment">
+                    </div>
+                    <div class="form-field">
+                        <label>Subcategory *</label>
+                        <input type="text" id="wms-cfg-subcategory" placeholder="e.g. Observation">
+                    </div>
+                    <div class="form-field full-width">
+                        <label>Description</label>
+                        <textarea id="wms-cfg-abstract" rows="2" style="resize:vertical;"></textarea>
+                    </div>
+                </div>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <button class="import-button" onclick="addWmsLayerToCatalog()">Add to Catalog</button>
+                    <button class="import-button" style="background:#6b7280;" onclick="clearWmsSelection()">Back to list</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load Config Form -->
+        <div id="load-config-form" class="add-layer-form">
+            <h3 style="margin-top: 0;">Load JSON Config into Catalog</h3>
+            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">
+                Paste a bulk config JSON. This loads entries into the catalog (does NOT create Climweb objects yet).
+            </p>
+            <textarea id="config-json-input" class="json-textarea" style="min-height: 200px;" placeholder="Paste JSON config here..."></textarea>
+            <div style="margin-top: 12px; display: flex; gap: 8px;">
+                <button class="import-button" onclick="submitLoadConfig()">Load into Catalog</button>
+                <button class="import-button" style="background: #6b7280;" onclick="toggleLoadConfigForm()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Tree controls -->
+        <div style="display:flex;gap:4px;margin-bottom:6px;margin-top:6px;justify-content:flex-start;">
+            <button onclick="expandAllNodes()" title="Expand all"
+                style="padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;background:#fff;cursor:pointer;font-size:14px;line-height:1;color:#374151;">
+                &#9660;
+            </button>
+            <button onclick="collapseAllNodes()" title="Collapse all"
+                style="padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;background:#fff;cursor:pointer;font-size:14px;line-height:1;color:#374151;">
+                &#9654;
+            </button>
+        </div>
+
+        <!-- Catalog Tree -->
+        <div id="catalog-tree" class="catalog-tree"></div>
+    </div>
+
     <!-- WMS Wizard Tab (Vue App) -->
-    <div id="wms-wizard" class="tab-content active">
+    <div id="wms-wizard" class="tab-content">
         <div id="app"></div>
     </div>
 
@@ -716,6 +1131,581 @@
       Clear All Datasets & Categories
     `
   }
+
+  // ── Catalog functions ──────────────────────────────────────────────────────
+
+  let catalogData = null
+  // Track which groups are open so we can restore state after re-render
+  let openGroups = new Set()
+
+  async function loadCatalog(expandAll) {
+    try {
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_tree" %}', {
+        credentials: 'include'
+      })
+      if (!response.ok && response.headers.get('content-type')?.indexOf('application/json') === -1) {
+        throw new Error(`Server error ${response.status}`)
+      }
+      catalogData = await response.json()
+      renderCatalog(expandAll)
+    } catch (error) {
+      console.error('Failed to load catalog:', error)
+    }
+  }
+
+  function renderCatalog(expandAll) {
+    if (!catalogData) return
+
+    // Save currently open groups before re-render
+    document.querySelectorAll('.collapsible-content.open').forEach(el => {
+      openGroups.add(el.id)
+    })
+
+    // Update stats
+    document.getElementById('stat-total').textContent = catalogData.total || 0
+    document.getElementById('stat-enabled').textContent = catalogData.enabled || 0
+    document.getElementById('stat-synced').textContent = catalogData.synced || 0
+
+    const tree = document.getElementById('catalog-tree')
+    const categories = catalogData.categories || []
+
+    if (categories.length === 0) {
+      tree.innerHTML = `<div class="catalog-empty">
+        <h3>Catalog is empty</h3>
+        <p>Load a JSON config or add layers manually to get started.</p>
+      </div>`
+      return
+    }
+
+    let html = ''
+
+    categories.forEach((cat, ci) => {
+      const catId = 'cat-' + ci
+      const isOpen = expandAll || openGroups.has(catId)
+      const totalEntries = cat.subcategories.reduce((sum, sc) => sum + sc.entries.length, 0)
+      const enabledEntries = cat.subcategories.reduce((sum, sc) =>
+        sum + sc.entries.filter(e => e.enabled).length, 0)
+
+      html += `<div class="cat-group">
+        <div class="cat-header" onclick="toggleCollapsible('${catId}')">
+          <span class="arrow${isOpen ? ' open' : ''}" id="arrow-${catId}">&#9654;</span>
+          <strong>${escapeHtml(cat.title)}</strong>
+          <span class="cat-count">${enabledEntries}/${totalEntries} enabled</span>
+        </div>
+        <div class="collapsible-content${isOpen ? ' open' : ''}" id="${catId}">`
+
+      cat.subcategories.forEach((subcat, si) => {
+        const subcatId = 'subcat-' + ci + '-' + si
+        const isSubOpen = expandAll || openGroups.has(subcatId)
+        const scEnabled = subcat.entries.filter(e => e.enabled).length
+        html += `<div class="subcat-group">
+          <div class="subcat-header" onclick="toggleCollapsible('${subcatId}')">
+            <span class="arrow${isSubOpen ? ' open' : ''}" id="arrow-${subcatId}">&#9654;</span>
+            ${escapeHtml(subcat.title)}
+            <span class="subcat-count">${scEnabled}/${subcat.entries.length}</span>
+          </div>
+          <div class="collapsible-content${isSubOpen ? ' open' : ''}" id="${subcatId}">`
+
+        subcat.entries.forEach(entry => {
+          const checked = entry.enabled ? 'checked' : ''
+          const metaParts = [entry.meta_source, entry.meta_resolution].filter(Boolean)
+          const metaStr = metaParts.length ? metaParts.join(' · ') : ''
+          const originLabel = entry.origin === 'config' ? '' :
+            `<span class="entry-origin">${entry.origin}</span>`
+
+          html += `<div class="entry-row">
+            <input type="checkbox" ${checked}
+              onchange="toggleEntry('${entry.id}')" title="Enable/disable this layer">
+            <span class="status-dot ${entry.status}" title="${entry.status}"></span>
+            <span class="entry-title">
+              <span class="title-text">${escapeHtml(entry.title)}</span>
+              ${metaStr ? `<br><span class="meta-text">${escapeHtml(metaStr)}</span>` : ''}
+            </span>
+            ${originLabel}
+          </div>`
+        })
+
+        html += `</div></div>`
+      })
+
+      html += `</div></div>`
+    })
+
+    tree.innerHTML = html
+  }
+
+  function toggleCollapsible(id) {
+    const el = document.getElementById(id)
+    const arrow = document.getElementById('arrow-' + id)
+    if (el) {
+      el.classList.toggle('open')
+      if (arrow) arrow.classList.toggle('open')
+      // Track state
+      if (el.classList.contains('open')) {
+        openGroups.add(id)
+      } else {
+        openGroups.delete(id)
+      }
+    }
+  }
+
+  function expandAllNodes() {
+    document.querySelectorAll('.catalog-tree .collapsible-content').forEach(el => {
+      el.classList.add('open')
+      openGroups.add(el.id)
+      const arrow = document.getElementById('arrow-' + el.id)
+      if (arrow) arrow.classList.add('open')
+    })
+  }
+
+  function collapseAllNodes() {
+    document.querySelectorAll('.catalog-tree .collapsible-content').forEach(el => {
+      el.classList.remove('open')
+      openGroups.delete(el.id)
+      const arrow = document.getElementById('arrow-' + el.id)
+      if (arrow) arrow.classList.remove('open')
+    })
+  }
+
+  async function toggleEntry(entryId) {
+    // Build URL relative to the catalog endpoint
+    const catalogUrl = '{% url "dataset_helper_plugin:catalog_tree" %}'
+    // catalogUrl = ".../catalog/" — append "<uuid>/toggle/"
+    const url = catalogUrl + entryId + '/toggle/'
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrftoken,
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include'
+      })
+      const text = await response.text()
+      console.log('Toggle response:', response.status, text.substring(0, 300))
+      if (!response.ok) {
+        return
+      }
+      // Reload full catalog to update counts and statuses
+      await loadCatalog()
+    } catch (error) {
+      console.error('Failed to toggle entry:', error)
+    }
+  }
+
+  async function resetCatalog() {
+    const confirmed = confirm(
+      'Are you sure you want to reset the catalog?\n\n' +
+      'This will delete all catalog entries. Climweb datasets will NOT be affected.'
+    )
+    if (!confirmed) return
+
+    const resultsEl = document.getElementById('sync-results')
+    resultsEl.className = 'sync-results visible'
+    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #dc2626; border-top-color: transparent;"></span> Resetting...'
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_reset" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        credentials: 'include'
+      })
+      const data = await response.json()
+
+      if (data.status === 'success') {
+        resultsEl.className = 'sync-results visible success'
+        resultsEl.innerHTML = data.message
+      } else {
+        resultsEl.className = 'sync-results visible error'
+        resultsEl.innerHTML = data.message
+      }
+
+      await loadCatalog()
+    } catch (error) {
+      resultsEl.className = 'sync-results visible error'
+      resultsEl.innerHTML = 'Reset failed: ' + error.message
+    }
+  }
+
+  async function syncCatalog() {
+    const resultsEl = document.getElementById('sync-results')
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      resultsEl.className = 'sync-results visible'
+      resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> Syncing...'
+
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_sync" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        credentials: 'include'
+      })
+      const data = await response.json()
+
+      if (data.status === 'success') {
+        resultsEl.className = 'sync-results visible success'
+        let msg = data.message
+        if (data.errors && data.errors.length > 0) {
+          msg += '<br><br><strong>Warnings:</strong><ul style="margin:4px 0;">'
+          data.errors.forEach(e => msg += `<li style="font-size:12px;color:#dc2626;">${escapeHtml(e)}</li>`)
+          msg += '</ul>'
+        }
+        resultsEl.innerHTML = msg
+      } else {
+        resultsEl.className = 'sync-results visible error'
+        resultsEl.innerHTML = data.message
+      }
+
+      await loadCatalog()
+    } catch (error) {
+      resultsEl.className = 'sync-results visible error'
+      resultsEl.innerHTML = 'Sync failed: ' + error.message
+    }
+  }
+
+  function toggleAddLayerForm() {
+    const form = document.getElementById('add-layer-form')
+    form.classList.toggle('visible')
+    // Close others
+    document.getElementById('import-wms-form').classList.remove('visible')
+    document.getElementById('load-config-form').classList.remove('visible')
+  }
+
+  function toggleImportWmsForm() {
+    const form = document.getElementById('import-wms-form')
+    const wasVisible = form.classList.contains('visible')
+    form.classList.toggle('visible')
+    document.getElementById('add-layer-form').classList.remove('visible')
+    document.getElementById('load-config-form').classList.remove('visible')
+    // Reset to step 1 when closing
+    if (wasVisible) {
+      resetWmsImport()
+    }
+  }
+
+  function toggleLoadConfigForm() {
+    const form = document.getElementById('load-config-form')
+    form.classList.toggle('visible')
+    document.getElementById('add-layer-form').classList.remove('visible')
+    document.getElementById('import-wms-form').classList.remove('visible')
+  }
+
+  async function submitAddLayer() {
+    const data = {
+      category_title: document.getElementById('add-category').value,
+      subcategory_title: document.getElementById('add-subcategory').value,
+      title: document.getElementById('add-title').value,
+      layer_name: document.getElementById('add-layer-name').value,
+      wms_url: document.getElementById('add-wms-url').value,
+      meta_source: document.getElementById('add-source').value,
+      meta_resolution: document.getElementById('add-resolution').value,
+    }
+
+    if (!data.category_title || !data.subcategory_title || !data.layer_name || !data.wms_url) {
+      alert('Please fill in all required fields (*).')
+      return
+    }
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_add_entry" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+      })
+      const result = await response.json()
+      if (result.status === 'success') {
+        toggleAddLayerForm()
+        await loadCatalog(true)
+      } else {
+        alert('Error: ' + result.message)
+      }
+    } catch (error) {
+      alert('Error: ' + error.message)
+    }
+  }
+
+  // ── WMS Import (multi-step) ────────────────────────────────────────────────
+
+  let wmsCapabilitiesData = null  // { wms_url, layers: [...] }
+  let wmsBaseUrl = ''
+
+  async function fetchWmsCapabilities() {
+    const urlInput = document.getElementById('import-wms-url')
+    const wmsUrl = urlInput.value.trim()
+    if (!wmsUrl) {
+      alert('Please enter a WMS URL.')
+      return
+    }
+
+    wmsBaseUrl = wmsUrl
+    const btn = document.getElementById('wms-fetch-btn')
+    btn.disabled = true
+    btn.innerHTML = '<span class="loading-spinner"></span> Fetching...'
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_wms_capabilities" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({ wms_url: wmsUrl }),
+        credentials: 'include'
+      })
+
+      if (!response.ok && response.headers.get('content-type')?.indexOf('application/json') === -1) {
+        throw new Error(`Server error ${response.status}`)
+      }
+
+      const result = await response.json()
+      if (result.status !== 'success') {
+        alert('Error: ' + result.message)
+        return
+      }
+
+      wmsCapabilitiesData = result
+      // Show picker step
+      document.getElementById('wms-step-url').style.display = 'none'
+      document.getElementById('wms-step-pick').style.display = 'block'
+      document.getElementById('wms-step-config').style.display = 'none'
+      document.getElementById('wms-layers-count').textContent =
+        `${result.total} layers from ${escapeHtml(wmsUrl)}`
+      document.getElementById('wms-search').value = ''
+      renderWmsLayers(result.layers)
+
+    } catch (error) {
+      alert('Failed to fetch capabilities: ' + error.message)
+    } finally {
+      btn.disabled = false
+      btn.innerHTML = 'Fetch Layers'
+    }
+  }
+
+  function renderWmsLayers(layers) {
+    const container = document.getElementById('wms-layers-list')
+    if (!layers || layers.length === 0) {
+      container.innerHTML = '<div style="padding:20px;text-align:center;color:#6b7280;">No layers found</div>'
+      return
+    }
+
+    let html = ''
+    layers.forEach((layer, i) => {
+      const abstract = layer.abstract ? escapeHtml(layer.abstract).substring(0, 120) : ''
+      html += `<div class="wms-layer-item" data-index="${i}"
+        onclick="selectWmsLayer(${i})"
+        style="padding:10px 12px;border-bottom:1px solid #f3f4f6;cursor:pointer;transition:background 0.1s;"
+        onmouseover="this.style.background='#f0fdf4'"
+        onmouseout="this.style.background=''">
+        <div style="font-weight:500;font-size:13px;">${escapeHtml(layer.title)}</div>
+        <div style="font-size:11px;color:#6b7280;font-family:monospace;">${escapeHtml(layer.name)}</div>
+        ${abstract ? `<div style="font-size:11px;color:#9ca3af;margin-top:2px;">${abstract}</div>` : ''}
+      </div>`
+    })
+    container.innerHTML = html
+  }
+
+  function filterWmsLayers() {
+    if (!wmsCapabilitiesData) return
+    const query = document.getElementById('wms-search').value.toLowerCase().trim()
+    if (!query) {
+      renderWmsLayers(wmsCapabilitiesData.layers)
+      return
+    }
+    const filtered = wmsCapabilitiesData.layers.filter(l =>
+      l.name.toLowerCase().includes(query) ||
+      l.title.toLowerCase().includes(query) ||
+      (l.abstract && l.abstract.toLowerCase().includes(query))
+    )
+    renderWmsLayers(filtered)
+  }
+
+  function selectWmsLayer(index) {
+    if (!wmsCapabilitiesData) return
+    const layer = wmsCapabilitiesData.layers[index]
+    if (!layer) return
+
+    // Fill the config form
+    document.getElementById('wms-cfg-layer-name').value = layer.name
+    document.getElementById('wms-cfg-title').value = layer.title || layer.name
+    document.getElementById('wms-cfg-abstract').value = layer.abstract || ''
+    // Pre-fill category/subcategory if empty
+    if (!document.getElementById('wms-cfg-category').value) {
+      document.getElementById('wms-cfg-category').value = ''
+    }
+    if (!document.getElementById('wms-cfg-subcategory').value) {
+      document.getElementById('wms-cfg-subcategory').value = 'Observation'
+    }
+
+    document.getElementById('wms-step-config').style.display = 'block'
+    // Scroll config into view
+    document.getElementById('wms-step-config').scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+  }
+
+  function clearWmsSelection() {
+    document.getElementById('wms-step-config').style.display = 'none'
+  }
+
+  function resetWmsImport() {
+    wmsCapabilitiesData = null
+    document.getElementById('wms-step-url').style.display = 'block'
+    document.getElementById('wms-step-pick').style.display = 'none'
+    document.getElementById('wms-step-config').style.display = 'none'
+  }
+
+  async function addWmsLayerToCatalog() {
+    const category = document.getElementById('wms-cfg-category').value.trim()
+    const subcategory = document.getElementById('wms-cfg-subcategory').value.trim()
+    const layerName = document.getElementById('wms-cfg-layer-name').value.trim()
+    const title = document.getElementById('wms-cfg-title').value.trim()
+    const abstract = document.getElementById('wms-cfg-abstract').value.trim()
+
+    if (!category || !subcategory) {
+      alert('Please fill in Category and Subcategory.')
+      return
+    }
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_add_entry" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+          layer_name: layerName,
+          wms_url: wmsBaseUrl,
+          title: title || layerName,
+          layer_title: title || layerName,
+          category_title: category,
+          subcategory_title: subcategory,
+          meta_overview: abstract,
+        }),
+        credentials: 'include'
+      })
+      const result = await response.json()
+      if (result.status === 'success') {
+        // Show brief success, keep picker open for more selections
+        const configEl = document.getElementById('wms-step-config')
+        configEl.innerHTML = `<div style="color:#166534;font-weight:500;padding:8px;">
+          Added "${escapeHtml(title || layerName)}" to catalog.
+        </div>`
+        setTimeout(() => {
+          configEl.style.display = 'none'
+          configEl.innerHTML = '' // will be rebuilt on next selection
+          // Restore config form HTML
+          rebuildWmsConfigForm()
+        }, 1500)
+        await loadCatalog(true)
+      } else {
+        alert('Error: ' + result.message)
+      }
+    } catch (error) {
+      alert('Error: ' + error.message)
+    }
+  }
+
+  function rebuildWmsConfigForm() {
+    document.getElementById('wms-step-config').innerHTML = `
+      <h4 style="margin-top:0;color:#166534;">Configure selected layer</h4>
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Layer Name</label>
+          <input type="text" id="wms-cfg-layer-name" readonly style="background:#f3f4f6;">
+        </div>
+        <div class="form-field">
+          <label>Title</label>
+          <input type="text" id="wms-cfg-title">
+        </div>
+        <div class="form-field">
+          <label>Category *</label>
+          <input type="text" id="wms-cfg-category" placeholder="e.g. Environment">
+        </div>
+        <div class="form-field">
+          <label>Subcategory *</label>
+          <input type="text" id="wms-cfg-subcategory" placeholder="e.g. Observation">
+        </div>
+        <div class="form-field full-width">
+          <label>Description</label>
+          <textarea id="wms-cfg-abstract" rows="2" style="resize:vertical;"></textarea>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;">
+        <button class="import-button" onclick="addWmsLayerToCatalog()">Add to Catalog</button>
+        <button class="import-button" style="background:#6b7280;" onclick="clearWmsSelection()">Back to list</button>
+      </div>`
+  }
+
+  async function submitLoadConfig() {
+    const textarea = document.getElementById('config-json-input')
+    let config
+    try {
+      config = JSON.parse(textarea.value)
+    } catch (e) {
+      alert('Invalid JSON: ' + e.message)
+      return
+    }
+
+    const resultsEl = document.getElementById('sync-results')
+    resultsEl.className = 'sync-results visible'
+    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> Loading config...'
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_load_config" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(config),
+        credentials: 'include'
+      })
+      if (!response.ok && response.headers.get('content-type')?.indexOf('application/json') === -1) {
+        throw new Error(`Server error ${response.status}. Check Django logs for details.`)
+      }
+      const result = await response.json()
+      if (result.status === 'success') {
+        resultsEl.className = 'sync-results visible success'
+        resultsEl.innerHTML = result.message
+        toggleLoadConfigForm()
+        await loadCatalog(true)
+      } else {
+        resultsEl.className = 'sync-results visible error'
+        resultsEl.innerHTML = result.message
+      }
+    } catch (error) {
+      resultsEl.className = 'sync-results visible error'
+      resultsEl.innerHTML = 'Load failed: ' + error.message
+    }
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div')
+    div.textContent = text
+    return div.innerHTML
+  }
+
+  // Load catalog on page load — all collapsed
+  document.addEventListener('DOMContentLoaded', function() {
+    openGroups.clear()
+    loadCatalog(false)
+  })
 
   // Add Dataset form handler (existing Vue integration)
   window.addEventListener('message', async function (event) {
