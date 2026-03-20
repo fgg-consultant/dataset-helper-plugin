@@ -360,6 +360,69 @@
         flex-shrink: 0;
     }
 
+    /* Layer detail panel */
+    .entry-detail {
+        display: none;
+        padding: 16px 16px 16px 56px;
+        background: #f9fafb;
+        border-top: 1px solid #e5e7eb;
+        animation: slideDown 0.2s ease-out;
+    }
+    .entry-detail.open {
+        display: block;
+    }
+    @keyframes slideDown {
+        from { opacity: 0; max-height: 0; }
+        to { opacity: 1; max-height: 600px; }
+    }
+    .detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 260px;
+        gap: 16px;
+    }
+    .detail-meta table {
+        width: 100%;
+        font-size: 12px;
+        border-collapse: collapse;
+    }
+    .detail-meta td {
+        padding: 4px 8px 4px 0;
+        vertical-align: top;
+    }
+    .detail-meta td:first-child {
+        font-weight: 600;
+        color: #6b7280;
+        white-space: nowrap;
+        width: 140px;
+    }
+    .detail-meta td:last-child {
+        color: #374151;
+        word-break: break-word;
+    }
+    .detail-preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+    .detail-preview img {
+        max-width: 256px;
+        max-height: 200px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        background: #e5e7eb;
+    }
+    .detail-preview .preview-label {
+        font-size: 11px;
+        color: #9ca3af;
+    }
+    .detail-description {
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: #4b5563;
+        line-height: 1.5;
+    }
+
     .catalog-empty {
         text-align: center;
         padding: 60px 20px;
@@ -1212,16 +1275,21 @@
           const metaStr = metaParts.length ? metaParts.join(' · ') : ''
           const originLabel = entry.origin === 'config' ? '' :
             `<span class="entry-origin">${entry.origin}</span>`
+          const detailId = 'detail-' + entry.id
+          const isDetailOpen = openGroups.has(detailId)
 
-          html += `<div class="entry-row">
+          html += `<div class="entry-row" onclick="toggleDetail('${entry.id}', event)" style="cursor:pointer;">
             <input type="checkbox" ${checked}
-              onchange="toggleEntry('${entry.id}')" title="Enable/disable this layer">
+              onchange="toggleEntry('${entry.id}')" onclick="event.stopPropagation()" title="Enable/disable this layer">
             <span class="status-dot ${entry.status}" title="${entry.status}"></span>
             <span class="entry-title">
               <span class="title-text">${escapeHtml(entry.title)}</span>
               ${metaStr ? `<br><span class="meta-text">${escapeHtml(metaStr)}</span>` : ''}
             </span>
             ${originLabel}
+          </div>
+          <div class="entry-detail${isDetailOpen ? ' open' : ''}" id="${detailId}">
+            ${buildDetailPanel(entry)}
           </div>`
         })
 
@@ -1232,6 +1300,79 @@
     })
 
     tree.innerHTML = html
+  }
+
+  function buildWmsPreviewUrl(entry) {
+    const bbox = '-4554203.020722416,-4917533.4489256255,8081548.881484727,4906985.59447665'
+    let base = entry.wms_url
+    const sep = base.includes('?') ? '&' : '?'
+    return base + sep +
+      'SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0' +
+      '&LAYERS=' + encodeURIComponent(entry.layer_name) +
+      '&CRS=EPSG:3857' +
+      '&BBOX=' + bbox +
+      '&WIDTH=256&HEIGHT=200' +
+      '&FORMAT=image/png' +
+      '&TRANSPARENT=true'
+  }
+
+  function buildDetailPanel(entry) {
+    const previewUrl = buildWmsPreviewUrl(entry)
+
+    const metaRows = [
+      ['Layer name', entry.layer_name],
+      ['WMS URL', entry.wms_url],
+      ['Source', entry.meta_source],
+      ['Function', entry.meta_function],
+      ['Resolution', entry.meta_resolution],
+      ['Coverage', entry.meta_geographic_coverage],
+      ['Update freq.', entry.meta_frequency_of_update],
+      ['License', entry.meta_license],
+      ['Multi-temporal', entry.multi_temporal ? 'Yes' : 'No'],
+      ['Origin', entry.origin],
+      ['Status', entry.status],
+    ].filter(([, v]) => v)
+
+    let tableHtml = metaRows.map(([label, value]) =>
+      `<tr><td>${escapeHtml(label)}</td><td>${escapeHtml(String(value))}</td></tr>`
+    ).join('')
+
+    const learnMore = entry.meta_learn_more
+      ? `<tr><td>Learn more</td><td><a href="${escapeHtml(entry.meta_learn_more)}" target="_blank" rel="noopener" style="color:#059669;text-decoration:underline;">${escapeHtml(entry.meta_learn_more)}</a></td></tr>`
+      : ''
+
+    const description = entry.meta_overview || entry.description
+    const descHtml = description
+      ? `<div class="detail-description">${escapeHtml(description)}</div>`
+      : ''
+
+    return `<div class="detail-grid">
+      <div class="detail-meta">
+        ${descHtml}
+        <table>${tableHtml}${learnMore}</table>
+      </div>
+      <div class="detail-preview">
+        <img src="${escapeHtml(previewUrl)}" alt="WMS Preview" loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.textContent='Preview not available'">
+        <span class="preview-label">WMS preview</span>
+      </div>
+    </div>`
+  }
+
+  function toggleDetail(entryId, event) {
+    // Don't toggle if clicking on a checkbox or link
+    if (event.target.tagName === 'INPUT' || event.target.tagName === 'A') return
+
+    const detailId = 'detail-' + entryId
+    const el = document.getElementById(detailId)
+    if (el) {
+      el.classList.toggle('open')
+      if (el.classList.contains('open')) {
+        openGroups.add(detailId)
+      } else {
+        openGroups.delete(detailId)
+      }
+    }
   }
 
   function toggleCollapsible(id) {

@@ -374,13 +374,22 @@ def get_catalog_tree():
             'id': str(entry.id),
             'product_code': entry.product_code,
             'title': entry.title,
+            'description': entry.description,
             'layer_name': entry.layer_name,
+            'layer_title': entry.layer_title,
             'wms_url': entry.wms_url,
+            'multi_temporal': entry.multi_temporal,
             'enabled': entry.enabled,
             'status': entry.status,
             'origin': entry.origin,
             'meta_source': entry.meta_source,
             'meta_resolution': entry.meta_resolution,
+            'meta_geographic_coverage': entry.meta_geographic_coverage,
+            'meta_license': entry.meta_license,
+            'meta_frequency_of_update': entry.meta_frequency_of_update,
+            'meta_function': entry.meta_function,
+            'meta_overview': entry.meta_overview,
+            'meta_learn_more': entry.meta_learn_more,
         })
 
     # Convert to sorted list format
