@@ -7,7 +7,7 @@ from django.views.decorators.http import require_POST
 from django.db import transaction
 import json
 
-from .models import CatalogEntry
+from .models import CatalogEntry, PluginSettings
 from . import services
 
 # Valid layer types from Dataset.DATASET_TYPE_CHOICES
@@ -25,12 +25,16 @@ def index(request):
     default_category = active_categories.first()
     default_subcategory = default_category.sub_categories.first() if default_category else None
 
+    # Load plugin settings for the template
+    settings = PluginSettings.load()
+
     template_name = "dataset_helper_plugin/index.html"
     context = {
         'datasets': datasets,
         'categories': categories,
         'default_category_id': default_category.pk if default_category else None,
         'default_subcategory_id': default_subcategory.pk if default_subcategory else None,
+        'plugin_settings': settings,
     }
     return render(request, template_name, context)
 
@@ -78,9 +82,13 @@ def catalog_load_config(request):
                 **stats,
             }, status=400)
 
+        msg = f"Catalog loaded: {stats['created']} created, {stats['updated']} updated"
+        if stats.get('skipped_estation'):
+            msg += f", {stats['skipped_estation']} skipped (not on local eStation)"
+
         return JsonResponse({
             'status': 'success',
-            'message': f"Catalog loaded: {stats['created']} created, {stats['updated']} updated",
+            'message': msg,
             **stats,
         })
     except Exception as e:
@@ -122,6 +130,29 @@ def catalog_toggle(request, entry_id):
         'id': str(entry.id),
         'enabled': entry.enabled,
         'new_status': entry.status,
+    })
+
+
+@csrf_exempt
+@require_POST
+def catalog_bulk_toggle(request):
+    """Set enabled flag for multiple catalog entries at once."""
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError as e:
+        return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+
+    entry_ids = data.get('entry_ids', [])
+    enabled = data.get('enabled', True)
+
+    if not entry_ids:
+        return JsonResponse({'status': 'error', 'message': 'No entry_ids provided'}, status=400)
+
+    updated = CatalogEntry.objects.filter(id__in=entry_ids).update(enabled=enabled)
+    return JsonResponse({
+        'status': 'success',
+        'updated': updated,
+        'enabled': enabled,
     })
 
 
@@ -225,6 +256,53 @@ def catalog_wms_capabilities(request):
         'wms_url': wms_url,
         'total': len(layers),
         'layers': layers,
+    })
+
+
+# ── Settings API ────────────────────────────────────────────────────────────
+
+
+def settings_get(request):
+    """Return current plugin settings."""
+    s = PluginSettings.load()
+    return JsonResponse({
+        'status': 'success',
+        'language': s.language,
+        'ecmwf_token': s.ecmwf_token,
+        'estation_url': s.estation_url,
+    })
+
+
+@csrf_exempt
+@require_POST
+def settings_save(request):
+    """Update plugin settings."""
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError as e:
+        return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+
+    s = PluginSettings.load()
+
+    if 'language' in data:
+        lang = data['language']
+        if lang not in dict(PluginSettings.LANGUAGE_CHOICES):
+            return JsonResponse({'status': 'error', 'message': f'Invalid language: {lang}'}, status=400)
+        s.language = lang
+
+    if 'ecmwf_token' in data:
+        s.ecmwf_token = data['ecmwf_token'] or 'public'
+
+    if 'estation_url' in data:
+        s.estation_url = data['estation_url'] or ''
+
+    s.save()
+    return JsonResponse({
+        'status': 'success',
+        'message': 'Settings saved',
+        'language': s.language,
+        'ecmwf_token': s.ecmwf_token,
+        'estation_url': s.estation_url,
     })
 
 

@@ -1,12 +1,56 @@
 import logging
+import re
+import urllib.request
+import json as json_module
 
 from django.db import transaction
 from geomanager.models.core import Category, Dataset, Metadata, SubCategory
 from geomanager.models.wms import WmsLayer, WmsRequestLayer
 
-from .models import CatalogEntry
+from .models import CatalogEntry, PluginSettings
 
 logger = logging.getLogger(__name__)
+
+
+def _resolve_i18n(value, lang='en'):
+    """
+    Resolve a multilingual value. If value is a dict with language keys,
+    return the string for `lang` (fallback to 'en', then first available).
+    If value is already a string, return it as-is.
+    """
+    if isinstance(value, dict):
+        return value.get(lang) or value.get('en') or next(iter(value.values()), '')
+    return value or ''
+
+
+def _substitute_ecmwf_token(wms_url, token):
+    """
+    Replace the token parameter in ECMWF eccharts WMS URLs with the configured token.
+    E.g. https://eccharts.ecmwf.int/wms/?token=public -> ...?token=<configured>
+    """
+    if 'eccharts.ecmwf.int' in wms_url and token:
+        return re.sub(r'(token=)[^&]*', rf'\g<1>{token}', wms_url)
+    return wms_url
+
+
+def _fetch_estation_product_ids(estation_url):
+    """
+    Fetch the local eStation /collections endpoint and return a set of product_id values.
+    Returns None if estation_url is empty (meaning: no filtering).
+    """
+    if not estation_url:
+        return None
+
+    collections_url = estation_url.rstrip('/') + '/collections'
+    try:
+        req = urllib.request.Request(collections_url, headers={'Accept': 'application/json'})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json_module.loads(resp.read().decode('utf-8'))
+        products = data.get('products', [])
+        return {p['product_id'] for p in products if p.get('product_id')}
+    except Exception as e:
+        logger.warning("Failed to fetch eStation collections from %s: %s", collections_url, e)
+        return None
 
 
 def load_catalog_from_config(json_data):
@@ -18,14 +62,22 @@ def load_catalog_from_config(json_data):
     1. Nested: {"categories": [{"title":..., "subcategories": [{"datasets": [...]}]}]}
     2. Flat products: {"products": [{"category":..., "product_id":..., "descriptive_name":..., "wms_getmap_url":...}]}
 
+    Applies plugin settings: language resolution, ECMWF token substitution,
+    and eStation local product filtering.
+
     Returns stats dict with created/updated/unchanged counts.
     """
-    stats = {'created': 0, 'updated': 0, 'unchanged': 0, 'errors': []}
+    stats = {'created': 0, 'updated': 0, 'unchanged': 0, 'skipped_estation': 0, 'errors': []}
+
+    settings = PluginSettings.load()
+    lang = settings.language
+    ecmwf_token = settings.ecmwf_token
+    estation_product_ids = _fetch_estation_product_ids(settings.estation_url)
 
     if json_data.get('categories'):
-        _load_nested_format(json_data, stats)
+        _load_nested_format(json_data, stats, lang, ecmwf_token, estation_product_ids)
     elif json_data.get('products'):
-        _load_products_format(json_data, stats)
+        _load_products_format(json_data, stats, lang, ecmwf_token, estation_product_ids)
     else:
         stats['errors'].append(
             'Unrecognized format: expected top-level "categories" (nested format) '
@@ -35,14 +87,25 @@ def load_catalog_from_config(json_data):
     return stats
 
 
-def _load_nested_format(json_data, stats):
+def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None):
     """Load from the nested categories > subcategories > datasets > layers format."""
+    # Determine if eStation filtering should apply to this config.
+    # We check if any WMS URL in the config points to estation.jrc.ec.europa.eu
+    _is_estation_config = None
+
+    def is_estation_layer(layer_name):
+        """Check if a layer_name is an eStation product (layer_xxx format)."""
+        nonlocal _is_estation_config
+        if estation_product_ids is None:
+            return True  # No filtering
+        return layer_name in estation_product_ids
+
     for cat_data in json_data.get('categories', []):
-        cat_title = cat_data.get('title', '')
+        cat_title = _resolve_i18n(cat_data.get('title', ''), lang)
         cat_icon = cat_data.get('icon', 'map')
 
         for subcat_data in cat_data.get('subcategories', []):
-            subcat_title = subcat_data.get('title', '')
+            subcat_title = _resolve_i18n(subcat_data.get('title', ''), lang)
 
             for dataset_data in subcat_data.get('datasets', []):
                 layers_data = dataset_data.get('layers', [])
@@ -55,37 +118,47 @@ def _load_nested_format(json_data, stats):
                     if not layer_name or not wms_url:
                         stats['errors'].append(
                             f"Skipping layer in '{cat_title}/{subcat_title}/"
-                            f"{dataset_data.get('title', '?')}': missing layer_name or wms_url"
+                            f"{_resolve_i18n(dataset_data.get('title', '?'), lang)}': missing layer_name or wms_url"
                         )
                         continue
+
+                    # eStation filtering: if local eStation is configured,
+                    # skip layers from eStation global that are not on the local instance
+                    if estation_product_ids is not None and 'estation' in wms_url.lower():
+                        if not is_estation_layer(layer_name):
+                            stats['skipped_estation'] += 1
+                            continue
+
+                    # Substitute ECMWF token
+                    wms_url = _substitute_ecmwf_token(wms_url, ecmwf_token)
 
                     product_code = layer_name
 
                     defaults = {
-                        'title': dataset_data.get('title', layer_name),
-                        'description': dataset_data.get('description', ''),
+                        'title': _resolve_i18n(dataset_data.get('title', layer_name), lang),
+                        'description': _resolve_i18n(dataset_data.get('description', ''), lang),
                         'category_title': cat_title,
                         'category_icon': cat_icon,
                         'subcategory_title': subcat_title,
                         'layer_name': layer_name,
                         'wms_url': wms_url,
-                        'layer_title': layer_data.get('title', ''),
+                        'layer_title': _resolve_i18n(layer_data.get('title', ''), lang),
                         'multi_temporal': dataset_data.get('multi_temporal', True),
                         'origin': CatalogEntry.ORIGIN_CONFIG,
                         'meta_source': metadata.get('source', ''),
                         'meta_resolution': metadata.get('resolution', ''),
-                        'meta_geographic_coverage': metadata.get('geographic_coverage', ''),
+                        'meta_geographic_coverage': _resolve_i18n(metadata.get('geographic_coverage', ''), lang),
                         'meta_license': metadata.get('license', ''),
-                        'meta_frequency_of_update': metadata.get('frequency_of_update', ''),
-                        'meta_function': metadata.get('function', ''),
-                        'meta_overview': metadata.get('overview', ''),
+                        'meta_frequency_of_update': _resolve_i18n(metadata.get('frequency_of_update', ''), lang),
+                        'meta_function': _resolve_i18n(metadata.get('function', ''), lang),
+                        'meta_overview': _resolve_i18n(metadata.get('overview', ''), lang),
                         'meta_learn_more': metadata.get('learn_more', ''),
                     }
 
                     _upsert_entry(product_code, defaults, stats)
 
 
-def _load_products_format(json_data, stats):
+def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None):
     """
     Load from the flat products format (e.g. jrc_station_products.json).
     Each product has: category, product_id, descriptive_name, wms_getmap_url, resource_url.
@@ -102,6 +175,12 @@ def _load_products_format(json_data, stats):
         if not product_id:
             stats['errors'].append(f"Skipping product without product_id: {product.get('descriptive_name', '?')}")
             continue
+
+        # eStation filtering: skip products not available on the local instance
+        if estation_product_ids is not None:
+            if product_id not in estation_product_ids:
+                stats['skipped_estation'] += 1
+                continue
 
         category = product.get('category', 'Uncategorized')
         # Capitalize category title

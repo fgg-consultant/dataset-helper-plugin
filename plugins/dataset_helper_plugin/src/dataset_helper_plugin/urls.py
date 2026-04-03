@@ -9,7 +9,12 @@ urlpatterns = [
     path('catalog/<uuid:entry_id>/toggle/', views.catalog_toggle, name='catalog_toggle'),
     path('catalog/entry/', views.catalog_add_entry, name='catalog_add_entry'),
     path('catalog/reset/', views.catalog_reset, name='catalog_reset'),
+    path('catalog/bulk-toggle/', views.catalog_bulk_toggle, name='catalog_bulk_toggle'),
     path('catalog/wms-capabilities/', views.catalog_wms_capabilities, name='catalog_wms_capabilities'),
+
+    # Settings API
+    path('settings/', views.settings_get, name='settings_get'),
+    path('settings/save/', views.settings_save, name='settings_save'),
 
     # Legacy endpoints
     path('action/', views.vue_action, name='vue_action'),

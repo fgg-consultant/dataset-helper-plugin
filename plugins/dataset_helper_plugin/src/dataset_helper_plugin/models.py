@@ -5,6 +5,59 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class PluginSettings(models.Model):
+    """
+    Singleton settings for the Dataset Helper plugin.
+    Stores per-Climweb configuration: language, ECMWF token, eStation URL.
+    """
+
+    LANGUAGE_CHOICES = (
+        ('en', 'English'),
+        ('fr', 'Français'),
+        ('es', 'Español'),
+        ('pt', 'Português'),
+        ('ar', 'العربية'),
+    )
+
+    language = models.CharField(
+        max_length=2,
+        choices=LANGUAGE_CHOICES,
+        default='en',
+        verbose_name=_("Language"),
+        help_text=_("Language for imported catalog labels"),
+    )
+    ecmwf_token = models.CharField(
+        max_length=255,
+        default='public',
+        verbose_name=_("ECMWF API Token"),
+        help_text=_("Token for ECMWF eccharts WMS service"),
+    )
+    estation_url = models.URLField(
+        max_length=500,
+        blank=True,
+        default='',
+        verbose_name=_("Local eStation URL"),
+        help_text=_("If set, only eStation products available on this local instance will be imported"),
+    )
+
+    class Meta:
+        verbose_name = _("Plugin Settings")
+        verbose_name_plural = _("Plugin Settings")
+
+    def __str__(self):
+        return f"Plugin Settings (lang={self.language})"
+
+    def save(self, *args, **kwargs):
+        # Enforce singleton: always use pk=1
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        obj, _ = cls.objects.get_or_create(pk=1)
+        return obj
+
+
 class CatalogEntry(models.Model):
     """
     A layer in the plugin's catalog. Tracks what layers are available,
