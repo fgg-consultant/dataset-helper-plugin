@@ -90,7 +90,7 @@ class CatalogEntry(models.Model):
                      "For manual/WMS entries it is auto-generated."),
     )
     title = models.CharField(max_length=255, verbose_name=_("Title"))
-    description = models.TextField(blank=True, default='')
+    summary = models.TextField(blank=True, default='')
 
     # --- Hierarchy (resolved to Climweb objects at provision time) ---
     category_title = models.CharField(max_length=255, verbose_name=_("Category"))

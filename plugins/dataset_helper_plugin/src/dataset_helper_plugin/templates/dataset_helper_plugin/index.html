@@ -1499,7 +1499,7 @@
       ? `<tr><td>Learn more</td><td><a href="${escapeHtml(entry.meta_learn_more)}" target="_blank" rel="noopener" style="color:#059669;text-decoration:underline;">${escapeHtml(entry.meta_learn_more)}</a></td></tr>`
       : ''
 
-    const description = entry.meta_overview || entry.description
+    const description = entry.meta_overview || entry.summary
     const descHtml = description
       ? `<div class="detail-description">${escapeHtml(description)}</div>`
       : ''
@@ -2003,7 +2003,7 @@
         resultsEl.innerHTML = result.message
         document.getElementById('config-json-input').value = ''
         toggleLoadConfigForm()
-        await loadCatalog(true)
+        await loadCatalog(false)
       } else {
         resultsEl.className = 'sync-results visible error'
         resultsEl.innerHTML = result.message

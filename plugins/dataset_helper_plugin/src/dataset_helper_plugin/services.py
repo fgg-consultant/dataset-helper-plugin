@@ -53,6 +53,15 @@ def _fetch_estation_product_ids(estation_url):
         return None
 
 
+def _substitute_estation_url(wms_url, estation_url):
+    """
+    Replace global eStation WMS base URL with the local eStation URL + /webservices.
+    """
+    if estation_url and 'estation' in wms_url.lower():
+        return estation_url.rstrip('/') + '/webservices'
+    return wms_url
+
+
 def load_catalog_from_config(json_data):
     """
     Parse a config JSON and populate the CatalogEntry table.
@@ -74,10 +83,12 @@ def load_catalog_from_config(json_data):
     ecmwf_token = settings.ecmwf_token
     estation_product_ids = _fetch_estation_product_ids(settings.estation_url)
 
+    estation_url = settings.estation_url
+
     if json_data.get('categories'):
-        _load_nested_format(json_data, stats, lang, ecmwf_token, estation_product_ids)
+        _load_nested_format(json_data, stats, lang, ecmwf_token, estation_product_ids, estation_url)
     elif json_data.get('products'):
-        _load_products_format(json_data, stats, lang, ecmwf_token, estation_product_ids)
+        _load_products_format(json_data, stats, lang, ecmwf_token, estation_product_ids, estation_url)
     else:
         stats['errors'].append(
             'Unrecognized format: expected top-level "categories" (nested format) '
@@ -87,7 +98,7 @@ def load_catalog_from_config(json_data):
     return stats
 
 
-def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None):
+def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None, estation_url=''):
     """Load from the nested categories > subcategories > datasets > layers format."""
     # Determine if eStation filtering should apply to this config.
     # We check if any WMS URL in the config points to estation.jrc.ec.europa.eu
@@ -131,12 +142,14 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
 
                     # Substitute ECMWF token
                     wms_url = _substitute_ecmwf_token(wms_url, ecmwf_token)
+                    # Substitute eStation URL with local instance
+                    wms_url = _substitute_estation_url(wms_url, estation_url)
 
                     product_code = layer_name
 
                     defaults = {
                         'title': _resolve_i18n(dataset_data.get('title', layer_name), lang),
-                        'description': _resolve_i18n(dataset_data.get('description', ''), lang),
+                        'summary': _resolve_i18n(dataset_data.get('summary', ''), lang),
                         'category_title': cat_title,
                         'category_icon': cat_icon,
                         'subcategory_title': subcat_title,
@@ -158,7 +171,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                     _upsert_entry(product_code, defaults, stats)
 
 
-def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None):
+def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None, estation_url=''):
     """
     Load from the flat products format (e.g. jrc_station_products.json).
     Each product has: category, product_id, descriptive_name, wms_getmap_url, resource_url.
@@ -205,11 +218,14 @@ def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', est
             if 'LAYERS' in params:
                 layer_name = params['LAYERS'][0]
 
+        # Substitute eStation URL with local instance
+        wms_url = _substitute_estation_url(wms_url, estation_url)
+
         descriptive_name = product.get('descriptive_name', product_id)
 
         defaults = {
             'title': descriptive_name,
-            'description': descriptive_name,
+            'summary': descriptive_name,
             'category_title': cat_title,
             'category_icon': 'map',
             'subcategory_title': 'Observation',
@@ -352,8 +368,8 @@ def _provision_entry(entry):
         initial_visible=False,
     )
 
-    if entry.description:
-        dataset.summary = entry.description
+    if entry.summary:
+        dataset.summary = entry.summary
         dataset.save(update_fields=['summary'])
 
     wms_layer = WmsLayer.objects.create(
@@ -401,7 +417,7 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
     entry = CatalogEntry.objects.create(
         product_code=product_code,
         title=data.get('title', layer_name),
-        description=data.get('description', ''),
+        summary=data.get('summary', ''),
         category_title=data['category_title'],
         category_icon=data.get('category_icon', 'map'),
         subcategory_title=data['subcategory_title'],
@@ -453,7 +469,7 @@ def get_catalog_tree():
             'id': str(entry.id),
             'product_code': entry.product_code,
             'title': entry.title,
-            'description': entry.description,
+            'summary': entry.summary,
             'layer_name': entry.layer_name,
             'layer_title': entry.layer_title,
             'wms_url': entry.wms_url,
