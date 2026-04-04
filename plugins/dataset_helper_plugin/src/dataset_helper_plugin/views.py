@@ -679,40 +679,55 @@ def clear_all(request):
     Clear all datasets and categories.
     This will delete all WmsRequestLayer, WmsLayer, Metadata, Dataset, SubCategory, and Category objects.
     """
-    try:
-        with transaction.atomic():
-            # Count items before deletion
-            counts = {
-                'wms_request_layers': WmsRequestLayer.objects.count(),
-                'wms_layers': WmsLayer.objects.count(),
-                'datasets': Dataset.objects.count(),
-                'metadata': Metadata.objects.count(),
-                'subcategories': SubCategory.objects.count(),
-                'categories': Category.objects.count(),
-            }
+    deleted = {
+        'wms_request_layers': 0,
+        'wms_layers': 0,
+        'datasets': 0,
+        'metadata': 0,
+        'subcategories': 0,
+        'categories': 0,
+    }
+    errors = []
 
-            # Delete in order (respecting foreign key constraints)
-            WmsRequestLayer.objects.all().delete()
-            WmsLayer.objects.all().delete()
+    # Delete in order (respecting foreign key constraints)
+    # Bulk deletes for child models that are unlikely to have external references
+    for model, key in [
+        (WmsRequestLayer, 'wms_request_layers'),
+        (WmsLayer, 'wms_layers'),
+    ]:
+        try:
+            count, _ = model.objects.all().delete()
+            deleted[key] = count
+        except Exception as e:
+            errors.append(f"Failed to bulk delete {key}: {e}")
 
-            # Delete metadata associated with datasets
-            Metadata.objects.filter(dataset__isnull=False).delete()
+    # Delete datasets, metadata, subcategories, categories one by one to skip protected ones
+    for model, key in [
+        (Metadata, 'metadata'),
+        (Dataset, 'datasets'),
+        (SubCategory, 'subcategories'),
+        (Category, 'categories'),
+    ]:
+        for obj in model.objects.all():
+            try:
+                obj.delete()
+                deleted[key] += 1
+            except Exception as e:
+                errors.append(f"Could not delete {key[:-1]} '{obj}': {e}")
 
-            Dataset.objects.all().delete()
-            SubCategory.objects.all().delete()
-            Category.objects.all().delete()
+    # Clear dataset_id references in catalog entries
+    CatalogEntry.objects.exclude(dataset_id=None).update(dataset_id=None)
 
-            # Clear dataset_id references in catalog entries
-            CatalogEntry.objects.exclude(dataset_id=None).update(dataset_id=None)
-
-            return JsonResponse({
-                'status': 'success',
-                'message': 'All data cleared successfully',
-                'deleted': counts
-            })
-
-    except Exception as e:
+    if errors:
         return JsonResponse({
-            'status': 'error',
-            'message': f'Clear failed: {str(e)}'
-        }, status=500)
+            'status': 'partial',
+            'message': f'Completed with {len(errors)} error(s)',
+            'deleted': deleted,
+            'errors': errors,
+        })
+
+    return JsonResponse({
+        'status': 'success',
+        'message': 'All data cleared successfully',
+        'deleted': deleted,
+    })

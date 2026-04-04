@@ -1237,11 +1237,26 @@
 
       resultsPanel.classList.add('visible')
 
-      if (data.status === 'success') {
+      if (data.status === 'success' || data.status === 'partial') {
+        const isPartial = data.status === 'partial'
+        const color = isPartial ? '#d97706' : '#059669'
         resultsPanel.classList.remove('error')
         resultsPanel.classList.add('success')
+
+        let errorsHtml = ''
+        if (data.errors && data.errors.length) {
+          errorsHtml = `
+            <div style="margin-top: 16px; padding: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px;">
+              <h5 style="color: #92400e; margin: 0 0 8px 0;">${data.errors.length} item(s) could not be deleted:</h5>
+              <ul style="margin: 0; padding-left: 20px; color: #92400e; font-size: 13px;">
+                ${data.errors.map(e => `<li>${e}</li>`).join('')}
+              </ul>
+            </div>
+          `
+        }
+
         resultsPanel.innerHTML = `
-          <h4 style="color: #059669; margin-top: 0;">All data cleared successfully!</h4>
+          <h4 style="color: ${color}; margin-top: 0;">${isPartial ? 'Completed with some errors' : 'All data cleared successfully!'}</h4>
           <div class="results-summary">
             <div class="result-stat">
               <div class="number">${data.deleted.categories}</div>
@@ -1256,12 +1271,17 @@
               <div class="label">Datasets Deleted</div>
             </div>
             <div class="result-stat">
+              <div class="number">${data.deleted.metadata}</div>
+              <div class="label">Metadata Deleted</div>
+            </div>
+            <div class="result-stat">
               <div class="number">${data.deleted.wms_layers}</div>
               <div class="label">WMS Layers Deleted</div>
             </div>
           </div>
+          ${errorsHtml}
           <p style="margin-top: 16px;">
-            <a href="javascript:window.location.reload()" style="color: #059669;">Refresh the page</a> to see the updated state.
+            <a href="javascript:window.location.reload()" style="color: ${color};">Refresh the page</a> to see the updated state.
           </p>
         `
       } else {
