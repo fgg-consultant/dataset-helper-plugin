@@ -39,6 +39,13 @@ class PluginSettings(models.Model):
         verbose_name=_("Local eStation URL"),
         help_text=_("If set, only eStation products available on this local instance will be imported"),
     )
+    country_alpha3 = models.CharField(
+        max_length=3,
+        blank=True,
+        default='',
+        verbose_name=_("Country code (alpha-3)"),
+        help_text=_("ISO 3166-1 alpha-3 country code used for URL placeholder substitution (e.g. bfa)"),
+    )
 
     class Meta:
         verbose_name = _("Plugin Settings")
@@ -64,6 +71,19 @@ class CatalogEntry(models.Model):
     whether the admin wants them, and whether they've been provisioned
     into Climweb's geomanager DB.
     """
+
+    LAYER_TYPE_WMS = 'wms'
+    LAYER_TYPE_RASTER_TILE = 'raster_tile'
+    LAYER_TYPE_VECTOR_TILE = 'vector_tile'
+    LAYER_TYPE_RASTER_FILE = 'raster_file'
+    LAYER_TYPE_VECTOR_FILE = 'vector_file'
+    LAYER_TYPE_CHOICES = (
+        (LAYER_TYPE_WMS, _('WMS')),
+        (LAYER_TYPE_RASTER_TILE, _('Raster Tile')),
+        (LAYER_TYPE_VECTOR_TILE, _('Vector Tile')),
+        (LAYER_TYPE_RASTER_FILE, _('Raster File')),
+        (LAYER_TYPE_VECTOR_FILE, _('Vector File')),
+    )
 
     ORIGIN_CONFIG = 'config'
     ORIGIN_MANUAL = 'manual'
@@ -92,6 +112,14 @@ class CatalogEntry(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Title"))
     summary = models.TextField(blank=True, default='')
 
+    # --- Layer type ---
+    layer_type = models.CharField(
+        max_length=20,
+        choices=LAYER_TYPE_CHOICES,
+        default=LAYER_TYPE_WMS,
+        verbose_name=_("Layer type"),
+    )
+
     # --- Hierarchy (resolved to Climweb objects at provision time) ---
     category_title = models.CharField(max_length=255, verbose_name=_("Category"))
     category_icon = models.CharField(max_length=50, default='map')
@@ -100,11 +128,39 @@ class CatalogEntry(models.Model):
     # --- WMS configuration ---
     layer_name = models.CharField(
         max_length=255,
+        blank=True,
+        default='',
         verbose_name=_("WMS layer name"),
         help_text=_("Layer identifier as returned by WMS GetCapabilities"),
     )
-    wms_url = models.URLField(max_length=500, verbose_name=_("WMS base URL"))
+    wms_url = models.CharField(max_length=500, blank=True, default='', verbose_name=_("WMS base URL"))
     layer_title = models.CharField(max_length=255, blank=True, default='')
+    extra_params_json = models.JSONField(
+        blank=True, null=True,
+        verbose_name=_("Extra WMS params"),
+        help_text=_("Additional query parameters for WMS requests (JSON object)"),
+    )
+
+    # --- Tile configuration (raster_tile, vector_tile) ---
+    tile_url = models.CharField(
+        max_length=500, blank=True, default='',
+        verbose_name=_("Tile URL"),
+        help_text=_("URL template with {z}/{x}/{y} placeholders"),
+    )
+
+    # --- File configuration (raster_file, vector_file) ---
+    file_url = models.CharField(
+        max_length=500, blank=True, default='',
+        verbose_name=_("File URL"),
+        help_text=_("URL to a remote file. May contain {country_alpha3} placeholder."),
+    )
+
+    # --- Render layers (vector_tile, vector_file) ---
+    render_layers_json = models.JSONField(
+        blank=True, null=True,
+        verbose_name=_("Render layers"),
+        help_text=_("MapLibre GL style layer definitions (JSON array)"),
+    )
 
     # --- Metadata (denormalized from config) ---
     meta_source = models.CharField(max_length=255, blank=True, default='')
@@ -164,7 +220,7 @@ class CatalogEntry(models.Model):
         return self.STATUS_DISABLED
 
     @staticmethod
-    def generate_product_code(layer_name, wms_url, origin='manual'):
-        key = f"{layer_name}:{wms_url}"
+    def generate_product_code(identifier, url, origin='manual', layer_type='wms'):
+        key = f"{layer_type}:{identifier}:{url}"
         digest = hashlib.md5(key.encode()).hexdigest()[:12]
         return f"{origin}_{digest}"

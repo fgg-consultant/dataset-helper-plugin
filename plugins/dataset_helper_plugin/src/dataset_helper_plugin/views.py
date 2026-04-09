@@ -181,7 +181,16 @@ def catalog_add_entry(request):
     except json.JSONDecodeError as e:
         return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
 
-    required = ['layer_name', 'wms_url', 'category_title', 'subcategory_title']
+    # Always required
+    required = ['category_title', 'subcategory_title']
+    # Type-specific required fields
+    layer_type = data.get('layer_type', 'wms')
+    if layer_type == 'wms':
+        required += ['layer_name', 'wms_url']
+    elif layer_type in ('raster_tile', 'vector_tile'):
+        required += ['tile_url']
+    elif layer_type in ('raster_file', 'vector_file'):
+        required += ['file_url']
     missing = [f for f in required if not data.get(f)]
     if missing:
         return JsonResponse({
@@ -296,6 +305,9 @@ def settings_save(request):
     if 'estation_url' in data:
         s.estation_url = data['estation_url'] or ''
 
+    if 'country_alpha3' in data:
+        s.country_alpha3 = (data['country_alpha3'] or '')[:3].lower()
+
     s.save()
     return JsonResponse({
         'status': 'success',
@@ -367,7 +379,8 @@ def vue_action(request):
                     srs=wms_srs,
                     format=wms_format,
                     default=True,
-                    request_time_from_capabilities=request_time_from_capabilities
+                    request_time_from_capabilities=request_time_from_capabilities,
+                    legend_from_capabilities=True,
                 )
 
                 # Create the required WmsRequestLayer (min_num=1 in the model)
@@ -645,7 +658,8 @@ def bulk_import(request):
                                 srs=wms_srs,
                                 format=wms_format,
                                 default=layer_data.get('default', False),
-                                request_time_from_capabilities=True
+                                request_time_from_capabilities=True,
+                                legend_from_capabilities=True,
                             )
 
                             # Create WmsRequestLayer

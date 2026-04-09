@@ -351,6 +351,17 @@
         color: #9ca3af;
     }
 
+    .entry-type-badge {
+        font-size: 10px;
+        padding: 1px 5px;
+        border-radius: 3px;
+        background: #dbeafe;
+        color: #1d4ed8;
+        flex-shrink: 0;
+        margin-right: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
     .entry-origin {
         font-size: 11px;
         padding: 2px 6px;
@@ -625,6 +636,11 @@
                     <label for="setting-estation-url">Local eStation URL</label>
                     <input type="url" id="setting-estation-url" value="{{ plugin_settings.estation_url }}" placeholder="https://burkina.puma2025.com/http/c000/w04/climsa/mobile-app">
                     <span class="hint">Leave empty to import all eStation products</span>
+                </div>
+                <div class="settings-field">
+                    <label for="setting-country-alpha3">Country code (alpha-3)</label>
+                    <input type="text" id="setting-country-alpha3" value="{{ plugin_settings.country_alpha3 }}" placeholder="bfa" maxlength="3" style="width:80px;text-transform:lowercase;">
+                    <span class="hint">ISO 3166-1 alpha-3 code for URL placeholders, e.g. bfa for Burkina Faso</span>
                 </div>
             </div>
             <div class="settings-actions">
@@ -1316,6 +1332,7 @@
       language: document.getElementById('setting-language').value,
       ecmwf_token: document.getElementById('setting-ecmwf-token').value.trim(),
       estation_url: document.getElementById('setting-estation-url').value.trim(),
+      country_alpha3: document.getElementById('setting-country-alpha3').value.trim().toLowerCase(),
     }
 
     const msgEl = document.getElementById('settings-msg')
@@ -1451,6 +1468,9 @@
           const detailId = 'detail-' + entry.id
           const isDetailOpen = openGroups.has(detailId)
 
+          const typeLabel = entry.layer_type && entry.layer_type !== 'wms'
+            ? `<span class="entry-type-badge">${escapeHtml(entry.layer_type)}</span>` : ''
+
           html += `<div class="entry-row" onclick="toggleDetail('${entry.id}', event)" style="cursor:pointer;">
             <input type="checkbox" ${checked}
               onchange="toggleEntry('${entry.id}')" onclick="event.stopPropagation()" title="Enable/disable this layer">
@@ -1459,7 +1479,7 @@
               <span class="title-text">${escapeHtml(entry.title)}</span>
               ${metaStr ? `<br><span class="meta-text">${escapeHtml(metaStr)}</span>` : ''}
             </span>
-            ${originLabel}
+            ${typeLabel}${originLabel}
           </div>
           <div class="entry-detail${isDetailOpen ? ' open' : ''}" id="${detailId}">
             ${buildDetailPanel(entry)}
@@ -1495,11 +1515,22 @@
   }
 
   function buildDetailPanel(entry) {
-    const previewUrl = buildWmsPreviewUrl(entry)
+    const lt = entry.layer_type || 'wms'
+
+    // Type-specific rows
+    const typeRows = []
+    typeRows.push(['Type', lt])
+    if (lt === 'wms') {
+      if (entry.layer_name) typeRows.push(['Layer name', entry.layer_name])
+      if (entry.wms_url) typeRows.push(['WMS URL', entry.wms_url])
+    } else if (lt === 'raster_tile' || lt === 'vector_tile') {
+      if (entry.tile_url) typeRows.push(['Tile URL', entry.tile_url])
+    } else if (lt === 'raster_file' || lt === 'vector_file') {
+      if (entry.file_url) typeRows.push(['File URL', entry.file_url])
+    }
 
     const metaRows = [
-      ['Layer name', entry.layer_name],
-      ['WMS URL', entry.wms_url],
+      ...typeRows,
       ['Source', entry.meta_source],
       ['Function', entry.meta_function],
       ['Resolution', entry.meta_resolution],
@@ -1524,16 +1555,23 @@
       ? `<div class="detail-description">${escapeHtml(description)}</div>`
       : ''
 
+    // Only show WMS preview for wms type
+    let previewHtml = ''
+    if (lt === 'wms' && entry.wms_url && entry.layer_name) {
+      const previewUrl = buildWmsPreviewUrl(entry)
+      previewHtml = `<div class="detail-preview">
+        <img src="${escapeHtml(previewUrl)}" alt="WMS Preview" loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.textContent='Preview not available'">
+        <span class="preview-label">WMS preview</span>
+      </div>`
+    }
+
     return `<div class="detail-grid">
       <div class="detail-meta">
         ${descHtml}
         <table>${tableHtml}${learnMore}</table>
       </div>
-      <div class="detail-preview">
-        <img src="${escapeHtml(previewUrl)}" alt="WMS Preview" loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.textContent='Preview not available'">
-        <span class="preview-label">WMS preview</span>
-      </div>
+      ${previewHtml}
     </div>`
   }
 
@@ -1926,6 +1964,7 @@
           'X-CSRFToken': csrftoken,
         },
         body: JSON.stringify({
+          layer_type: 'wms',
           layer_name: layerName,
           wms_url: wmsBaseUrl,
           title: title || layerName,

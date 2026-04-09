@@ -1,11 +1,25 @@
+import hashlib
 import logging
+import os
 import re
+import tempfile
 import urllib.request
+import uuid
 import json as json_module
 
+from django.conf import settings as django_settings
+from django.core.files import File
 from django.db import transaction
+from django.utils import timezone
 from geomanager.models.core import Category, Dataset, Metadata, SubCategory
-from geomanager.models.wms import WmsLayer, WmsRequestLayer
+from geomanager.models.raster_file import RasterFileLayer, RasterUpload
+from geomanager.models.raster_tile import RasterTileLayer
+from geomanager.models.vector_file import VectorFileLayer, PgVectorTable
+from geomanager.models.vector_tile import VectorTileLayer
+from geomanager.models.wms import WmsLayer, WmsRequestLayer, WmsRequestParam
+from geomanager.settings import geomanager_settings
+from geomanager.utils.raster_utils import read_raster_info, create_layer_raster_file
+from geomanager.utils.vector_utils import ogr_db_import
 
 from .models import CatalogEntry, PluginSettings
 
@@ -100,13 +114,9 @@ def load_catalog_from_config(json_data):
 
 def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None, estation_url=''):
     """Load from the nested categories > subcategories > datasets > layers format."""
-    # Determine if eStation filtering should apply to this config.
-    # We check if any WMS URL in the config points to estation.jrc.ec.europa.eu
-    _is_estation_config = None
 
     def is_estation_layer(layer_name):
-        """Check if a layer_name is an eStation product (layer_xxx format)."""
-        nonlocal _is_estation_config
+        """Check if a layer_name is an eStation product."""
         if estation_product_ids is None:
             return True  # No filtering
         return layer_name in estation_product_ids
@@ -123,39 +133,71 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                 metadata = dataset_data.get('metadata', {})
 
                 for layer_data in layers_data:
-                    layer_name = layer_data.get('layer_name', '')
-                    wms_url = layer_data.get('wms_url', '')
+                    layer_type = layer_data.get('type', 'wms')
+                    dataset_title = _resolve_i18n(dataset_data.get('title', '?'), lang)
 
-                    if not layer_name or not wms_url:
+                    # --- Validate required fields per type ---
+                    if layer_type == 'wms':
+                        layer_name = layer_data.get('layer_name', '')
+                        wms_url = layer_data.get('wms_url', '')
+                        if not layer_name or not wms_url:
+                            stats['errors'].append(
+                                f"Skipping WMS layer in '{cat_title}/{subcat_title}/"
+                                f"{dataset_title}': missing layer_name or wms_url"
+                            )
+                            continue
+
+                        # eStation filtering
+                        if estation_product_ids is not None and 'estation' in wms_url.lower():
+                            if not is_estation_layer(layer_name):
+                                stats['skipped_estation'] += 1
+                                continue
+
+                        wms_url = _substitute_ecmwf_token(wms_url, ecmwf_token)
+                        wms_url = _substitute_estation_url(wms_url, estation_url)
+                        product_code = layer_name
+
+                    elif layer_type in ('raster_tile', 'vector_tile'):
+                        tile_url = layer_data.get('tile_url', '')
+                        if not tile_url:
+                            stats['errors'].append(
+                                f"Skipping {layer_type} layer in '{cat_title}/{subcat_title}/"
+                                f"{dataset_title}': missing tile_url"
+                            )
+                            continue
+                        product_code = f"{layer_type}_{hashlib.md5(tile_url.encode()).hexdigest()[:12]}"
+
+                    elif layer_type in ('raster_file', 'vector_file'):
+                        file_url = layer_data.get('url', '')
+                        if not file_url:
+                            stats['errors'].append(
+                                f"Skipping {layer_type} layer in '{cat_title}/{subcat_title}/"
+                                f"{dataset_title}': missing url"
+                            )
+                            continue
+                        product_code = f"{layer_type}_{hashlib.md5(file_url.encode()).hexdigest()[:12]}"
+
+                    else:
                         stats['errors'].append(
                             f"Skipping layer in '{cat_title}/{subcat_title}/"
-                            f"{_resolve_i18n(dataset_data.get('title', '?'), lang)}': missing layer_name or wms_url"
+                            f"{dataset_title}': unknown type '{layer_type}'"
                         )
                         continue
 
-                    # eStation filtering: if local eStation is configured,
-                    # skip layers from eStation global that are not on the local instance
-                    if estation_product_ids is not None and 'estation' in wms_url.lower():
-                        if not is_estation_layer(layer_name):
-                            stats['skipped_estation'] += 1
-                            continue
-
-                    # Substitute ECMWF token
-                    wms_url = _substitute_ecmwf_token(wms_url, ecmwf_token)
-                    # Substitute eStation URL with local instance
-                    wms_url = _substitute_estation_url(wms_url, estation_url)
-
-                    product_code = layer_name
-
                     defaults = {
-                        'title': _resolve_i18n(dataset_data.get('title', layer_name), lang),
+                        'title': _resolve_i18n(dataset_data.get('title', ''), lang) or product_code,
                         'summary': _resolve_i18n(dataset_data.get('summary', ''), lang),
                         'category_title': cat_title,
                         'category_icon': cat_icon,
                         'subcategory_title': subcat_title,
-                        'layer_name': layer_name,
-                        'wms_url': wms_url,
+                        'layer_type': layer_type,
+                        'layer_name': layer_data.get('layer_name', ''),
+                        'wms_url': wms_url if layer_type == 'wms' else '',
                         'layer_title': _resolve_i18n(layer_data.get('title', ''), lang),
+                        'tile_url': layer_data.get('tile_url', ''),
+                        'file_url': layer_data.get('url', ''),
+                        'render_layers_json': layer_data.get('render_layers') or None,
+                        'extra_params_json': layer_data.get('extra_params') or None,
                         'multi_temporal': dataset_data.get('multi_temporal', True),
                         'origin': CatalogEntry.ORIGIN_CONFIG,
                         'meta_source': metadata.get('source', ''),
@@ -229,6 +271,7 @@ def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', est
             'category_title': cat_title,
             'category_icon': 'map',
             'subcategory_title': 'Observation',
+            'layer_type': 'wms',
             'layer_name': layer_name,
             'wms_url': wms_url,
             'layer_title': descriptive_name,
@@ -278,7 +321,6 @@ def sync_catalog_to_climweb():
             status = entry.status
 
             if status == CatalogEntry.STATUS_SYNCED:
-                # Verify the Dataset still exists in Climweb
                 if not Dataset.objects.filter(id=entry.dataset_id).exists():
                     entry.dataset_id = None
                     entry.save(update_fields=['dataset_id', 'updated_at'])
@@ -287,22 +329,28 @@ def sync_catalog_to_climweb():
                     stats['already_synced'] += 1
 
             elif status == CatalogEntry.STATUS_PENDING_ADD:
+                sid = transaction.savepoint()
                 try:
                     dataset_id = _provision_entry(entry)
                     entry.dataset_id = dataset_id
                     entry.save(update_fields=['dataset_id', 'updated_at'])
+                    transaction.savepoint_commit(sid)
                     stats['added'] += 1
                 except Exception as e:
+                    transaction.savepoint_rollback(sid)
                     stats['errors'].append(f"Failed to provision '{entry.title}': {e}")
                     logger.exception("Failed to provision catalog entry %s", entry.product_code)
 
             elif status == CatalogEntry.STATUS_PENDING_REMOVE:
+                sid = transaction.savepoint()
                 try:
                     _deprovision_entry(entry)
                     entry.dataset_id = None
                     entry.save(update_fields=['dataset_id', 'updated_at'])
+                    transaction.savepoint_commit(sid)
                     stats['removed'] += 1
                 except Exception as e:
+                    transaction.savepoint_rollback(sid)
                     stats['errors'].append(f"Failed to deprovision '{entry.title}': {e}")
                     logger.exception("Failed to deprovision catalog entry %s", entry.product_code)
 
@@ -311,12 +359,16 @@ def sync_catalog_to_climweb():
     return stats
 
 
-def _provision_entry(entry):
-    """
-    Create Climweb objects (Category, SubCategory, Metadata, Dataset,
-    WmsLayer, WmsRequestLayer) for a single CatalogEntry.
+# ---------------------------------------------------------------------------
+# Provisioning helpers
+# ---------------------------------------------------------------------------
 
-    Returns the new Dataset UUID.
+
+def _create_common_objects(entry):
+    """
+    Create the shared Climweb objects for any layer type:
+    Category, SubCategory, Metadata, Dataset.
+    Returns the new Dataset instance.
     """
     category, _ = Category.objects.get_or_create(
         title=entry.category_title,
@@ -357,7 +409,7 @@ def _provision_entry(entry):
         title=entry.title,
         category=category,
         sub_category=subcategory,
-        layer_type='wms',
+        layer_type=entry.layer_type,
         metadata=metadata,
         published=True,
         public=True,
@@ -372,6 +424,25 @@ def _provision_entry(entry):
         dataset.summary = entry.summary
         dataset.save(update_fields=['summary'])
 
+    return dataset
+
+
+def _provision_entry(entry):
+    """
+    Create Climweb objects for a single CatalogEntry.
+    Dispatches to a type-specific provisioner.
+    Returns the new Dataset UUID.
+    """
+    dataset = _create_common_objects(entry)
+    provisioner = _PROVISIONERS.get(entry.layer_type)
+    if provisioner is None:
+        raise ValueError(f"Unsupported layer type: {entry.layer_type}")
+    provisioner(entry, dataset)
+    return dataset.id
+
+
+def _provision_wms(entry, dataset):
+    """Create WmsLayer + WmsRequestLayer for a WMS catalog entry."""
     wms_layer = WmsLayer.objects.create(
         dataset=dataset,
         title=entry.layer_title or entry.title,
@@ -384,6 +455,7 @@ def _provision_entry(entry):
         format='image/png',
         default=True,
         request_time_from_capabilities=True,
+        legend_from_capabilities=True,
     )
 
     WmsRequestLayer.objects.create(
@@ -391,13 +463,182 @@ def _provision_entry(entry):
         name=entry.layer_name,
     )
 
-    return dataset.id
+    # Add extra WMS query params if present
+    if entry.extra_params_json and isinstance(entry.extra_params_json, dict):
+        for param_name, param_value in entry.extra_params_json.items():
+            WmsRequestParam.objects.create(
+                layer=wms_layer,
+                name=param_name,
+                value=str(param_value),
+            )
+
+
+def _provision_raster_tile(entry, dataset):
+    """Create a RasterTileLayer for an XYZ raster tile catalog entry."""
+    RasterTileLayer.objects.create(
+        dataset=dataset,
+        title=entry.layer_title or entry.title,
+        base_url=entry.tile_url,
+        default=True,
+    )
+
+
+def _provision_vector_tile(entry, dataset):
+    """Create a VectorTileLayer for an MVT vector tile catalog entry."""
+    VectorTileLayer.objects.create(
+        dataset=dataset,
+        title=entry.layer_title or entry.title,
+        base_url=entry.tile_url,
+        default=True,
+        use_render_layers_json=bool(entry.render_layers_json),
+        render_layers_json=entry.render_layers_json,
+    )
+
+
+def _provision_raster_file(entry, dataset):
+    """Download a remote GeoTIFF and ingest it as a RasterFileLayer."""
+    url = _resolve_file_url(entry.file_url)
+
+    layer = RasterFileLayer.objects.create(
+        dataset=dataset,
+        title=entry.layer_title or entry.title,
+        default=True,
+    )
+
+    _download_and_ingest_raster(layer, dataset, url)
+
+
+def _provision_vector_file(entry, dataset):
+    """Download a remote GeoJSON and import it as a VectorFileLayer."""
+    url = _resolve_file_url(entry.file_url)
+
+    layer = VectorFileLayer.objects.create(
+        dataset=dataset,
+        title=entry.layer_title or entry.title,
+        default=True,
+    )
+
+    _download_and_ingest_vector(layer, url)
+
+
+_PROVISIONERS = {
+    'wms': _provision_wms,
+    'raster_tile': _provision_raster_tile,
+    'vector_tile': _provision_vector_tile,
+    'raster_file': _provision_raster_file,
+    'vector_file': _provision_vector_file,
+}
+
+
+# ---------------------------------------------------------------------------
+# URL placeholder substitution
+# ---------------------------------------------------------------------------
+
+
+def _resolve_file_url(url_template):
+    """
+    Replace placeholders in a file URL with values from PluginSettings.
+    Supported: {country_alpha3}, {COUNTRY_ALPHA3}
+    """
+    settings = PluginSettings.load()
+    url = url_template
+    if settings.country_alpha3:
+        url = url.replace('{country_alpha3}', settings.country_alpha3.lower())
+        url = url.replace('{COUNTRY_ALPHA3}', settings.country_alpha3.upper())
+    return url
+
+
+# ---------------------------------------------------------------------------
+# File download and ingest helpers
+# ---------------------------------------------------------------------------
+
+
+def _download_file(url, suffix='.tif'):
+    """
+    Download a URL to a temporary file.
+    Returns the temp file path. Caller is responsible for cleanup.
+    """
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+    tmp.close()
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'ClimwebDatasetHelper/1.0'})
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            with open(tmp.name, 'wb') as f:
+                while True:
+                    chunk = resp.read(8192)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+        return tmp.name
+    except Exception:
+        if os.path.exists(tmp.name):
+            os.unlink(tmp.name)
+        raise
+
+
+def _download_and_ingest_raster(layer, dataset, url):
+    """Download a GeoTIFF from URL and create a LayerRasterFile."""
+    file_path = _download_file(url, suffix='.tif')
+    try:
+        with open(file_path, 'rb') as f:
+            upload = RasterUpload.objects.create(
+                dataset=dataset,
+                file=File(f, name=os.path.basename(file_path)),
+            )
+
+        raster_meta = read_raster_info(upload.file.path)
+        upload.raster_metadata = raster_meta
+        upload.save(update_fields=['raster_metadata'])
+
+        time = timezone.now()
+        create_layer_raster_file(layer, upload, time)
+        upload.delete()
+    finally:
+        if os.path.exists(file_path):
+            os.unlink(file_path)
+
+
+def _download_and_ingest_vector(layer, url):
+    """Download a GeoJSON from URL and import it into PostgreSQL."""
+    file_path = _download_file(url, suffix='.geojson')
+    try:
+        default_db = django_settings.DATABASES['default']
+        db_params = {
+            'host': default_db.get('HOST'),
+            'port': default_db.get('PORT'),
+            'user': default_db.get('USER'),
+            'password': default_db.get('PASSWORD'),
+            'name': default_db.get('NAME'),
+            'pg_service_schema': geomanager_settings.get('vector_db_schema'),
+        }
+
+        table_name = f"vector_{uuid.uuid4().hex[:12]}"
+        table_info = ogr_db_import(file_path, table_name, db_params)
+
+        PgVectorTable.objects.create(
+            layer=layer,
+            table_name=table_name,
+            full_table_name=table_info.get('table_name', table_name),
+            time=timezone.now(),
+            properties=table_info.get('properties', []),
+            geometry_type=table_info.get('geom_type', 'UNKNOWN'),
+            bounds=table_info.get('bounds', []),
+        )
+    finally:
+        if os.path.exists(file_path):
+            os.unlink(file_path)
+
+
+# ---------------------------------------------------------------------------
+# Deprovision
+# ---------------------------------------------------------------------------
 
 
 def _deprovision_entry(entry):
     """
     Delete the Climweb Dataset associated with a CatalogEntry.
-    Cascading deletes handle WmsLayer and WmsRequestLayer.
+    Cascading deletes handle all layer types (WmsLayer, RasterTileLayer,
+    VectorTileLayer, RasterFileLayer, VectorFileLayer and their children).
     """
     if entry.dataset_id:
         Dataset.objects.filter(id=entry.dataset_id).delete()
@@ -407,23 +648,39 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
     """
     Add a new CatalogEntry from manual input or WMS import.
     """
-    layer_name = data['layer_name']
-    wms_url = data['wms_url']
+    layer_type = data.get('layer_type', 'wms')
+    layer_name = data.get('layer_name', '')
+    wms_url = data.get('wms_url', '')
+    tile_url = data.get('tile_url', '')
+    file_url = data.get('file_url', '')
+
+    # Derive a unique identifier for product_code generation
+    if layer_type == 'wms':
+        identifier, url = layer_name, wms_url
+    elif layer_type in ('raster_tile', 'vector_tile'):
+        identifier, url = tile_url, tile_url
+    else:
+        identifier, url = file_url, file_url
 
     product_code = data.get('product_code')
     if not product_code:
-        product_code = CatalogEntry.generate_product_code(layer_name, wms_url, origin)
+        product_code = CatalogEntry.generate_product_code(identifier, url, origin, layer_type)
 
     entry = CatalogEntry.objects.create(
         product_code=product_code,
-        title=data.get('title', layer_name),
+        title=data.get('title', identifier or 'Untitled'),
         summary=data.get('summary', ''),
         category_title=data['category_title'],
         category_icon=data.get('category_icon', 'map'),
         subcategory_title=data['subcategory_title'],
+        layer_type=layer_type,
         layer_name=layer_name,
         wms_url=wms_url,
         layer_title=data.get('layer_title', ''),
+        tile_url=tile_url,
+        file_url=file_url,
+        render_layers_json=data.get('render_layers_json'),
+        extra_params_json=data.get('extra_params_json'),
         multi_temporal=data.get('multi_temporal', True),
         origin=origin,
         enabled=True,
@@ -470,9 +727,14 @@ def get_catalog_tree():
             'product_code': entry.product_code,
             'title': entry.title,
             'summary': entry.summary,
+            'layer_type': entry.layer_type,
             'layer_name': entry.layer_name,
             'layer_title': entry.layer_title,
             'wms_url': entry.wms_url,
+            'tile_url': entry.tile_url,
+            'file_url': entry.file_url,
+            'render_layers_json': entry.render_layers_json,
+            'extra_params_json': entry.extra_params_json,
             'multi_temporal': entry.multi_temporal,
             'enabled': entry.enabled,
             'status': entry.status,
