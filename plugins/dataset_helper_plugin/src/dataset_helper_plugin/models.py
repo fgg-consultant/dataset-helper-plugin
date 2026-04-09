@@ -193,6 +193,11 @@ class CatalogEntry(models.Model):
         help_text=_("UUID of the corresponding Dataset in geomanager, if provisioned"),
     )
 
+    # --- Ordering ---
+    category_order = models.IntegerField(default=0, verbose_name=_("Category sort order"))
+    subcategory_order = models.IntegerField(default=0, verbose_name=_("Subcategory sort order"))
+    entry_order = models.IntegerField(default=0, verbose_name=_("Entry sort order"))
+
     # --- Timestamps ---
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -200,7 +205,7 @@ class CatalogEntry(models.Model):
     class Meta:
         verbose_name = _("Catalog Entry")
         verbose_name_plural = _("Catalog Entries")
-        ordering = ['category_title', 'subcategory_title', 'title']
+        ordering = ['category_order', 'subcategory_order', 'entry_order', 'title']
 
     def __str__(self):
         return f"{self.category_title} > {self.subcategory_title} > {self.title}"

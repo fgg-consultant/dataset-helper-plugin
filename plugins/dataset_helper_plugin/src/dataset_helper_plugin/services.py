@@ -121,11 +121,13 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
             return True  # No filtering
         return layer_name in estation_product_ids
 
-    for cat_data in json_data.get('categories', []):
+    entry_counter = 0
+
+    for cat_idx, cat_data in enumerate(json_data.get('categories', [])):
         cat_title = _resolve_i18n(cat_data.get('title', ''), lang)
         cat_icon = cat_data.get('icon', 'map')
 
-        for subcat_data in cat_data.get('subcategories', []):
+        for subcat_idx, subcat_data in enumerate(cat_data.get('subcategories', [])):
             subcat_title = _resolve_i18n(subcat_data.get('title', ''), lang)
 
             for dataset_data in subcat_data.get('datasets', []):
@@ -190,6 +192,9 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                         'category_title': cat_title,
                         'category_icon': cat_icon,
                         'subcategory_title': subcat_title,
+                        'category_order': cat_idx,
+                        'subcategory_order': subcat_idx,
+                        'entry_order': entry_counter,
                         'layer_type': layer_type,
                         'layer_name': layer_data.get('layer_name', ''),
                         'wms_url': wms_url if layer_type == 'wms' else '',
@@ -209,6 +214,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                         'meta_overview': _resolve_i18n(metadata.get('overview', ''), lang),
                         'meta_learn_more': metadata.get('learn_more', ''),
                     }
+                    entry_counter += 1
 
                     _upsert_entry(product_code, defaults, stats)
 
@@ -224,6 +230,9 @@ def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', est
         wms_base_url = f"https://{server_url}/webservices"
     else:
         wms_base_url = server_url.rstrip('/') + '/webservices'
+
+    cat_order_map = {}
+    entry_counter = 0
 
     for product in json_data.get('products', []):
         product_id = product.get('product_id', '')
@@ -265,12 +274,18 @@ def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', est
 
         descriptive_name = product.get('descriptive_name', product_id)
 
+        if cat_title not in cat_order_map:
+            cat_order_map[cat_title] = len(cat_order_map)
+
         defaults = {
             'title': descriptive_name,
             'summary': descriptive_name,
             'category_title': cat_title,
             'category_icon': 'map',
             'subcategory_title': 'Observation',
+            'category_order': cat_order_map[cat_title],
+            'subcategory_order': 0,
+            'entry_order': entry_counter,
             'layer_type': 'wms',
             'layer_name': layer_name,
             'wms_url': wms_url,
@@ -280,6 +295,7 @@ def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', est
             'meta_source': 'JRC eStation',
             'meta_learn_more': product.get('resource_url', ''),
         }
+        entry_counter += 1
 
         _upsert_entry(product_id, defaults, stats)
 
@@ -666,6 +682,36 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
     if not product_code:
         product_code = CatalogEntry.generate_product_code(identifier, url, origin, layer_type)
 
+    # Place manual/imported entries at the end of their category/subcategory
+    from django.db.models import Max
+    max_orders = CatalogEntry.objects.aggregate(
+        max_cat=Max('category_order'),
+        max_entry=Max('entry_order'),
+    )
+    cat_order = max_orders['max_cat'] or 0
+    # Check if this category already exists to reuse its order
+    existing_cat = CatalogEntry.objects.filter(
+        category_title=data['category_title']
+    ).values('category_order', 'subcategory_order').first()
+    if existing_cat:
+        cat_order = existing_cat['category_order']
+        # Get max subcategory_order within that category
+        existing_subcat = CatalogEntry.objects.filter(
+            category_title=data['category_title'],
+            subcategory_title=data['subcategory_title'],
+        ).values('subcategory_order').first()
+        if existing_subcat:
+            subcat_order = existing_subcat['subcategory_order']
+        else:
+            max_subcat = CatalogEntry.objects.filter(
+                category_title=data['category_title']
+            ).aggregate(m=Max('subcategory_order'))['m'] or 0
+            subcat_order = max_subcat + 1
+    else:
+        cat_order = (max_orders['max_cat'] or 0) + 1
+        subcat_order = 0
+    entry_order = (max_orders['max_entry'] or 0) + 1
+
     entry = CatalogEntry.objects.create(
         product_code=product_code,
         title=data.get('title', identifier or 'Untitled'),
@@ -673,6 +719,9 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         category_title=data['category_title'],
         category_icon=data.get('category_icon', 'map'),
         subcategory_title=data['subcategory_title'],
+        category_order=cat_order,
+        subcategory_order=subcat_order,
+        entry_order=entry_order,
         layer_type=layer_type,
         layer_name=layer_name,
         wms_url=wms_url,
@@ -749,14 +798,10 @@ def get_catalog_tree():
             'meta_learn_more': entry.meta_learn_more,
         })
 
-    # Convert to sorted list format
+    # Convert to list, preserving insertion order (driven by DB ordering)
     result = []
-    for cat_key in sorted(tree.keys()):
-        cat = tree[cat_key]
-        subcats_list = []
-        for subcat_key in sorted(cat['subcategories'].keys()):
-            subcat = cat['subcategories'][subcat_key]
-            subcats_list.append(subcat)
+    for cat in tree.values():
+        subcats_list = list(cat['subcategories'].values())
         result.append({
             'title': cat['title'],
             'icon': cat['icon'],
