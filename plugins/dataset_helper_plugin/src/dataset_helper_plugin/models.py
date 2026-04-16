@@ -162,6 +162,13 @@ class CatalogEntry(models.Model):
         help_text=_("MapLibre GL style layer definitions (JSON array)"),
     )
 
+    # --- Legend configuration ---
+    legend_json = models.JSONField(
+        blank=True, null=True,
+        verbose_name=_("Legend"),
+        help_text=_("Custom legend definition: {type, items: [{name, color}]}"),
+    )
+
     # --- Metadata (denormalized from config) ---
     meta_source = models.CharField(max_length=255, blank=True, default='')
     meta_resolution = models.CharField(max_length=255, blank=True, default='')

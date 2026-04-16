@@ -203,6 +203,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                         'file_url': layer_data.get('url', ''),
                         'render_layers_json': layer_data.get('render_layers') or None,
                         'extra_params_json': layer_data.get('extra_params') or None,
+                        'legend_json': layer_data.get('legend') or None,
                         'multi_temporal': dataset_data.get('multi_temporal', True),
                         'origin': CatalogEntry.ORIGIN_CONFIG,
                         'meta_source': metadata.get('source', ''),
@@ -491,12 +492,14 @@ def _provision_wms(entry, dataset):
 
 def _provision_raster_tile(entry, dataset):
     """Create a RasterTileLayer for an XYZ raster tile catalog entry."""
-    RasterTileLayer.objects.create(
+    layer = RasterTileLayer.objects.create(
         dataset=dataset,
         title=entry.layer_title or entry.title,
         base_url=entry.tile_url,
         default=True,
     )
+    if entry.legend_json:
+        _apply_legend(layer, entry.legend_json)
 
 
 def _provision_vector_tile(entry, dataset):
@@ -535,6 +538,50 @@ def _provision_vector_file(entry, dataset):
     )
 
     _download_and_ingest_vector(layer, url)
+
+
+def _apply_legend(layer, legend_config):
+    """
+    Apply a legend configuration from the catalog to a Climweb layer model.
+
+    legend_config: dict with 'type' (basic/choropleth/gradient) and
+                   'items' list of {name, color} dicts.
+
+    Sets the layer's ``legend`` StreamField (InlineLegendBlock JSON format)
+    and ``use_custom_legend`` flag when present.
+    """
+    if not hasattr(layer, 'legend'):
+        logger.warning(
+            "Layer model %s does not have a legend field — legend config stored "
+            "in catalog entry but not applied to the Climweb layer.",
+            type(layer).__name__,
+        )
+        return
+
+    legend_type = legend_config.get('type', 'basic')
+    items = legend_config.get('items', [])
+
+    # Convert from catalog format {name, color} to StreamField format {value, color}
+    stream_items = [
+        {"color": item.get("color", ""), "value": item.get("name", "")}
+        for item in items
+    ]
+
+    legend_data = json_module.dumps([{
+        "type": "legend",
+        "id": str(uuid.uuid4()),
+        "value": {
+            "type": legend_type,
+            "items": stream_items,
+        },
+    }])
+
+    layer.legend = legend_data
+
+    if hasattr(layer, 'use_custom_legend'):
+        layer.use_custom_legend = True
+
+    layer.save()
 
 
 _PROVISIONERS = {
@@ -730,6 +777,7 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         file_url=file_url,
         render_layers_json=data.get('render_layers_json'),
         extra_params_json=data.get('extra_params_json'),
+        legend_json=data.get('legend_json'),
         multi_temporal=data.get('multi_temporal', True),
         origin=origin,
         enabled=True,
@@ -784,6 +832,7 @@ def get_catalog_tree():
             'file_url': entry.file_url,
             'render_layers_json': entry.render_layers_json,
             'extra_params_json': entry.extra_params_json,
+            'legend_json': entry.legend_json,
             'multi_temporal': entry.multi_temporal,
             'enabled': entry.enabled,
             'status': entry.status,
