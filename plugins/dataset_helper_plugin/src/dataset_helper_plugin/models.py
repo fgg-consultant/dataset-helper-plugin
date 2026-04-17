@@ -145,7 +145,12 @@ class CatalogEntry(models.Model):
     tile_url = models.CharField(
         max_length=500, blank=True, default='',
         verbose_name=_("Tile URL"),
-        help_text=_("URL template with {z}/{x}/{y} placeholders"),
+        help_text=_("URL template with {z}/{x}/{y} placeholders, or a .pmtiles file URL when is_pmtiles is set"),
+    )
+    is_pmtiles = models.BooleanField(
+        default=False,
+        verbose_name=_("PMTiles format"),
+        help_text=_("For vector_tile layers: treat tile_url as a PMTiles archive URL instead of an XYZ template"),
     )
 
     # --- File configuration (raster_file, vector_file) ---

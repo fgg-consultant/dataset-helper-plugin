@@ -200,6 +200,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                         'wms_url': wms_url if layer_type == 'wms' else '',
                         'layer_title': _resolve_i18n(layer_data.get('title', ''), lang),
                         'tile_url': layer_data.get('tile_url', ''),
+                        'is_pmtiles': bool(layer_data.get('is_pmtiles', False)),
                         'file_url': layer_data.get('url', ''),
                         'render_layers_json': layer_data.get('render_layers') or None,
                         'extra_params_json': layer_data.get('extra_params') or None,
@@ -492,14 +493,17 @@ def _provision_wms(entry, dataset):
 
 def _provision_raster_tile(entry, dataset):
     """Create a RasterTileLayer for an XYZ raster tile catalog entry."""
-    layer = RasterTileLayer.objects.create(
+    kwargs = dict(
         dataset=dataset,
         title=entry.layer_title or entry.title,
         base_url=entry.tile_url,
         default=True,
     )
+
     if entry.legend_json:
-        _apply_legend(layer, entry.legend_json)
+        _add_legend_kwargs(kwargs, entry.legend_json, RasterTileLayer)
+
+    RasterTileLayer.objects.create(**kwargs)
 
 
 def _provision_vector_tile(entry, dataset):
@@ -509,6 +513,7 @@ def _provision_vector_tile(entry, dataset):
         title=entry.layer_title or entry.title,
         base_url=entry.tile_url,
         default=True,
+        is_pmtiles=entry.is_pmtiles,
         use_render_layers_json=bool(entry.render_layers_json),
         render_layers_json=entry.render_layers_json,
     )
@@ -540,21 +545,22 @@ def _provision_vector_file(entry, dataset):
     _download_and_ingest_vector(layer, url)
 
 
-def _apply_legend(layer, legend_config):
+def _add_legend_kwargs(kwargs, legend_config, model_class):
     """
-    Apply a legend configuration from the catalog to a Climweb layer model.
+    Add legend fields to a ``create()`` kwargs dict.
 
     legend_config: dict with 'type' (basic/choropleth/gradient) and
                    'items' list of {name, color} dicts.
 
-    Sets the layer's ``legend`` StreamField (InlineLegendBlock JSON format)
-    and ``use_custom_legend`` flag when present.
+    Builds an InlineLegendBlock-compatible StreamField value (Python list,
+    not a JSON string) and adds it to *kwargs* so the legend is set
+    atomically in the same ``objects.create()`` call.
     """
-    if not hasattr(layer, 'legend'):
+    if not hasattr(model_class, 'legend'):
         logger.warning(
-            "Layer model %s does not have a legend field — legend config stored "
+            "Model %s does not have a legend field — legend config stored "
             "in catalog entry but not applied to the Climweb layer.",
-            type(layer).__name__,
+            model_class.__name__,
         )
         return
 
@@ -567,21 +573,17 @@ def _apply_legend(layer, legend_config):
         for item in items
     ]
 
-    legend_data = json_module.dumps([{
+    kwargs['legend'] = [{
         "type": "legend",
         "id": str(uuid.uuid4()),
         "value": {
             "type": legend_type,
             "items": stream_items,
         },
-    }])
+    }]
 
-    layer.legend = legend_data
-
-    if hasattr(layer, 'use_custom_legend'):
-        layer.use_custom_legend = True
-
-    layer.save()
+    if hasattr(model_class, 'use_custom_legend'):
+        kwargs['use_custom_legend'] = True
 
 
 _PROVISIONERS = {
@@ -653,7 +655,7 @@ def _download_and_ingest_raster(layer, dataset, url):
         upload.raster_metadata = raster_meta
         upload.save(update_fields=['raster_metadata'])
 
-        time = timezone.now()
+        time = timezone.now().replace(minute=0, second=0, microsecond=0)
         create_layer_raster_file(layer, upload, time)
         upload.delete()
     finally:
@@ -682,7 +684,7 @@ def _download_and_ingest_vector(layer, url):
             layer=layer,
             table_name=table_name,
             full_table_name=table_info.get('table_name', table_name),
-            time=timezone.now(),
+            time=timezone.now().replace(minute=0, second=0, microsecond=0),
             properties=table_info.get('properties', []),
             geometry_type=table_info.get('geom_type', 'UNKNOWN'),
             bounds=table_info.get('bounds', []),
@@ -774,6 +776,7 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         wms_url=wms_url,
         layer_title=data.get('layer_title', ''),
         tile_url=tile_url,
+        is_pmtiles=bool(data.get('is_pmtiles', False)),
         file_url=file_url,
         render_layers_json=data.get('render_layers_json'),
         extra_params_json=data.get('extra_params_json'),
@@ -829,6 +832,7 @@ def get_catalog_tree():
             'layer_title': entry.layer_title,
             'wms_url': entry.wms_url,
             'tile_url': entry.tile_url,
+            'is_pmtiles': entry.is_pmtiles,
             'file_url': entry.file_url,
             'render_layers_json': entry.render_layers_json,
             'extra_params_json': entry.extra_params_json,

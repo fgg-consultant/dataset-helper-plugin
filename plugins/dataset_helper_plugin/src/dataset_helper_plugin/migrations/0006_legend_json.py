@@ -8,6 +8,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunSQL(
+            sql='ALTER TABLE dataset_helper_plugin_catalogentry DROP COLUMN IF EXISTS dataset_group;',
+            reverse_sql=migrations.RunSQL.noop,
+        ),
         migrations.AddField(
             model_name='catalogentry',
             name='legend_json',
