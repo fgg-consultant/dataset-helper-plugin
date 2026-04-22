@@ -629,8 +629,8 @@
                 </div>
                 <div class="settings-field">
                     <label for="setting-ecmwf-token">ECMWF Token</label>
-                    <input type="text" id="setting-ecmwf-token" value="{{ plugin_settings.ecmwf_token }}" placeholder="public">
-                    <span class="hint">Token for eccharts.ecmwf.int WMS service</span>
+                    <input type="text" id="setting-ecmwf-token" value="{{ plugin_settings.ecmwf_token }}" placeholder="(leave empty for public-only)">
+                    <span class="hint">Token for eccharts.ecmwf.int. Empty = public layers only; private layers (token={ECMWF_TOKEN}) are skipped.</span>
                 </div>
                 <div class="settings-field">
                     <label for="setting-estation-url">Local eStation URL</label>

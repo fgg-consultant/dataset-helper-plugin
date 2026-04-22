@@ -36,3 +36,14 @@ npm install
 npm run build
 cp -r dist/* ../dataset_helper_plugin/src/dataset_helper_plugin/static/dataset_helper_plugin/
 ```
+
+## Deploy the plugin
+
+```bash
+docker compose exec -e CLIMWEB_PLUGIN_DIR=/climweb/plugins climweb /climweb/plugins/install_plugin.sh -g https://github.com/fgg-consultant/dataset-helper-plugin --overwrite
+```
+
+docker compose exec -e CLIMWEB_PLUGIN_DIR=/climweb/plugins climweb python /climweb/web/src/climweb/manage.py makemigrations
+
+docker compose exec -e CLIMWEB_PLUGIN_DIR=/climweb/plugins climweb python /climweb/web/src/climweb/manage.py migrate dataset_helper_plugin ```                                       
+```

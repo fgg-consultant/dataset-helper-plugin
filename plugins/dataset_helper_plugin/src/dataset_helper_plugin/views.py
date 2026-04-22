@@ -1,4 +1,5 @@
 from geomanager.models.core import Dataset, Category, SubCategory, Metadata
+from geomanager.models.raster_style import RasterStyle
 from geomanager.models.wms import WmsLayer, WmsRequestLayer
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -300,7 +301,7 @@ def settings_save(request):
         s.language = lang
 
     if 'ecmwf_token' in data:
-        s.ecmwf_token = data['ecmwf_token'] or 'public'
+        s.ecmwf_token = (data['ecmwf_token'] or '').strip()
 
     if 'estation_url' in data:
         s.estation_url = data['estation_url'] or ''
@@ -696,6 +697,7 @@ def clear_all(request):
     deleted = {
         'wms_request_layers': 0,
         'wms_layers': 0,
+        'raster_styles': 0,
         'datasets': 0,
         'metadata': 0,
         'subcategories': 0,
@@ -716,9 +718,12 @@ def clear_all(request):
             errors.append(f"Failed to bulk delete {key}: {e}")
 
     # Delete datasets, metadata, subcategories, categories one by one to skip protected ones
+    # (raster styles are deleted after datasets because RasterFileLayer.style uses SET_NULL,
+    # so they aren't removed by the dataset cascade)
     for model, key in [
         (Metadata, 'metadata'),
         (Dataset, 'datasets'),
+        (RasterStyle, 'raster_styles'),
         (SubCategory, 'subcategories'),
         (Category, 'categories'),
     ]:

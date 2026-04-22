@@ -12,7 +12,8 @@ from django.core.files import File
 from django.db import transaction
 from django.utils import timezone
 from geomanager.models.core import Category, Dataset, Metadata, SubCategory
-from geomanager.models.raster_file import RasterFileLayer, RasterUpload
+from geomanager.models.raster_file import LayerRasterFile, RasterFileLayer, RasterUpload
+from geomanager.models.raster_style import RasterStyle
 from geomanager.models.raster_tile import RasterTileLayer
 from geomanager.models.vector_file import VectorFileLayer, PgVectorTable
 from geomanager.models.vector_tile import VectorTileLayer
@@ -37,14 +38,40 @@ def _resolve_i18n(value, lang='en'):
     return value or ''
 
 
-def _substitute_ecmwf_token(wms_url, token):
+ECMWF_TOKEN_PLACEHOLDER = '{ECMWF_TOKEN}'
+
+
+def _apply_ecmwf_token(wms_url, token):
     """
-    Replace the token parameter in ECMWF eccharts WMS URLs with the configured token.
-    E.g. https://eccharts.ecmwf.int/wms/?token=public -> ...?token=<configured>
+    Apply the configured ECMWF token to an eccharts WMS URL.
+
+    Rules (only for URLs containing 'eccharts.ecmwf.int'):
+      - token=public in URL:
+          * token configured -> replace 'public' with the token
+          * no token         -> leave URL unchanged
+      - token={ECMWF_TOKEN} placeholder in URL:
+          * token configured -> replace placeholder with the token; mark as non-public
+          * no token         -> skip (cannot sync a private layer without a token)
+
+    Returns (new_url, public, skip).
+    Non-ECMWF URLs are returned unchanged with public=True, skip=False.
     """
-    if 'eccharts.ecmwf.int' in wms_url and token:
-        return re.sub(r'(token=)[^&]*', rf'\g<1>{token}', wms_url)
-    return wms_url
+    if 'eccharts.ecmwf.int' not in wms_url:
+        return wms_url, True, False
+
+    has_token = bool(token)
+
+    if ECMWF_TOKEN_PLACEHOLDER in wms_url:
+        if has_token:
+            return wms_url.replace(ECMWF_TOKEN_PLACEHOLDER, token), False, False
+        return wms_url, False, True
+
+    if 'token=public' in wms_url:
+        if has_token:
+            return re.sub(r'(token=)[^&]*', rf'\g<1>{token}', wms_url), True, False
+        return wms_url, True, False
+
+    return wms_url, True, False
 
 
 def _fetch_estation_product_ids(estation_url):
@@ -90,7 +117,14 @@ def load_catalog_from_config(json_data):
 
     Returns stats dict with created/updated/unchanged counts.
     """
-    stats = {'created': 0, 'updated': 0, 'unchanged': 0, 'skipped_estation': 0, 'errors': []}
+    stats = {
+        'created': 0,
+        'updated': 0,
+        'unchanged': 0,
+        'skipped_estation': 0,
+        'skipped_ecmwf_no_token': 0,
+        'errors': [],
+    }
 
     settings = PluginSettings.load()
     lang = settings.language
@@ -112,7 +146,7 @@ def load_catalog_from_config(json_data):
     return stats
 
 
-def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None, estation_url=''):
+def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_product_ids=None, estation_url=''):
     """Load from the nested categories > subcategories > datasets > layers format."""
 
     def is_estation_layer(layer_name):
@@ -138,6 +172,8 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                     layer_type = layer_data.get('type', 'wms')
                     dataset_title = _resolve_i18n(dataset_data.get('title', '?'), lang)
 
+                    public = True
+
                     # --- Validate required fields per type ---
                     if layer_type == 'wms':
                         layer_name = layer_data.get('layer_name', '')
@@ -155,7 +191,11 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                                 stats['skipped_estation'] += 1
                                 continue
 
-                        wms_url = _substitute_ecmwf_token(wms_url, ecmwf_token)
+                        wms_url, public, skip = _apply_ecmwf_token(wms_url, ecmwf_token)
+                        if skip:
+                            stats['skipped_ecmwf_no_token'] += 1
+                            continue
+
                         wms_url = _substitute_estation_url(wms_url, estation_url)
                         product_code = layer_name
 
@@ -198,11 +238,13 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                         'layer_type': layer_type,
                         'layer_name': layer_data.get('layer_name', ''),
                         'wms_url': wms_url if layer_type == 'wms' else '',
+                        'public': public,
                         'layer_title': _resolve_i18n(layer_data.get('title', ''), lang),
                         'tile_url': layer_data.get('tile_url', ''),
                         'is_pmtiles': bool(layer_data.get('is_pmtiles', False)),
                         'file_url': layer_data.get('url', ''),
                         'render_layers_json': layer_data.get('render_layers') or None,
+                        'popup_config_json': layer_data.get('popup_config') or None,
                         'extra_params_json': layer_data.get('extra_params') or None,
                         'legend_json': layer_data.get('legend') or None,
                         'multi_temporal': dataset_data.get('multi_temporal', True),
@@ -221,7 +263,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='public', estat
                     _upsert_entry(product_code, defaults, stats)
 
 
-def _load_products_format(json_data, stats, lang='en', ecmwf_token='public', estation_product_ids=None, estation_url=''):
+def _load_products_format(json_data, stats, lang='en', ecmwf_token='', estation_product_ids=None, estation_url=''):
     """
     Load from the flat products format (e.g. jrc_station_products.json).
     Each product has: category, product_id, descriptive_name, wms_getmap_url, resource_url.
@@ -329,6 +371,7 @@ def sync_catalog_to_climweb():
         'removed': 0,
         'orphans_cleared': 0,
         'already_synced': 0,
+        'public_updated': 0,
         'errors': [],
     }
 
@@ -339,11 +382,16 @@ def sync_catalog_to_climweb():
             status = entry.status
 
             if status == CatalogEntry.STATUS_SYNCED:
-                if not Dataset.objects.filter(id=entry.dataset_id).exists():
+                dataset = Dataset.objects.filter(id=entry.dataset_id).first()
+                if dataset is None:
                     entry.dataset_id = None
                     entry.save(update_fields=['dataset_id', 'updated_at'])
                     stats['orphans_cleared'] += 1
                 else:
+                    if dataset.public != entry.public:
+                        dataset.public = entry.public
+                        dataset.save(update_fields=['public'])
+                        stats['public_updated'] += 1
                     stats['already_synced'] += 1
 
             elif status == CatalogEntry.STATUS_PENDING_ADD:
@@ -423,6 +471,10 @@ def _create_common_objects(entry):
             learn_more=entry.meta_learn_more or None,
         )
 
+    # raster_file datasets require a time dimension on every LayerRasterFile,
+    # so the parent Dataset must always be multi_temporal.
+    multi_temporal = True if entry.layer_type == CatalogEntry.LAYER_TYPE_RASTER_FILE else entry.multi_temporal
+
     dataset = Dataset.objects.create(
         title=entry.title,
         category=category,
@@ -430,8 +482,8 @@ def _create_common_objects(entry):
         layer_type=entry.layer_type,
         metadata=metadata,
         published=True,
-        public=True,
-        multi_temporal=entry.multi_temporal,
+        public=entry.public,
+        multi_temporal=multi_temporal,
         multi_layer=False,
         near_realtime=False,
         can_clip=False,
@@ -501,14 +553,16 @@ def _provision_raster_tile(entry, dataset):
     )
 
     if entry.legend_json:
-        _add_legend_kwargs(kwargs, entry.legend_json, RasterTileLayer)
+        _add_legend_kwargs(kwargs, entry.legend_json, RasterTileLayer,
+                            lang=PluginSettings.load().language)
 
     RasterTileLayer.objects.create(**kwargs)
 
 
 def _provision_vector_tile(entry, dataset):
     """Create a VectorTileLayer for an MVT vector tile catalog entry."""
-    VectorTileLayer.objects.create(
+    lang = PluginSettings.load().language
+    kwargs = dict(
         dataset=dataset,
         title=entry.layer_title or entry.title,
         base_url=entry.tile_url,
@@ -518,43 +572,74 @@ def _provision_vector_tile(entry, dataset):
         render_layers_json=entry.render_layers_json,
     )
 
+    popup_stream = _build_popup_stream_value(entry.popup_config_json, lang=lang)
+    if popup_stream:
+        kwargs['popup_config'] = popup_stream
+
+    if entry.legend_json:
+        _add_legend_kwargs(kwargs, entry.legend_json, VectorTileLayer, lang=lang)
+
+    VectorTileLayer.objects.create(**kwargs)
+
 
 def _provision_raster_file(entry, dataset):
-    """Download a remote GeoTIFF and ingest it as a RasterFileLayer."""
+    """Download a remote GeoTIFF, ingest it, then create a RasterStyle from the band stats."""
     url = _resolve_file_url(entry.file_url)
-
-    layer = RasterFileLayer.objects.create(
-        dataset=dataset,
-        title=entry.layer_title or entry.title,
-        default=True,
-    )
-
-    _download_and_ingest_raster(layer, dataset, url)
+    file_path = _download_file(url, suffix='.tif')
+    try:
+        layer = RasterFileLayer.objects.create(
+            dataset=dataset,
+            title=entry.layer_title or entry.title,
+            default=True,
+        )
+        raster_file = _ingest_raster_file(layer, dataset, file_path)
+        style = _create_default_raster_style_from_metadata(
+            name=entry.layer_title or entry.title,
+            raster_metadata=raster_file.raster_metadata,
+        )
+        layer.style = style
+        layer.save(update_fields=['style'])
+    finally:
+        if os.path.exists(file_path):
+            os.unlink(file_path)
 
 
 def _provision_vector_file(entry, dataset):
     """Download a remote GeoJSON and import it as a VectorFileLayer."""
     url = _resolve_file_url(entry.file_url)
+    lang = PluginSettings.load().language
 
-    layer = VectorFileLayer.objects.create(
+    kwargs = dict(
         dataset=dataset,
         title=entry.layer_title or entry.title,
         default=True,
     )
 
-    _download_and_ingest_vector(layer, url)
+    if entry.legend_json:
+        _add_legend_kwargs(kwargs, entry.legend_json, VectorFileLayer, lang=lang)
+
+    layer = VectorFileLayer.objects.create(**kwargs)
+
+    _download_and_ingest_vector(layer, url, popup_config=entry.popup_config_json)
 
 
-def _add_legend_kwargs(kwargs, legend_config, model_class):
+_VALID_LEGEND_TYPES = ('basic', 'choropleth', 'gradient')
+
+
+def _add_legend_kwargs(kwargs, legend_config, model_class, lang='en'):
     """
     Add legend fields to a ``create()`` kwargs dict.
 
     legend_config: dict with 'type' (basic/choropleth/gradient) and
-                   'items' list of {name, color} dicts.
+                   'items' list of {name, color} dicts. ``name`` may be an
+                   i18n dict; it's resolved to a string for the StreamField.
 
     Builds an InlineLegendBlock-compatible StreamField value (Python list,
     not a JSON string) and adds it to *kwargs* so the legend is set
     atomically in the same ``objects.create()`` call.
+
+    Unknown legend types (e.g. "categorical") are normalized to "basic",
+    the closest native rendering.
     """
     if not hasattr(model_class, 'legend'):
         logger.warning(
@@ -565,11 +650,21 @@ def _add_legend_kwargs(kwargs, legend_config, model_class):
         return
 
     legend_type = legend_config.get('type', 'basic')
+    if legend_type not in _VALID_LEGEND_TYPES:
+        logger.info(
+            "Unknown legend type '%s' — falling back to 'basic'.", legend_type
+        )
+        legend_type = 'basic'
+
     items = legend_config.get('items', [])
 
-    # Convert from catalog format {name, color} to StreamField format {value, color}
+    # Convert from catalog format {name, color} to StreamField format {value, color}.
+    # ``name`` may be an i18n dict — resolve to the configured language.
     stream_items = [
-        {"color": item.get("color", ""), "value": item.get("name", "")}
+        {
+            "color": item.get("color", ""),
+            "value": _resolve_i18n(item.get("name"), lang),
+        }
         for item in items
     ]
 
@@ -641,29 +736,66 @@ def _download_file(url, suffix='.tif'):
         raise
 
 
-def _download_and_ingest_raster(layer, dataset, url):
-    """Download a GeoTIFF from URL and create a LayerRasterFile."""
-    file_path = _download_file(url, suffix='.tif')
-    try:
-        with open(file_path, 'rb') as f:
-            upload = RasterUpload.objects.create(
-                dataset=dataset,
-                file=File(f, name=os.path.basename(file_path)),
-            )
+def _ingest_raster_file(layer, dataset, file_path):
+    """Register an already-downloaded GeoTIFF as a LayerRasterFile; return the created LayerRasterFile."""
+    with open(file_path, 'rb') as f:
+        upload = RasterUpload.objects.create(
+            dataset=dataset,
+            file=File(f, name=os.path.basename(file_path)),
+        )
 
-        raster_meta = read_raster_info(upload.file.path)
-        upload.raster_metadata = raster_meta
-        upload.save(update_fields=['raster_metadata'])
+    raster_meta = read_raster_info(upload.file.path)
+    upload.raster_metadata = raster_meta
+    upload.save(update_fields=['raster_metadata'])
 
-        time = timezone.now().replace(minute=0, second=0, microsecond=0)
-        create_layer_raster_file(layer, upload, time)
-        upload.delete()
-    finally:
-        if os.path.exists(file_path):
-            os.unlink(file_path)
+    time = timezone.now().replace(minute=0, second=0, microsecond=0)
+    create_layer_raster_file(layer, upload, time)
+    upload.delete()
+    # create_layer_raster_file doesn't return the created row; fetch by the
+    # unique (layer, time) pair so the caller can read raster_metadata.
+    return LayerRasterFile.objects.get(layer=layer, time=time)
 
 
-def _download_and_ingest_vector(layer, url):
+_DEFAULT_RASTER_PALETTE = (
+    '#2166ac,#4393c3,#92c5de,#d1e5f0,#f7f7f7,#fddbc7,#f4a582,#d6604d,#b2182b'
+)
+
+
+def _create_default_raster_style_from_metadata(name, raster_metadata):
+    """
+    Create a RasterStyle with a default diverging palette using band-1 min/max
+    from the LayerRasterFile.raster_metadata dict populated at ingest time.
+
+    Expected structure: ``{"bands": {"1": {"min": ..., "max": ...}}}``.
+    Falls back to (0, 100) if the stats are missing.
+    """
+    import math
+
+    meta = raster_metadata or {}
+    band_stats = meta.get("bands", {}).get("1", {})
+    min_val = band_stats.get("min")
+    max_val = band_stats.get("max")
+
+    if min_val is None or max_val is None:
+        min_val, max_val = 0, 100
+
+    imin = int(math.floor(min_val))
+    imax = int(math.ceil(max_val))
+    if imax <= imin:
+        imax = imin + 1
+
+    return RasterStyle.objects.create(
+        name=(name or 'raster')[:256],
+        min=imin,
+        max=imax,
+        steps=9,
+        palette=_DEFAULT_RASTER_PALETTE,
+        legend_type='choropleth_vertical',
+        interpolate=False,
+    )
+
+
+def _download_and_ingest_vector(layer, url, popup_config=None):
     """Download a GeoJSON from URL and import it into PostgreSQL."""
     file_path = _download_file(url, suffix='.geojson')
     try:
@@ -680,18 +812,85 @@ def _download_and_ingest_vector(layer, url):
         table_name = f"vector_{uuid.uuid4().hex[:12]}"
         table_info = ogr_db_import(file_path, table_name, db_params)
 
+        properties = _apply_popup_to_properties(
+            table_info.get('properties', []),
+            popup_config,
+        )
+
         PgVectorTable.objects.create(
             layer=layer,
             table_name=table_name,
             full_table_name=table_info.get('table_name', table_name),
             time=timezone.now().replace(minute=0, second=0, microsecond=0),
-            properties=table_info.get('properties', []),
+            properties=properties,
             geometry_type=table_info.get('geom_type', 'UNKNOWN'),
             bounds=table_info.get('bounds', []),
         )
     finally:
         if os.path.exists(file_path):
             os.unlink(file_path)
+
+
+def _build_popup_stream_value(popup_config, lang='en'):
+    """
+    Build a StreamField value for ``VectorTileLayer.popup_config`` from the
+    catalog's ``popup_config_json`` list.
+
+    Each input item: ``{"data_key", "label", "data_type"}``.
+    ``label`` may be an i18n dict; it's resolved with ``_resolve_i18n``.
+    """
+    if not popup_config or not isinstance(popup_config, list):
+        return None
+
+    blocks = []
+    for item in popup_config:
+        data_key = (item.get('data_key') or '').strip()
+        if not data_key:
+            continue
+        label = _resolve_i18n(item.get('label'), lang) or data_key
+        data_type = item.get('data_type') or 'string'
+        if data_type not in ('string', 'number'):
+            data_type = 'string'
+        blocks.append({
+            'type': 'popup_fields',
+            'id': str(uuid.uuid4()),
+            'value': {
+                'data_key': data_key,
+                'label': label,
+                'data_type': data_type,
+            },
+        })
+    return blocks or None
+
+
+def _apply_popup_to_properties(properties, popup_config, lang='en'):
+    """
+    Annotate ``PgVectorTable.properties`` rows with ``popup=True`` and optional
+    ``label`` for every column listed in ``popup_config``. Unknown data_keys
+    are logged and ignored — the vector_file model has no ``data_type``.
+    """
+    properties = list(properties or [])
+    if not popup_config or not isinstance(popup_config, list):
+        return properties
+
+    by_name = {(p.get('name') or ''): p for p in properties}
+    for item in popup_config:
+        data_key = (item.get('data_key') or '').strip()
+        if not data_key:
+            continue
+        column = by_name.get(data_key)
+        if column is None:
+            logger.warning(
+                "popup_config data_key '%s' not found in vector file columns; ignoring.",
+                data_key,
+            )
+            continue
+        column['popup'] = True
+        label = _resolve_i18n(item.get('label'), lang)
+        if label:
+            column['label'] = label
+
+    return properties
 
 
 # ---------------------------------------------------------------------------
@@ -779,6 +978,7 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         is_pmtiles=bool(data.get('is_pmtiles', False)),
         file_url=file_url,
         render_layers_json=data.get('render_layers_json'),
+        popup_config_json=data.get('popup_config_json'),
         extra_params_json=data.get('extra_params_json'),
         legend_json=data.get('legend_json'),
         multi_temporal=data.get('multi_temporal', True),
@@ -835,6 +1035,7 @@ def get_catalog_tree():
             'is_pmtiles': entry.is_pmtiles,
             'file_url': entry.file_url,
             'render_layers_json': entry.render_layers_json,
+            'popup_config_json': entry.popup_config_json,
             'extra_params_json': entry.extra_params_json,
             'legend_json': entry.legend_json,
             'multi_temporal': entry.multi_temporal,

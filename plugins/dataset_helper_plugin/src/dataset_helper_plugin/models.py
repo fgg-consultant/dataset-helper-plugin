@@ -28,9 +28,13 @@ class PluginSettings(models.Model):
     )
     ecmwf_token = models.CharField(
         max_length=255,
-        default='public',
+        blank=True,
+        default='',
         verbose_name=_("ECMWF API Token"),
-        help_text=_("Token for ECMWF eccharts WMS service"),
+        help_text=_(
+            "Token for ECMWF eccharts WMS service. Leave empty to keep public layers "
+            "using token=public and skip private layers (token={ECMWF_TOKEN})."
+        ),
     )
     estation_url = models.URLField(
         max_length=500,
@@ -134,6 +138,11 @@ class CatalogEntry(models.Model):
         help_text=_("Layer identifier as returned by WMS GetCapabilities"),
     )
     wms_url = models.CharField(max_length=500, blank=True, default='', verbose_name=_("WMS base URL"))
+    public = models.BooleanField(
+        default=True,
+        verbose_name=_("Public"),
+        help_text=_("Propagated to Dataset.public. False for ECMWF private layers (token={ECMWF_TOKEN} in config)."),
+    )
     layer_title = models.CharField(max_length=255, blank=True, default='')
     extra_params_json = models.JSONField(
         blank=True, null=True,
@@ -165,6 +174,14 @@ class CatalogEntry(models.Model):
         blank=True, null=True,
         verbose_name=_("Render layers"),
         help_text=_("MapLibre GL style layer definitions (JSON array)"),
+    )
+
+    # --- Popup configuration (vector_tile, vector_file) ---
+    popup_config_json = models.JSONField(
+        blank=True, null=True,
+        verbose_name=_("Popup config"),
+        help_text=_("List of fields shown when a feature is clicked. "
+                     "Each item: {data_key, label, data_type}."),
     )
 
     # --- Legend configuration ---
