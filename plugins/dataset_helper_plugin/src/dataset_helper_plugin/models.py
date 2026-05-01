@@ -57,6 +57,13 @@ class PluginSettings(models.Model):
         verbose_name=_("Country code (alpha-2)"),
         help_text=_("ISO 3166-1 alpha-2 country code used for URL placeholder substitution (e.g. bf)"),
     )
+    country_name = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+        verbose_name=_("Country name"),
+        help_text=_("Official country name from OpenStreetMap Nominatim (display_name)"),
+    )
     country_bbox = models.JSONField(
         blank=True, null=True,
         verbose_name=_("Country bounding box"),

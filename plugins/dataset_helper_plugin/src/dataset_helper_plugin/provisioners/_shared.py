@@ -87,6 +87,7 @@ def resolve_file_url(url_template):
     Supported placeholders:
       ``{country_alpha3}`` / ``{COUNTRY_ALPHA3}`` — ISO 3166-1 alpha-3
       ``{country_alpha2}`` / ``{COUNTRY_ALPHA2}`` — ISO 3166-1 alpha-2
+      ``{country_name}``   / ``{COUNTRY_NAME}``   — Nominatim display_name
     """
     settings = PluginSettings.load()
     url = url_template
@@ -96,6 +97,9 @@ def resolve_file_url(url_template):
     if settings.country_alpha2:
         url = url.replace('{country_alpha2}', settings.country_alpha2.lower())
         url = url.replace('{COUNTRY_ALPHA2}', settings.country_alpha2.upper())
+    if settings.country_name:
+        url = url.replace('{country_name}', settings.country_name)
+        url = url.replace('{COUNTRY_NAME}', settings.country_name.upper())
     return url
 
 

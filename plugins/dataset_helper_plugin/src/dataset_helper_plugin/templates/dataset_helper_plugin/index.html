@@ -597,9 +597,10 @@
                         <option value="">— Loading countries… —</option>
                     </select>
                     <span class="hint" id="country-bbox-hint">
-                        Required. Saves the ISO 3166-1 alpha-3 code (URL placeholder <code>{country_alpha3}</code>) and the country bounding box from OpenStreetMap Nominatim.
+                        Required. Saves ISO codes (placeholders <code>{country_alpha3}</code> / <code>{country_alpha2}</code>), the official country name and the bounding box from OpenStreetMap Nominatim.
                     </span>
                     {{ plugin_settings.country_bbox|json_script:"current-country-bbox" }}
+                    {{ plugin_settings.country_name|json_script:"current-country-name" }}
                 </div>
             </div>
             <div class="settings-actions">
@@ -960,15 +961,17 @@
       return
     }
 
-    // Ensure we have a bbox; fetch if missing.
-    if (!window._countryBbox && window._fetchCountryBbox) {
-      msgEl.textContent = 'Fetching country bounding box…'
+    // Ensure we have a bbox + country name; fetch if missing.
+    if ((!window._countryBbox || !window._countryName) && window._fetchCountryInfo) {
+      msgEl.textContent = 'Fetching country info…'
       msgEl.style.color = '#6b7280'
       try {
-        window._countryBbox = await window._fetchCountryBbox(alpha2)
+        const info = await window._fetchCountryInfo(alpha2)
+        window._countryBbox = info.bbox
+        window._countryName = info.name
         if (window._renderCountryHint) window._renderCountryHint()
       } catch (err) {
-        msgEl.textContent = 'Could not fetch bounding box: ' + err.message
+        msgEl.textContent = 'Could not fetch country info: ' + err.message
         msgEl.style.color = '#dc2626'
         return
       }
@@ -980,6 +983,7 @@
       estation_url: document.getElementById('setting-estation-url').value.trim(),
       country_alpha3: alpha3,
       country_alpha2: alpha2,
+      country_name: window._countryName || '',
       country_bbox: window._countryBbox,
     }
 
@@ -1743,13 +1747,18 @@ window._countryBbox = (() => {
   try { return JSON.parse(document.getElementById('current-country-bbox').textContent) }
   catch (_) { return null }
 })()
+window._countryName = (() => {
+  try { return JSON.parse(document.getElementById('current-country-name').textContent) || '' }
+  catch (_) { return '' }
+})()
 
 function renderHint(extra) {
   const bb = window._countryBbox
   const bbStr = bb && bb.length === 4
     ? `[S ${bb[0]}, N ${bb[1]}, W ${bb[2]}, E ${bb[3]}]`
     : 'none'
-  hint.textContent = `Bounding box: ${bbStr}${extra ? ' — ' + extra : ''}`
+  const nameStr = window._countryName ? ` "${window._countryName}"` : ''
+  hint.textContent = `Country${nameStr} — Bounding box: ${bbStr}${extra ? ' — ' + extra : ''}`
 }
 
 async function loadLocale(lang) {
@@ -1791,19 +1800,24 @@ async function loadLocale(lang) {
   }
 })()
 
-async function fetchCountryBbox(alpha2) {
+async function fetchCountryInfo(alpha2) {
   const r = await fetch(
     `https://nominatim.openstreetmap.org/search?country=${alpha2}&featuretype=country&format=json&limit=1`,
     { headers: { 'Accept': 'application/json' } }
   )
   if (!r.ok) throw new Error('HTTP ' + r.status)
   const data = await r.json()
-  const bbox = data && data[0] && data[0].boundingbox
+  const first = data && data[0]
+  if (!first) throw new Error('No country result returned')
+  const bbox = first.boundingbox
   if (!bbox || bbox.length !== 4) throw new Error('No bounding box returned')
-  return bbox.map(parseFloat)
+  return {
+    bbox: bbox.map(parseFloat),
+    name: first.display_name || first.name || '',
+  }
 }
 
-window._fetchCountryBbox = fetchCountryBbox
+window._fetchCountryInfo = fetchCountryInfo
 window._renderCountryHint = renderHint
 
 select.addEventListener('change', async () => {
@@ -1811,16 +1825,20 @@ select.addEventListener('change', async () => {
   const alpha2 = opt && opt.dataset.alpha2
   if (!alpha2) {
     window._countryBbox = null
+    window._countryName = ''
     renderHint()
     return
   }
-  renderHint('Fetching bounding box…')
+  renderHint('Fetching country info…')
   try {
-    window._countryBbox = await fetchCountryBbox(alpha2)
+    const info = await fetchCountryInfo(alpha2)
+    window._countryBbox = info.bbox
+    window._countryName = info.name
     renderHint()
   } catch (err) {
     window._countryBbox = null
-    renderHint('Failed to fetch bounding box: ' + err.message)
+    window._countryName = ''
+    renderHint('Failed to fetch country info: ' + err.message)
   }
 })
 </script>

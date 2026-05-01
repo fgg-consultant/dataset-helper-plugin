@@ -8,11 +8,18 @@ import uuid
 from django.db import transaction
 from django.utils.dateparse import parse_datetime
 from geomanager.models.core import Category, Dataset, Metadata, SubCategory
-from geomanager.models.raster_cog import RasterCOGLayer
 from geomanager.models.raster_style import ColorValue, RasterStyle
 from geomanager.models.raster_tile import RasterTileLayer
 from geomanager.models.vector_tile import VectorTileLayer
 from geomanager.models.wms import WmsLayer, WmsRequestLayer, WmsRequestParam
+
+# raster_cog is on a separate geomanager branch — make the import optional so
+# the plugin still loads on branches without it. _provision_raster_cog raises
+# at sync time if the layer type is used while the model is missing.
+try:
+    from geomanager.models.raster_cog import RasterCOGLayer
+except ImportError:
+    RasterCOGLayer = None
 
 from .models import CatalogEntry, PluginSettings
 from .provisioners import PROVISIONERS as _PACKAGED_PROVISIONERS
@@ -601,6 +608,11 @@ def _provision_vector_tile(entry, dataset):
 
 def _provision_raster_cog(entry, dataset):
     """Create a RasterCOGLayer + RasterStyle from catalog entry config."""
+    if RasterCOGLayer is None:
+        raise RuntimeError(
+            "raster_cog layer type requires geomanager with the raster_cog model "
+            "(branch 'cog'). Current geomanager build does not expose it."
+        )
     style = _create_raster_style_from_config(
         entry.raster_style_json or {},
         name=entry.layer_title or entry.title,
