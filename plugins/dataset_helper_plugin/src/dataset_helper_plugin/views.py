@@ -292,23 +292,27 @@ def settings_save(request):
     if 'estation_url' in data:
         s.estation_url = data['estation_url'] or ''
 
-    if 'country_alpha3' in data:
-        s.country_alpha3 = (data['country_alpha3'] or '')[:3].lower()
+    # Country is mandatory: alpha3 + matching bbox must be sent together.
+    has_alpha3 = 'country_alpha3' in data
+    has_bbox = 'country_bbox' in data
 
-    if 'country_bbox' in data:
-        bbox = data['country_bbox']
-        if bbox in (None, '', []):
-            s.country_bbox = None
-        elif isinstance(bbox, list) and len(bbox) == 4 and all(
-            isinstance(v, (int, float)) for v in bbox
-        ):
-            s.country_bbox = [float(v) for v in bbox]
-        else:
+    if has_alpha3 or has_bbox:
+        alpha3 = (data.get('country_alpha3') or '').strip().lower()[:3]
+        if not alpha3 or len(alpha3) != 3 or not alpha3.isalpha():
+            return JsonResponse(
+                {'status': 'error', 'message': 'country_alpha3 is required (ISO 3166-1 alpha-3)'},
+                status=400,
+            )
+        bbox = data.get('country_bbox')
+        if not (isinstance(bbox, list) and len(bbox) == 4
+                and all(isinstance(v, (int, float)) for v in bbox)):
             return JsonResponse(
                 {'status': 'error',
                  'message': 'country_bbox must be a list of 4 numbers [south, north, west, east]'},
                 status=400,
             )
+        s.country_alpha3 = alpha3
+        s.country_bbox = [float(v) for v in bbox]
 
     s.save()
     return JsonResponse({

@@ -592,12 +592,12 @@
                     <span class="hint">Leave empty to import all eStation products</span>
                 </div>
                 <div class="settings-field">
-                    <label for="setting-country">Country</label>
-                    <select id="setting-country" data-current-alpha3="{{ plugin_settings.country_alpha3|default:'' }}" style="min-width:260px;" disabled>
+                    <label for="setting-country">Country <span style="color:#dc2626;">*</span></label>
+                    <select id="setting-country" required data-current-alpha3="{{ plugin_settings.country_alpha3|default:'' }}" style="min-width:260px;" disabled>
                         <option value="">— Loading countries… —</option>
                     </select>
                     <span class="hint" id="country-bbox-hint">
-                        Saves the ISO 3166-1 alpha-3 code (URL placeholder <code>{country_alpha3}</code>) and the country bounding box from OpenStreetMap Nominatim.
+                        Required. Saves the ISO 3166-1 alpha-3 code (URL placeholder <code>{country_alpha3}</code>) and the country bounding box from OpenStreetMap Nominatim.
                     </span>
                     {{ plugin_settings.country_bbox|json_script:"current-country-bbox" }}
                 </div>
@@ -948,15 +948,40 @@
 
   async function saveSettings() {
     const countrySelect = document.getElementById('setting-country')
+    const msgEl = document.getElementById('settings-msg')
+    const alpha3 = (countrySelect.value || '').toLowerCase()
+    const opt = countrySelect.options[countrySelect.selectedIndex]
+    const alpha2 = opt && opt.dataset && opt.dataset.alpha2
+
+    if (!alpha3 || !alpha2) {
+      msgEl.textContent = 'Please pick a country before saving'
+      msgEl.style.color = '#dc2626'
+      countrySelect.focus()
+      return
+    }
+
+    // Ensure we have a bbox; fetch if missing.
+    if (!window._countryBbox && window._fetchCountryBbox) {
+      msgEl.textContent = 'Fetching country bounding box…'
+      msgEl.style.color = '#6b7280'
+      try {
+        window._countryBbox = await window._fetchCountryBbox(alpha2)
+        if (window._renderCountryHint) window._renderCountryHint()
+      } catch (err) {
+        msgEl.textContent = 'Could not fetch bounding box: ' + err.message
+        msgEl.style.color = '#dc2626'
+        return
+      }
+    }
+
     const data = {
       language: document.getElementById('setting-language').value,
       ecmwf_token: document.getElementById('setting-ecmwf-token').value.trim(),
       estation_url: document.getElementById('setting-estation-url').value.trim(),
-      country_alpha3: (countrySelect.value || '').toLowerCase(),
-      country_bbox: window._countryBbox || null,
+      country_alpha3: alpha3,
+      country_bbox: window._countryBbox,
     }
 
-    const msgEl = document.getElementById('settings-msg')
     msgEl.textContent = 'Saving...'
     msgEl.style.color = '#6b7280'
 
@@ -1765,6 +1790,21 @@ async function loadLocale(lang) {
   }
 })()
 
+async function fetchCountryBbox(alpha2) {
+  const r = await fetch(
+    `https://nominatim.openstreetmap.org/search?country=${alpha2}&featuretype=country&format=json&limit=1`,
+    { headers: { 'Accept': 'application/json' } }
+  )
+  if (!r.ok) throw new Error('HTTP ' + r.status)
+  const data = await r.json()
+  const bbox = data && data[0] && data[0].boundingbox
+  if (!bbox || bbox.length !== 4) throw new Error('No bounding box returned')
+  return bbox.map(parseFloat)
+}
+
+window._fetchCountryBbox = fetchCountryBbox
+window._renderCountryHint = renderHint
+
 select.addEventListener('change', async () => {
   const opt = select.options[select.selectedIndex]
   const alpha2 = opt && opt.dataset.alpha2
@@ -1775,19 +1815,7 @@ select.addEventListener('change', async () => {
   }
   renderHint('Fetching bounding box…')
   try {
-    const r = await fetch(
-      `https://nominatim.openstreetmap.org/search?country=${alpha2}&featuretype=country&format=json&limit=1`,
-      { headers: { 'Accept': 'application/json' } }
-    )
-    if (!r.ok) throw new Error('HTTP ' + r.status)
-    const data = await r.json()
-    const bbox = data && data[0] && data[0].boundingbox
-    if (!bbox || bbox.length !== 4) {
-      window._countryBbox = null
-      renderHint('No bounding box returned')
-      return
-    }
-    window._countryBbox = bbox.map(parseFloat)
+    window._countryBbox = await fetchCountryBbox(alpha2)
     renderHint()
   } catch (err) {
     window._countryBbox = null
