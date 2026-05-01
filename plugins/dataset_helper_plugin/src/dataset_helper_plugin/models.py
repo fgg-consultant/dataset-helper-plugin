@@ -50,6 +50,11 @@ class PluginSettings(models.Model):
         verbose_name=_("Country code (alpha-3)"),
         help_text=_("ISO 3166-1 alpha-3 country code used for URL placeholder substitution (e.g. bfa)"),
     )
+    country_bbox = models.JSONField(
+        blank=True, null=True,
+        verbose_name=_("Country bounding box"),
+        help_text=_("Nominatim country bounding box as [south, north, west, east] of decimal degrees"),
+    )
 
     class Meta:
         verbose_name = _("Plugin Settings")

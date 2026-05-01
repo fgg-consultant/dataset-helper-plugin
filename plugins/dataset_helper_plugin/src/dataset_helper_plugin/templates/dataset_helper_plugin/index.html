@@ -592,9 +592,14 @@
                     <span class="hint">Leave empty to import all eStation products</span>
                 </div>
                 <div class="settings-field">
-                    <label for="setting-country-alpha3">Country code (alpha-3)</label>
-                    <input type="text" id="setting-country-alpha3" value="{{ plugin_settings.country_alpha3 }}" placeholder="bfa" maxlength="3" style="width:80px;text-transform:lowercase;">
-                    <span class="hint">ISO 3166-1 alpha-3 code for URL placeholders, e.g. bfa for Burkina Faso</span>
+                    <label for="setting-country">Country</label>
+                    <select id="setting-country" data-current-alpha3="{{ plugin_settings.country_alpha3|default:'' }}" style="min-width:260px;" disabled>
+                        <option value="">— Loading countries… —</option>
+                    </select>
+                    <span class="hint" id="country-bbox-hint">
+                        Saves the ISO 3166-1 alpha-3 code (URL placeholder <code>{country_alpha3}</code>) and the country bounding box from OpenStreetMap Nominatim.
+                    </span>
+                    {{ plugin_settings.country_bbox|json_script:"current-country-bbox" }}
                 </div>
             </div>
             <div class="settings-actions">
@@ -942,11 +947,13 @@
   // ── Settings functions ────────────────────────────────────────────────────
 
   async function saveSettings() {
+    const countrySelect = document.getElementById('setting-country')
     const data = {
       language: document.getElementById('setting-language').value,
       ecmwf_token: document.getElementById('setting-ecmwf-token').value.trim(),
       estation_url: document.getElementById('setting-estation-url').value.trim(),
-      country_alpha3: document.getElementById('setting-country-alpha3').value.trim().toLowerCase(),
+      country_alpha3: (countrySelect.value || '').toLowerCase(),
+      country_bbox: window._countryBbox || null,
     }
 
     const msgEl = document.getElementById('settings-msg')
@@ -1698,5 +1705,94 @@
     openGroups.clear()
     loadCatalog(false)
   })
+</script>
+
+<script type="module">
+// Country picker — populated via i18n-iso-countries (jsdelivr ESM) in the configured language.
+const select = document.getElementById('setting-country')
+const hint = document.getElementById('country-bbox-hint')
+const requestedLang = '{{ plugin_settings.language|default:"en" }}'
+
+window._countryBbox = (() => {
+  try { return JSON.parse(document.getElementById('current-country-bbox').textContent) }
+  catch (_) { return null }
+})()
+
+function renderHint(extra) {
+  const bb = window._countryBbox
+  const bbStr = bb && bb.length === 4
+    ? `[S ${bb[0]}, N ${bb[1]}, W ${bb[2]}, E ${bb[3]}]`
+    : 'none'
+  hint.textContent = `Bounding box: ${bbStr}${extra ? ' — ' + extra : ''}`
+}
+
+async function loadLocale(lang) {
+  try {
+    const mod = await import(`https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.7.0/langs/${lang}.json/+esm`)
+    return [lang, mod.default || mod]
+  } catch (_) {
+    if (lang === 'en') throw new Error('Failed to load English locale')
+    const en = await import('https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.7.0/langs/en.json/+esm')
+    return ['en', en.default || en]
+  }
+}
+
+(async () => {
+  try {
+    const countriesMod = await import('https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.7.0/+esm')
+    const countries = countriesMod.default || countriesMod
+    const [lang, locale] = await loadLocale(requestedLang)
+    countries.registerLocale(locale)
+
+    const names = countries.getNames(lang, { select: 'official' })
+    const collator = new Intl.Collator(lang)
+    const sortedAlpha2 = Object.keys(names).sort((a, b) => collator.compare(names[a], names[b]))
+    const currentAlpha3 = (select.dataset.currentAlpha3 || '').toUpperCase()
+
+    const opts = ['<option value="">— Select a country —</option>']
+    for (const a2 of sortedAlpha2) {
+      const a3 = countries.alpha2ToAlpha3(a2)
+      if (!a3) continue
+      const selected = a3 === currentAlpha3 ? ' selected' : ''
+      opts.push(`<option value="${a3.toLowerCase()}" data-alpha2="${a2.toLowerCase()}"${selected}>${names[a2]}</option>`)
+    }
+    select.innerHTML = opts.join('')
+    select.disabled = false
+    renderHint()
+  } catch (err) {
+    select.innerHTML = '<option value="">— Failed to load countries —</option>'
+    renderHint('Could not load country list (' + err.message + ')')
+  }
+})()
+
+select.addEventListener('change', async () => {
+  const opt = select.options[select.selectedIndex]
+  const alpha2 = opt && opt.dataset.alpha2
+  if (!alpha2) {
+    window._countryBbox = null
+    renderHint()
+    return
+  }
+  renderHint('Fetching bounding box…')
+  try {
+    const r = await fetch(
+      `https://nominatim.openstreetmap.org/search?country=${alpha2}&featuretype=country&format=json&limit=1`,
+      { headers: { 'Accept': 'application/json' } }
+    )
+    if (!r.ok) throw new Error('HTTP ' + r.status)
+    const data = await r.json()
+    const bbox = data && data[0] && data[0].boundingbox
+    if (!bbox || bbox.length !== 4) {
+      window._countryBbox = null
+      renderHint('No bounding box returned')
+      return
+    }
+    window._countryBbox = bbox.map(parseFloat)
+    renderHint()
+  } catch (err) {
+    window._countryBbox = null
+    renderHint('Failed to fetch bounding box: ' + err.message)
+  }
+})
 </script>
 {% endblock %}

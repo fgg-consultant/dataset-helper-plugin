@@ -264,6 +264,8 @@ def settings_get(request):
         'language': s.language,
         'ecmwf_token': s.ecmwf_token,
         'estation_url': s.estation_url,
+        'country_alpha3': s.country_alpha3,
+        'country_bbox': s.country_bbox,
     })
 
 
@@ -293,6 +295,21 @@ def settings_save(request):
     if 'country_alpha3' in data:
         s.country_alpha3 = (data['country_alpha3'] or '')[:3].lower()
 
+    if 'country_bbox' in data:
+        bbox = data['country_bbox']
+        if bbox in (None, '', []):
+            s.country_bbox = None
+        elif isinstance(bbox, list) and len(bbox) == 4 and all(
+            isinstance(v, (int, float)) for v in bbox
+        ):
+            s.country_bbox = [float(v) for v in bbox]
+        else:
+            return JsonResponse(
+                {'status': 'error',
+                 'message': 'country_bbox must be a list of 4 numbers [south, north, west, east]'},
+                status=400,
+            )
+
     s.save()
     return JsonResponse({
         'status': 'success',
@@ -300,6 +317,8 @@ def settings_save(request):
         'language': s.language,
         'ecmwf_token': s.ecmwf_token,
         'estation_url': s.estation_url,
+        'country_alpha3': s.country_alpha3,
+        'country_bbox': s.country_bbox,
     })
 
 
