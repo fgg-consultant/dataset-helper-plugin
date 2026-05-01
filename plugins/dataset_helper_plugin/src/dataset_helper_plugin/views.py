@@ -265,6 +265,7 @@ def settings_get(request):
         'ecmwf_token': s.ecmwf_token,
         'estation_url': s.estation_url,
         'country_alpha3': s.country_alpha3,
+        'country_alpha2': s.country_alpha2,
         'country_bbox': s.country_bbox,
     })
 
@@ -292,15 +293,18 @@ def settings_save(request):
     if 'estation_url' in data:
         s.estation_url = data['estation_url'] or ''
 
-    # Country is mandatory: alpha3 + matching bbox must be sent together.
-    has_alpha3 = 'country_alpha3' in data
-    has_bbox = 'country_bbox' in data
-
-    if has_alpha3 or has_bbox:
+    # Country is mandatory: alpha3 + alpha2 + matching bbox must be sent together.
+    if any(k in data for k in ('country_alpha3', 'country_alpha2', 'country_bbox')):
         alpha3 = (data.get('country_alpha3') or '').strip().lower()[:3]
         if not alpha3 or len(alpha3) != 3 or not alpha3.isalpha():
             return JsonResponse(
                 {'status': 'error', 'message': 'country_alpha3 is required (ISO 3166-1 alpha-3)'},
+                status=400,
+            )
+        alpha2 = (data.get('country_alpha2') or '').strip().lower()[:2]
+        if not alpha2 or len(alpha2) != 2 or not alpha2.isalpha():
+            return JsonResponse(
+                {'status': 'error', 'message': 'country_alpha2 is required (ISO 3166-1 alpha-2)'},
                 status=400,
             )
         bbox = data.get('country_bbox')
@@ -312,6 +316,7 @@ def settings_save(request):
                 status=400,
             )
         s.country_alpha3 = alpha3
+        s.country_alpha2 = alpha2
         s.country_bbox = [float(v) for v in bbox]
 
     s.save()

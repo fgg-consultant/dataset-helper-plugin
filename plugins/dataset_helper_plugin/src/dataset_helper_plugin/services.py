@@ -1,43 +1,30 @@
 import hashlib
+import json as json_module
 import logging
-import os
 import re
-import tempfile
 import urllib.request
 import uuid
-import json as json_module
 
-from django.conf import settings as django_settings
-from django.core.files import File
 from django.db import transaction
-from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 from geomanager.models.core import Category, Dataset, Metadata, SubCategory
 from geomanager.models.raster_cog import RasterCOGLayer
-from geomanager.models.raster_file import LayerRasterFile, RasterFileLayer, RasterUpload
 from geomanager.models.raster_style import ColorValue, RasterStyle
 from geomanager.models.raster_tile import RasterTileLayer
-from geomanager.models.vector_file import VectorFileLayer, PgVectorTable
 from geomanager.models.vector_tile import VectorTileLayer
 from geomanager.models.wms import WmsLayer, WmsRequestLayer, WmsRequestParam
-from geomanager.settings import geomanager_settings
-from geomanager.utils.raster_utils import read_raster_info, create_layer_raster_file
-from geomanager.utils.vector_utils import ogr_db_import
 
 from .models import CatalogEntry, PluginSettings
+from .provisioners import PROVISIONERS as _PACKAGED_PROVISIONERS
+from .provisioners._shared import (
+    DEFAULT_RASTER_PALETTE,
+    add_legend_kwargs,
+    download_file,
+    resolve_file_url,
+    resolve_i18n,
+)
 
 logger = logging.getLogger(__name__)
-
-
-def _resolve_i18n(value, lang='en'):
-    """
-    Resolve a multilingual value. If value is a dict with language keys,
-    return the string for `lang` (fallback to 'en', then first available).
-    If value is already a string, return it as-is.
-    """
-    if isinstance(value, dict):
-        return value.get(lang) or value.get('en') or next(iter(value.values()), '')
-    return value or ''
 
 
 ECMWF_TOKEN_PLACEHOLDER = '{ECMWF_TOKEN}'
@@ -169,11 +156,11 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
     entry_counter = 0
 
     for cat_idx, cat_data in enumerate(json_data.get('categories', [])):
-        cat_title = _resolve_i18n(cat_data.get('title', ''), lang)
+        cat_title = resolve_i18n(cat_data.get('title', ''), lang)
         cat_icon = cat_data.get('icon', 'map')
 
         for subcat_idx, subcat_data in enumerate(cat_data.get('subcategories', [])):
-            subcat_title = _resolve_i18n(subcat_data.get('title', ''), lang)
+            subcat_title = resolve_i18n(subcat_data.get('title', ''), lang)
 
             for dataset_data in subcat_data.get('datasets', []):
                 layers_data = dataset_data.get('layers', [])
@@ -181,7 +168,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
 
                 for layer_data in layers_data:
                     layer_type = layer_data.get('type', 'wms')
-                    dataset_title = _resolve_i18n(dataset_data.get('title', '?'), lang)
+                    dataset_title = resolve_i18n(dataset_data.get('title', '?'), lang)
 
                     public = True
 
@@ -250,8 +237,8 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                         continue
 
                     defaults = {
-                        'title': _resolve_i18n(dataset_data.get('title', ''), lang) or product_code,
-                        'summary': _resolve_i18n(dataset_data.get('summary', ''), lang),
+                        'title': resolve_i18n(dataset_data.get('title', ''), lang) or product_code,
+                        'summary': resolve_i18n(dataset_data.get('summary', ''), lang),
                         'category_title': cat_title,
                         'category_icon': cat_icon,
                         'subcategory_title': subcat_title,
@@ -262,7 +249,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                         'layer_name': layer_data.get('layer_name', ''),
                         'wms_url': wms_url if layer_type == 'wms' else '',
                         'public': public,
-                        'layer_title': _resolve_i18n(layer_data.get('title', ''), lang),
+                        'layer_title': resolve_i18n(layer_data.get('title', ''), lang),
                         'tile_url': layer_data.get('tile_url', ''),
                         'is_pmtiles': bool(layer_data.get('is_pmtiles', False)),
                         'file_url': layer_data.get('url', ''),
@@ -281,11 +268,11 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                         'origin': CatalogEntry.ORIGIN_CONFIG,
                         'meta_source': metadata.get('source', ''),
                         'meta_resolution': metadata.get('resolution', ''),
-                        'meta_geographic_coverage': _resolve_i18n(metadata.get('geographic_coverage', ''), lang),
+                        'meta_geographic_coverage': resolve_i18n(metadata.get('geographic_coverage', ''), lang),
                         'meta_license': metadata.get('license', ''),
-                        'meta_frequency_of_update': _resolve_i18n(metadata.get('frequency_of_update', ''), lang),
-                        'meta_function': _resolve_i18n(metadata.get('function', ''), lang),
-                        'meta_overview': _resolve_i18n(metadata.get('overview', ''), lang),
+                        'meta_frequency_of_update': resolve_i18n(metadata.get('frequency_of_update', ''), lang),
+                        'meta_function': resolve_i18n(metadata.get('function', ''), lang),
+                        'meta_overview': resolve_i18n(metadata.get('overview', ''), lang),
                         'meta_learn_more': metadata.get('learn_more', ''),
                     }
                     entry_counter += 1
@@ -583,7 +570,7 @@ def _provision_raster_tile(entry, dataset):
     )
 
     if entry.legend_json:
-        _add_legend_kwargs(kwargs, entry.legend_json, RasterTileLayer,
+        add_legend_kwargs(kwargs, entry.legend_json, RasterTileLayer,
                             lang=PluginSettings.load().language)
 
     RasterTileLayer.objects.create(**kwargs)
@@ -607,31 +594,9 @@ def _provision_vector_tile(entry, dataset):
         kwargs['popup_config'] = popup_stream
 
     if entry.legend_json:
-        _add_legend_kwargs(kwargs, entry.legend_json, VectorTileLayer, lang=lang)
+        add_legend_kwargs(kwargs, entry.legend_json, VectorTileLayer, lang=lang)
 
     VectorTileLayer.objects.create(**kwargs)
-
-
-def _provision_raster_file(entry, dataset):
-    """Download a remote GeoTIFF, ingest it, then create a RasterStyle from the band stats."""
-    url = _resolve_file_url(entry.file_url)
-    file_path = _download_file(url, suffix='.tif')
-    try:
-        layer = RasterFileLayer.objects.create(
-            dataset=dataset,
-            title=entry.layer_title or entry.title,
-            default=True,
-        )
-        raster_file = _ingest_raster_file(layer, dataset, file_path)
-        style = _create_default_raster_style_from_metadata(
-            name=entry.layer_title or entry.title,
-            raster_metadata=raster_file.raster_metadata,
-        )
-        layer.style = style
-        layer.save(update_fields=['style'])
-    finally:
-        if os.path.exists(file_path):
-            os.unlink(file_path)
 
 
 def _provision_raster_cog(entry, dataset):
@@ -655,196 +620,13 @@ def _provision_raster_cog(entry, dataset):
     )
 
 
-def _provision_vector_file(entry, dataset):
-    """Download a remote GeoJSON and import it as a VectorFileLayer."""
-    url = _resolve_file_url(entry.file_url)
-    lang = PluginSettings.load().language
-
-    kwargs = dict(
-        dataset=dataset,
-        title=entry.layer_title or entry.title,
-        default=True,
-    )
-
-    if entry.legend_json:
-        _add_legend_kwargs(kwargs, entry.legend_json, VectorFileLayer, lang=lang)
-
-    layer = VectorFileLayer.objects.create(**kwargs)
-
-    _download_and_ingest_vector(layer, url, popup_config=entry.popup_config_json)
-
-
-_VALID_LEGEND_TYPES = ('basic', 'choropleth', 'gradient')
-
-
-def _add_legend_kwargs(kwargs, legend_config, model_class, lang='en'):
-    """
-    Add legend fields to a ``create()`` kwargs dict.
-
-    legend_config: dict with 'type' (basic/choropleth/gradient) and
-                   'items' list of {name, color} dicts. ``name`` may be an
-                   i18n dict; it's resolved to a string for the StreamField.
-
-    Builds an InlineLegendBlock-compatible StreamField value (Python list,
-    not a JSON string) and adds it to *kwargs* so the legend is set
-    atomically in the same ``objects.create()`` call.
-
-    Unknown legend types (e.g. "categorical") are normalized to "basic",
-    the closest native rendering.
-    """
-    if not hasattr(model_class, 'legend'):
-        logger.warning(
-            "Model %s does not have a legend field — legend config stored "
-            "in catalog entry but not applied to the Climweb layer.",
-            model_class.__name__,
-        )
-        return
-
-    legend_type = legend_config.get('type', 'basic')
-    if legend_type not in _VALID_LEGEND_TYPES:
-        logger.info(
-            "Unknown legend type '%s' — falling back to 'basic'.", legend_type
-        )
-        legend_type = 'basic'
-
-    items = legend_config.get('items', [])
-
-    # Convert from catalog format {name, color} to StreamField format {value, color}.
-    # ``name`` may be an i18n dict — resolve to the configured language.
-    stream_items = [
-        {
-            "color": item.get("color", ""),
-            "value": _resolve_i18n(item.get("name"), lang),
-        }
-        for item in items
-    ]
-
-    kwargs['legend'] = [{
-        "type": "legend",
-        "id": str(uuid.uuid4()),
-        "value": {
-            "type": legend_type,
-            "items": stream_items,
-        },
-    }]
-
-    if hasattr(model_class, 'use_custom_legend'):
-        kwargs['use_custom_legend'] = True
-
-
 _PROVISIONERS = {
     'wms': _provision_wms,
     'raster_tile': _provision_raster_tile,
     'vector_tile': _provision_vector_tile,
-    'raster_file': _provision_raster_file,
-    'vector_file': _provision_vector_file,
     'raster_cog': _provision_raster_cog,
+    **_PACKAGED_PROVISIONERS,  # adds 'raster_file' (provisioners/raster_file.py)
 }
-
-
-# ---------------------------------------------------------------------------
-# URL placeholder substitution
-# ---------------------------------------------------------------------------
-
-
-def _resolve_file_url(url_template):
-    """
-    Replace placeholders in a file URL with values from PluginSettings.
-    Supported: {country_alpha3}, {COUNTRY_ALPHA3}
-    """
-    settings = PluginSettings.load()
-    url = url_template
-    if settings.country_alpha3:
-        url = url.replace('{country_alpha3}', settings.country_alpha3.lower())
-        url = url.replace('{COUNTRY_ALPHA3}', settings.country_alpha3.upper())
-    return url
-
-
-# ---------------------------------------------------------------------------
-# File download and ingest helpers
-# ---------------------------------------------------------------------------
-
-
-def _download_file(url, suffix='.tif'):
-    """
-    Download a URL to a temporary file.
-    Returns the temp file path. Caller is responsible for cleanup.
-    """
-    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
-    tmp.close()
-    try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'ClimwebDatasetHelper/1.0'})
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            with open(tmp.name, 'wb') as f:
-                while True:
-                    chunk = resp.read(8192)
-                    if not chunk:
-                        break
-                    f.write(chunk)
-        return tmp.name
-    except Exception:
-        if os.path.exists(tmp.name):
-            os.unlink(tmp.name)
-        raise
-
-
-def _ingest_raster_file(layer, dataset, file_path):
-    """Register an already-downloaded GeoTIFF as a LayerRasterFile; return the created LayerRasterFile."""
-    with open(file_path, 'rb') as f:
-        upload = RasterUpload.objects.create(
-            dataset=dataset,
-            file=File(f, name=os.path.basename(file_path)),
-        )
-
-    raster_meta = read_raster_info(upload.file.path)
-    upload.raster_metadata = raster_meta
-    upload.save(update_fields=['raster_metadata'])
-
-    time = timezone.now().replace(minute=0, second=0, microsecond=0)
-    create_layer_raster_file(layer, upload, time)
-    upload.delete()
-    # create_layer_raster_file doesn't return the created row; fetch by the
-    # unique (layer, time) pair so the caller can read raster_metadata.
-    return LayerRasterFile.objects.get(layer=layer, time=time)
-
-
-_DEFAULT_RASTER_PALETTE = (
-    '#2166ac,#4393c3,#92c5de,#d1e5f0,#f7f7f7,#fddbc7,#f4a582,#d6604d,#b2182b'
-)
-
-
-def _create_default_raster_style_from_metadata(name, raster_metadata):
-    """
-    Create a RasterStyle with a default diverging palette using band-1 min/max
-    from the LayerRasterFile.raster_metadata dict populated at ingest time.
-
-    Expected structure: ``{"bands": {"1": {"min": ..., "max": ...}}}``.
-    Falls back to (0, 100) if the stats are missing.
-    """
-    import math
-
-    meta = raster_metadata or {}
-    band_stats = meta.get("bands", {}).get("1", {})
-    min_val = band_stats.get("min")
-    max_val = band_stats.get("max")
-
-    if min_val is None or max_val is None:
-        min_val, max_val = 0, 100
-
-    imin = int(math.floor(min_val))
-    imax = int(math.ceil(max_val))
-    if imax <= imin:
-        imax = imin + 1
-
-    return RasterStyle.objects.create(
-        name=(name or 'raster')[:256],
-        min=imin,
-        max=imax,
-        steps=9,
-        palette=_DEFAULT_RASTER_PALETTE,
-        legend_type='choropleth_vertical',
-        interpolate=False,
-    )
 
 
 _VALID_RASTER_LEGEND_TYPES = (
@@ -904,11 +686,11 @@ def _create_raster_style_from_config(config, name='', lang='en'):
 
     style = RasterStyle.objects.create(
         name=(cfg.get('name') or name or 'raster')[:256],
-        unit=_resolve_i18n(cfg.get('unit'), lang) or '',
+        unit=resolve_i18n(cfg.get('unit'), lang) or '',
         min=int(cfg.get('min', 0)),
         max=int(cfg.get('max', 100)),
         steps=int(cfg.get('steps', 9)),
-        palette=cfg.get('palette') or _DEFAULT_RASTER_PALETTE,
+        palette=cfg.get('palette') or DEFAULT_RASTER_PALETTE,
         interpolate=bool(cfg.get('interpolate', False)),
         legend_type=legend_type,
         use_custom_colors=use_custom_colors,
@@ -921,46 +703,10 @@ def _create_raster_style_from_config(config, name='', lang='en'):
             threshold=float(item['threshold']),
             color=_normalize_hex_color(item.get('color'), default='#000000'),
             show_on_legend=bool(item.get('show_on_legend', True)),
-            label=_resolve_i18n(item.get('label'), lang) or None,
+            label=resolve_i18n(item.get('label'), lang) or None,
         )
 
     return style
-
-
-def _download_and_ingest_vector(layer, url, popup_config=None):
-    """Download a GeoJSON from URL and import it into PostgreSQL."""
-    file_path = _download_file(url, suffix='.geojson')
-    try:
-        default_db = django_settings.DATABASES['default']
-        db_params = {
-            'host': default_db.get('HOST'),
-            'port': default_db.get('PORT'),
-            'user': default_db.get('USER'),
-            'password': default_db.get('PASSWORD'),
-            'name': default_db.get('NAME'),
-            'pg_service_schema': geomanager_settings.get('vector_db_schema'),
-        }
-
-        table_name = f"vector_{uuid.uuid4().hex[:12]}"
-        table_info = ogr_db_import(file_path, table_name, db_params)
-
-        properties = _apply_popup_to_properties(
-            table_info.get('properties', []),
-            popup_config,
-        )
-
-        PgVectorTable.objects.create(
-            layer=layer,
-            table_name=table_name,
-            full_table_name=table_info.get('table_name', table_name),
-            time=timezone.now().replace(minute=0, second=0, microsecond=0),
-            properties=properties,
-            geometry_type=table_info.get('geom_type', 'UNKNOWN'),
-            bounds=table_info.get('bounds', []),
-        )
-    finally:
-        if os.path.exists(file_path):
-            os.unlink(file_path)
 
 
 def _build_popup_stream_value(popup_config, lang='en'):
@@ -969,7 +715,7 @@ def _build_popup_stream_value(popup_config, lang='en'):
     catalog's ``popup_config_json`` list.
 
     Each input item: ``{"data_key", "label", "data_type"}``.
-    ``label`` may be an i18n dict; it's resolved with ``_resolve_i18n``.
+    ``label`` may be an i18n dict; it's resolved with ``resolve_i18n``.
     """
     if not popup_config or not isinstance(popup_config, list):
         return None
@@ -979,7 +725,7 @@ def _build_popup_stream_value(popup_config, lang='en'):
         data_key = (item.get('data_key') or '').strip()
         if not data_key:
             continue
-        label = _resolve_i18n(item.get('label'), lang) or data_key
+        label = resolve_i18n(item.get('label'), lang) or data_key
         data_type = item.get('data_type') or 'string'
         if data_type not in ('string', 'number'):
             data_type = 'string'
@@ -993,36 +739,6 @@ def _build_popup_stream_value(popup_config, lang='en'):
             },
         })
     return blocks or None
-
-
-def _apply_popup_to_properties(properties, popup_config, lang='en'):
-    """
-    Annotate ``PgVectorTable.properties`` rows with ``popup=True`` and optional
-    ``label`` for every column listed in ``popup_config``. Unknown data_keys
-    are logged and ignored — the vector_file model has no ``data_type``.
-    """
-    properties = list(properties or [])
-    if not popup_config or not isinstance(popup_config, list):
-        return properties
-
-    by_name = {(p.get('name') or ''): p for p in properties}
-    for item in popup_config:
-        data_key = (item.get('data_key') or '').strip()
-        if not data_key:
-            continue
-        column = by_name.get(data_key)
-        if column is None:
-            logger.warning(
-                "popup_config data_key '%s' not found in vector file columns; ignoring.",
-                data_key,
-            )
-            continue
-        column['popup'] = True
-        label = _resolve_i18n(item.get('label'), lang)
-        if label:
-            column['label'] = label
-
-    return properties
 
 
 # ---------------------------------------------------------------------------
