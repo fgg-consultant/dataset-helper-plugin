@@ -189,6 +189,12 @@ class CatalogEntry(models.Model):
         verbose_name=_("File URL"),
         help_text=_("URL to a remote file. May contain {country_alpha3} placeholder."),
     )
+    file_bearer = models.CharField(
+        max_length=2048, blank=True, default='',
+        verbose_name=_("File bearer token"),
+        help_text=_("Optional bearer token sent as 'Authorization: Bearer …' "
+                    "when downloading file_url (e.g. APIs that require auth)."),
+    )
 
     # --- COG configuration (raster_cog) ---
     cog_url_template = models.CharField(

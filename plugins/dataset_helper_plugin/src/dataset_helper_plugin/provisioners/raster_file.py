@@ -15,7 +15,7 @@ from ._shared import DEFAULT_RASTER_PALETTE, download_file, resolve_file_url
 def provision(entry, dataset):
     """Download a remote GeoTIFF, ingest it, then create a RasterStyle from band stats."""
     url = resolve_file_url(entry.file_url)
-    file_path = download_file(url, suffix='.tif')
+    file_path = download_file(url, suffix='.tif', bearer=entry.file_bearer or None)
     try:
         layer = RasterFileLayer.objects.create(
             dataset=dataset,

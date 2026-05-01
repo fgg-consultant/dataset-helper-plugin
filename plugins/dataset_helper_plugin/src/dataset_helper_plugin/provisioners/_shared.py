@@ -4,6 +4,7 @@ import os
 import tempfile
 import urllib.request
 import uuid
+from urllib.parse import quote
 
 from ..models import PluginSettings
 
@@ -98,20 +99,33 @@ def resolve_file_url(url_template):
         url = url.replace('{country_alpha2}', settings.country_alpha2.lower())
         url = url.replace('{COUNTRY_ALPHA2}', settings.country_alpha2.upper())
     if settings.country_name:
-        url = url.replace('{country_name}', settings.country_name)
-        url = url.replace('{COUNTRY_NAME}', settings.country_name.upper())
+        # Country name often contains spaces / accents — URL-encode so the
+        # substituted URL stays valid (urllib rejects raw spaces, etc.).
+        url = url.replace('{country_name}', quote(settings.country_name, safe=''))
+        url = url.replace('{COUNTRY_NAME}', quote(settings.country_name.upper(), safe=''))
     return url
 
 
-def download_file(url, suffix='.tif'):
+def download_file(url, suffix='.tif', bearer=None):
     """
     Download a URL to a temporary file. Returns the temp file path.
     Caller is responsible for cleanup.
+
+    ``bearer``: optional token sent as ``Authorization: Bearer <token>`` for
+    APIs that require auth (kept out of the URL so it never lands in logs).
     """
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
     tmp.close()
     try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'ClimwebDatasetHelper/1.0'})
+        headers = {'User-Agent': 'ClimwebDatasetHelper/1.0'}
+        if bearer:
+            headers['Authorization'] = f'Bearer {bearer}'
+        req = urllib.request.Request(url, headers=headers)
+        logger.info(
+            "##### url '%s': bearer %s",
+            url, bearer
+        )
+
         with urllib.request.urlopen(req, timeout=120) as resp:
             with open(tmp.name, 'wb') as f:
                 while True:
@@ -119,7 +133,10 @@ def download_file(url, suffix='.tif'):
                     if not chunk:
                         break
                     f.write(chunk)
+                    logger.info("##### CHUNK %s",chunk)
+
         return tmp.name
+
     except Exception:
         if os.path.exists(tmp.name):
             os.unlink(tmp.name)

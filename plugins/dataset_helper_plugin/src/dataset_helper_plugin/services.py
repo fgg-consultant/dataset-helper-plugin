@@ -260,6 +260,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                         'tile_url': layer_data.get('tile_url', ''),
                         'is_pmtiles': bool(layer_data.get('is_pmtiles', False)),
                         'file_url': layer_data.get('url', ''),
+                        'file_bearer': (layer_data.get('bearer') or '').strip(),
                         'cog_url_template': layer_data.get('url_template', '') if layer_type == 'raster_cog' else '',
                         'cog_time_start': _parse_iso_dt(layer_data.get('time_start')) if layer_type == 'raster_cog' else None,
                         'cog_time_end': _parse_iso_dt(layer_data.get('time_end')) if layer_type == 'raster_cog' else None,

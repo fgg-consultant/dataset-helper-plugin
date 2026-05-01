@@ -39,7 +39,7 @@ def provision(entry, dataset):
     url = resolve_file_url(entry.file_url)
     lang = PluginSettings.load().language
 
-    download_path = download_file(url, suffix='.json')
+    download_path = download_file(url, suffix='.json', bearer=entry.file_bearer or None)
     geojson_path = None
     cleanup_paths = [download_path]
     try:
@@ -65,10 +65,16 @@ def provision(entry, dataset):
 
         layer = VectorFileLayer.objects.create(**kwargs)
 
+        # Force a .geojson filename for the upload — geomanager's
+        # ogr_db_import dispatches on the file extension and only accepts
+        # .zip / .geojson / .gpkg. The downloaded file may be named .json
+        # (passed-through GeoJSON) or .json.geojson (converted), so we
+        # rewrite the name explicitly here.
+        upload_name = f"vector_{uuid.uuid4().hex[:12]}.geojson"
         with open(geojson_path, 'rb') as f:
             upload = VectorUpload.objects.create(
                 dataset=dataset,
-                file=File(f, name=os.path.basename(geojson_path)),
+                file=File(f, name=upload_name),
             )
 
         time = timezone.now().replace(minute=0, second=0, microsecond=0)
@@ -127,12 +133,29 @@ def _to_geojson(file_path):
     with open(file_path, encoding='utf-8') as f:
         data = json.load(f)
 
-    if isinstance(data, dict) and data.get('type') in ('FeatureCollection', 'Feature'):
-        return file_path
+    if isinstance(data, dict):
+        # Already GeoJSON: pass through.
+        if data.get('type') in ('FeatureCollection', 'Feature'):
+            return file_path
+        # Common API envelope: ``{"success": true, "data": [...]}`` (or a dict
+        # of records keyed by id). Unwrap to the inner records and continue
+        # with the lat/lng-based conversion below.
+        if 'success' in data and 'data' in data:
+            inner = data['data']
+            if isinstance(inner, list):
+                data = inner
+            elif isinstance(inner, dict):
+                data = list(inner.values())
+            else:
+                raise ValueError(
+                    "JSON envelope 'data' must be a list or dict of records, "
+                    f"got {type(inner).__name__}"
+                )
 
     if not isinstance(data, list):
         raise ValueError(
-            "Vector JSON must be a GeoJSON FeatureCollection/Feature or a list of records"
+            "Vector JSON must be a GeoJSON FeatureCollection/Feature, a list "
+            "of records, or {success, data: [...]} envelope"
         )
     sample = next((r for r in data if isinstance(r, dict)), None)
     if sample is None:
