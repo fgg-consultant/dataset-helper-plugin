@@ -8,11 +8,11 @@ from . import urls as plugin_urls
 @hooks.register('register_admin_urls')
 def register_dataset_helper_url():
     return [
-        path('dataset_helper/', include((plugin_urls, 'dataset_helper_plugin'))),
+        path('geomanager/dataset_helper/', include((plugin_urls, 'dataset_helper_plugin'))),
     ]
 
 
-@hooks.register('register_admin_menu_item')
-def register_admin_menu_item():
+@hooks.register('register_geo_manager_menu_item')
+def register_geo_manager_dataset_helper_item():
     url = reverse('dataset_helper_plugin:index')
-    return MenuItem('Dataset helper', url, icon_name='globe', order=300)
+    return MenuItem('Dataset helper', url, icon_name='pick', order=1.5)
