@@ -81,12 +81,14 @@ class CatalogEntry(models.Model):
     LAYER_TYPE_VECTOR_TILE = 'vector_tile'
     LAYER_TYPE_RASTER_FILE = 'raster_file'
     LAYER_TYPE_VECTOR_FILE = 'vector_file'
+    LAYER_TYPE_RASTER_COG = 'raster_cog'
     LAYER_TYPE_CHOICES = (
         (LAYER_TYPE_WMS, _('WMS')),
         (LAYER_TYPE_RASTER_TILE, _('Raster Tile')),
         (LAYER_TYPE_VECTOR_TILE, _('Vector Tile')),
         (LAYER_TYPE_RASTER_FILE, _('Raster File')),
         (LAYER_TYPE_VECTOR_FILE, _('Vector File')),
+        (LAYER_TYPE_RASTER_COG, _('Raster COG')),
     )
 
     ORIGIN_CONFIG = 'config'
@@ -167,6 +169,33 @@ class CatalogEntry(models.Model):
         max_length=500, blank=True, default='',
         verbose_name=_("File URL"),
         help_text=_("URL to a remote file. May contain {country_alpha3} placeholder."),
+    )
+
+    # --- COG configuration (raster_cog) ---
+    cog_url_template = models.CharField(
+        max_length=2048, blank=True, default='',
+        verbose_name=_("COG URL template"),
+        help_text=_("URL template with a time placeholder, e.g. "
+                    "https://example.org/data/file_{time:%Y}.tif"),
+    )
+    cog_time_start = models.DateTimeField(null=True, blank=True, verbose_name=_("COG time start"))
+    cog_time_end = models.DateTimeField(null=True, blank=True, verbose_name=_("COG time end"))
+    cog_time_step_value = models.PositiveIntegerField(default=1, verbose_name=_("COG time step value"))
+    cog_time_step_unit = models.CharField(
+        max_length=20, default='years',
+        verbose_name=_("COG time step unit"),
+        help_text=_("One of: years, months, days, hours"),
+    )
+    cog_date_format = models.CharField(
+        max_length=100, blank=True, default='',
+        verbose_name=_("COG datetime display format"),
+    )
+
+    # --- Raster style configuration (raster_cog) ---
+    raster_style_json = models.JSONField(
+        blank=True, null=True,
+        verbose_name=_("Raster style"),
+        help_text=_("Raster style definition: {min, max, steps, palette, interpolate, legend_type, unit}"),
     )
 
     # --- Render layers (vector_tile, vector_file) ---

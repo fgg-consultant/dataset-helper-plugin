@@ -4,8 +4,6 @@
 
 {% block extra_css %}
 {{ block.super }}
-<script type="module" crossorigin src="/static/dataset_helper_plugin/assets/index-BfSNY7gh.js"></script>
-<link rel="stylesheet" crossorigin href="/static/dataset_helper_plugin/assets/index-CPL5XMMd.css">
 
 <style>
     .tabs {
@@ -590,8 +588,6 @@
     <!-- Tab Navigation -->
     <div class="tabs">
         <button class="tab-button active" data-tab="catalog">Layer Catalog</button>
-        <button class="tab-button" data-tab="wms-wizard">WMS Wizard</button>
-        <button class="tab-button" data-tab="datasets-list">Existing Datasets</button>
         <button class="tab-button" data-tab="bulk-import">Bulk Import</button>
     </div>
 
@@ -819,74 +815,6 @@
 
         <!-- Catalog Tree -->
         <div id="catalog-tree" class="catalog-tree"></div>
-    </div>
-
-    <!-- WMS Wizard Tab (Vue App) -->
-    <div id="wms-wizard" class="tab-content">
-        <div id="app"></div>
-    </div>
-
-    <!-- Existing Datasets Tab -->
-    <div id="datasets-list" class="tab-content">
-        <!-- Categories Section -->
-        <h2>Categories</h2>
-        {% if categories %}
-        <table class="listing" style="margin-bottom: 30px;">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Icon</th>
-                <th>Subcategories</th>
-                <th>Active</th>
-                <th>Public</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for category in categories %}
-            <tr>
-                <td>{{ category.title }}</td>
-                <td><code>{{ category.icon }}</code></td>
-                <td>{{ category.sub_categories.count }}</td>
-                <td>{{ category.active|yesno:'Yes,No' }}</td>
-                <td>{{ category.public|yesno:'Yes,No' }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <p>No categories found.</p>
-        {% endif %}
-
-        <!-- Datasets Section -->
-        <h2>Datasets</h2>
-        {% if datasets %}
-        <table class="listing">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Subcategory</th>
-                <th>Type</th>
-                <th>Published</th>
-                <th>Public</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for dataset in datasets %}
-            <tr>
-                <td>{{ dataset.title }}</td>
-                <td>{{ dataset.category }}</td>
-                <td>{{ dataset.sub_category }}</td>
-                <td>{{ dataset.get_layer_type_display }}</td>
-                <td>{{ dataset.published|yesno:'Yes,No' }}</td>
-                <td>{{ dataset.public|yesno:'Yes,No' }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <p>No datasets found.</p>
-        {% endif %}
     </div>
 
     <!-- Bulk Import Tab -->
@@ -2083,53 +2011,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     openGroups.clear()
     loadCatalog(false)
-  })
-
-  // Add Dataset form handler (existing Vue integration)
-  window.addEventListener('message', async function (event) {
-    if (event.data.type !== 'vue-add-dataset') return
-    const dataset = event.data.dataset
-    const {name, title} = dataset.layer
-    const datasetTitle = title
-    const layerTitle = title
-    const layerName = name
-    const wmsUrl = dataset.url
-
-    try {
-      const csrftoken = getCookie('csrftoken')
-
-      const response = await fetch('{% url "dataset_helper_plugin:vue_action" %}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken,
-        },
-        body: JSON.stringify({
-          title: datasetTitle,
-          category_id: {{ default_category_id|default:'null' }},
-          sub_category_id: {{ default_subcategory_id|default:'null' }},
-          layer_title: layerTitle,
-          layer_name: layerName,
-          wms_url: wmsUrl
-        }),
-        credentials: 'include'
-      })
-
-
-      const data = await response.json()
-
-      if (data.status === 'success') {
-        alert(data.message + '\nDataset ID: ' + data.dataset_id +
-          (data.layer_id ? '\nLayer ID: ' + data.layer_id : ''))
-        // Reload the page to show the new dataset
-        window.location.reload()
-      } else {
-        alert('Error: ' + data.message)
-      }
-    } catch (error) {
-      alert('Error creating dataset: ' + error.message)
-      console.error('Error:', error)
-    }
   })
 </script>
 {% endblock %}

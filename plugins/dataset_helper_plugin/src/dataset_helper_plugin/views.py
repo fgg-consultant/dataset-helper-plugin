@@ -7,6 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.db import transaction
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 from .models import CatalogEntry, PluginSettings
 from . import services
@@ -16,28 +19,8 @@ VALID_LAYER_TYPES = ('raster_file', 'vector_file', 'wms', 'raster_tile', 'vector
 
 
 def index(request):
-    # Retrieve all Dataset objects from the database
-    datasets = Dataset.objects.all()
-    # All categories for the listing view
-    categories = Category.objects.all().order_by('title')
-    # Active/public categories for defaults
-    active_categories = Category.objects.filter(active=True, public=True)
-    # Get the first category and its first subcategory as defaults
-    default_category = active_categories.first()
-    default_subcategory = default_category.sub_categories.first() if default_category else None
-
-    # Load plugin settings for the template
-    settings = PluginSettings.load()
-
     template_name = "dataset_helper_plugin/index.html"
-    context = {
-        'datasets': datasets,
-        'categories': categories,
-        'default_category_id': default_category.pk if default_category else None,
-        'default_subcategory_id': default_subcategory.pk if default_subcategory else None,
-        'plugin_settings': settings,
-    }
-    return render(request, template_name, context)
+    return render(request, template_name, {'plugin_settings': PluginSettings.load()})
 
 
 # ── Catalog API ──────────────────────────────────────────────────────────────
@@ -112,6 +95,7 @@ def catalog_sync(request):
             **stats,
         })
     except Exception as e:
+        logger.exception("catalog_sync failed")
         return JsonResponse({'status': 'error', 'message': f'Sync failed: {e}'}, status=500)
 
 
@@ -317,93 +301,6 @@ def settings_save(request):
         'ecmwf_token': s.ecmwf_token,
         'estation_url': s.estation_url,
     })
-
-
-# ── Legacy endpoints (kept for backward compatibility) ───────────────────────
-
-
-@csrf_exempt
-def vue_action(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            title = data.get('title')
-            category_id = data.get('category_id')
-            sub_category_id = data.get('sub_category_id')
-
-            # Layer information
-            layer_title = data.get('layer_title')
-            layer_name = data.get('layer_name')
-            wms_url = data.get('wms_url')
-
-            # Optional WMS configuration
-            wms_version = data.get('wms_version', '1.3.0')  # Default to 1.3.0
-            wms_format = data.get('wms_format', 'image/png')
-            wms_srs = data.get('wms_srs', 'EPSG:3857')
-            wms_transparent = data.get('wms_transparent', True)
-            wms_width = data.get('wms_width', 256)
-            wms_height = data.get('wms_height', 256)
-            request_time_from_capabilities = data.get('request_time_from_capabilities', True)
-
-            if not (title and category_id and sub_category_id):
-                return JsonResponse({'status': 'error', 'message': 'Missing required fields'}, status=400)
-
-            category = Category.objects.get(id=category_id)
-            sub_category = SubCategory.objects.get(id=sub_category_id)
-
-            # Create the dataset
-            dataset = Dataset.objects.create(
-                title=title,
-                category=category,
-                sub_category=sub_category,
-                layer_type='wms',
-                published=True,
-                public=True,
-                multi_temporal=True,  # WMS layers are often multi-temporal
-                multi_layer=False,    # Single layer by default
-                near_realtime=False,
-                can_clip=False,       # WMS doesn't support clipping
-                initial_visible=False
-            )
-
-            # Create WMS layer if layer information is provided
-            wms_layer = None
-            if layer_title and layer_name and wms_url:
-                wms_layer = WmsLayer.objects.create(
-                    dataset=dataset,
-                    title=layer_title,
-                    base_url=wms_url,
-                    version=wms_version,
-                    width=wms_width,
-                    height=wms_height,
-                    transparent=wms_transparent,
-                    srs=wms_srs,
-                    format=wms_format,
-                    default=True,
-                    request_time_from_capabilities=request_time_from_capabilities,
-                    legend_from_capabilities=True,
-                )
-
-                # Create the required WmsRequestLayer (min_num=1 in the model)
-                WmsRequestLayer.objects.create(
-                    layer=wms_layer,
-                    name=layer_name
-                )
-
-            response_data = {
-                'status': 'success',
-                'message': 'Dataset created',
-                'dataset_id': str(dataset.id)
-            }
-
-            if wms_layer:
-                response_data['layer_id'] = str(wms_layer.id)
-                response_data['message'] = 'Dataset and WMS layer created successfully'
-
-            return JsonResponse(response_data)
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
 
 @csrf_exempt

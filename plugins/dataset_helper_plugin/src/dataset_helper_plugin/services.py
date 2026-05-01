@@ -11,9 +11,11 @@ from django.conf import settings as django_settings
 from django.core.files import File
 from django.db import transaction
 from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 from geomanager.models.core import Category, Dataset, Metadata, SubCategory
+from geomanager.models.raster_cog import RasterCOGLayer
 from geomanager.models.raster_file import LayerRasterFile, RasterFileLayer, RasterUpload
-from geomanager.models.raster_style import RasterStyle
+from geomanager.models.raster_style import ColorValue, RasterStyle
 from geomanager.models.raster_tile import RasterTileLayer
 from geomanager.models.vector_file import VectorFileLayer, PgVectorTable
 from geomanager.models.vector_tile import VectorTileLayer
@@ -39,6 +41,15 @@ def _resolve_i18n(value, lang='en'):
 
 
 ECMWF_TOKEN_PLACEHOLDER = '{ECMWF_TOKEN}'
+
+
+def _parse_iso_dt(value):
+    """Parse an ISO-8601 datetime string (supports trailing Z). Returns None on failure."""
+    if not value:
+        return None
+    if isinstance(value, str) and value.endswith('Z'):
+        value = value[:-1] + '+00:00'
+    return parse_datetime(value) if isinstance(value, str) else None
 
 
 def _apply_ecmwf_token(wms_url, token):
@@ -219,6 +230,18 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                             continue
                         product_code = f"{layer_type}_{hashlib.md5(file_url.encode()).hexdigest()[:12]}"
 
+                    elif layer_type == 'raster_cog':
+                        cog_url = layer_data.get('url_template', '')
+                        time_start_raw = layer_data.get('time_start', '')
+                        time_end_raw = layer_data.get('time_end', '')
+                        if not cog_url or not time_start_raw or not time_end_raw:
+                            stats['errors'].append(
+                                f"Skipping raster_cog layer in '{cat_title}/{subcat_title}/"
+                                f"{dataset_title}': missing url_template, time_start or time_end"
+                            )
+                            continue
+                        product_code = f"raster_cog_{hashlib.md5(cog_url.encode()).hexdigest()[:12]}"
+
                     else:
                         stats['errors'].append(
                             f"Skipping layer in '{cat_title}/{subcat_title}/"
@@ -243,6 +266,13 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                         'tile_url': layer_data.get('tile_url', ''),
                         'is_pmtiles': bool(layer_data.get('is_pmtiles', False)),
                         'file_url': layer_data.get('url', ''),
+                        'cog_url_template': layer_data.get('url_template', '') if layer_type == 'raster_cog' else '',
+                        'cog_time_start': _parse_iso_dt(layer_data.get('time_start')) if layer_type == 'raster_cog' else None,
+                        'cog_time_end': _parse_iso_dt(layer_data.get('time_end')) if layer_type == 'raster_cog' else None,
+                        'cog_time_step_value': int(layer_data.get('time_step_value', 1)) if layer_type == 'raster_cog' else 1,
+                        'cog_time_step_unit': layer_data.get('time_step_unit', 'years') if layer_type == 'raster_cog' else 'years',
+                        'cog_date_format': layer_data.get('date_format', '') if layer_type == 'raster_cog' else '',
+                        'raster_style_json': layer_data.get('raster_style') or None,
                         'render_layers_json': layer_data.get('render_layers') or None,
                         'popup_config_json': layer_data.get('popup_config') or None,
                         'extra_params_json': layer_data.get('extra_params') or None,
@@ -377,50 +407,50 @@ def sync_catalog_to_climweb():
 
     entries = CatalogEntry.objects.all()
 
-    with transaction.atomic():
-        for entry in entries:
-            status = entry.status
+    for entry in entries:
+        status = entry.status
 
-            if status == CatalogEntry.STATUS_SYNCED:
-                dataset = Dataset.objects.filter(id=entry.dataset_id).first()
-                if dataset is None:
-                    entry.dataset_id = None
-                    entry.save(update_fields=['dataset_id', 'updated_at'])
-                    stats['orphans_cleared'] += 1
-                else:
-                    if dataset.public != entry.public:
-                        dataset.public = entry.public
-                        dataset.save(update_fields=['public'])
-                        stats['public_updated'] += 1
-                    stats['already_synced'] += 1
+        if status == CatalogEntry.STATUS_SYNCED:
+            try:
+                with transaction.atomic():
+                    dataset = Dataset.objects.filter(id=entry.dataset_id).first()
+                    if dataset is None:
+                        entry.dataset_id = None
+                        entry.save(update_fields=['dataset_id', 'updated_at'])
+                        stats['orphans_cleared'] += 1
+                    else:
+                        if dataset.public != entry.public:
+                            dataset.public = entry.public
+                            dataset.save(update_fields=['public'])
+                            stats['public_updated'] += 1
+                        stats['already_synced'] += 1
+            except Exception as e:
+                stats['errors'].append(f"Failed to reconcile '{entry.title}': {e}")
+                logger.exception("Failed to reconcile catalog entry %s", entry.product_code)
 
-            elif status == CatalogEntry.STATUS_PENDING_ADD:
-                sid = transaction.savepoint()
-                try:
+        elif status == CatalogEntry.STATUS_PENDING_ADD:
+            try:
+                with transaction.atomic():
                     dataset_id = _provision_entry(entry)
                     entry.dataset_id = dataset_id
                     entry.save(update_fields=['dataset_id', 'updated_at'])
-                    transaction.savepoint_commit(sid)
-                    stats['added'] += 1
-                except Exception as e:
-                    transaction.savepoint_rollback(sid)
-                    stats['errors'].append(f"Failed to provision '{entry.title}': {e}")
-                    logger.exception("Failed to provision catalog entry %s", entry.product_code)
+                stats['added'] += 1
+            except Exception as e:
+                stats['errors'].append(f"Failed to provision '{entry.title}': {e}")
+                logger.exception("Failed to provision catalog entry %s", entry.product_code)
 
-            elif status == CatalogEntry.STATUS_PENDING_REMOVE:
-                sid = transaction.savepoint()
-                try:
+        elif status == CatalogEntry.STATUS_PENDING_REMOVE:
+            try:
+                with transaction.atomic():
                     _deprovision_entry(entry)
                     entry.dataset_id = None
                     entry.save(update_fields=['dataset_id', 'updated_at'])
-                    transaction.savepoint_commit(sid)
-                    stats['removed'] += 1
-                except Exception as e:
-                    transaction.savepoint_rollback(sid)
-                    stats['errors'].append(f"Failed to deprovision '{entry.title}': {e}")
-                    logger.exception("Failed to deprovision catalog entry %s", entry.product_code)
+                stats['removed'] += 1
+            except Exception as e:
+                stats['errors'].append(f"Failed to deprovision '{entry.title}': {e}")
+                logger.exception("Failed to deprovision catalog entry %s", entry.product_code)
 
-            # STATUS_DISABLED: nothing to do
+        # STATUS_DISABLED: nothing to do
 
     return stats
 
@@ -604,6 +634,27 @@ def _provision_raster_file(entry, dataset):
             os.unlink(file_path)
 
 
+def _provision_raster_cog(entry, dataset):
+    """Create a RasterCOGLayer + RasterStyle from catalog entry config."""
+    style = _create_raster_style_from_config(
+        entry.raster_style_json or {},
+        name=entry.layer_title or entry.title,
+        lang=PluginSettings.load().language,
+    )
+    RasterCOGLayer.objects.create(
+        dataset=dataset,
+        title=entry.layer_title or entry.title,
+        default=True,
+        url_template=entry.cog_url_template,
+        time_start=entry.cog_time_start,
+        time_end=entry.cog_time_end,
+        time_step_value=entry.cog_time_step_value,
+        time_step_unit=entry.cog_time_step_unit,
+        date_format=entry.cog_date_format or None,
+        style=style,
+    )
+
+
 def _provision_vector_file(entry, dataset):
     """Download a remote GeoJSON and import it as a VectorFileLayer."""
     url = _resolve_file_url(entry.file_url)
@@ -687,6 +738,7 @@ _PROVISIONERS = {
     'vector_tile': _provision_vector_tile,
     'raster_file': _provision_raster_file,
     'vector_file': _provision_vector_file,
+    'raster_cog': _provision_raster_cog,
 }
 
 
@@ -793,6 +845,86 @@ def _create_default_raster_style_from_metadata(name, raster_metadata):
         legend_type='choropleth_vertical',
         interpolate=False,
     )
+
+
+_VALID_RASTER_LEGEND_TYPES = (
+    'basic', 'choropleth', 'choropleth_vertical', 'gradient', 'gradient_vertical',
+)
+
+
+_HEX_RE = re.compile(r'^#[0-9a-fA-F]+$')
+
+
+def _normalize_hex_color(value, default='#ff0000'):
+    """
+    Normalize a hex color string to 6-digit ``#RRGGBB``.
+
+    Accepts ``#RGB``, ``#RRGGBB``, ``#RRGGBBAA`` (alpha stripped with a warning).
+    Returns ``default`` if the value is empty/invalid.
+    """
+    if not value or not isinstance(value, str):
+        return default
+    if not _HEX_RE.match(value):
+        logger.warning("Invalid hex color %r — using %s", value, default)
+        return default
+    body = value[1:]
+    if len(body) == 3:
+        return '#' + ''.join(c * 2 for c in body)
+    if len(body) == 6:
+        return value
+    if len(body) == 8:
+        logger.info("Stripping alpha channel from color %s → #%s", value, body[:6])
+        return '#' + body[:6]
+    logger.warning("Unexpected hex length for %r — using %s", value, default)
+    return default
+
+
+def _create_raster_style_from_config(config, name='', lang='en'):
+    """
+    Create a RasterStyle from an explicit JSON config dict.
+
+    Recognized keys (all optional; defaults applied):
+      name, unit, min, max, steps, palette, interpolate, legend_type,
+      use_custom_colors, custom_colors, custom_color_for_rest.
+
+    When ``use_custom_colors`` is true (or ``custom_colors`` is non-empty),
+    a ColorValue is created for each entry in ``custom_colors``
+    (keys: threshold, color, label?, show_on_legend?). ``label`` may be
+    a multilingual dict ({en, fr, ...}) — resolved via the configured ``lang``.
+    ``custom_color_for_rest`` is the fallback color for values outside
+    the defined thresholds.
+    """
+    cfg = config or {}
+    legend_type = cfg.get('legend_type', 'choropleth_vertical')
+    if legend_type not in _VALID_RASTER_LEGEND_TYPES:
+        legend_type = 'choropleth_vertical'
+
+    custom_colors = cfg.get('custom_colors') or []
+    use_custom_colors = bool(cfg.get('use_custom_colors') or custom_colors)
+
+    style = RasterStyle.objects.create(
+        name=(cfg.get('name') or name or 'raster')[:256],
+        unit=_resolve_i18n(cfg.get('unit'), lang) or '',
+        min=int(cfg.get('min', 0)),
+        max=int(cfg.get('max', 100)),
+        steps=int(cfg.get('steps', 9)),
+        palette=cfg.get('palette') or _DEFAULT_RASTER_PALETTE,
+        interpolate=bool(cfg.get('interpolate', False)),
+        legend_type=legend_type,
+        use_custom_colors=use_custom_colors,
+        custom_color_for_rest=_normalize_hex_color(cfg.get('custom_color_for_rest'), default='#ff0000'),
+    )
+
+    for item in custom_colors:
+        ColorValue.objects.create(
+            layer=style,
+            threshold=float(item['threshold']),
+            color=_normalize_hex_color(item.get('color'), default='#000000'),
+            show_on_legend=bool(item.get('show_on_legend', True)),
+            label=_resolve_i18n(item.get('label'), lang) or None,
+        )
+
+    return style
 
 
 def _download_and_ingest_vector(layer, url, popup_config=None):
