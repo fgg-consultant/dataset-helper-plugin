@@ -45,5 +45,5 @@ docker compose exec -e CLIMWEB_PLUGIN_DIR=/climweb/plugins climweb /climweb/plug
 
 docker compose exec -e CLIMWEB_PLUGIN_DIR=/climweb/plugins climweb python /climweb/web/src/climweb/manage.py makemigrations
 
-docker compose exec -e CLIMWEB_PLUGIN_DIR=/climweb/plugins climweb python /climweb/web/src/climweb/manage.py migrate dataset_helper_plugin ```                                       
+docker compose exec -e CLIMWEB_PLUGIN_DIR=/climweb/plugins climweb python /climweb/web/src/climweb/manage.py migrate dataset_helper_plugin                                      
 ```

@@ -28,6 +28,19 @@ Dataset Helper Plugin for Climweb (Django/Wagtail framework). The plugin provide
 You must not consider the frontend.
 When asking for code, just generate backend code in the plugin folder.
 
+## Plugin Vision
+
+The plugin acts as a **managed catalog** of WMS layers for Climweb:
+
+1. **Ships a default layer catalog** (~119 layers from various sources: JRC, ECMWF, CAMS, CGLS, etc.) defined in a JSON config
+2. **Admin selects layers** via a collapsible tree UI (Category > SubCategory > Layer) with checkboxes — all checked by default
+3. **"Load Layers" provisions** checked layers into Climweb DB (Category, SubCategory, Dataset, WmsLayer, Metadata)
+4. **Tracks sync state** between the catalog and Climweb via the `CatalogEntry` model:
+   - Each catalog entry has a `product_code` (natural key) and a nullable `dataset_id` (loose UUID ref to Climweb Dataset)
+   - Status: `synced` (green), `pending_add` (orange), `pending_remove` (red), `disabled` (gray)
+5. **Supports custom layers**: admin can add layers manually or import from a remote WMS GetCapabilities
+6. **Origin tracking**: each entry is tagged as `config`, `manual`, or `wms_import`
+
 ## Development Commands
 
 ### Backend (from `plugins/dataset_helper_plugin/`)
