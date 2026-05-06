@@ -754,8 +754,13 @@
 
         <!-- Load Config Form -->
         <div id="load-config-form" class="add-layer-form">
-            <h3 style="margin-top: 0;">Load JSON Config into Catalog</h3>
-            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0;">
+                <h3 style="margin: 0;">Load JSON Config into Catalog</h3>
+                <button class="import-button" style="background: #059669;" onclick="loadEmbeddedCatalog()">
+                    Load Embedded Catalog
+                </button>
+            </div>
+            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px; margin-top: 12px;">
                 Paste a bulk config JSON. This loads entries into the catalog (does NOT create Climweb objects yet).
             </p>
             <textarea id="config-json-input" class="json-textarea" style="min-height: 200px;" placeholder="Paste JSON config here..."></textarea>
@@ -1694,6 +1699,48 @@
     resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> Loading config...'
 
     try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_load_config" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(config),
+        credentials: 'include'
+      })
+      if (!response.ok && response.headers.get('content-type')?.indexOf('application/json') === -1) {
+        throw new Error(`Server error ${response.status}. Check Django logs for details.`)
+      }
+      const result = await response.json()
+      if (result.status === 'success') {
+        resultsEl.className = 'sync-results visible success'
+        resultsEl.innerHTML = result.message
+        document.getElementById('config-json-input').value = ''
+        toggleLoadConfigForm()
+        await loadCatalog(false)
+      } else {
+        resultsEl.className = 'sync-results visible error'
+        resultsEl.innerHTML = result.message
+      }
+    } catch (error) {
+      resultsEl.className = 'sync-results visible error'
+      resultsEl.innerHTML = 'Load failed: ' + error.message
+    }
+  }
+
+  async function loadEmbeddedCatalog() {
+    const resultsEl = document.getElementById('sync-results')
+    resultsEl.className = 'sync-results visible'
+    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> Loading embedded catalog...'
+
+    try {
+      const catalogResp = await fetch('{% static "dataset_helper_plugin/catalog.json" %}', { credentials: 'include' })
+      if (!catalogResp.ok) {
+        throw new Error(`Failed to fetch embedded catalog (HTTP ${catalogResp.status})`)
+      }
+      const config = await catalogResp.json()
+
       const csrftoken = getCookie('csrftoken')
       const response = await fetch('{% url "dataset_helper_plugin:catalog_load_config" %}', {
         method: 'POST',
