@@ -22,7 +22,15 @@ from django.core.files import File
 from django.utils import timezone
 
 from geomanager.models.vector_file import VectorFileLayer, VectorUpload
-from geomanager.utils.vector_utils import create_layer_vector_file
+
+# ``create_layer_vector_file`` ships in the local geomanager source (branch
+# with the helper) but is absent from older pip-installed versions. Make the
+# import optional so the plugin still loads even when the bind-mount hasn't
+# been wired up yet — provision() raises with a clear message at sync time.
+try:
+    from geomanager.utils.vector_utils import create_layer_vector_file
+except ImportError:
+    create_layer_vector_file = None
 
 from ..models import PluginSettings
 from ._shared import add_legend_kwargs, download_file, resolve_file_url, resolve_i18n
@@ -36,6 +44,12 @@ _LON_KEYS = ('lon', 'lng', 'long', 'longitude', 'lon_dd', 'longitude_dd', 'longi
 
 def provision(entry, dataset):
     """Materialise a VectorFileLayer + PgVectorTable from a catalog entry."""
+    if create_layer_vector_file is None:
+        raise RuntimeError(
+            "geomanager.utils.vector_utils.create_layer_vector_file is missing — "
+            "the plugin needs the local geomanager source mounted in the venv "
+            "(e.g. 'pip install -e /geomanager' inside climweb-dev)."
+        )
     url = resolve_file_url(entry.file_url)
     lang = PluginSettings.load().language
 

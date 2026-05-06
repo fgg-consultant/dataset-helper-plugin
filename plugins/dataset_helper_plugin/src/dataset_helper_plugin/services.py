@@ -469,6 +469,12 @@ def _create_common_objects(entry):
             'public': True,
         },
     )
+    # Persist the JSON-driven position into Category.order (wagtail-adminsortable).
+    # We update on every sync so admins re-loading the catalog get the order
+    # reflected, but we don't touch icon/active/public to preserve manual edits.
+    if category.order != entry.category_order:
+        category.order = entry.category_order
+        category.save(update_fields=['order'])
 
     subcategory, _ = SubCategory.objects.get_or_create(
         title=entry.subcategory_title,
@@ -478,6 +484,10 @@ def _create_common_objects(entry):
             'public': True,
         },
     )
+    # SubCategory uses Orderable's ``sort_order`` (not AdminSortable's ``order``).
+    if subcategory.sort_order != entry.subcategory_order:
+        subcategory.sort_order = entry.subcategory_order
+        subcategory.save(update_fields=['sort_order'])
 
     metadata = None
     if any([
