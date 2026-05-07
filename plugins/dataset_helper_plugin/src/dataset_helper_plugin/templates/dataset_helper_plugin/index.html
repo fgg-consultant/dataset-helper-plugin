@@ -483,6 +483,24 @@
         border-radius: 8px;
         background: #fff;
     }
+    .settings-panel.invalid {
+        border-color: #dc2626;
+        border-width: 2px;
+        background: #fef2f2;
+    }
+    .settings-panel.invalid summary {
+        color: #dc2626;
+    }
+    .settings-panel .required-warning {
+        display: none;
+        margin-left: 8px;
+        font-weight: 500;
+        font-size: 12px;
+        color: #dc2626;
+    }
+    .settings-panel.invalid .required-warning {
+        display: inline;
+    }
     .settings-panel summary {
         cursor: pointer;
         font-weight: 600;
@@ -568,7 +586,7 @@
 
         <!-- Settings Panel -->
         <details class="settings-panel" id="settings-panel">
-            <summary>Settings</summary>
+            <summary>Settings<span class="required-warning">— required setting missing</span></summary>
             <div class="settings-grid">
                 <div class="settings-field">
                     <label for="setting-language">Language</label>
@@ -638,7 +656,7 @@
             <button class="import-button" style="background: #6b7280;" onclick="toggleImportWmsForm()">
                 Import from WMS
             </button>
-            <button class="import-button" style="background: #2563eb;" onclick="toggleLoadConfigForm()">
+            <button id="load-config-btn" class="import-button" style="background: #2563eb;" onclick="toggleLoadConfigForm()">
                 Load Config JSON
             </button>
             <button class="danger-button" onclick="resetCatalog()">
@@ -952,6 +970,29 @@
 
   // ── Settings functions ────────────────────────────────────────────────────
 
+  function updateSettingsValidity() {
+    const select = document.getElementById('setting-country')
+    const currentAlpha3 = (select.dataset.currentAlpha3 || '').trim()
+    const isValid = currentAlpha3.length === 3
+    const panel = document.getElementById('settings-panel')
+    const loadBtn = document.getElementById('load-config-btn')
+    if (isValid) {
+      panel.classList.remove('invalid')
+      if (loadBtn) {
+        loadBtn.disabled = false
+        loadBtn.title = ''
+      }
+    } else {
+      panel.classList.add('invalid')
+      panel.open = true
+      if (loadBtn) {
+        loadBtn.disabled = true
+        loadBtn.title = 'Set the required Country setting first'
+      }
+    }
+  }
+  window.updateSettingsValidity = updateSettingsValidity
+
   async function saveSettings() {
     const countrySelect = document.getElementById('setting-country')
     const msgEl = document.getElementById('settings-msg')
@@ -1011,6 +1052,8 @@
       if (result.status === 'success') {
         msgEl.textContent = 'Settings saved'
         msgEl.style.color = '#059669'
+        countrySelect.dataset.currentAlpha3 = alpha3
+        updateSettingsValidity()
       } else {
         msgEl.textContent = 'Error: ' + result.message
         msgEl.style.color = '#dc2626'
@@ -1846,6 +1889,10 @@ async function loadLocale(lang) {
     renderHint('Could not load country list (' + err.message + ')')
   }
 })()
+
+if (typeof window.updateSettingsValidity === 'function') {
+  window.updateSettingsValidity()
+}
 
 async function fetchCountryInfo(alpha2) {
   const r = await fetch(
