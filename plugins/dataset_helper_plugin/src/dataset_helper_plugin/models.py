@@ -257,6 +257,7 @@ class CatalogEntry(models.Model):
 
     # --- Dataset properties ---
     multi_temporal = models.BooleanField(default=True)
+    near_realtime = models.BooleanField(default=False)
 
     # --- State ---
     origin = models.CharField(
