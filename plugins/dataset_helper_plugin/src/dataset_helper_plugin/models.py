@@ -88,6 +88,48 @@ class PluginSettings(models.Model):
         return obj
 
 
+class CatalogState(models.Model):
+    """
+    Singleton recording which version of the embedded catalog has been
+    loaded into the CatalogEntry table. Allows the admin UI to detect
+    when the bundled catalog has been updated since the last load.
+    """
+
+    loaded_version = models.CharField(
+        max_length=64,
+        blank=True,
+        default='',
+        verbose_name=_("Loaded catalog version"),
+    )
+    loaded_schema_version = models.PositiveIntegerField(
+        default=0,
+        verbose_name=_("Loaded catalog schema version"),
+    )
+    loaded_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_("Last load timestamp"),
+    )
+
+    class Meta:
+        verbose_name = _("Catalog State")
+        verbose_name_plural = _("Catalog State")
+
+    def __str__(self):
+        if not self.loaded_version:
+            return "Catalog State (never loaded)"
+        return f"Catalog State (v{self.loaded_version})"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        obj, _ = cls.objects.get_or_create(pk=1)
+        return obj
+
+
 class CatalogEntry(models.Model):
     """
     A layer in the plugin's catalog. Tracks what layers are available,

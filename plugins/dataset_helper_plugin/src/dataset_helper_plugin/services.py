@@ -6,6 +6,7 @@ import urllib.request
 import uuid
 
 from django.db import transaction
+from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 from geomanager.models.core import Category, Dataset, Metadata, SubCategory
 from geomanager.models.raster_style import ColorValue, RasterStyle
@@ -21,7 +22,7 @@ try:
 except ImportError:
     RasterCOGLayer = None
 
-from .models import CatalogEntry, PluginSettings
+from .models import CatalogEntry, CatalogState, PluginSettings
 from .provisioners import PROVISIONERS as _PACKAGED_PROVISIONERS
 from .provisioners._shared import (
     DEFAULT_RASTER_PALETTE,
@@ -35,6 +36,9 @@ logger = logging.getLogger(__name__)
 
 
 ECMWF_TOKEN_PLACEHOLDER = '{ECMWF_TOKEN}'
+
+# Highest catalog schema_version this code knows how to parse.
+SUPPORTED_CATALOG_SCHEMA_VERSION = 1
 
 
 def _parse_iso_dt(value):
@@ -131,6 +135,15 @@ def load_catalog_from_config(json_data):
         'errors': [],
     }
 
+    version = (json_data.get('version') or '').strip()
+    schema_version = json_data.get('schema_version')
+    if schema_version is not None and schema_version > SUPPORTED_CATALOG_SCHEMA_VERSION:
+        stats['errors'].append(
+            f"Unsupported catalog schema_version={schema_version}. "
+            f"This plugin supports up to schema_version={SUPPORTED_CATALOG_SCHEMA_VERSION}."
+        )
+        return stats
+
     settings = PluginSettings.load()
     lang = settings.language
     ecmwf_token = settings.ecmwf_token
@@ -147,6 +160,13 @@ def load_catalog_from_config(json_data):
             'Unrecognized format: expected top-level "categories" (nested format) '
             'or "products" (flat format).'
         )
+
+    if stats['created'] + stats['updated'] + stats['unchanged'] > 0:
+        state = CatalogState.load()
+        state.loaded_version = version
+        state.loaded_schema_version = schema_version or 0
+        state.loaded_at = timezone.now()
+        state.save()
 
     return stats
 
