@@ -11,7 +11,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-from .models import CatalogEntry, PluginSettings
+from .models import CatalogEntry, CatalogState, PluginSettings
 from . import services
 
 # Valid layer types from Dataset.DATASET_TYPE_CHOICES
@@ -33,12 +33,25 @@ def catalog_tree(request):
         total = CatalogEntry.objects.count()
         enabled = CatalogEntry.objects.filter(enabled=True).count()
         synced = CatalogEntry.objects.exclude(dataset_id=None).filter(enabled=True).count()
+
+        embedded_version, embedded_schema = services.get_embedded_catalog_version()
+        state = CatalogState.load()
+        update_available = bool(
+            embedded_version and embedded_version != state.loaded_version
+        )
+
         return JsonResponse({
             'status': 'success',
             'total': total,
             'enabled': enabled,
             'synced': synced,
             'categories': tree,
+            'embedded_version': embedded_version,
+            'embedded_schema_version': embedded_schema,
+            'loaded_version': state.loaded_version,
+            'loaded_schema_version': state.loaded_schema_version,
+            'loaded_at': state.loaded_at.isoformat() if state.loaded_at else None,
+            'update_available': update_available,
         })
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)

@@ -456,6 +456,45 @@
         box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.1);
     }
 
+    /* Catalog version banner */
+    .catalog-version-banner {
+        margin-bottom: 16px;
+        padding: 12px 16px;
+        border-radius: 6px;
+        display: none;
+        font-size: 13px;
+        line-height: 1.5;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .catalog-version-banner.visible { display: flex; }
+    .catalog-version-banner.update {
+        background: #fef3c7;
+        border: 1px solid #fcd34d;
+        color: #78350f;
+    }
+    .catalog-version-banner.info {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: #1e3a8a;
+    }
+    .catalog-version-banner .banner-text { flex: 1 1 auto; min-width: 0; }
+    .catalog-version-banner .banner-text strong { font-weight: 600; }
+    .catalog-version-banner button {
+        flex: 0 0 auto;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        background: #059669;
+        color: #fff;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .catalog-version-banner button:hover { background: #047857; }
+
     /* Sync results */
     .sync-results {
         margin-top: 16px;
@@ -582,6 +621,12 @@
                 <div class="number" id="stat-synced">-</div>
                 <div class="label">Synced</div>
             </div>
+        </div>
+
+        <!-- Catalog version banner -->
+        <div id="catalog-version-banner" class="catalog-version-banner">
+            <div class="banner-text" id="catalog-version-banner-text"></div>
+            <button onclick="loadEmbeddedCatalog()" id="catalog-version-banner-btn">Load embedded catalog</button>
         </div>
 
         <!-- Settings Panel -->
@@ -1068,6 +1113,43 @@
 
   // ── Catalog functions ──────────────────────────────────────────────────────
 
+  function renderCatalogVersionBanner(data) {
+    const banner = document.getElementById('catalog-version-banner')
+    const textEl = document.getElementById('catalog-version-banner-text')
+    const btn = document.getElementById('catalog-version-banner-btn')
+    if (!banner || !textEl || !btn) return
+
+    const embedded = data.embedded_version || ''
+    const loaded = data.loaded_version || ''
+    const updateAvailable = !!data.update_available
+
+    banner.classList.remove('visible', 'update', 'info')
+
+    if (!embedded) {
+      // No version info in the bundled file — nothing meaningful to display.
+      return
+    }
+
+    if (!loaded) {
+      banner.classList.add('visible', 'info')
+      textEl.innerHTML = `No catalog loaded yet. Bundled catalog: <strong>v${embedded}</strong>.`
+      btn.textContent = `Load embedded catalog v${embedded}`
+      return
+    }
+
+    if (updateAvailable) {
+      banner.classList.add('visible', 'update')
+      textEl.innerHTML =
+        `A catalog update is available: <strong>v${loaded}</strong> → <strong>v${embedded}</strong>. ` +
+        `Loading will upsert entries by product_code (manual entries are not touched).`
+      btn.textContent = `Load v${embedded}`
+      return
+    }
+
+    // Versions match — keep silent. We could surface "v{loaded} loaded on …"
+    // later if we want a passive indicator.
+  }
+
   let catalogData = null
   // Track which groups are open so we can restore state after re-render
   let openGroups = new Set()
@@ -1099,6 +1181,8 @@
     document.getElementById('stat-total').textContent = catalogData.total || 0
     document.getElementById('stat-enabled').textContent = catalogData.enabled || 0
     document.getElementById('stat-synced').textContent = catalogData.synced || 0
+
+    renderCatalogVersionBanner(catalogData)
 
     const tree = document.getElementById('catalog-tree')
     const categories = catalogData.categories || []
@@ -1802,7 +1886,7 @@
         resultsEl.className = 'sync-results visible success'
         resultsEl.innerHTML = result.message
         document.getElementById('config-json-input').value = ''
-        toggleLoadConfigForm()
+        document.getElementById('load-config-form').classList.remove('visible')
         await loadCatalog(false)
       } else {
         resultsEl.className = 'sync-results visible error'

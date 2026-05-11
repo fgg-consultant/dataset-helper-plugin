@@ -1,10 +1,12 @@
 import hashlib
 import json as json_module
 import logging
+import os
 import re
 import urllib.request
 import uuid
 
+from django.contrib.staticfiles import finders
 from django.db import transaction
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
@@ -39,6 +41,46 @@ ECMWF_TOKEN_PLACEHOLDER = '{ECMWF_TOKEN}'
 
 # Highest catalog schema_version this code knows how to parse.
 SUPPORTED_CATALOG_SCHEMA_VERSION = 1
+
+EMBEDDED_CATALOG_STATIC_PATH = 'dataset_helper_plugin/catalog.json'
+
+# (path, mtime) -> (version, schema_version). Avoids re-parsing the 3MB
+# catalog on every admin page load; invalidates automatically when the
+# file is replaced by a plugin upgrade.
+_embedded_version_cache = {}
+
+
+def get_embedded_catalog_version():
+    """
+    Return (version, schema_version) of the bundled catalog.json.
+    Returns ('', 0) if the file is missing, unparseable, or has no version.
+    """
+    path = finders.find(EMBEDDED_CATALOG_STATIC_PATH)
+    if not path or not os.path.exists(path):
+        return ('', 0)
+
+    try:
+        mtime = os.path.getmtime(path)
+    except OSError:
+        return ('', 0)
+
+    cached = _embedded_version_cache.get(path)
+    if cached and cached[0] == mtime:
+        return cached[1]
+
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json_module.load(f)
+    except (OSError, ValueError) as e:
+        logger.warning("Failed to read embedded catalog at %s: %s", path, e)
+        return ('', 0)
+
+    result = (
+        (data.get('version') or '').strip(),
+        int(data.get('schema_version') or 0),
+    )
+    _embedded_version_cache[path] = (mtime, result)
+    return result
 
 
 def _parse_iso_dt(value):
