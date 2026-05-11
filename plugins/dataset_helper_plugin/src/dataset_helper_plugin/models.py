@@ -328,6 +328,15 @@ class CatalogEntry(models.Model):
         help_text=_("sha256 of catalog-derived fields at last load. Used to detect "
                     "whether a re-load actually changes anything for this entry."),
     )
+    provisioned_hash = models.CharField(
+        max_length=64,
+        blank=True,
+        default='',
+        verbose_name=_("Provisioned content hash"),
+        help_text=_("sha256 of the Climweb Dataset (+ related objects) the last "
+                    "time this entry was provisioned or re-provisioned. Used to "
+                    "detect Wagtail admin edits that diverge from the catalog."),
+    )
 
     # --- Ordering ---
     category_order = models.IntegerField(default=0, verbose_name=_("Category sort order"))

@@ -16,6 +16,11 @@ from geomanager.models.raster_tile import RasterTileLayer
 from geomanager.models.vector_tile import VectorTileLayer
 from geomanager.models.wms import WmsLayer, WmsRequestLayer, WmsRequestParam
 
+try:
+    from geomanager.models.raster_file import RasterFileLayer
+except ImportError:
+    RasterFileLayer = None
+
 # raster_cog is on a separate geomanager branch — make the import optional so
 # the plugin still loads on branches without it. _provision_raster_cog raises
 # at sync time if the layer type is used while the model is missing.
@@ -74,6 +79,115 @@ def compute_source_hash(values):
         payload = {k: values.get(k) for k in SOURCE_HASH_FIELDS}
     else:
         payload = {k: getattr(values, k, None) for k in SOURCE_HASH_FIELDS}
+    serialized = json_module.dumps(payload, sort_keys=True, default=str)
+    return hashlib.sha256(serialized.encode('utf-8')).hexdigest()
+
+
+def _project_provisioned_layer(dataset):
+    """
+    Return a canonical dict of the layer-type-specific Climweb object
+    attached to ``dataset``. Used by ``compute_provisioned_hash``.
+
+    Only fields the plugin actually writes during provisioning are
+    projected. Complex StreamFields (popup_config) and RasterStyle
+    relations are skipped for v1 — the hash will not detect edits
+    confined to those, which is an acceptable initial limitation.
+    """
+    lt = dataset.layer_type
+    if lt == 'wms':
+        wms = WmsLayer.objects.filter(dataset=dataset).first()
+        if wms is None:
+            return {}
+        return {
+            'base_url': wms.base_url,
+            'version': wms.version,
+            'format': wms.format,
+            'srs': wms.srs,
+            'width': wms.width,
+            'height': wms.height,
+            'transparent': wms.transparent,
+            'request_layers': sorted(
+                WmsRequestLayer.objects.filter(layer=wms).values_list('name', flat=True)
+            ),
+            'request_params': sorted(
+                (p.name, p.value)
+                for p in WmsRequestParam.objects.filter(layer=wms)
+            ),
+        }
+    if lt == 'raster_tile':
+        rt = RasterTileLayer.objects.filter(dataset=dataset).first()
+        if rt is None:
+            return {}
+        return {'base_url': rt.base_url}
+    if lt == 'vector_tile':
+        vt = VectorTileLayer.objects.filter(dataset=dataset).first()
+        if vt is None:
+            return {}
+        return {
+            'base_url': vt.base_url,
+            'is_pmtiles': vt.is_pmtiles,
+            'use_render_layers_json': vt.use_render_layers_json,
+            'render_layers_json': vt.render_layers_json,
+        }
+    if lt == 'raster_cog' and RasterCOGLayer is not None:
+        rc = RasterCOGLayer.objects.filter(dataset=dataset).first()
+        if rc is None:
+            return {}
+        return {
+            'url_template': rc.url_template,
+            'time_start': rc.time_start,
+            'time_end': rc.time_end,
+            'time_step_value': rc.time_step_value,
+            'time_step_unit': rc.time_step_unit,
+            'date_format': rc.date_format,
+        }
+    if lt == 'raster_file' and RasterFileLayer is not None:
+        # The list of ingested LayerRasterFile rows changes over time as new
+        # frames arrive — including them would make the hash drift on every
+        # ingest. Hash only the stable layer-level fields.
+        rf = RasterFileLayer.objects.filter(dataset=dataset).first()
+        if rf is None:
+            return {}
+        return {'title': rf.title}
+    return {}
+
+
+def compute_provisioned_hash(dataset_id):
+    """
+    Return a stable sha256 hex digest of the current state of the Climweb
+    Dataset (and the layer-type-specific objects) identified by ``dataset_id``.
+    Returns '' if the Dataset no longer exists.
+    """
+    if dataset_id is None:
+        return ''
+    dataset = Dataset.objects.filter(id=dataset_id).first()
+    if dataset is None:
+        return ''
+
+    payload = {
+        'title': dataset.title,
+        'summary': dataset.summary or '',
+        'layer_type': dataset.layer_type,
+        'public': dataset.public,
+        'multi_temporal': dataset.multi_temporal,
+        'near_realtime': dataset.near_realtime,
+    }
+
+    metadata = dataset.metadata
+    if metadata is not None:
+        payload['metadata'] = {
+            'source': metadata.source or '',
+            'function': metadata.function or '',
+            'resolution': metadata.resolution or '',
+            'geographic_coverage': metadata.geographic_coverage or '',
+            'license': metadata.license or '',
+            'frequency_of_update': metadata.frequency_of_update or '',
+            'overview': metadata.overview or '',
+            'learn_more': metadata.learn_more or '',
+        }
+
+    payload['layer'] = _project_provisioned_layer(dataset)
+
     serialized = json_module.dumps(payload, sort_keys=True, default=str)
     return hashlib.sha256(serialized.encode('utf-8')).hexdigest()
 
@@ -578,7 +692,8 @@ def sync_catalog_to_climweb():
                 with transaction.atomic():
                     dataset_id = _provision_entry(entry)
                     entry.dataset_id = dataset_id
-                    entry.save(update_fields=['dataset_id', 'updated_at'])
+                    entry.provisioned_hash = compute_provisioned_hash(dataset_id)
+                    entry.save(update_fields=['dataset_id', 'provisioned_hash', 'updated_at'])
                 stats['added'] += 1
             except Exception as e:
                 stats['errors'].append(f"Failed to provision '{entry.title}': {e}")
@@ -589,7 +704,8 @@ def sync_catalog_to_climweb():
                 with transaction.atomic():
                     _deprovision_entry(entry)
                     entry.dataset_id = None
-                    entry.save(update_fields=['dataset_id', 'updated_at'])
+                    entry.provisioned_hash = ''
+                    entry.save(update_fields=['dataset_id', 'provisioned_hash', 'updated_at'])
                 stats['removed'] += 1
             except Exception as e:
                 stats['errors'].append(f"Failed to deprovision '{entry.title}': {e}")
