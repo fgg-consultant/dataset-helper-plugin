@@ -319,6 +319,16 @@ class CatalogEntry(models.Model):
         help_text=_("UUID of the corresponding Dataset in geomanager, if provisioned"),
     )
 
+    # --- Content fingerprint ---
+    source_hash = models.CharField(
+        max_length=64,
+        blank=True,
+        default='',
+        verbose_name=_("Catalog content hash"),
+        help_text=_("sha256 of catalog-derived fields at last load. Used to detect "
+                    "whether a re-load actually changes anything for this entry."),
+    )
+
     # --- Ordering ---
     category_order = models.IntegerField(default=0, verbose_name=_("Category sort order"))
     subcategory_order = models.IntegerField(default=0, verbose_name=_("Subcategory sort order"))

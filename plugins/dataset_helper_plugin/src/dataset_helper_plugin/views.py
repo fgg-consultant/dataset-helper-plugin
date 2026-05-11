@@ -79,7 +79,10 @@ def catalog_load_config(request):
                 **stats,
             }, status=400)
 
-        msg = f"Catalog loaded: {stats['created']} created, {stats['updated']} updated"
+        msg = (
+            f"Catalog loaded: {stats['created']} created, "
+            f"{stats['updated']} updated, {stats['unchanged']} unchanged"
+        )
         if stats.get('skipped_estation'):
             msg += f", {stats['skipped_estation']} skipped (not on local eStation)"
 
@@ -121,7 +124,10 @@ def catalog_load_embedded(request):
             **stats,
         }, status=400)
 
-    msg = f"Catalog loaded: {stats['created']} created, {stats['updated']} updated"
+    msg = (
+        f"Catalog loaded: {stats['created']} created, "
+        f"{stats['updated']} updated, {stats['unchanged']} unchanged"
+    )
     if stats.get('skipped_estation'):
         msg += f", {stats['skipped_estation']} skipped (not on local eStation)"
 

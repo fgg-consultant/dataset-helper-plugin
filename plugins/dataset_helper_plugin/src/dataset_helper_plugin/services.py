@@ -42,6 +42,41 @@ ECMWF_TOKEN_PLACEHOLDER = '{ECMWF_TOKEN}'
 # Highest catalog schema_version this code knows how to parse.
 SUPPORTED_CATALOG_SCHEMA_VERSION = 1
 
+# Fields hashed into CatalogEntry.source_hash. These are the fields that
+# originate from the catalog JSON; state fields (origin, enabled,
+# dataset_id, timestamps, hashes themselves) are deliberately excluded
+# so the hash stays stable when local state changes.
+SOURCE_HASH_FIELDS = (
+    'title', 'summary',
+    'layer_type',
+    'category_title', 'category_icon', 'subcategory_title',
+    'layer_name', 'wms_url', 'public', 'layer_title', 'extra_params_json',
+    'tile_url', 'is_pmtiles',
+    'file_url', 'file_bearer',
+    'cog_url_template', 'cog_time_start', 'cog_time_end',
+    'cog_time_step_value', 'cog_time_step_unit', 'cog_date_format',
+    'raster_style_json', 'render_layers_json', 'popup_config_json', 'legend_json',
+    'meta_source', 'meta_resolution', 'meta_geographic_coverage',
+    'meta_license', 'meta_frequency_of_update', 'meta_function',
+    'meta_overview', 'meta_learn_more',
+    'multi_temporal', 'near_realtime',
+    'category_order', 'subcategory_order', 'entry_order',
+)
+
+
+def compute_source_hash(values):
+    """
+    Return a stable sha256 hex digest of the catalog-derived fields of an
+    entry. Accepts a dict (the ``defaults`` payload for ``update_or_create``)
+    or a ``CatalogEntry`` instance.
+    """
+    if isinstance(values, dict):
+        payload = {k: values.get(k) for k in SOURCE_HASH_FIELDS}
+    else:
+        payload = {k: getattr(values, k, None) for k in SOURCE_HASH_FIELDS}
+    serialized = json_module.dumps(payload, sort_keys=True, default=str)
+    return hashlib.sha256(serialized.encode('utf-8')).hexdigest()
+
 EMBEDDED_CATALOG_STATIC_PATH = 'dataset_helper_plugin/catalog.json'
 
 # (path, mtime) -> (version, schema_version). Avoids re-parsing the 3MB
@@ -461,15 +496,39 @@ def _load_products_format(json_data, stats, lang='en', ecmwf_token='', estation_
 
 
 def _upsert_entry(product_code, defaults, stats):
-    """Create or update a CatalogEntry and update stats."""
-    entry, created = CatalogEntry.objects.update_or_create(
-        product_code=product_code,
-        defaults=defaults,
-    )
-    if created:
+    """
+    Create or update a CatalogEntry and update stats.
+
+    Distinguishes three outcomes using ``source_hash``:
+      - created: no row existed for this product_code
+      - updated: row existed, catalog content changed
+      - unchanged: row existed, catalog content is byte-identical
+    """
+    incoming_hash = compute_source_hash(defaults)
+
+    try:
+        entry = CatalogEntry.objects.get(product_code=product_code)
+    except CatalogEntry.DoesNotExist:
+        entry = None
+
+    if entry is None:
+        CatalogEntry.objects.create(
+            product_code=product_code,
+            source_hash=incoming_hash,
+            **defaults,
+        )
         stats['created'] += 1
-    else:
-        stats['updated'] += 1
+        return
+
+    if entry.source_hash == incoming_hash:
+        stats['unchanged'] += 1
+        return
+
+    for field, value in defaults.items():
+        setattr(entry, field, value)
+    entry.source_hash = incoming_hash
+    entry.save()
+    stats['updated'] += 1
 
 
 def sync_catalog_to_climweb():
@@ -922,8 +981,7 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         subcat_order = 0
     entry_order = (max_orders['max_entry'] or 0) + 1
 
-    entry = CatalogEntry.objects.create(
-        product_code=product_code,
+    fields = dict(
         title=data.get('title', identifier or 'Untitled'),
         summary=data.get('summary', ''),
         category_title=data['category_title'],
@@ -945,8 +1003,6 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         legend_json=data.get('legend_json'),
         multi_temporal=data.get('multi_temporal', True),
         near_realtime=data.get('near_realtime', False),
-        origin=origin,
-        enabled=True,
         meta_source=data.get('meta_source', ''),
         meta_resolution=data.get('meta_resolution', ''),
         meta_geographic_coverage=data.get('meta_geographic_coverage', ''),
@@ -955,6 +1011,13 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         meta_function=data.get('meta_function', ''),
         meta_overview=data.get('meta_overview', ''),
         meta_learn_more=data.get('meta_learn_more', ''),
+    )
+    entry = CatalogEntry.objects.create(
+        product_code=product_code,
+        origin=origin,
+        enabled=True,
+        source_hash=compute_source_hash(fields),
+        **fields,
     )
     return entry
 
