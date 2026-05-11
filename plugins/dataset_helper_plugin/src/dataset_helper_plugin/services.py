@@ -260,6 +260,94 @@ def load_embedded_catalog():
     return load_catalog_from_config(data)
 
 
+def preview_embedded_catalog():
+    """
+    Dry-run: walk the embedded catalog JSON exactly like a real load
+    would, but classify each entry into a bucket instead of writing.
+
+    Buckets returned:
+      - to_add        : product_code in JSON, not in DB
+      - clean_update  : source_hash changed, no local drift  → safe to apply
+      - local_drift   : source_hash unchanged, but Climweb Dataset diverged
+                        from its provisioned baseline (admin edited it)
+      - conflict      : source_hash changed AND Climweb Dataset diverged
+      - unchanged     : nothing to do for this entry
+      - to_remove     : origin=config entry in DB, absent from JSON
+
+    Returns a dict with the buckets plus the loader's error/skip counters.
+    """
+    data, _ = _read_embedded_catalog()
+    catalog_version = (data.get('version') or '').strip()
+    catalog_schema = int(data.get('schema_version') or 0)
+
+    incoming = []  # [(product_code, defaults)]
+    def collect(product_code, defaults, stats):
+        incoming.append((product_code, defaults))
+
+    base_stats = load_catalog_from_config(data, handle_entry=collect)
+
+    incoming_codes = {pc for pc, _ in incoming}
+    existing = {
+        e.product_code: e
+        for e in CatalogEntry.objects.filter(origin=CatalogEntry.ORIGIN_CONFIG)
+    }
+
+    to_add, clean_update, local_drift, conflict, to_remove = [], [], [], [], []
+    unchanged_count = 0
+
+    def _describe(product_code, defaults, entry=None):
+        return {
+            'product_code': product_code,
+            'title': (defaults.get('title') if defaults else None) or (entry.title if entry else ''),
+            'category': (defaults.get('category_title') if defaults else None) or (entry.category_title if entry else ''),
+            'subcategory': (defaults.get('subcategory_title') if defaults else None) or (entry.subcategory_title if entry else ''),
+        }
+
+    for product_code, defaults in incoming:
+        incoming_hash = compute_source_hash(defaults)
+        entry = existing.get(product_code)
+
+        if entry is None:
+            to_add.append(_describe(product_code, defaults))
+            continue
+
+        source_changed = incoming_hash != entry.source_hash
+
+        local_drifted = False
+        if entry.dataset_id and entry.provisioned_hash:
+            current = compute_provisioned_hash(entry.dataset_id)
+            local_drifted = (current != entry.provisioned_hash)
+
+        info = _describe(product_code, defaults, entry)
+
+        if source_changed and local_drifted:
+            conflict.append(info)
+        elif source_changed:
+            clean_update.append(info)
+        elif local_drifted:
+            local_drift.append(info)
+        else:
+            unchanged_count += 1
+
+    for product_code, entry in existing.items():
+        if product_code not in incoming_codes:
+            to_remove.append(_describe(product_code, None, entry))
+
+    return {
+        'catalog_version': catalog_version,
+        'catalog_schema_version': catalog_schema,
+        'to_add': to_add,
+        'clean_update': clean_update,
+        'local_drift': local_drift,
+        'conflict': conflict,
+        'to_remove': to_remove,
+        'unchanged': unchanged_count,
+        'errors': base_stats.get('errors', []),
+        'skipped_estation': base_stats.get('skipped_estation', 0),
+        'skipped_ecmwf_no_token': base_stats.get('skipped_ecmwf_no_token', 0),
+    }
+
+
 def _parse_iso_dt(value):
     """Parse an ISO-8601 datetime string (supports trailing Z). Returns None on failure."""
     if not value:
@@ -331,7 +419,7 @@ def _substitute_estation_url(wms_url, estation_url):
     return wms_url
 
 
-def load_catalog_from_config(json_data):
+def load_catalog_from_config(json_data, handle_entry=None):
     """
     Parse a config JSON and populate the CatalogEntry table.
     Uses update_or_create keyed on product_code for idempotency.
@@ -342,6 +430,11 @@ def load_catalog_from_config(json_data):
 
     Applies plugin settings: language resolution, ECMWF token substitution,
     and eStation local product filtering.
+
+    ``handle_entry`` is the callback invoked for every layer found in the
+    JSON; it receives ``(product_code, defaults, stats)``. Defaults to
+    ``_upsert_entry`` (writes to DB). The dry-run preview path passes a
+    collector here instead, so no writes happen.
 
     Returns stats dict with created/updated/unchanged counts.
     """
@@ -370,17 +463,23 @@ def load_catalog_from_config(json_data):
 
     estation_url = settings.estation_url
 
+    if handle_entry is None:
+        handle_entry = _upsert_entry
+
     if json_data.get('categories'):
-        _load_nested_format(json_data, stats, lang, ecmwf_token, estation_product_ids, estation_url)
+        _load_nested_format(json_data, stats, lang, ecmwf_token, estation_product_ids, estation_url, handle_entry)
     elif json_data.get('products'):
-        _load_products_format(json_data, stats, lang, ecmwf_token, estation_product_ids, estation_url)
+        _load_products_format(json_data, stats, lang, ecmwf_token, estation_product_ids, estation_url, handle_entry)
     else:
         stats['errors'].append(
             'Unrecognized format: expected top-level "categories" (nested format) '
             'or "products" (flat format).'
         )
 
-    if stats['created'] + stats['updated'] + stats['unchanged'] > 0:
+    # Only stamp the loaded version when we actually wrote — preview/dry-run
+    # uses a non-default handle_entry and must not advance CatalogState.
+    real_write = handle_entry is _upsert_entry
+    if real_write and stats['created'] + stats['updated'] + stats['unchanged'] > 0:
         state = CatalogState.load()
         state.loaded_version = version
         state.loaded_schema_version = schema_version or 0
@@ -390,8 +489,10 @@ def load_catalog_from_config(json_data):
     return stats
 
 
-def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_product_ids=None, estation_url=''):
+def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_product_ids=None, estation_url='', handle_entry=None):
     """Load from the nested categories > subcategories > datasets > layers format."""
+    if handle_entry is None:
+        handle_entry = _upsert_entry
 
     def is_estation_layer(layer_name):
         """Check if a layer_name is an eStation product."""
@@ -525,14 +626,16 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                     }
                     entry_counter += 1
 
-                    _upsert_entry(product_code, defaults, stats)
+                    handle_entry(product_code, defaults, stats)
 
 
-def _load_products_format(json_data, stats, lang='en', ecmwf_token='', estation_product_ids=None, estation_url=''):
+def _load_products_format(json_data, stats, lang='en', ecmwf_token='', estation_product_ids=None, estation_url='', handle_entry=None):
     """
     Load from the flat products format (e.g. jrc_station_products.json).
     Each product has: category, product_id, descriptive_name, wms_getmap_url, resource_url.
     """
+    if handle_entry is None:
+        handle_entry = _upsert_entry
     server_url = json_data.get('ServerURL', 'localhost')
     # Build WMS base URL from server URL
     if not server_url.startswith('http'):
@@ -606,7 +709,7 @@ def _load_products_format(json_data, stats, lang='en', ecmwf_token='', estation_
         }
         entry_counter += 1
 
-        _upsert_entry(product_id, defaults, stats)
+        handle_entry(product_id, defaults, stats)
 
 
 def _upsert_entry(product_code, defaults, stats):

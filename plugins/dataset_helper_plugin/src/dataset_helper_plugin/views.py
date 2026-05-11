@@ -95,6 +95,27 @@ def catalog_load_config(request):
         return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
 
 
+def catalog_preview_embedded(request):
+    """
+    Dry-run: return the changeset that would result from loading the
+    embedded catalog into the database, without writing anything.
+    """
+    try:
+        changeset = services.preview_embedded_catalog()
+    except FileNotFoundError as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    except ValueError as e:
+        return JsonResponse(
+            {'status': 'error', 'message': f'Invalid embedded catalog JSON: {e}'},
+            status=500,
+        )
+    except Exception as e:
+        logger.exception("catalog_preview_embedded failed")
+        return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
+
+    return JsonResponse({'status': 'success', **changeset})
+
+
 @csrf_exempt
 @require_POST
 def catalog_load_embedded(request):
