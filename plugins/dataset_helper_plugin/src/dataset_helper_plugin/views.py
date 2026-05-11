@@ -161,6 +161,15 @@ def catalog_reset(request):
     try:
         count = CatalogEntry.objects.count()
         CatalogEntry.objects.all().delete()
+
+        # An empty DB means no catalog is loaded — drop the recorded version
+        # so the admin UI offers the "Load embedded catalog" banner again.
+        state = CatalogState.load()
+        state.loaded_version = ''
+        state.loaded_schema_version = 0
+        state.loaded_at = None
+        state.save()
+
         return JsonResponse({
             'status': 'success',
             'message': f'Catalog reset: {count} entries deleted',
