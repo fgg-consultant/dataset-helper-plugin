@@ -50,6 +50,22 @@ EMBEDDED_CATALOG_STATIC_PATH = 'dataset_helper_plugin/catalog.json'
 _embedded_version_cache = {}
 
 
+def _read_embedded_catalog():
+    """
+    Read and parse the bundled catalog.json from disk.
+    Returns (data, path). Raises FileNotFoundError if missing,
+    ValueError (JSONDecodeError) if not valid JSON.
+    """
+    path = finders.find(EMBEDDED_CATALOG_STATIC_PATH)
+    if not path or not os.path.exists(path):
+        raise FileNotFoundError(
+            f"Embedded catalog not found at static path "
+            f"'{EMBEDDED_CATALOG_STATIC_PATH}'"
+        )
+    with open(path, 'r', encoding='utf-8') as f:
+        return json_module.load(f), path
+
+
 def get_embedded_catalog_version():
     """
     Return (version, schema_version) of the bundled catalog.json.
@@ -69,9 +85,8 @@ def get_embedded_catalog_version():
         return cached[1]
 
     try:
-        with open(path, 'r', encoding='utf-8') as f:
-            data = json_module.load(f)
-    except (OSError, ValueError) as e:
+        data, _ = _read_embedded_catalog()
+    except (FileNotFoundError, OSError, ValueError) as e:
         logger.warning("Failed to read embedded catalog at %s: %s", path, e)
         return ('', 0)
 
@@ -81,6 +96,19 @@ def get_embedded_catalog_version():
     )
     _embedded_version_cache[path] = (mtime, result)
     return result
+
+
+def load_embedded_catalog():
+    """
+    Load the bundled catalog.json directly from disk into the CatalogEntry
+    table. Bypasses the browser/static-handler round trip so we always
+    process the file currently on disk, never a stale cached/collected
+    copy.
+
+    Returns the stats dict from load_catalog_from_config.
+    """
+    data, _ = _read_embedded_catalog()
+    return load_catalog_from_config(data)
 
 
 def _parse_iso_dt(value):

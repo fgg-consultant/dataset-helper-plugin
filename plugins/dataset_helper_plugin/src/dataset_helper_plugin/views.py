@@ -94,6 +94,46 @@ def catalog_load_config(request):
 
 @csrf_exempt
 @require_POST
+def catalog_load_embedded(request):
+    """
+    Load the bundled catalog.json directly from disk. The browser does not
+    need to (and must not) fetch the static file itself, because a stale
+    cached or collectstatic'd copy would silently replace the live data
+    with old content.
+    """
+    try:
+        stats = services.load_embedded_catalog()
+    except FileNotFoundError as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    except ValueError as e:
+        return JsonResponse(
+            {'status': 'error', 'message': f'Invalid embedded catalog JSON: {e}'},
+            status=500,
+        )
+    except Exception as e:
+        logger.exception("catalog_load_embedded failed")
+        return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
+
+    if stats['created'] == 0 and stats['updated'] == 0 and stats['errors']:
+        return JsonResponse({
+            'status': 'error',
+            'message': stats['errors'][0],
+            **stats,
+        }, status=400)
+
+    msg = f"Catalog loaded: {stats['created']} created, {stats['updated']} updated"
+    if stats.get('skipped_estation'):
+        msg += f", {stats['skipped_estation']} skipped (not on local eStation)"
+
+    return JsonResponse({
+        'status': 'success',
+        'message': msg,
+        **stats,
+    })
+
+
+@csrf_exempt
+@require_POST
 def catalog_sync(request):
     """Provision enabled entries to Climweb and deprovision disabled ones."""
     try:

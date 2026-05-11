@@ -5,6 +5,7 @@ urlpatterns = [
     # Catalog API
     path('catalog/', views.catalog_tree, name='catalog_tree'),
     path('catalog/load-config/', views.catalog_load_config, name='catalog_load_config'),
+    path('catalog/load-embedded/', views.catalog_load_embedded, name='catalog_load_embedded'),
     path('catalog/sync/', views.catalog_sync, name='catalog_sync'),
     path('catalog/<uuid:entry_id>/toggle/', views.catalog_toggle, name='catalog_toggle'),
     path('catalog/entry/', views.catalog_add_entry, name='catalog_add_entry'),

@@ -1862,20 +1862,12 @@
     resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> Loading embedded catalog...'
 
     try {
-      const catalogResp = await fetch('{% static "dataset_helper_plugin/catalog.json" %}', { credentials: 'include' })
-      if (!catalogResp.ok) {
-        throw new Error(`Failed to fetch embedded catalog (HTTP ${catalogResp.status})`)
-      }
-      const config = await catalogResp.json()
-
       const csrftoken = getCookie('csrftoken')
-      const response = await fetch('{% url "dataset_helper_plugin:catalog_load_config" %}', {
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_load_embedded" %}', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'X-CSRFToken': csrftoken,
         },
-        body: JSON.stringify(config),
         credentials: 'include'
       })
       if (!response.ok && response.headers.get('content-type')?.indexOf('application/json') === -1) {
