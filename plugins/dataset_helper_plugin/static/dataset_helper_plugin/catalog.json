@@ -1,5 +1,5 @@
 {
-  "version": "2026.05.0",
+  "version": "2026.05.18",
   "schema_version": 1,
   "categories": [
     {
@@ -2891,6 +2891,7 @@
                 "ar": "العواصف الحملية – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -2963,6 +2964,7 @@
                 "ar": "كشف البرق – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -3035,6 +3037,7 @@
                 "ar": "عواصف رعدية سريعة التطور – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -13963,6 +13966,7 @@
                 "ar": "تقدير هطول الأمطار – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -14035,6 +14039,7 @@
                 "ar": "تقدير هطول الأمطار – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -24287,7 +24292,10 @@
                 "ar": "صورة بالألوان الطبيعية المحسّنة – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
+              "initial_visible": true,
+              "auto_update_interval": 15,
               "metadata": {
                 "title": {
                   "en": "Enhanced Natural Colour Image – Europe & Africa (MSG)",
@@ -24359,6 +24367,7 @@
                 "ar": "صورة بالألوان الطبيعية المحسّنة – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -24431,6 +24440,7 @@
                 "ar": "صورة بالألوان الطبيعية المحسّنة – مسح سريع (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -24503,7 +24513,10 @@
                 "ar": "صورة ملونة من القمر الثابت – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
+              "initial_visible": true,
+              "auto_update_interval": 10,
               "metadata": {
                 "title": {
                   "en": "Geo Colour Image – Europe & Africa (MTG)",
@@ -24791,6 +24804,7 @@
                 "ar": "صورة الأشعة تحت الحمراء عالية الدقة – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -24863,6 +24877,7 @@
                 "ar": "صورة مرئية عالية الدقة – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -24935,6 +24950,7 @@
                 "ar": "صورة مرئية عالية الدقة – أوروبا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25007,6 +25023,7 @@
                 "ar": "صورة مرئية عالية الدقة – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25079,6 +25096,7 @@
                 "ar": "صورة الأشعة تحت الحمراء 10.8 µm – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25151,6 +25169,7 @@
                 "ar": "صورة الأشعة تحت الحمراء 10.8 µm – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25223,6 +25242,7 @@
                 "ar": "صورة الأشعة تحت الحمراء 3.9 µm – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25295,6 +25315,7 @@
                 "ar": "صورة الأشعة تحت الحمراء 3.9 µm – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25367,6 +25388,7 @@
                 "ar": "صورة الأشعة تحت الحمراء 3.9 µm – مسح سريع (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25439,6 +25461,7 @@
                 "ar": "صورة بالألوان الطبيعية – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25511,6 +25534,7 @@
                 "ar": "صورة بالألوان الطبيعية – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25583,6 +25607,7 @@
                 "ar": "صورة بالألوان الطبيعية – مسح سريع (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25799,6 +25824,7 @@
                 "ar": "صورة بالألوان الحقيقية – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25871,6 +25897,7 @@
                 "ar": "صورة في الضوء المرئي – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -25943,6 +25970,7 @@
                 "ar": "صورة في الضوء المرئي – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -28543,6 +28571,7 @@
                 "ar": "رصد الحرائق النشطة – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -28615,6 +28644,7 @@
                 "ar": "رصد الحرائق النشطة – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -28831,6 +28861,7 @@
                 "ar": "كشف درجة حرارة الحرائق – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -48315,6 +48346,7 @@
                 "ar": "خريطة عدم الاستقرار الجوي – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -48387,6 +48419,7 @@
                 "ar": "مؤشر خطر العواصف الرعدية – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -55445,6 +55478,7 @@
                 "ar": "تحليل الكتل الهوائية – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -55517,6 +55551,7 @@
                 "ar": "تحليل الكتل الهوائية – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -55589,6 +55624,7 @@
                 "ar": "كشف الغيوم – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -55661,6 +55697,7 @@
                 "ar": "كشف الغيوم – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -55733,6 +55770,7 @@
                 "ar": "طور السحب – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -55805,6 +55843,7 @@
                 "ar": "خصائص السحب – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -55877,6 +55916,7 @@
                 "ar": "خصائص السحب – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -55949,6 +55989,7 @@
                 "ar": "خصائص السحب – مسح سريع (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56021,6 +56062,7 @@
                 "ar": "ارتفاع قمة السحب – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56093,6 +56135,7 @@
                 "ar": "ارتفاع قمة السحب – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56165,6 +56208,7 @@
                 "ar": "نوع السحب – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56237,6 +56281,7 @@
                 "ar": "العواصف الحملية – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56309,6 +56354,7 @@
                 "ar": "كشف الغبار – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56381,6 +56427,7 @@
                 "ar": "كشف الغبار – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56453,6 +56500,7 @@
                 "ar": "كشف الغبار – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56525,6 +56573,7 @@
                 "ar": "الضباب والسحب المنخفضة – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56597,6 +56646,7 @@
                 "ar": "الضباب والسحب المنخفضة – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -56669,6 +56719,7 @@
                 "ar": "الضباب والسحب المنخفضة – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -57173,6 +57224,7 @@
                 "ar": "كشف الثلوج – أوروبا وأفريقيا (MTG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -57245,6 +57297,7 @@
                 "ar": "كشف الثلوج – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -57317,6 +57370,7 @@
                 "ar": "أنظمة الطقس الاستوائية – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -57389,6 +57443,7 @@
                 "ar": "أنظمة الطقس الاستوائية – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -57461,6 +57516,7 @@
                 "ar": "كشف الرماد البركاني – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -57533,6 +57589,7 @@
                 "ar": "كشف الرماد البركاني – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -57605,6 +57662,7 @@
                 "ar": "صورة بخار الماء – أوروبا وأفريقيا (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
@@ -57677,6 +57735,7 @@
                 "ar": "صورة بخار الماء – المحيط الهندي (MSG)"
               },
               "multi_temporal": true,
+              "near_realtime": true,
               "public": true,
               "metadata": {
                 "title": {
