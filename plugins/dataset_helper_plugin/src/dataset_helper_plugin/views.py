@@ -124,9 +124,28 @@ def catalog_load_embedded(request):
     need to (and must not) fetch the static file itself, because a stale
     cached or collectstatic'd copy would silently replace the live data
     with old content.
+
+    Optional JSON body: {"conflict_policy": "skip"|"overwrite"}. Defaults to
+    "overwrite" for backward compatibility; the preview-driven UI sends
+    "skip" explicitly when the admin chose to preserve local Wagtail edits.
     """
+    conflict_policy = 'overwrite'
+    if request.body:
+        try:
+            body = json.loads(request.body)
+        except json.JSONDecodeError as e:
+            return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+        policy = body.get('conflict_policy')
+        if policy not in (None, 'skip', 'overwrite'):
+            return JsonResponse(
+                {'status': 'error', 'message': f"conflict_policy must be 'skip' or 'overwrite', got {policy!r}"},
+                status=400,
+            )
+        if policy is not None:
+            conflict_policy = policy
+
     try:
-        stats = services.load_embedded_catalog()
+        stats = services.load_embedded_catalog(conflict_policy=conflict_policy)
     except FileNotFoundError as e:
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     except ValueError as e:
@@ -149,6 +168,10 @@ def catalog_load_embedded(request):
         f"Catalog loaded: {stats['created']} created, "
         f"{stats['updated']} updated, {stats['unchanged']} unchanged"
     )
+    if stats.get('conflict_skipped'):
+        msg += f", {stats['conflict_skipped']} conflicts kept local"
+    if stats.get('removed'):
+        msg += f", {stats['removed']} disabled (gone from JSON)"
     if stats.get('skipped_estation'):
         msg += f", {stats['skipped_estation']} skipped (not on local eStation)"
 

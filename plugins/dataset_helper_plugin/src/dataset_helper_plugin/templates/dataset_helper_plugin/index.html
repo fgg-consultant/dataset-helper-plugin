@@ -495,6 +495,109 @@
     }
     .catalog-version-banner button:hover { background: #047857; }
 
+    /* Catalog preview pane (review changes before apply) */
+    .catalog-preview-pane {
+        margin-bottom: 16px;
+        padding: 16px 18px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: #fff;
+        display: none;
+    }
+    .catalog-preview-pane.visible { display: block; }
+    .catalog-preview-pane h3 {
+        margin: 0 0 10px 0;
+        font-size: 15px;
+        color: #111827;
+    }
+    .catalog-preview-pane .preview-sub {
+        font-size: 12px;
+        color: #6b7280;
+        margin-bottom: 14px;
+    }
+    .catalog-preview-pane .preview-counts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        font-size: 13px;
+        margin-bottom: 14px;
+    }
+    .catalog-preview-pane .preview-counts .pc {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .catalog-preview-pane .preview-counts .pc strong { font-weight: 600; }
+    .catalog-preview-pane .preview-counts .pc-dot {
+        width: 9px; height: 9px; border-radius: 50%;
+        display: inline-block;
+    }
+    .pc-dot.add        { background: #059669; }
+    .pc-dot.update     { background: #2563eb; }
+    .pc-dot.drift      { background: #9333ea; }
+    .pc-dot.conflict   { background: #dc2626; }
+    .pc-dot.remove     { background: #6b7280; }
+    .pc-dot.unchanged  { background: #d1d5db; }
+
+    .catalog-preview-pane .bucket {
+        border-top: 1px solid #f3f4f6;
+        padding: 8px 0;
+    }
+    .catalog-preview-pane .bucket summary {
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        color: #374151;
+        padding: 4px 0;
+        list-style: revert;
+    }
+    .catalog-preview-pane .bucket.conflict summary {
+        color: #b91c1c;
+    }
+    .catalog-preview-pane .bucket ul {
+        margin: 6px 0 4px 18px;
+        padding: 0;
+        list-style: disc;
+        font-size: 12px;
+        color: #4b5563;
+        max-height: 260px;
+        overflow-y: auto;
+    }
+    .catalog-preview-pane .bucket li {
+        padding: 2px 0;
+    }
+    .catalog-preview-pane .bucket li .path {
+        color: #9ca3af;
+        font-size: 11px;
+    }
+    .catalog-preview-pane .preview-actions {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .catalog-preview-pane .preview-actions button {
+        padding: 7px 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .catalog-preview-pane .btn-apply       { background: #059669; color: #fff; }
+    .catalog-preview-pane .btn-apply:hover { background: #047857; }
+    .catalog-preview-pane .btn-overwrite       { background: #dc2626; color: #fff; }
+    .catalog-preview-pane .btn-overwrite:hover { background: #b91c1c; }
+    .catalog-preview-pane .btn-cancel       { background: #e5e7eb; color: #374151; }
+    .catalog-preview-pane .btn-cancel:hover { background: #d1d5db; }
+    .catalog-preview-pane .preview-loading {
+        padding: 20px;
+        text-align: center;
+        color: #6b7280;
+        font-size: 13px;
+    }
+
     /* Sync results */
     .sync-results {
         margin-top: 16px;
@@ -626,7 +729,12 @@
         <!-- Catalog version banner -->
         <div id="catalog-version-banner" class="catalog-version-banner">
             <div class="banner-text" id="catalog-version-banner-text"></div>
-            <button onclick="loadEmbeddedCatalog()" id="catalog-version-banner-btn">Load embedded catalog</button>
+            <button onclick="reviewCatalogChanges()" id="catalog-version-banner-btn">Review changes</button>
+        </div>
+
+        <!-- Catalog preview pane (filled by JS after a successful preview call) -->
+        <div id="catalog-preview-pane" class="catalog-preview-pane">
+            <div id="catalog-preview-body"></div>
         </div>
 
         <!-- Settings Panel -->
@@ -819,8 +927,8 @@
         <div id="load-config-form" class="add-layer-form">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0;">
                 <h3 style="margin: 0;">Load JSON Config into Catalog</h3>
-                <button class="import-button" style="background: #059669;" onclick="loadEmbeddedCatalog()">
-                    Load Embedded Catalog
+                <button class="import-button" style="background: #059669;" onclick="reviewCatalogChanges()">
+                    Review embedded catalog
                 </button>
             </div>
             <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px; margin-top: 12px;">
@@ -1113,6 +1221,168 @@
 
   // ── Catalog functions ──────────────────────────────────────────────────────
 
+  // ── Preview / Apply flow ───────────────────────────────────────────────────
+
+  function _renderBucketSection(label, items, className, opts) {
+    if (!items || items.length === 0) return ''
+    const open = opts && opts.open ? ' open' : ''
+    const rows = items.map(e =>
+      `<li>${escapeHtml(e.title || e.product_code)}` +
+      `<span class="path"> — ${escapeHtml(e.category || '')} › ${escapeHtml(e.subcategory || '')}</span></li>`
+    ).join('')
+    return `<details class="bucket ${className}"${open}>` +
+      `<summary>${escapeHtml(label)} (${items.length})</summary>` +
+      `<ul>${rows}</ul></details>`
+  }
+
+  function renderPreviewPane(data) {
+    const body = document.getElementById('catalog-preview-body')
+    if (!body) return
+
+    const conflicts = data.conflict || []
+    const toAdd     = data.to_add || []
+    const cleanUpd  = data.clean_update || []
+    const drift     = data.local_drift || []
+    const toRemove  = data.to_remove || []
+    const unchanged = data.unchanged || 0
+
+    const fromV = data.loaded_version
+      ? `v${escapeHtml(data.loaded_version)}`
+      : '(no version)'
+    const toV = data.catalog_version
+      ? `v${escapeHtml(data.catalog_version)}`
+      : '(no version)'
+
+    const hasChange = toAdd.length + cleanUpd.length + conflicts.length + toRemove.length > 0
+
+    let html = `
+      <h3>Review catalog update — ${fromV} → ${toV}</h3>
+      <div class="preview-sub">Nothing has been written yet. Pick an apply mode or cancel.</div>
+      <div class="preview-counts">
+        <span class="pc"><span class="pc-dot add"></span><strong>${toAdd.length}</strong> new</span>
+        <span class="pc"><span class="pc-dot update"></span><strong>${cleanUpd.length}</strong> updated</span>
+        <span class="pc"><span class="pc-dot drift"></span><strong>${drift.length}</strong> local drift</span>
+        <span class="pc"><span class="pc-dot conflict"></span><strong>${conflicts.length}</strong> conflict${conflicts.length === 1 ? '' : 's'}</span>
+        <span class="pc"><span class="pc-dot remove"></span><strong>${toRemove.length}</strong> to remove</span>
+        <span class="pc"><span class="pc-dot unchanged"></span><strong>${unchanged}</strong> unchanged</span>
+      </div>
+    `
+
+    html += _renderBucketSection('Conflicts (catalog changed AND Wagtail edited)', conflicts, 'conflict', { open: true })
+    html += _renderBucketSection('New entries to add',                              toAdd,     'add',      {})
+    html += _renderBucketSection('Clean updates (catalog moved, no local edits)',  cleanUpd,  'update',   {})
+    html += _renderBucketSection('Local drift (Wagtail-edited, catalog unchanged)', drift,    'drift',    {})
+    html += _renderBucketSection('To remove (gone from catalog source)',           toRemove,  'remove',   {})
+
+    if (data.errors && data.errors.length) {
+      const errs = data.errors.map(e => `<li>${escapeHtml(e)}</li>`).join('')
+      html += `<details class="bucket conflict" open>
+        <summary>Errors (${data.errors.length})</summary><ul>${errs}</ul></details>`
+    }
+
+    if (!hasChange) {
+      html += `<div class="preview-sub" style="margin-top:14px;">
+        Nothing to apply — catalog and database are in sync.</div>`
+    }
+
+    const skipLabel = conflicts.length
+      ? `Apply — keep ${conflicts.length} local edit${conflicts.length === 1 ? '' : 's'}`
+      : `Apply changes`
+
+    html += `<div class="preview-actions">`
+    if (hasChange) {
+      html += `<button class="btn-apply" onclick="applyPreview('skip')">${escapeHtml(skipLabel)}</button>`
+      if (conflicts.length) {
+        html += `<button class="btn-overwrite" onclick="applyPreview('overwrite')">Apply — overwrite ${conflicts.length} conflict${conflicts.length === 1 ? '' : 's'}</button>`
+      }
+    }
+    html += `<button class="btn-cancel" onclick="cancelPreview()">Cancel</button>`
+    html += `</div>`
+
+    body.innerHTML = html
+  }
+
+  async function reviewCatalogChanges() {
+    // Hide the banner while the preview is open; show the pane.
+    const banner = document.getElementById('catalog-version-banner')
+    const pane = document.getElementById('catalog-preview-pane')
+    const body = document.getElementById('catalog-preview-body')
+    if (banner) banner.classList.remove('visible')
+    if (pane) pane.classList.add('visible')
+    if (body) {
+      body.innerHTML = `<div class="preview-loading">
+        <span class="loading-spinner"></span> Computing changeset…</div>`
+    }
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_preview_embedded" %}', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken },
+        credentials: 'include',
+      })
+      const data = await response.json()
+      if (data.status !== 'success') {
+        body.innerHTML = `<div class="preview-loading" style="color:#b91c1c;">
+          ${escapeHtml(data.message || 'Preview failed')}</div>
+          <div class="preview-actions"><button class="btn-cancel" onclick="cancelPreview()">Close</button></div>`
+        return
+      }
+      // Use the loaded_version we already had on catalogData so the title is meaningful
+      // even before the apply touches CatalogState.
+      data.loaded_version = (catalogData && catalogData.loaded_version) || ''
+      renderPreviewPane(data)
+    } catch (err) {
+      body.innerHTML = `<div class="preview-loading" style="color:#b91c1c;">
+        Preview failed: ${escapeHtml(err.message)}</div>
+        <div class="preview-actions"><button class="btn-cancel" onclick="cancelPreview()">Close</button></div>`
+    }
+  }
+
+  function cancelPreview() {
+    const pane = document.getElementById('catalog-preview-pane')
+    if (pane) pane.classList.remove('visible')
+    // Re-render the banner from the cached catalogData (untouched since open).
+    if (catalogData) renderCatalogVersionBanner(catalogData)
+  }
+
+  async function applyPreview(conflictPolicy) {
+    const pane = document.getElementById('catalog-preview-pane')
+    const body = document.getElementById('catalog-preview-body')
+    if (body) {
+      body.innerHTML = `<div class="preview-loading">
+        <span class="loading-spinner"></span> Applying changes (${escapeHtml(conflictPolicy)})…</div>`
+    }
+    const resultsEl = document.getElementById('sync-results')
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_load_embedded" %}', {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrftoken,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ conflict_policy: conflictPolicy }),
+        credentials: 'include',
+      })
+      const result = await response.json()
+      if (pane) pane.classList.remove('visible')
+      if (result.status === 'success') {
+        resultsEl.className = 'sync-results visible success'
+        resultsEl.innerHTML = escapeHtml(result.message || 'Catalog loaded')
+      } else {
+        resultsEl.className = 'sync-results visible error'
+        resultsEl.innerHTML = escapeHtml(result.message || 'Apply failed')
+      }
+      await loadCatalog(false)
+    } catch (err) {
+      if (pane) pane.classList.remove('visible')
+      resultsEl.className = 'sync-results visible error'
+      resultsEl.innerHTML = 'Apply failed: ' + escapeHtml(err.message)
+    }
+  }
+
   function renderCatalogVersionBanner(data) {
     const banner = document.getElementById('catalog-version-banner')
     const textEl = document.getElementById('catalog-version-banner-text')
@@ -1133,7 +1403,7 @@
     if (!loaded) {
       banner.classList.add('visible', 'info')
       textEl.innerHTML = `No catalog loaded yet. Bundled catalog: <strong>v${embedded}</strong>.`
-      btn.textContent = `Load embedded catalog v${embedded}`
+      btn.textContent = `Review changes`
       return
     }
 
@@ -1141,8 +1411,8 @@
       banner.classList.add('visible', 'update')
       textEl.innerHTML =
         `A catalog update is available: <strong>v${loaded}</strong> → <strong>v${embedded}</strong>. ` +
-        `Loading will upsert entries by product_code (manual entries are not touched).`
-      btn.textContent = `Load v${embedded}`
+        `Review the changeset before applying — entries you edited in Wagtail can be kept.`
+      btn.textContent = `Review changes`
       return
     }
 
@@ -1845,40 +2115,6 @@
         resultsEl.innerHTML = result.message
         document.getElementById('config-json-input').value = ''
         toggleLoadConfigForm()
-        await loadCatalog(false)
-      } else {
-        resultsEl.className = 'sync-results visible error'
-        resultsEl.innerHTML = result.message
-      }
-    } catch (error) {
-      resultsEl.className = 'sync-results visible error'
-      resultsEl.innerHTML = 'Load failed: ' + error.message
-    }
-  }
-
-  async function loadEmbeddedCatalog() {
-    const resultsEl = document.getElementById('sync-results')
-    resultsEl.className = 'sync-results visible'
-    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> Loading embedded catalog...'
-
-    try {
-      const csrftoken = getCookie('csrftoken')
-      const response = await fetch('{% url "dataset_helper_plugin:catalog_load_embedded" %}', {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrftoken,
-        },
-        credentials: 'include'
-      })
-      if (!response.ok && response.headers.get('content-type')?.indexOf('application/json') === -1) {
-        throw new Error(`Server error ${response.status}. Check Django logs for details.`)
-      }
-      const result = await response.json()
-      if (result.status === 'success') {
-        resultsEl.className = 'sync-results visible success'
-        resultsEl.innerHTML = result.message
-        document.getElementById('config-json-input').value = ''
-        document.getElementById('load-config-form').classList.remove('visible')
         await loadCatalog(false)
       } else {
         resultsEl.className = 'sync-results visible error'

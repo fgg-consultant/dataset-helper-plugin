@@ -247,17 +247,31 @@ def get_embedded_catalog_version():
     return result
 
 
-def load_embedded_catalog():
+def load_embedded_catalog(conflict_policy='overwrite'):
     """
     Load the bundled catalog.json directly from disk into the CatalogEntry
     table. Bypasses the browser/static-handler round trip so we always
     process the file currently on disk, never a stale cached/collected
     copy.
 
+    ``conflict_policy`` controls what happens when an entry's catalog
+    content has changed AND the provisioned Climweb Dataset has been
+    edited locally:
+      - 'skip'      : keep local edits, hold off the catalog change
+      - 'overwrite' : adopt the new catalog content (default)
+
+    The embedded catalog is authoritative for its scope: config-origin
+    entries that disappear from the JSON are marked ``enabled=False``
+    so the next Climweb sync deprovisions them.
+
     Returns the stats dict from load_catalog_from_config.
     """
     data, _ = _read_embedded_catalog()
-    return load_catalog_from_config(data)
+    return load_catalog_from_config(
+        data,
+        conflict_policy=conflict_policy,
+        mark_removed=True,
+    )
 
 
 def preview_embedded_catalog():
@@ -419,10 +433,9 @@ def _substitute_estation_url(wms_url, estation_url):
     return wms_url
 
 
-def load_catalog_from_config(json_data, handle_entry=None):
+def load_catalog_from_config(json_data, handle_entry=None, conflict_policy='overwrite', mark_removed=False):
     """
     Parse a config JSON and populate the CatalogEntry table.
-    Uses update_or_create keyed on product_code for idempotency.
 
     Supports two formats:
     1. Nested: {"categories": [{"title":..., "subcategories": [{"datasets": [...]}]}]}
@@ -432,16 +445,30 @@ def load_catalog_from_config(json_data, handle_entry=None):
     and eStation local product filtering.
 
     ``handle_entry`` is the callback invoked for every layer found in the
-    JSON; it receives ``(product_code, defaults, stats)``. Defaults to
-    ``_upsert_entry`` (writes to DB). The dry-run preview path passes a
-    collector here instead, so no writes happen.
+    JSON; it receives ``(product_code, defaults, stats)``. Defaults to a
+    policy-aware wrapper around ``_upsert_entry``. The dry-run preview
+    path passes a collector here instead, so no writes happen.
 
-    Returns stats dict with created/updated/unchanged counts.
+    ``conflict_policy`` is forwarded to ``_upsert_entry`` (only meaningful
+    on the default real-write path):
+      - 'overwrite' : always apply catalog content (default; matches the
+                      historical behavior of the textarea-paste flow)
+      - 'skip'      : skip entries whose Climweb Dataset diverged locally
+
+    ``mark_removed`` (default False, set to True by the embedded-catalog
+    loader): after the walk, ``origin=config`` entries that did not
+    appear in the JSON are disabled (so the next sync deprovisions
+    them). The textarea-paste path leaves this off — a paste is not
+    necessarily authoritative for the whole catalog.
+
+    Returns stats dict with created/updated/unchanged/conflict_skipped/removed.
     """
     stats = {
         'created': 0,
         'updated': 0,
         'unchanged': 0,
+        'conflict_skipped': 0,
+        'removed': 0,
         'skipped_estation': 0,
         'skipped_ecmwf_no_token': 0,
         'errors': [],
@@ -463,8 +490,21 @@ def load_catalog_from_config(json_data, handle_entry=None):
 
     estation_url = settings.estation_url
 
-    if handle_entry is None:
-        handle_entry = _upsert_entry
+    real_write = handle_entry is None
+    seen_codes = set() if mark_removed else None
+
+    if real_write:
+        def _default_handler(pc, defaults, stats):
+            _upsert_entry(pc, defaults, stats, conflict_policy=conflict_policy)
+            if seen_codes is not None:
+                seen_codes.add(pc)
+        handle_entry = _default_handler
+    elif seen_codes is not None:
+        original = handle_entry
+        def _tracking_wrapper(pc, defaults, stats):
+            original(pc, defaults, stats)
+            seen_codes.add(pc)
+        handle_entry = _tracking_wrapper
 
     if json_data.get('categories'):
         _load_nested_format(json_data, stats, lang, ecmwf_token, estation_product_ids, estation_url, handle_entry)
@@ -476,9 +516,17 @@ def load_catalog_from_config(json_data, handle_entry=None):
             'or "products" (flat format).'
         )
 
-    # Only stamp the loaded version when we actually wrote — preview/dry-run
-    # uses a non-default handle_entry and must not advance CatalogState.
-    real_write = handle_entry is _upsert_entry
+    if real_write and seen_codes is not None:
+        # Disable enabled config-origin entries that disappeared from the JSON.
+        # Bulk .update() bypasses auto_now, so set updated_at explicitly.
+        removed = (
+            CatalogEntry.objects
+            .filter(origin=CatalogEntry.ORIGIN_CONFIG, enabled=True)
+            .exclude(product_code__in=seen_codes)
+            .update(enabled=False, updated_at=timezone.now())
+        )
+        stats['removed'] = removed
+
     if real_write and stats['created'] + stats['updated'] + stats['unchanged'] > 0:
         state = CatalogState.load()
         state.loaded_version = version
@@ -712,14 +760,18 @@ def _load_products_format(json_data, stats, lang='en', ecmwf_token='', estation_
         handle_entry(product_id, defaults, stats)
 
 
-def _upsert_entry(product_code, defaults, stats):
+def _upsert_entry(product_code, defaults, stats, conflict_policy='overwrite'):
     """
     Create or update a CatalogEntry and update stats.
 
-    Distinguishes three outcomes using ``source_hash``:
-      - created: no row existed for this product_code
-      - updated: row existed, catalog content changed
-      - unchanged: row existed, catalog content is byte-identical
+    Outcomes (tracked in stats):
+      - created          : no row existed for this product_code
+      - updated          : row existed, catalog content changed, applied
+      - unchanged        : row existed, catalog content is byte-identical
+      - conflict_skipped : row existed, catalog content changed, but the
+                           provisioned Climweb Dataset has diverged from
+                           its baseline AND conflict_policy='skip' — the
+                           local edits win, the catalog change is held off.
     """
     incoming_hash = compute_source_hash(defaults)
 
@@ -740,6 +792,12 @@ def _upsert_entry(product_code, defaults, stats):
     if entry.source_hash == incoming_hash:
         stats['unchanged'] += 1
         return
+
+    if conflict_policy == 'skip' and entry.dataset_id and entry.provisioned_hash:
+        current = compute_provisioned_hash(entry.dataset_id)
+        if current != entry.provisioned_hash:
+            stats['conflict_skipped'] += 1
+            return
 
     for field, value in defaults.items():
         setattr(entry, field, value)
