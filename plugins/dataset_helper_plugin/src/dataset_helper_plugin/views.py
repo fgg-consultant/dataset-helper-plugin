@@ -457,6 +457,33 @@ def settings_save(request):
 
 @csrf_exempt
 @require_POST
+def catalog_clear_provisioned(request):
+    """
+    Delete only the Climweb Datasets that this plugin provisioned.
+    Categories, SubCategories, and external (non-plugin) Datasets are
+    left alone. CatalogEntry rows remain — their dataset_id and hashes
+    are cleared, so they go back to pending_add for a future sync.
+    """
+    try:
+        stats = services.clear_provisioned_datasets()
+    except Exception as e:
+        logger.exception("catalog_clear_provisioned failed")
+        return JsonResponse({'status': 'error', 'message': f'Clear failed: {e}'}, status=500)
+
+    return JsonResponse({
+        'status': 'success',
+        'message': (
+            f"Cleared catalog-managed data: "
+            f"{stats['datasets_deleted']} Dataset(s), "
+            f"{stats['metadata_deleted']} Metadata object(s). "
+            f"{stats['entries_reset']} catalog entries reset to pending_add."
+        ),
+        **stats,
+    })
+
+
+@csrf_exempt
+@require_POST
 def clear_all(request):
     """
     Clear all datasets and categories.

@@ -11,6 +11,7 @@ urlpatterns = [
     path('catalog/<uuid:entry_id>/toggle/', views.catalog_toggle, name='catalog_toggle'),
     path('catalog/entry/', views.catalog_add_entry, name='catalog_add_entry'),
     path('catalog/reset/', views.catalog_reset, name='catalog_reset'),
+    path('catalog/clear-provisioned/', views.catalog_clear_provisioned, name='catalog_clear_provisioned'),
     path('catalog/bulk-toggle/', views.catalog_bulk_toggle, name='catalog_bulk_toggle'),
     path('catalog/wms-capabilities/', views.catalog_wms_capabilities, name='catalog_wms_capabilities'),
 

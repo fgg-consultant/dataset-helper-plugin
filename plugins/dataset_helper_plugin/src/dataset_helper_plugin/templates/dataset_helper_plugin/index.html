@@ -971,9 +971,32 @@
     <div id="danger-zone" class="tab-content">
         <div class="danger-zone">
             <h3>Danger Zone</h3>
-            <p style="margin-bottom: 16px;">
-                This will permanently delete <strong>all datasets, subcategories, and categories</strong>
-                in the Climweb geomanager. This action cannot be undone.
+
+            <h4 style="margin-top: 8px;">Clear catalog-managed datasets</h4>
+            <p style="margin-bottom: 12px;">
+                Delete every Climweb Dataset this plugin provisioned (tracked via
+                <code>CatalogEntry.dataset_id</code>) and its dedicated Metadata.
+                <strong>Datasets you created outside the plugin are kept</strong>,
+                as are Categories and SubCategories (which may be shared).
+                Catalog entries go back to <em>pending_add</em> and can be
+                re-provisioned by clicking <em>Synchronize with Climweb</em>.
+            </p>
+            <button id="clear-provisioned-button" class="danger-button" onclick="clearProvisioned()">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                Clear catalog-managed datasets
+            </button>
+            <div id="clear-provisioned-results" class="results-panel" style="margin-top: 16px;"></div>
+
+            <hr style="margin: 28px 0; border: none; border-top: 1px solid #fecaca;">
+
+            <h4 style="color: #991b1b;">Wipe ALL Climweb data (nuclear)</h4>
+            <p style="margin-bottom: 12px;">
+                This deletes <strong>every</strong> Dataset, SubCategory, and Category
+                in the Climweb geomanager — including any not created by this plugin.
+                Use only if you understand what this implies. Cannot be undone.
             </p>
             <button id="clear-all-button" class="danger-button" onclick="clearAll()">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1019,6 +1042,76 @@
       document.getElementById(tabId).classList.add('active')
     })
   })
+
+  // Clear only plugin-provisioned datasets (selective).
+  async function clearProvisioned() {
+    const confirmed = confirm(
+      'Delete all Climweb Datasets that this plugin provisioned?\n\n' +
+      'Datasets created outside the plugin will be kept.\n' +
+      'Catalog entries will be reset to pending_add.\n\n' +
+      'This action cannot be undone.'
+    )
+    if (!confirmed) return
+
+    const button = document.getElementById('clear-provisioned-button')
+    const resultsPanel = document.getElementById('clear-provisioned-results')
+
+    const originalHtml = button.innerHTML
+    button.disabled = true
+    button.innerHTML = '<span class="loading-spinner"></span>Clearing…'
+
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_clear_provisioned" %}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        credentials: 'include'
+      })
+      const data = await response.json()
+      resultsPanel.classList.add('visible')
+
+      if (data.status === 'success') {
+        resultsPanel.classList.remove('error')
+        resultsPanel.classList.add('success')
+        resultsPanel.innerHTML = `
+          <h4 style="color: #059669; margin-top: 0;">Catalog datasets cleared</h4>
+          <div class="results-summary">
+            <div class="result-stat">
+              <div class="number">${data.datasets_deleted}</div>
+              <div class="label">Datasets Deleted</div>
+            </div>
+            <div class="result-stat">
+              <div class="number">${data.metadata_deleted}</div>
+              <div class="label">Metadata Deleted</div>
+            </div>
+            <div class="result-stat">
+              <div class="number">${data.entries_reset}</div>
+              <div class="label">Catalog Entries Reset</div>
+            </div>
+          </div>
+          <p style="margin-top: 16px;">
+            Categories and SubCategories were preserved.
+            <a href="javascript:window.location.reload()" style="color: #059669;">Refresh the page</a>
+            to see the updated state.
+          </p>
+        `
+      } else {
+        resultsPanel.classList.remove('success')
+        resultsPanel.classList.add('error')
+        resultsPanel.innerHTML = `<p style="color: #dc2626;">Error: ${escapeHtml(data.message || 'Clear failed')}</p>`
+      }
+    } catch (error) {
+      resultsPanel.classList.add('visible', 'error')
+      resultsPanel.classList.remove('success')
+      resultsPanel.innerHTML = `<p style="color: #dc2626;">Error: ${escapeHtml(error.message)}</p>`
+    }
+
+    button.disabled = false
+    button.innerHTML = originalHtml
+  }
 
   // Clear all datasets and categories
   async function clearAll() {

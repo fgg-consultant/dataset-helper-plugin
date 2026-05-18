@@ -1360,6 +1360,51 @@ def _deprovision_entry(entry):
         Dataset.objects.filter(id=entry.dataset_id).delete()
 
 
+def clear_provisioned_datasets():
+    """
+    Delete every Climweb Dataset that this plugin provisioned (i.e. every
+    Dataset whose UUID is referenced by some ``CatalogEntry.dataset_id``)
+    together with its dedicated Metadata. Categories and SubCategories
+    are deliberately left alone — they can be shared with non-plugin
+    Datasets, and reset by hand if the admin really wants them gone.
+
+    CatalogEntry rows themselves are preserved; their ``dataset_id`` and
+    provisioning hashes are cleared, so each entry goes back to
+    ``pending_add`` and can be re-provisioned by the next sync.
+    """
+    entries_qs = CatalogEntry.objects.exclude(dataset_id=None)
+    dataset_ids = list(entries_qs.values_list('dataset_id', flat=True))
+
+    target_datasets = Dataset.objects.filter(id__in=dataset_ids)
+    datasets_count = target_datasets.count()
+    metadata_ids = list(
+        target_datasets
+        .exclude(metadata=None)
+        .values_list('metadata_id', flat=True)
+    )
+
+    # Delete Datasets first — cascade takes care of WmsLayer / RasterTileLayer
+    # / etc. and their children. Metadata is FK'd FROM Dataset so it gets
+    # orphaned, not cascade-deleted; clean it up explicitly below.
+    target_datasets.delete()
+
+    metadata_result = Metadata.objects.filter(id__in=metadata_ids).delete()
+    metadata_deleted = metadata_result[0] if metadata_result else 0
+
+    entries_reset = entries_qs.update(
+        dataset_id=None,
+        provisioned_hash='',
+        provisioned_source_hash='',
+        updated_at=timezone.now(),
+    )
+
+    return {
+        'datasets_deleted': datasets_count,
+        'metadata_deleted': metadata_deleted,
+        'entries_reset': entries_reset,
+    }
+
+
 def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
     """
     Add a new CatalogEntry from manual input or WMS import.
