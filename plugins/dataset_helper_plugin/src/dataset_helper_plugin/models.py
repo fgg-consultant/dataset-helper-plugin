@@ -337,6 +337,15 @@ class CatalogEntry(models.Model):
                     "time this entry was provisioned or re-provisioned. Used to "
                     "detect Wagtail admin edits that diverge from the catalog."),
     )
+    provisioned_source_hash = models.CharField(
+        max_length=64,
+        blank=True,
+        default='',
+        verbose_name=_("Source hash at last sync"),
+        help_text=_("Value of source_hash at the moment of the last successful "
+                    "sync. Used to detect whether the catalog content has moved "
+                    "since the Climweb Dataset was provisioned."),
+    )
 
     # --- Ordering ---
     category_order = models.IntegerField(default=0, verbose_name=_("Category sort order"))

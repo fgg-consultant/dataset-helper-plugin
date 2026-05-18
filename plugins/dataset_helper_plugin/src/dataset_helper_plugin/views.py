@@ -188,13 +188,17 @@ def catalog_sync(request):
     """Provision enabled entries to Climweb and deprovision disabled ones."""
     try:
         stats = services.sync_catalog_to_climweb()
+        parts = [
+            f"{stats['added']} added",
+            f"{stats['removed']} removed",
+            f"{stats['reprovisioned']} updated",
+            f"{stats['orphans_cleared']} orphans cleared",
+        ]
+        if stats.get('raster_file_drift'):
+            parts.append(f"{stats['raster_file_drift']} raster_file drift (skipped)")
         return JsonResponse({
             'status': 'success',
-            'message': (
-                f"Sync complete: {stats['added']} added, "
-                f"{stats['removed']} removed, "
-                f"{stats['orphans_cleared']} orphans cleared"
-            ),
+            'message': "Sync complete: " + ", ".join(parts),
             **stats,
         })
     except Exception as e:

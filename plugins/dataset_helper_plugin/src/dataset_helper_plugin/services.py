@@ -812,13 +812,22 @@ def sync_catalog_to_climweb():
 
     - pending_add entries: create Climweb objects and store dataset_id
     - pending_remove entries: delete Climweb Dataset (cascades) and clear dataset_id
-    - synced entries: verify Dataset still exists; clear dataset_id if orphaned
+    - synced entries:
+        * verify Dataset still exists; orphan-clear if not
+        * if source_hash advanced since last sync, re-provision (write-
+          through of catalog updates)
+        * otherwise, only sync the public flag (cheap drift check)
+      raster_file is intentionally skipped from re-provision — wiping
+      uploaded time-slot files just to update a title would be too
+      destructive, so the drift is surfaced via a counter instead.
 
     Returns stats dict.
     """
     stats = {
         'added': 0,
         'removed': 0,
+        'reprovisioned': 0,
+        'raster_file_drift': 0,
         'orphans_cleared': 0,
         'already_synced': 0,
         'public_updated': 0,
@@ -836,8 +845,48 @@ def sync_catalog_to_climweb():
                     dataset = Dataset.objects.filter(id=entry.dataset_id).first()
                     if dataset is None:
                         entry.dataset_id = None
-                        entry.save(update_fields=['dataset_id', 'updated_at'])
+                        entry.provisioned_hash = ''
+                        entry.provisioned_source_hash = ''
+                        entry.save(update_fields=[
+                            'dataset_id', 'provisioned_hash',
+                            'provisioned_source_hash', 'updated_at',
+                        ])
                         stats['orphans_cleared'] += 1
+                        continue
+
+                    # First-time baseline for entries that pre-date the
+                    # provisioned_source_hash migration: any pre-migration
+                    # drift is unrecoverable, but we want detection to work
+                    # going forward.
+                    if entry.source_hash and not entry.provisioned_source_hash:
+                        entry.provisioned_source_hash = entry.source_hash
+                        if not entry.provisioned_hash:
+                            entry.provisioned_hash = compute_provisioned_hash(entry.dataset_id)
+                        entry.save(update_fields=[
+                            'provisioned_hash', 'provisioned_source_hash', 'updated_at',
+                        ])
+                        stats['already_synced'] += 1
+                        continue
+
+                    catalog_moved = (
+                        entry.source_hash
+                        and entry.provisioned_source_hash
+                        and entry.source_hash != entry.provisioned_source_hash
+                    )
+
+                    if catalog_moved and entry.layer_type == CatalogEntry.LAYER_TYPE_RASTER_FILE:
+                        # Re-provisioning would delete uploaded LayerRasterFile
+                        # rows; surface the drift but leave Climweb alone.
+                        stats['raster_file_drift'] += 1
+                        stats['already_synced'] += 1
+                    elif catalog_moved:
+                        _reprovision_entry(entry, dataset)
+                        entry.provisioned_hash = compute_provisioned_hash(entry.dataset_id)
+                        entry.provisioned_source_hash = entry.source_hash
+                        entry.save(update_fields=[
+                            'provisioned_hash', 'provisioned_source_hash', 'updated_at',
+                        ])
+                        stats['reprovisioned'] += 1
                     else:
                         if dataset.public != entry.public:
                             dataset.public = entry.public
@@ -854,7 +903,11 @@ def sync_catalog_to_climweb():
                     dataset_id = _provision_entry(entry)
                     entry.dataset_id = dataset_id
                     entry.provisioned_hash = compute_provisioned_hash(dataset_id)
-                    entry.save(update_fields=['dataset_id', 'provisioned_hash', 'updated_at'])
+                    entry.provisioned_source_hash = entry.source_hash
+                    entry.save(update_fields=[
+                        'dataset_id', 'provisioned_hash',
+                        'provisioned_source_hash', 'updated_at',
+                    ])
                 stats['added'] += 1
             except Exception as e:
                 stats['errors'].append(f"Failed to provision '{entry.title}': {e}")
@@ -866,7 +919,11 @@ def sync_catalog_to_climweb():
                     _deprovision_entry(entry)
                     entry.dataset_id = None
                     entry.provisioned_hash = ''
-                    entry.save(update_fields=['dataset_id', 'provisioned_hash', 'updated_at'])
+                    entry.provisioned_source_hash = ''
+                    entry.save(update_fields=[
+                        'dataset_id', 'provisioned_hash',
+                        'provisioned_source_hash', 'updated_at',
+                    ])
                 stats['removed'] += 1
             except Exception as e:
                 stats['errors'].append(f"Failed to deprovision '{entry.title}': {e}")
@@ -971,6 +1028,103 @@ def _provision_entry(entry):
         raise ValueError(f"Unsupported layer type: {entry.layer_type}")
     provisioner(entry, dataset)
     return dataset.id
+
+
+def _clear_layer_objects(dataset):
+    """
+    Delete the layer-type-specific objects attached to ``dataset`` so the
+    matching provisioner can re-create them cleanly. Children of these
+    layer objects (WmsRequestLayer, WmsRequestParam, …) cascade-delete.
+    raster_file is deliberately not cleared — its uploaded files would
+    be lost; ``sync_catalog_to_climweb`` skips raster_file re-provision
+    for the same reason.
+    """
+    WmsLayer.objects.filter(dataset=dataset).delete()
+    RasterTileLayer.objects.filter(dataset=dataset).delete()
+    VectorTileLayer.objects.filter(dataset=dataset).delete()
+    if RasterCOGLayer is not None:
+        RasterCOGLayer.objects.filter(dataset=dataset).delete()
+
+
+def _reprovision_entry(entry, dataset):
+    """
+    Push the current CatalogEntry contents back onto an already-provisioned
+    Climweb Dataset, preserving its UUID (so any external reference that
+    points at this Dataset stays valid).
+
+    Updates Category/SubCategory assignment (catalog can reshuffle these),
+    Dataset scalar fields, Metadata (one-to-one), and replaces the
+    layer-type-specific objects via the same provisioner used by the
+    add path.
+    """
+    category, _ = Category.objects.get_or_create(
+        title=entry.category_title,
+        defaults={'icon': entry.category_icon, 'active': True, 'public': True},
+    )
+    if category.order != entry.category_order:
+        category.order = entry.category_order
+        category.save(update_fields=['order'])
+
+    subcategory, _ = SubCategory.objects.get_or_create(
+        title=entry.subcategory_title,
+        category=category,
+        defaults={'active': True, 'public': True},
+    )
+    if subcategory.sort_order != entry.subcategory_order:
+        subcategory.sort_order = entry.subcategory_order
+        subcategory.save(update_fields=['sort_order'])
+
+    multi_temporal = (
+        True
+        if entry.layer_type == CatalogEntry.LAYER_TYPE_RASTER_FILE
+        else entry.multi_temporal
+    )
+    dataset.title = entry.title
+    dataset.category = category
+    dataset.sub_category = subcategory
+    dataset.layer_type = entry.layer_type
+    dataset.public = entry.public
+    dataset.multi_temporal = multi_temporal
+    dataset.near_realtime = entry.near_realtime
+    dataset.summary = entry.summary or ''
+    dataset.save()
+
+    has_metadata_fields = any([
+        entry.meta_source, entry.meta_resolution, entry.meta_function,
+        entry.meta_overview, entry.meta_geographic_coverage,
+    ])
+    if dataset.metadata:
+        m = dataset.metadata
+        m.title = entry.meta_source or entry.title
+        m.function = entry.meta_function or None
+        m.resolution = entry.meta_resolution or None
+        m.geographic_coverage = entry.meta_geographic_coverage or None
+        m.source = entry.meta_source or None
+        m.license = entry.meta_license or None
+        m.frequency_of_update = entry.meta_frequency_of_update or None
+        m.overview = entry.meta_overview or None
+        m.learn_more = entry.meta_learn_more or None
+        m.save()
+    elif has_metadata_fields:
+        metadata = Metadata.objects.create(
+            title=entry.meta_source or entry.title,
+            function=entry.meta_function or None,
+            resolution=entry.meta_resolution or None,
+            geographic_coverage=entry.meta_geographic_coverage or None,
+            source=entry.meta_source or None,
+            license=entry.meta_license or None,
+            frequency_of_update=entry.meta_frequency_of_update or None,
+            overview=entry.meta_overview or None,
+            learn_more=entry.meta_learn_more or None,
+        )
+        dataset.metadata = metadata
+        dataset.save(update_fields=['metadata'])
+
+    _clear_layer_objects(dataset)
+    provisioner = _PROVISIONERS.get(entry.layer_type)
+    if provisioner is None:
+        raise ValueError(f"Unsupported layer type: {entry.layer_type}")
+    provisioner(entry, dataset)
 
 
 def _provision_wms(entry, dataset):
