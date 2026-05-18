@@ -1360,13 +1360,56 @@ def _deprovision_entry(entry):
         Dataset.objects.filter(id=entry.dataset_id).delete()
 
 
+def _sweep_empty_taxonomy():
+    """
+    Delete SubCategories that no longer reference any Dataset, then
+    Categories that no longer reference any Dataset or SubCategory.
+
+    Emptiness is determined against the *current* Dataset / SubCategory
+    state — so anything still pointed to by a non-plugin Dataset stays.
+    PROTECT FKs on Dataset.category and Dataset.sub_category give Django
+    a built-in safety net: the exclude() filter is the primary guard,
+    PROTECT is the belt-and-suspenders.
+
+    Returns (subcategories_deleted, categories_deleted).
+    """
+    subcat_ids_with_datasets = (
+        Dataset.objects
+        .exclude(sub_category=None)
+        .values_list('sub_category_id', flat=True)
+        .distinct()
+    )
+    empty_subcats = SubCategory.objects.exclude(id__in=list(subcat_ids_with_datasets))
+    subcats_deleted = empty_subcats.count()
+    empty_subcats.delete()
+
+    cat_ids_with_datasets = (
+        Dataset.objects
+        .exclude(category=None)
+        .values_list('category_id', flat=True)
+        .distinct()
+    )
+    cat_ids_with_subcats = (
+        SubCategory.objects
+        .values_list('category_id', flat=True)
+        .distinct()
+    )
+    cat_ids_in_use = set(cat_ids_with_datasets) | set(cat_ids_with_subcats)
+    empty_cats = Category.objects.exclude(id__in=cat_ids_in_use)
+    cats_deleted = empty_cats.count()
+    empty_cats.delete()
+
+    return subcats_deleted, cats_deleted
+
+
 def clear_provisioned_datasets():
     """
     Delete every Climweb Dataset that this plugin provisioned (i.e. every
     Dataset whose UUID is referenced by some ``CatalogEntry.dataset_id``)
-    together with its dedicated Metadata. Categories and SubCategories
-    are deliberately left alone — they can be shared with non-plugin
-    Datasets, and reset by hand if the admin really wants them gone.
+    together with its dedicated Metadata, then garbage-collect any
+    SubCategories and Categories left empty as a result. Categories and
+    SubCategories still referenced by external (non-plugin) Datasets
+    stay untouched.
 
     CatalogEntry rows themselves are preserved; their ``dataset_id`` and
     provisioning hashes are cleared, so each entry goes back to
@@ -1391,6 +1434,8 @@ def clear_provisioned_datasets():
     metadata_result = Metadata.objects.filter(id__in=metadata_ids).delete()
     metadata_deleted = metadata_result[0] if metadata_result else 0
 
+    subcats_deleted, cats_deleted = _sweep_empty_taxonomy()
+
     entries_reset = entries_qs.update(
         dataset_id=None,
         provisioned_hash='',
@@ -1401,6 +1446,8 @@ def clear_provisioned_datasets():
     return {
         'datasets_deleted': datasets_count,
         'metadata_deleted': metadata_deleted,
+        'subcategories_deleted': subcats_deleted,
+        'categories_deleted': cats_deleted,
         'entries_reset': entries_reset,
     }
 

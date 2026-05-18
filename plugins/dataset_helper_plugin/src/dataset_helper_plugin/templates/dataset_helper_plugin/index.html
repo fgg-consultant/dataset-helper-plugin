@@ -975,9 +975,10 @@
             <h4 style="margin-top: 8px;">Clear catalog-managed datasets</h4>
             <p style="margin-bottom: 12px;">
                 Delete every Climweb Dataset this plugin provisioned (tracked via
-                <code>CatalogEntry.dataset_id</code>) and its dedicated Metadata.
-                <strong>Datasets you created outside the plugin are kept</strong>,
-                as are Categories and SubCategories (which may be shared).
+                <code>CatalogEntry.dataset_id</code>) and its dedicated Metadata,
+                then sweep any SubCategories and Categories that no longer hold
+                anything. <strong>Datasets you created outside the plugin are kept</strong>;
+                so are taxonomy nodes still pointed to by non-plugin Datasets.
                 Catalog entries go back to <em>pending_add</em> and can be
                 re-provisioned by clicking <em>Synchronize with Climweb</em>.
             </p>
@@ -1088,12 +1089,21 @@
               <div class="label">Metadata Deleted</div>
             </div>
             <div class="result-stat">
+              <div class="number">${data.subcategories_deleted}</div>
+              <div class="label">Empty SubCategories Swept</div>
+            </div>
+            <div class="result-stat">
+              <div class="number">${data.categories_deleted}</div>
+              <div class="label">Empty Categories Swept</div>
+            </div>
+            <div class="result-stat">
               <div class="number">${data.entries_reset}</div>
               <div class="label">Catalog Entries Reset</div>
             </div>
           </div>
           <p style="margin-top: 16px;">
-            Categories and SubCategories were preserved.
+            Datasets, SubCategories and Categories that did not come from this plugin
+            were preserved.
             <a href="javascript:window.location.reload()" style="color: #059669;">Refresh the page</a>
             to see the updated state.
           </p>

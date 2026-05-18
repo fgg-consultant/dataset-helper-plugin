@@ -277,7 +277,9 @@ def catalog_reset(request):
             'message': (
                 f"Catalog reset: {entries_deleted} catalog entries deleted, "
                 f"{clear_stats['datasets_deleted']} Climweb Dataset(s) removed, "
-                f"{clear_stats['metadata_deleted']} Metadata removed"
+                f"{clear_stats['metadata_deleted']} Metadata removed, "
+                f"{clear_stats['subcategories_deleted']} empty SubCategor(ies) swept, "
+                f"{clear_stats['categories_deleted']} empty Categor(ies) swept"
             ),
             'deleted': entries_deleted,
             **clear_stats,
@@ -489,7 +491,9 @@ def catalog_clear_provisioned(request):
         'message': (
             f"Cleared catalog-managed data: "
             f"{stats['datasets_deleted']} Dataset(s), "
-            f"{stats['metadata_deleted']} Metadata object(s). "
+            f"{stats['metadata_deleted']} Metadata, "
+            f"{stats['subcategories_deleted']} empty SubCategor(ies), "
+            f"{stats['categories_deleted']} empty Categor(ies). "
             f"{stats['entries_reset']} catalog entries reset to pending_add."
         ),
         **stats,
