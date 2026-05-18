@@ -480,6 +480,16 @@
         border: 1px solid #bfdbfe;
         color: #1e3a8a;
     }
+    .catalog-version-banner.passive {
+        background: transparent;
+        border: none;
+        padding: 4px 2px;
+        margin-bottom: 10px;
+        color: #6b7280;
+        font-size: 12px;
+    }
+    .catalog-version-banner.passive button { display: none; }
+    .catalog-version-banner.passive .banner-text strong { color: #374151; }
     .catalog-version-banner .banner-text { flex: 1 1 auto; min-width: 0; }
     .catalog-version-banner .banner-text strong { font-weight: 600; }
     .catalog-version-banner button {
@@ -1383,6 +1393,13 @@
     }
   }
 
+  function _formatLoadedAt(iso) {
+    if (!iso) return ''
+    const d = new Date(iso)
+    if (isNaN(d.getTime())) return ''
+    return d.toLocaleString()
+  }
+
   function renderCatalogVersionBanner(data) {
     const banner = document.getElementById('catalog-version-banner')
     const textEl = document.getElementById('catalog-version-banner-text')
@@ -1392,8 +1409,9 @@
     const embedded = data.embedded_version || ''
     const loaded = data.loaded_version || ''
     const updateAvailable = !!data.update_available
+    const loadedAt = _formatLoadedAt(data.loaded_at)
 
-    banner.classList.remove('visible', 'update', 'info')
+    banner.classList.remove('visible', 'update', 'info', 'passive')
 
     if (!embedded) {
       // No version info in the bundled file — nothing meaningful to display.
@@ -1416,8 +1434,12 @@
       return
     }
 
-    // Versions match — keep silent. We could surface "v{loaded} loaded on …"
-    // later if we want a passive indicator.
+    // Versions match — show a passive indicator so the admin always knows
+    // which catalog revision is live.
+    banner.classList.add('visible', 'passive')
+    textEl.innerHTML = loadedAt
+      ? `Catalog <strong>v${loaded}</strong> · loaded ${loadedAt}`
+      : `Catalog <strong>v${loaded}</strong> loaded`
   }
 
   let catalogData = null
