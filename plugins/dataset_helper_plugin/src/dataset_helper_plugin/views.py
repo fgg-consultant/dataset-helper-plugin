@@ -251,13 +251,21 @@ def catalog_bulk_toggle(request):
 @csrf_exempt
 @require_POST
 def catalog_reset(request):
-    """Delete all CatalogEntry objects, resetting the catalog to empty."""
+    """
+    Wipe everything this plugin tracks: delete the Climweb Datasets it
+    provisioned (selective — non-plugin Datasets, Categories and
+    SubCategories are kept), then delete all CatalogEntry rows (config,
+    manual, wms_import) and clear CatalogState.
+
+    Order matters: clear_provisioned_datasets reads dataset_id from
+    CatalogEntry, so it must run before the entries are deleted.
+    """
     try:
-        count = CatalogEntry.objects.count()
+        clear_stats = services.clear_provisioned_datasets()
+
+        entries_deleted = CatalogEntry.objects.count()
         CatalogEntry.objects.all().delete()
 
-        # An empty DB means no catalog is loaded — drop the recorded version
-        # so the admin UI offers the "Load embedded catalog" banner again.
         state = CatalogState.load()
         state.loaded_version = ''
         state.loaded_schema_version = 0
@@ -266,10 +274,16 @@ def catalog_reset(request):
 
         return JsonResponse({
             'status': 'success',
-            'message': f'Catalog reset: {count} entries deleted',
-            'deleted': count,
+            'message': (
+                f"Catalog reset: {entries_deleted} catalog entries deleted, "
+                f"{clear_stats['datasets_deleted']} Climweb Dataset(s) removed, "
+                f"{clear_stats['metadata_deleted']} Metadata removed"
+            ),
+            'deleted': entries_deleted,
+            **clear_stats,
         })
     except Exception as e:
+        logger.exception("catalog_reset failed")
         return JsonResponse({'status': 'error', 'message': f'Reset failed: {e}'}, status=500)
 
 

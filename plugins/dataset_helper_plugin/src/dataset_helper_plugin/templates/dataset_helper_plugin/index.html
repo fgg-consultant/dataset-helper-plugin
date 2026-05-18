@@ -1840,9 +1840,14 @@
   }
 
   async function resetCatalog() {
+    const total = (catalogData && catalogData.total) || 0
+    const synced = (catalogData && catalogData.synced) || 0
     const confirmed = confirm(
-      'Are you sure you want to reset the catalog?\n\n' +
-      'This will delete all catalog entries. Climweb datasets will NOT be affected.'
+      'Reset the entire catalog?\n\n' +
+      `• ${total} catalog entries will be deleted (config, manual, wms_import).\n` +
+      `• ~${synced} Climweb Dataset(s) provisioned by the plugin will be removed.\n` +
+      '• Categories, SubCategories and Datasets not managed by the plugin are kept.\n\n' +
+      'This action cannot be undone.'
     )
     if (!confirmed) return
 
