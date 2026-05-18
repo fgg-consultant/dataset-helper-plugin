@@ -65,6 +65,7 @@ SOURCE_HASH_FIELDS = (
     'meta_license', 'meta_frequency_of_update', 'meta_function',
     'meta_overview', 'meta_learn_more',
     'multi_temporal', 'near_realtime',
+    'initial_visible', 'auto_update_interval',
     'category_order', 'subcategory_order', 'entry_order',
 )
 
@@ -171,6 +172,8 @@ def compute_provisioned_hash(dataset_id):
         'public': dataset.public,
         'multi_temporal': dataset.multi_temporal,
         'near_realtime': dataset.near_realtime,
+        'initial_visible': dataset.initial_visible,
+        'auto_update_interval': dataset.auto_update_interval,
     }
 
     metadata = dataset.metadata
@@ -662,6 +665,8 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                         'legend_json': layer_data.get('legend') or None,
                         'multi_temporal': dataset_data.get('multi_temporal', True),
                         'near_realtime': dataset_data.get('near_realtime', False),
+                        'initial_visible': dataset_data.get('initial_visible', False),
+                        'auto_update_interval': dataset_data.get('auto_update_interval', None),
                         'origin': CatalogEntry.ORIGIN_CONFIG,
                         'meta_source': metadata.get('source', ''),
                         'meta_resolution': metadata.get('resolution', ''),
@@ -1006,7 +1011,8 @@ def _create_common_objects(entry):
         multi_layer=False,
         near_realtime=entry.near_realtime,
         can_clip=False,
-        initial_visible=False,
+        initial_visible=entry.initial_visible,
+        auto_update_interval=entry.auto_update_interval,
     )
 
     if entry.summary:
@@ -1086,6 +1092,8 @@ def _reprovision_entry(entry, dataset):
     dataset.public = entry.public
     dataset.multi_temporal = multi_temporal
     dataset.near_realtime = entry.near_realtime
+    dataset.initial_visible = entry.initial_visible
+    dataset.auto_update_interval = entry.auto_update_interval
     dataset.summary = entry.summary or ''
     dataset.save()
 
@@ -1526,6 +1534,8 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         legend_json=data.get('legend_json'),
         multi_temporal=data.get('multi_temporal', True),
         near_realtime=data.get('near_realtime', False),
+        initial_visible=data.get('initial_visible', False),
+        auto_update_interval=data.get('auto_update_interval', None),
         meta_source=data.get('meta_source', ''),
         meta_resolution=data.get('meta_resolution', ''),
         meta_geographic_coverage=data.get('meta_geographic_coverage', ''),
@@ -1589,6 +1599,8 @@ def get_catalog_tree():
             'legend_json': entry.legend_json,
             'multi_temporal': entry.multi_temporal,
             'near_realtime': entry.near_realtime,
+            'initial_visible': entry.initial_visible,
+            'auto_update_interval': entry.auto_update_interval,
             'enabled': entry.enabled,
             'status': entry.status,
             'origin': entry.origin,

@@ -300,6 +300,18 @@ class CatalogEntry(models.Model):
     # --- Dataset properties ---
     multi_temporal = models.BooleanField(default=True)
     near_realtime = models.BooleanField(default=False)
+    initial_visible = models.BooleanField(
+        default=False,
+        verbose_name=_("Initially visible on map"),
+        help_text=_("If set, the dataset is enabled on the map by default."),
+    )
+    auto_update_interval = models.IntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_("Auto update interval (minutes)"),
+        help_text=_("Auto-refresh interval for multi-temporal layers, in minutes. "
+                    "Leave empty to disable auto-updating."),
+    )
 
     # --- State ---
     origin = models.CharField(
