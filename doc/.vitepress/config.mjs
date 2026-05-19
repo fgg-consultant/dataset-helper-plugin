@@ -23,6 +23,7 @@ function sidebarFr() {
       text: 'Utilisation quotidienne',
       items: [
         { text: 'Le catalogue de couches', link: '/catalog' },
+        { text: 'Explorer le catalogue embarqué', link: '/catalog-browser' },
         { text: 'Synchroniser avec Climweb', link: '/sync' },
         { text: 'Mises à jour du catalogue', link: '/updates' },
       ],
@@ -56,6 +57,7 @@ function sidebarEn() {
       text: 'Daily use',
       items: [
         { text: 'The layer catalog', link: '/en/catalog' },
+        { text: 'Embedded catalog browser', link: '/en/catalog-browser' },
         { text: 'Synchronize with Climweb', link: '/en/sync' },
         { text: 'Catalog updates', link: '/en/updates' },
       ],
@@ -89,6 +91,7 @@ function sidebarEs() {
       text: 'Uso diario',
       items: [
         { text: 'El catálogo de capas', link: '/es/catalog' },
+        { text: 'Explorar el catálogo incluido', link: '/es/catalog-browser' },
         { text: 'Sincronizar con Climweb', link: '/es/sync' },
         { text: 'Actualizaciones del catálogo', link: '/es/updates' },
       ],
@@ -122,6 +125,7 @@ function sidebarPt() {
       text: 'Uso diário',
       items: [
         { text: 'O catálogo de camadas', link: '/pt/catalog' },
+        { text: 'Explorar o catálogo embarcado', link: '/pt/catalog-browser' },
         { text: 'Sincronizar com Climweb', link: '/pt/sync' },
         { text: 'Atualizações do catálogo', link: '/pt/updates' },
       ],
@@ -155,6 +159,7 @@ function sidebarAr() {
       text: 'الاستخدام اليومي',
       items: [
         { text: 'كتالوج الطبقات', link: '/ar/catalog' },
+        { text: 'استعراض الكتالوج المدمج', link: '/ar/catalog-browser' },
         { text: 'المزامنة مع Climweb', link: '/ar/sync' },
         { text: 'تحديثات الكتالوج', link: '/ar/updates' },
       ],

@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "prepare:catalog": "mkdir -p public && cp ../plugins/dataset_helper_plugin/static/dataset_helper_plugin/catalog.json public/catalog.json",
+    "predocs:dev": "npm run prepare:catalog",
+    "predocs:build": "npm run prepare:catalog",
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
