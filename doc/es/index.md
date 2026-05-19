@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: Dataset Helper
-  text: El catálogo de capas WMS de Climweb
+  text: El catálogo de capas de Climweb
   tagline: Active, importe y sincronice las capas del mapviewer sin tocar la administración de Wagtail.
   actions:
     - theme: brand
@@ -19,7 +19,7 @@ hero:
 features:
   - icon: 📚
     title: Catálogo incluido
-    details: ~119 capas WMS listas para usar (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) entregadas con el plugin.
+    details: ~865 capas listas para usar (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) entregadas con el plugin.
   - icon: ✅
     title: Selección por casillas
     details: Elija las capas que quiere en un árbol Categoría › Subcategoría › Capa. Activación masiva por categoría.

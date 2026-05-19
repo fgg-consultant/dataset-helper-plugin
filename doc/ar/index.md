@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: Dataset Helper
-  text: كتالوج طبقات WMS لـ Climweb
+  text: كتالوج طبقات Climweb
   tagline: قم بتفعيل واستيراد ومزامنة طبقات عارض الخرائط دون لمس إدارة Wagtail.
   actions:
     - theme: brand
@@ -19,7 +19,7 @@ hero:
 features:
   - icon: 📚
     title: كتالوج مدمج
-    details: حوالي 119 طبقة WMS جاهزة للاستخدام (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) يتم تسليمها مع المكوّن.
+    details: حوالي 865 طبقة جاهزة للاستخدام (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) يتم تسليمها مع المكوّن.
   - icon: ✅
     title: اختيار عبر صناديق الاختيار
     details: اختر الطبقات التي تريدها في شجرة الفئة › الفئة الفرعية › الطبقة. تفعيل جماعي حسب الفئة.

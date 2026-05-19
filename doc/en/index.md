@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: Dataset Helper
-  text: The WMS layer catalog for Climweb
+  text: The layer catalog for Climweb
   tagline: Enable, import and synchronize mapviewer layers without touching the Wagtail admin.
   actions:
     - theme: brand
@@ -19,7 +19,7 @@ hero:
 features:
   - icon: 📚
     title: Bundled catalog
-    details: ~119 ready-to-use WMS layers (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) shipped with the plugin.
+    details: ~865 ready-to-use layers (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) shipped with the plugin.
   - icon: ✅
     title: Checkbox-driven selection
     details: Pick the layers you want in a Category › SubCategory › Layer tree. Bulk-toggle per category.

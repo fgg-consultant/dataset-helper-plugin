@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: Dataset Helper
-  text: Le catalogue de couches WMS de Climweb
+  text: Le catalogue de couches de Climweb
   tagline: Activez, importez et synchronisez les couches du mapviewer sans toucher à l'admin Wagtail.
   actions:
     - theme: brand
@@ -19,7 +19,7 @@ hero:
 features:
   - icon: 📚
     title: Catalogue embarqué
-    details: ~119 couches WMS prêtes à l'emploi (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) livrées avec le plugin.
+    details: ~865 couches prêtes à l'emploi (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) livrées avec le plugin.
   - icon: ✅
     title: Sélection par cases à cocher
     details: Pickez les couches voulues dans un arbre Category › SubCategory › Layer. Activation en masse par catégorie.

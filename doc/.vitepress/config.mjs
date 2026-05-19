@@ -191,7 +191,7 @@ const locales = {
     themeConfig: {
       nav: [
         { text: 'Guide', link: '/getting-started' },
-        { text: 'Catalogue', link: '/catalog' },
+        { text: 'Catalogue', link: '/catalog-browser' },
         { text: 'Synchro', link: '/sync' },
       ],
       sidebar: sidebarFr(),
@@ -241,7 +241,7 @@ const locales = {
     themeConfig: {
       nav: [
         { text: 'Guide', link: '/en/getting-started' },
-        { text: 'Catalog', link: '/en/catalog' },
+        { text: 'Catalog', link: '/en/catalog-browser' },
         { text: 'Sync', link: '/en/sync' },
       ],
       sidebar: sidebarEn(),
@@ -272,7 +272,7 @@ const locales = {
     themeConfig: {
       nav: [
         { text: 'Guía', link: '/es/getting-started' },
-        { text: 'Catálogo', link: '/es/catalog' },
+        { text: 'Catálogo', link: '/es/catalog-browser' },
         { text: 'Sincro', link: '/es/sync' },
       ],
       sidebar: sidebarEs(),
@@ -303,7 +303,7 @@ const locales = {
     themeConfig: {
       nav: [
         { text: 'Guia', link: '/pt/getting-started' },
-        { text: 'Catálogo', link: '/pt/catalog' },
+        { text: 'Catálogo', link: '/pt/catalog-browser' },
         { text: 'Sincronia', link: '/pt/sync' },
       ],
       sidebar: sidebarPt(),
@@ -334,7 +334,7 @@ const locales = {
     themeConfig: {
       nav: [
         { text: 'الدليل', link: '/ar/getting-started' },
-        { text: 'الكتالوج', link: '/ar/catalog' },
+        { text: 'الكتالوج', link: '/ar/catalog-browser' },
         { text: 'المزامنة', link: '/ar/sync' },
       ],
       sidebar: sidebarAr(),

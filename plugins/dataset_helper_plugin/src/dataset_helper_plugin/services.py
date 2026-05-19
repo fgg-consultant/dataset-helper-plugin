@@ -7,7 +7,8 @@ import urllib.request
 import uuid
 
 from django.contrib.staticfiles import finders
-from django.db import transaction
+from django.db import IntegrityError, transaction
+from django.db.models.deletion import ProtectedError, RestrictedError
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 from geomanager.models.core import Category, Dataset, Metadata, SubCategory
@@ -1368,6 +1369,26 @@ def _deprovision_entry(entry):
         Dataset.objects.filter(id=entry.dataset_id).delete()
 
 
+def _try_delete(obj):
+    """
+    Attempt to delete a single taxonomy object inside a savepoint.
+    Return True on success, False if the row is still referenced from
+    outside the plugin (PROTECT/RESTRICT FKs or DB-level FK constraints
+    from other apps such as ``cap_capgeomanagersettings``). The savepoint
+    ensures a failure here does not poison the surrounding transaction.
+    """
+    try:
+        with transaction.atomic():
+            obj.delete()
+    except (ProtectedError, RestrictedError, IntegrityError) as exc:
+        logger.info(
+            "Skipping delete of %s id=%s — still referenced: %s",
+            obj._meta.label, obj.pk, exc,
+        )
+        return False
+    return True
+
+
 def _sweep_empty_taxonomy():
     """
     Delete SubCategories that no longer reference any Dataset, then
@@ -1379,6 +1400,10 @@ def _sweep_empty_taxonomy():
     a built-in safety net: the exclude() filter is the primary guard,
     PROTECT is the belt-and-suspenders.
 
+    Rows still referenced by *other* apps (e.g. CAP's
+    ``cap_capgeomanagersettings``) are silently skipped rather than
+    aborting the whole clear operation.
+
     Returns (subcategories_deleted, categories_deleted).
     """
     subcat_ids_with_datasets = (
@@ -1387,9 +1412,10 @@ def _sweep_empty_taxonomy():
         .values_list('sub_category_id', flat=True)
         .distinct()
     )
-    empty_subcats = SubCategory.objects.exclude(id__in=list(subcat_ids_with_datasets))
-    subcats_deleted = empty_subcats.count()
-    empty_subcats.delete()
+    empty_subcats = list(
+        SubCategory.objects.exclude(id__in=list(subcat_ids_with_datasets))
+    )
+    subcats_deleted = sum(1 for sc in empty_subcats if _try_delete(sc))
 
     cat_ids_with_datasets = (
         Dataset.objects
@@ -1403,9 +1429,8 @@ def _sweep_empty_taxonomy():
         .distinct()
     )
     cat_ids_in_use = set(cat_ids_with_datasets) | set(cat_ids_with_subcats)
-    empty_cats = Category.objects.exclude(id__in=cat_ids_in_use)
-    cats_deleted = empty_cats.count()
-    empty_cats.delete()
+    empty_cats = list(Category.objects.exclude(id__in=cat_ids_in_use))
+    cats_deleted = sum(1 for c in empty_cats if _try_delete(c))
 
     return subcats_deleted, cats_deleted
 

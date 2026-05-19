@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: Dataset Helper
-  text: O catálogo de camadas WMS do Climweb
+  text: O catálogo de camadas do Climweb
   tagline: Ative, importe e sincronize as camadas do mapviewer sem tocar na administração do Wagtail.
   actions:
     - theme: brand
@@ -19,7 +19,7 @@ hero:
 features:
   - icon: 📚
     title: Catálogo embarcado
-    details: ~119 camadas WMS prontas para uso (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) entregues com o plugin.
+    details: ~865 camadas prontas para uso (JRC eStation, ECMWF, CAMS, EUMETSAT, CGLS…) entregues com o plugin.
   - icon: ✅
     title: Seleção por caixas
     details: Escolha as camadas desejadas em uma árvore Categoria › Subcategoria › Camada. Ativação em massa por categoria.
