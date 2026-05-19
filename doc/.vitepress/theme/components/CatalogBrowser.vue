@@ -150,6 +150,47 @@ function getLayerCountForCategory(category) {
     return total + (subcategory.datasets ? subcategory.datasets.length : 0)
   }, 0)
 }
+
+// Deterministic FNV-1a hash → stable badge color per distinct value.
+function hashStr(s) {
+  let h = 2166136261 >>> 0
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i)
+    h = Math.imul(h, 16777619) >>> 0
+  }
+  return h
+}
+
+// Returns CSS custom properties for light and dark themes. Same hue both
+// sides, swapped lightness so contrast stays readable.
+function colorFor(value) {
+  const v = String(value || '').trim() || '∅'
+  const hue = hashStr(v) % 360
+  return {
+    '--cb-bg': `hsl(${hue} 75% 90%)`,
+    '--cb-fg': `hsl(${hue} 55% 25%)`,
+    '--cb-bg-dark': `hsl(${hue} 40% 22%)`,
+    '--cb-fg-dark': `hsl(${hue} 80% 85%)`,
+  }
+}
+
+function datasetTypes(ds) {
+  const seen = new Set()
+  const out = []
+  for (const l of ds.layers || []) {
+    if (l.type && !seen.has(l.type)) {
+      seen.add(l.type)
+      out.push(l.type)
+    }
+  }
+  return out
+}
+
+function datasetSource(ds) {
+  const raw = ds.metadata?.source
+  if (raw == null || raw === '') return ''
+  return typeof raw === 'object' ? tr(raw) : String(raw)
+}
 function expandAll() {
   if (!data.value) return
   const nc = new Set(),
@@ -473,12 +514,21 @@ const t = computed(() => I18N[lang.value] || I18N.en)
                       :class="{ open: openDatasets.has(dsKey(ci, si, di)) }"
                     >▶</span>
                     <span class="cb-ds-title">{{ tr(ds.title) }}</span>
-                    <span
-                      v-for="(layer, li) in ds.layers"
-                      :key="li"
-                      class="cb-badge"
-                      :title="layer.layer_name"
-                    >{{ layer.type }}</span>
+                    <span class="cb-ds-badges">
+                      <span
+                        v-for="ty in datasetTypes(ds)"
+                        :key="'t-' + ty"
+                        class="cb-badge cb-badge-tag"
+                        :style="colorFor('type:' + ty)"
+                        :title="t.type"
+                      >{{ ty }}</span>
+                      <span
+                        v-if="datasetSource(ds)"
+                        class="cb-badge cb-badge-tag"
+                        :style="colorFor('src:' + datasetSource(ds))"
+                        :title="t.source"
+                      >{{ datasetSource(ds) }}</span>
+                    </span>
                   </button>
                   <div
                     v-if="openDatasets.has(dsKey(ci, si, di))"
@@ -791,6 +841,7 @@ button.cb-ds-header:hover {
   background: var(--vp-c-bg-mute);
   color: var(--vp-c-text-2);
   font-weight: 500;
+  white-space: nowrap;
 }
 .cb-badge-type {
   background: var(--vp-c-brand-soft);
@@ -799,6 +850,28 @@ button.cb-ds-header:hover {
 .cb-badge-default {
   background: #fef3c7;
   color: #92400e;
+}
+
+/* Colored badges driven by inline CSS custom properties (computed via
+   colorFor()). Dark theme swaps the bg/fg pair so contrast holds. */
+.cb-badge-tag {
+  background: var(--cb-bg);
+  color: var(--cb-fg);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.dark .cb-badge-tag {
+  background: var(--cb-bg-dark);
+  color: var(--cb-fg-dark);
+}
+
+.cb-ds-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-inline-start: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .cb-detail {
