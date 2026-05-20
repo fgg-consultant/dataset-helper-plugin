@@ -70,7 +70,7 @@
                   "pt": "10 m rajada de vento Índice de previsão extrema (EFI). Mede quão extrema é a previsão de 10 m rajada de vento em comparação com o clima do modelo",
                   "ar": "10 م هبة رياح مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ 10 م هبة رياح مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -147,7 +147,7 @@
                   "pt": "10 m velocidade do vento Índice de previsão extrema (EFI). Mede quão extrema é a previsão de 10 m velocidade do vento em comparação com o clima do modelo",
                   "ar": "10 م سرعة الرياح مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ 10 م سرعة الرياح مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -224,7 +224,7 @@
                   "pt": "2 m temperatura máxima Índice de previsão extrema (EFI). Mede quão extrema é a previsão de 2 m temperatura máxima em comparação com o clima do modelo",
                   "ar": "2 م درجة الحرارة القصوى مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ 2 م درجة الحرارة القصوى مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -301,7 +301,7 @@
                   "pt": "2 m temperatura mínima Índice de previsão extrema (EFI). Mede quão extrema é a previsão de 2 m temperatura mínima em comparação com o clima do modelo",
                   "ar": "2 م درجة الحرارة الدنيا مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ 2 م درجة الحرارة الدنيا مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -378,7 +378,7 @@
                   "pt": "2 m temperatura Índice de previsão extrema (EFI). Mede quão extrema é a previsão de 2 m temperatura em comparação com o clima do modelo",
                   "ar": "2 م درجة الحرارة مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ 2 م درجة الحرارة مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -455,7 +455,7 @@
                   "pt": "CAPE Índice de previsão extrema (EFI). Mede quão extrema é a previsão de cape em comparação com o clima do modelo",
                   "ar": "CAPE مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ cape مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -532,7 +532,7 @@
                   "pt": "CAPE shear Índice de previsão extrema (EFI). Mede quão extrema é a previsão de cape shear em comparação com o clima do modelo",
                   "ar": "CAPE shear مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ cape shear مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -609,7 +609,7 @@
                   "pt": "Maximum significant wave height Índice de previsão extrema (EFI). Mede quão extrema é a previsão de maximum significant wave height em comparação com o clima do modelo",
                   "ar": "Maximum الارتفاع الملحوظ للأمواج مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ maximum الارتفاع الملحوظ للأمواج مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -686,7 +686,7 @@
                   "pt": "Snowfall Índice de previsão extrema (EFI). Mede quão extrema é a previsão de queda de neve em comparação com o clima do modelo",
                   "ar": "Snowfall مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ تساقط الثلوج مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -763,7 +763,7 @@
                   "pt": "Precipitação total Índice de previsão extrema (EFI). Mede quão extrema é a previsão de total precipitação em comparação com o clima do modelo",
                   "ar": "إجمالي الهطول مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ إجمالي الهطول مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -840,7 +840,7 @@
                   "pt": "Water vapour flux Índice de previsão extrema (EFI). Mede quão extrema é a previsão de water vapour flux em comparação com o clima do modelo",
                   "ar": "Water vapour flux مؤشر التنبؤ بالظواهر المتطرفة (EFI). يقيس مدى تطرف التنبؤ بـ water vapour flux مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1159,7 +1159,7 @@
                   "pt": "10 m rajada de vento Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "10 م هبة رياح مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1236,7 +1236,7 @@
                   "pt": "10 m velocidade do vento Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "10 م سرعة الرياح مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1313,7 +1313,7 @@
                   "pt": "2 m temperatura máxima Deslocamento das caudas (SOT) – quantil 10. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "2 م درجة الحرارة القصوى مؤشر انزياح أطراف التوزيع (SOT) – المئين 10. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1390,7 +1390,7 @@
                   "pt": "2 m temperatura máxima Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "2 م درجة الحرارة القصوى مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1467,7 +1467,7 @@
                   "pt": "2 m temperatura mínima Deslocamento das caudas (SOT) – quantil 10. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "2 م درجة الحرارة الدنيا مؤشر انزياح أطراف التوزيع (SOT) – المئين 10. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1544,7 +1544,7 @@
                   "pt": "2 m temperatura mínima Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "2 م درجة الحرارة الدنيا مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1621,7 +1621,7 @@
                   "pt": "2 m temperatura Deslocamento das caudas (SOT) – quantil 10. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "2 م درجة الحرارة مؤشر انزياح أطراف التوزيع (SOT) – المئين 10. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1698,7 +1698,7 @@
                   "pt": "2 m temperatura Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "2 م درجة الحرارة مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1775,7 +1775,7 @@
                   "pt": "CAPE SHEAR Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "CAPE SHEAR مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1852,7 +1852,7 @@
                   "pt": "CAPE Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "CAPE مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -1929,7 +1929,7 @@
                   "pt": "K-index. Indicates the potential for thunderstorm development",
                   "ar": "K-index. يشير إلى احتمال تطور العواصف الرعدية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2006,7 +2006,7 @@
                   "pt": "Densidade de relâmpagos (100km-2/hour). Shows the forecast relâmpagos activity and probabilidade",
                   "ar": "كثافة البرق (100km-2/hour). يظهر التنبؤ بنشاط البرق واحتماله"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2083,7 +2083,7 @@
                   "pt": "Densidade de relâmpagos probabilidade. Shows the forecast relâmpagos activity and probabilidade",
                   "ar": "كثافة البرق الاحتمال. يظهر التنبؤ بنشاط البرق واحتماله"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2160,7 +2160,7 @@
                   "pt": "Maximum significant wave height Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "Maximum الارتفاع الملحوظ للأمواج مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2237,7 +2237,7 @@
                   "pt": "Snow fall Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "Snow fall مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2314,7 +2314,7 @@
                   "pt": "Sub-sazonal 2 m temperatura Deslocamento das caudas (SOT) – quantil 10. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "دون الموسمي 2 م درجة الحرارة مؤشر انزياح أطراف التوزيع (SOT) – المئين 10. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2391,7 +2391,7 @@
                   "pt": "Sub-sazonal 2 m temperatura Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "دون الموسمي 2 م درجة الحرارة مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2468,7 +2468,7 @@
                   "pt": "Sub-sazonal Índice de previsão extrema (EFI) for 2 m temperatura. Mede quão extrema é a previsão de sub-seasonal  for 2 m temperatura em comparação com o clima do modelo",
                   "ar": "دون الموسمي مؤشر التنبؤ بالظواهر المتطرفة (EFI) for 2 م درجة الحرارة. يقيس مدى تطرف التنبؤ بـ sub-seasonal  for 2 م درجة الحرارة مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2545,7 +2545,7 @@
                   "pt": "Sub-sazonal Índice de previsão extrema (EFI) for total precipitação. Mede quão extrema é a previsão de sub-seasonal  for total precipitação em comparação com o clima do modelo",
                   "ar": "دون الموسمي مؤشر التنبؤ بالظواهر المتطرفة (EFI) for إجمالي الهطول. يقيس مدى تطرف التنبؤ بـ sub-seasonal  for إجمالي الهطول مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2622,7 +2622,7 @@
                   "pt": "Sub-sazonal Precipitação total shift of tails (SOT) index. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "دون الموسمي إجمالي الهطول shift of tails (SOT) index. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2699,7 +2699,7 @@
                   "pt": "Precipitação total Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "إجمالي الهطول مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -2776,7 +2776,7 @@
                   "pt": "Water vapour flux Deslocamento das caudas (SOT) – quantil 90. Indica a probabilidade de condições meteorológicas extremas além dos registros históricos",
                   "ar": "Water vapour flux مؤشر انزياح أطراف التوزيع (SOT) – المئين 90. يشير إلى احتمال حدوث طقس متطرف يتجاوز السجلات التاريخية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3255,7 +3255,7 @@
                   "pt": "Precipitação convectiva. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "هطول حملي. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3332,7 +3332,7 @@
                   "pt": "Precipitação total acumulada. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Total متراكم الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3409,7 +3409,7 @@
                   "pt": "Precipitação total. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3486,7 +3486,7 @@
                   "pt": "Precipitação convectiva. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "هطول حملي. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3563,7 +3563,7 @@
                   "pt": "Precipitação total acumulada. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Total متراكم الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3640,7 +3640,7 @@
                   "pt": "Precipitação total. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3717,7 +3717,7 @@
                   "pt": "Precipitação convectiva. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "هطول حملي. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3794,7 +3794,7 @@
                   "pt": "Precipitação convectiva probabilidade. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "هطول حملي الاحتمال. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3871,7 +3871,7 @@
                   "pt": "Média do conjunto – total acumulada precipitação. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "متوسط المجموعة – total متراكم الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -3948,7 +3948,7 @@
                   "pt": "Média do conjunto – total precipitação. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "متوسط المجموعة – إجمالي الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4025,7 +4025,7 @@
                   "pt": "Freezing rain. Mostra as condições meteorológicas previstas",
                   "ar": "Freezing rain. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4102,7 +4102,7 @@
                   "pt": "Freezing rain probabilidade. Mostra a probabilidade de exceder limiares específicos",
                   "ar": "Freezing rain الاحتمال. يظهر احتمال تجاوز عتبات محددة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4179,7 +4179,7 @@
                   "pt": "Most probable precipitação type (in %). Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Most probable الهطول type (in %). يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4256,7 +4256,7 @@
                   "pt": "Probabilidade of combined events of 2 m Temperatura and total precipitação. Mostra a temperatura do ar prevista",
                   "ar": "الاحتمال of combined events of 2 م درجة الحرارة and إجمالي الهطول. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4333,7 +4333,7 @@
                   "pt": "Probabilidade of combined events of velocidade do vento and total precipitação. Mostra a velocidade do vento sustentada prevista",
                   "ar": "الاحتمال of combined events of سرعة الرياح and إجمالي الهطول. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4410,7 +4410,7 @@
                   "pt": "Stratiform precipitação. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Stratiform الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4487,7 +4487,7 @@
                   "pt": "Stratiform precipitação probabilidade. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Stratiform الهطول الاحتمال. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4564,7 +4564,7 @@
                   "pt": "Sub-sazonal Precipitation probabilidade of weekly mean anomalies > 0. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "دون الموسمي Precipitation الاحتمال of weekly mean anomalies > 0. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4641,7 +4641,7 @@
                   "pt": "Sub-sazonal precipitação probabilidade dist. at various quantiles. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "دون الموسمي الهطول الاحتمال dist. at various quantiles. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4718,7 +4718,7 @@
                   "pt": "Sub-sazonal precipitação weekly mean anomaly. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "دون الموسمي الهطول weekly mean anomaly. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4795,7 +4795,7 @@
                   "pt": "Precipitação total. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4872,7 +4872,7 @@
                   "pt": "Precipitação total probabilidade. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول الاحتمال. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -4949,7 +4949,7 @@
                   "pt": "Precipitação total weighted probabilidade. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول weighted الاحتمال. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -6660,7 +6660,7 @@
                   "pt": "24h total precipitação from M-Climate at various percentiles. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "24h إجمالي الهطول from M-Climate عند مئينات مختلفة. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -6737,7 +6737,7 @@
                   "pt": "Precipitação convectiva percentile. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "هطول حملي percentile. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -6814,7 +6814,7 @@
                   "pt": "Precipitação convectiva rate. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "هطول حملي rate. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -6891,7 +6891,7 @@
                   "pt": "Precipitação convectiva rate probabilidade. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "هطول حملي rate الاحتمال. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -6968,7 +6968,7 @@
                   "pt": "ERICHA hourly acumulada precipitação. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "ERICHA hourly متراكم الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7045,7 +7045,7 @@
                   "pt": "Daily precipitação, Probabilidade of exceedence - 10 Year return period. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Daily الهطول, الاحتمال of exceedence - 10 Year return period. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7122,7 +7122,7 @@
                   "pt": "Daily precipitação, Probabilidade of exceedence - 20 Year return period. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Daily الهطول, الاحتمال of exceedence - 20 Year return period. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7199,7 +7199,7 @@
                   "pt": "Daily precipitação, Probabilidade of exceedence - 50 Year return period. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Daily الهطول, الاحتمال of exceedence - 50 Year return period. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7276,7 +7276,7 @@
                   "pt": "Point rainfall percentile (EXPERIMENTAL). Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Point rainfall percentile (EXPERIMENTAL). يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7353,7 +7353,7 @@
                   "pt": "Point rainfall probabilidade (EXPERIMENTAL). Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Point rainfall الاحتمال (EXPERIMENTAL). يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7430,7 +7430,7 @@
                   "pt": "Precipitation type. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Precipitation type. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7507,7 +7507,7 @@
                   "pt": "Radar-based Accumulated Precipitation 80th Percentile. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Radar-based Accumulated Precipitation 80th Percentile. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7584,7 +7584,7 @@
                   "pt": "Radar-based Previous 24h Accumulated Precipitation. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Radar-based Previous 24h Accumulated Precipitation. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7661,7 +7661,7 @@
                   "pt": "Stratiform precipitação percentile. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Stratiform الهطول percentile. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7738,7 +7738,7 @@
                   "pt": "Stratiform precipitação rate. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Stratiform الهطول rate. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7815,7 +7815,7 @@
                   "pt": "Stratiform precipitação rate probabilidade. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Stratiform الهطول rate الاحتمال. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7892,7 +7892,7 @@
                   "pt": "Precipitação total acumulada. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Total متراكم الهطول. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -7969,7 +7969,7 @@
                   "pt": "Precipitação total acumulada probabilidade. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "Total متراكم الهطول الاحتمال. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -8046,7 +8046,7 @@
                   "pt": "Precipitação total deviation/anomaly, last 24hr. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول deviation/anomaly, last 24hr. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -8123,7 +8123,7 @@
                   "pt": "Precipitação total percentile. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول percentile. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -8200,7 +8200,7 @@
                   "pt": "Precipitação total rate. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول rate. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -8277,7 +8277,7 @@
                   "pt": "Precipitação total rate probabilidade. Mostra a quantidade de chuva e outras precipitações prevista",
                   "ar": "إجمالي الهطول rate الاحتمال. يظهر التنبؤ بكمية الأمطار والهطول"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -16393,7 +16393,7 @@
                   "pt": "2 m temperatura do ponto de orvalho. Mostra a temperatura na qual o ar fica saturado de umidade",
                   "ar": "2 م درجة حرارة نقطة الندى. يظهر درجة الحرارة التي يصبح عندها الهواء مشبعاً بالرطوبة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -16470,7 +16470,7 @@
                   "pt": "2 m temperatura do ponto de orvalho probabilidade. Mostra a temperatura na qual o ar fica saturado de umidade",
                   "ar": "2 م درجة حرارة نقطة الندى الاحتمال. يظهر درجة الحرارة التي يصبح عندها الهواء مشبعاً بالرطوبة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -16547,7 +16547,7 @@
                   "pt": "2 m mean temperatura over an interval. Mostra a temperatura do ar prevista",
                   "ar": "2 م متوسط درجة الحرارة over an interval. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -16624,7 +16624,7 @@
                   "pt": "2 m temperatura. Mostra a temperatura do ar prevista",
                   "ar": "2 م درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -16701,7 +16701,7 @@
                   "pt": "2 m temperatura probabilidade. Mostra a temperatura do ar prevista",
                   "ar": "2 م درجة الحرارة الاحتمال. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -16778,7 +16778,7 @@
                   "pt": "2 m temperatura weighted probabilidade. Mostra a temperatura do ar prevista",
                   "ar": "2 م درجة الحرارة weighted الاحتمال. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -16855,7 +16855,7 @@
                   "pt": "850 hPa temperatura probabilidade. Mostra a temperatura do ar prevista",
                   "ar": "850 hPa درجة الحرارة الاحتمال. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -16932,7 +16932,7 @@
                   "pt": "850 hPa wet bulb potential temperatura. Mostra a temperatura do ar prevista",
                   "ar": "850 hPa wet bulb potential درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17009,7 +17009,7 @@
                   "pt": "2 m temperatura do ponto de orvalho. Mostra a temperatura na qual o ar fica saturado de umidade",
                   "ar": "2 م درجة حرارة نقطة الندى. يظهر درجة الحرارة التي يصبح عندها الهواء مشبعاً بالرطوبة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17086,7 +17086,7 @@
                   "pt": "2 m temperatura. Mostra a temperatura do ar prevista",
                   "ar": "2 م درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17163,7 +17163,7 @@
                   "pt": "850 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "850 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17240,7 +17240,7 @@
                   "pt": "Temperatura. Mostra a temperatura do ar prevista",
                   "ar": "درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17317,7 +17317,7 @@
                   "pt": "2 m temperatura do ponto de orvalho. Mostra a temperatura na qual o ar fica saturado de umidade",
                   "ar": "2 م درجة حرارة نقطة الندى. يظهر درجة الحرارة التي يصبح عندها الهواء مشبعاً بالرطوبة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17394,7 +17394,7 @@
                   "pt": "2 m temperatura. Mostra a temperatura do ar prevista",
                   "ar": "2 م درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17471,7 +17471,7 @@
                   "pt": "850 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "850 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17548,7 +17548,7 @@
                   "pt": "Temperatura. Mostra a temperatura do ar prevista",
                   "ar": "درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17625,7 +17625,7 @@
                   "pt": "Média do conjunto – 10 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "متوسط المجموعة – 10 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17702,7 +17702,7 @@
                   "pt": "Média do conjunto – 2 m temperatura. Mostra a temperatura do ar prevista",
                   "ar": "متوسط المجموعة – 2 م درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17779,7 +17779,7 @@
                   "pt": "Média do conjunto – 500 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "متوسط المجموعة – 500 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17856,7 +17856,7 @@
                   "pt": "Média do conjunto – 850 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "متوسط المجموعة – 850 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -17933,7 +17933,7 @@
                   "pt": "Dispersão do conjunto – 2 m temperatura. Mostra a temperatura do ar prevista",
                   "ar": "تشتت المجموعة – 2 م درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18010,7 +18010,7 @@
                   "pt": "Dispersão do conjunto – 500 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "تشتت المجموعة – 500 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18087,7 +18087,7 @@
                   "pt": "Dispersão do conjunto – 850 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "تشتت المجموعة – 850 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18164,7 +18164,7 @@
                   "pt": "Maximum 2 m temperatura. Mostra a temperatura mais alta prevista durante um período",
                   "ar": "Maximum 2 م درجة الحرارة. يظهر أعلى درجة حرارة متوقعة خلال فترة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18241,7 +18241,7 @@
                   "pt": "Maximum 2 m temperatura probabilidade. Mostra a temperatura mais alta prevista durante um período",
                   "ar": "Maximum 2 م درجة الحرارة الاحتمال. يظهر أعلى درجة حرارة متوقعة خلال فترة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18318,7 +18318,7 @@
                   "pt": "Minimum 2 m temperatura. Mostra a temperatura mais baixa prevista durante um período",
                   "ar": "Minimum 2 م درجة الحرارة. يظهر أدنى درجة حرارة متوقعة خلال فترة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18395,7 +18395,7 @@
                   "pt": "Minimum 2 m temperatura probabilidade. Mostra a temperatura mais baixa prevista durante um período",
                   "ar": "Minimum 2 م درجة الحرارة الاحتمال. يظهر أدنى درجة حرارة متوقعة خلال فترة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18472,7 +18472,7 @@
                   "pt": "Spaghetti plot - 850 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "Spaghetti plot - 850 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18549,7 +18549,7 @@
                   "pt": "Sub-sazonal 10hPa temperatura weekly mean anomaly. Mostra a temperatura do ar prevista",
                   "ar": "دون الموسمي 10hPa درجة الحرارة weekly mean anomaly. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18626,7 +18626,7 @@
                   "pt": "Sub-sazonal 2 m temperatura probabilidade of weekly mean anomalies > 0. Mostra a temperatura do ar prevista",
                   "ar": "دون الموسمي 2 م درجة الحرارة الاحتمال of weekly mean anomalies > 0. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18703,7 +18703,7 @@
                   "pt": "Sub-sazonal 2 m temperatura weekly mean anomaly. Mostra a temperatura do ar prevista",
                   "ar": "دون الموسمي 2 م درجة الحرارة weekly mean anomaly. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18780,7 +18780,7 @@
                   "pt": "Sub-sazonal surface temperatura probabilidade dist. at various quantiles. Mostra a temperatura do ar prevista",
                   "ar": "دون الموسمي surface درجة الحرارة الاحتمال dist. at various quantiles. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18857,7 +18857,7 @@
                   "pt": "Sub-sazonal surface temperatura probabilidade of weekly mean anomalies > 0. Mostra a temperatura do ar prevista",
                   "ar": "دون الموسمي surface درجة الحرارة الاحتمال of weekly mean anomalies > 0. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -18934,7 +18934,7 @@
                   "pt": "Sub-sazonal surface temperatura weekly mean anomaly. Mostra a temperatura do ar prevista",
                   "ar": "دون الموسمي surface درجة الحرارة weekly mean anomaly. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19253,7 +19253,7 @@
                   "pt": "10 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "10 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19330,7 +19330,7 @@
                   "pt": "2 m temperatura do ponto de orvalho percentile. Mostra a temperatura na qual o ar fica saturado de umidade",
                   "ar": "2 م درجة حرارة نقطة الندى percentile. يظهر درجة الحرارة التي يصبح عندها الهواء مشبعاً بالرطوبة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19407,7 +19407,7 @@
                   "pt": "200 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "200 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19484,7 +19484,7 @@
                   "pt": "24h 5-value-mean temperatura from M-Climate at various quantiles. Mostra a temperatura do ar prevista",
                   "ar": "24h 5-value-متوسط درجة الحرارة from M-Climate at various quantiles. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19561,7 +19561,7 @@
                   "pt": "24h maximum 2 m temperatura from M-Climate at various percentiles. Mostra a temperatura mais alta prevista durante um período",
                   "ar": "24h maximum 2 م درجة الحرارة from M-Climate عند مئينات مختلفة. يظهر أعلى درجة حرارة متوقعة خلال فترة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19638,7 +19638,7 @@
                   "pt": "24h minimum 2 m temperatura from M-Climate at various percentiles. Mostra a temperatura mais baixa prevista durante um período",
                   "ar": "24h minimum 2 م درجة الحرارة from M-Climate عند مئينات مختلفة. يظهر أدنى درجة حرارة متوقعة خلال فترة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19715,7 +19715,7 @@
                   "pt": "250 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "250 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19792,7 +19792,7 @@
                   "pt": "2 m temperatura deviation/anomaly, last 24hr. Mostra a temperatura do ar prevista",
                   "ar": "2 م درجة الحرارة deviation/anomaly, last 24hr. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19869,7 +19869,7 @@
                   "pt": "2 m temperatura percentile. Mostra a temperatura do ar prevista",
                   "ar": "2 م درجة الحرارة percentile. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -19946,7 +19946,7 @@
                   "pt": "300 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "300 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20023,7 +20023,7 @@
                   "pt": "315K (potential temperatura level) potential vorticity. Mostra a temperatura do ar prevista",
                   "ar": "315K (potential درجة الحرارة level) potential vorticity. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20100,7 +20100,7 @@
                   "pt": "500 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "500 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20177,7 +20177,7 @@
                   "pt": "600 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "600 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20254,7 +20254,7 @@
                   "pt": "700 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "700 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20331,7 +20331,7 @@
                   "pt": "800 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "800 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20408,7 +20408,7 @@
                   "pt": "850 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "850 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20485,7 +20485,7 @@
                   "pt": "850 hPa temperatura percentile. Mostra a temperatura do ar prevista",
                   "ar": "850 hPa درجة الحرارة percentile. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20562,7 +20562,7 @@
                   "pt": "925 hPa temperatura. Mostra a temperatura do ar prevista",
                   "ar": "925 hPa درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20639,7 +20639,7 @@
                   "pt": "Heat index (Thermal comfort parameters). Mostra as condições meteorológicas previstas",
                   "ar": "Heat index (Thermal comfort parameters). يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20716,7 +20716,7 @@
                   "pt": "Height of zero degree level. Mostra as condições meteorológicas previstas",
                   "ar": "Height of zero degree level. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20793,7 +20793,7 @@
                   "pt": "Height of zero-degree/one-degree wet-bulb temperatura. Mostra a temperatura do ar prevista",
                   "ar": "Height of zero-degree/one-degree wet-bulb درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20870,7 +20870,7 @@
                   "pt": "Humidex (Thermal comfort parameters). Mostra as condições meteorológicas previstas",
                   "ar": "Humidex (Thermal comfort parameters). يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -20947,7 +20947,7 @@
                   "pt": "Maximum 2 m temperatura percentile. Mostra a temperatura mais alta prevista durante um período",
                   "ar": "Maximum 2 م درجة الحرارة percentile. يظهر أعلى درجة حرارة متوقعة خلال فترة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -21024,7 +21024,7 @@
                   "pt": "Minimum 2 m temperatura percentile. Mostra a temperatura mais baixa prevista durante um período",
                   "ar": "Minimum 2 م درجة الحرارة percentile. يظهر أدنى درجة حرارة متوقعة خلال فترة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -21101,7 +21101,7 @@
                   "pt": "Universal thermal climate index (Thermal comfort parameters). Mostra as condições meteorológicas previstas",
                   "ar": "Universal thermal climate index (Thermal comfort parameters). يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -21178,7 +21178,7 @@
                   "pt": "Wet bulb globe temperatura (Thermal comfort parameters). Mostra a temperatura do ar prevista",
                   "ar": "Wet bulb globe درجة الحرارة (Thermal comfort parameters). يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -21255,7 +21255,7 @@
                   "pt": "Vento chill factor (Thermal comfort parameters). Mostra as condições de vento previstas",
                   "ar": "الرياح chill factor (Thermal comfort parameters). يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -22387,7 +22387,7 @@
                   "pt": "10 m rajada de vento. Mostra a velocidade máxima instantânea do vento prevista perto da superfície",
                   "ar": "10 m هبة رياح. يظهر التنبؤ بأقصى سرعة رياح لحظية بالقرب من السطح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -22464,7 +22464,7 @@
                   "pt": "100 m vento probabilidade. Mostra as condições de vento previstas",
                   "ar": "100 م الرياح الاحتمال. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -22541,7 +22541,7 @@
                   "pt": "10 m velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "10 م سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -22618,7 +22618,7 @@
                   "pt": "10 m vento gusts probabilidade. Mostra a velocidade máxima instantânea do vento prevista perto da superfície",
                   "ar": "10 م الرياح gusts الاحتمال. يظهر التنبؤ بأقصى سرعة رياح لحظية بالقرب من السطح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -22695,7 +22695,7 @@
                   "pt": "10 m vento probabilidade. Mostra as condições de vento previstas",
                   "ar": "10 م الرياح الاحتمال. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -22772,7 +22772,7 @@
                   "pt": "10 m velocidade do vento weighted probabilidade. Mostra a velocidade do vento sustentada prevista",
                   "ar": "10 م سرعة الرياح weighted الاحتمال. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -22849,7 +22849,7 @@
                   "pt": "10 m velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "10 م سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -22926,7 +22926,7 @@
                   "pt": "200 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "200 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23003,7 +23003,7 @@
                   "pt": "850 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "850 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23080,7 +23080,7 @@
                   "pt": "Velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23157,7 +23157,7 @@
                   "pt": "10 m velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "10 م سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23234,7 +23234,7 @@
                   "pt": "200 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "200 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23311,7 +23311,7 @@
                   "pt": "850 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "850 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23388,7 +23388,7 @@
                   "pt": "Velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23465,7 +23465,7 @@
                   "pt": "Média do conjunto – 100 m velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "متوسط المجموعة – 100 م سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23542,7 +23542,7 @@
                   "pt": "Média do conjunto – 10 m velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "متوسط المجموعة – 10 م سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23619,7 +23619,7 @@
                   "pt": "Média do conjunto – 850 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "متوسط المجموعة – 850 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23696,7 +23696,7 @@
                   "pt": "Dispersão do conjunto – 100 m velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "تشتت المجموعة – 100 م سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23773,7 +23773,7 @@
                   "pt": "Dispersão do conjunto – 10 m velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "تشتت المجموعة – 10 م سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23850,7 +23850,7 @@
                   "pt": "Dispersão do conjunto – 850 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "تشتت المجموعة – 850 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -23927,7 +23927,7 @@
                   "pt": "Probabilidade of combined events of 10 m velocidade do vento and significant wave height. Mostra a velocidade do vento sustentada prevista",
                   "ar": "الاحتمال of combined events of 10 م سرعة الرياح and الارتفاع الملحوظ للأمواج. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24004,7 +24004,7 @@
                   "pt": "Probabilidade of combined events of rajada de vento and total queda de neve. Mostra a velocidade máxima instantânea do vento prevista perto da superfície",
                   "ar": "الاحتمال of combined events of هبة رياح and total تساقط الثلوج. يظهر التنبؤ بأقصى سرعة رياح لحظية بالقرب من السطح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24081,7 +24081,7 @@
                   "pt": "Sub-sazonal 10 hPa vento weekly mean anomaly. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "دون الموسمي 10 hPa الرياح weekly mean anomaly. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24158,7 +24158,7 @@
                   "pt": "Sub-sazonal 10 m vento weekly mean anomaly. Mostra as condições de vento previstas",
                   "ar": "دون الموسمي 10 م الرياح weekly mean anomaly. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24235,7 +24235,7 @@
                   "pt": "Sub-sazonal 100 m vento weekly mean anomaly. Mostra as condições de vento previstas",
                   "ar": "دون الموسمي 100 م الرياح weekly mean anomaly. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24631,7 +24631,7 @@
                   "pt": "100 m vento. Mostra as condições de vento previstas",
                   "ar": "100 م الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24708,7 +24708,7 @@
                   "pt": "1000 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "1000 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24785,7 +24785,7 @@
                   "pt": "1000 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "1000 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24862,7 +24862,7 @@
                   "pt": "10 m vento. Mostra as condições de vento previstas",
                   "ar": "10 م الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -24939,7 +24939,7 @@
                   "pt": "10 m vento gusts percentile. Mostra a velocidade máxima instantânea do vento prevista perto da superfície",
                   "ar": "10 م الرياح gusts percentile. يظهر التنبؤ بأقصى سرعة رياح لحظية بالقرب من السطح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25016,7 +25016,7 @@
                   "pt": "10 m vento percentile. Mostra as condições de vento previstas",
                   "ar": "10 م الرياح percentile. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25093,7 +25093,7 @@
                   "pt": "10 m velocidade do vento deviation/anomaly, last 24hr. Mostra a velocidade do vento sustentada prevista",
                   "ar": "10 م سرعة الرياح deviation/anomaly, last 24hr. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25170,7 +25170,7 @@
                   "pt": "200 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "200 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25247,7 +25247,7 @@
                   "pt": "200 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "200 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25324,7 +25324,7 @@
                   "pt": "24h 4-value-mean 10 m velocidade do vento from M-Climate at various percentiles. Mostra a velocidade do vento sustentada prevista",
                   "ar": "24h 4-value-mean 10 م سرعة الرياح from M-Climate عند مئينات مختلفة. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25401,7 +25401,7 @@
                   "pt": "24h maximum rajada de vento from M-Climate at various percentiles. Mostra a velocidade máxima instantânea do vento prevista perto da superfície",
                   "ar": "24h maximum هبة رياح from M-Climate عند مئينات مختلفة. يظهر التنبؤ بأقصى سرعة رياح لحظية بالقرب من السطح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25478,7 +25478,7 @@
                   "pt": "250 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "250 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25555,7 +25555,7 @@
                   "pt": "250 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "250 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25632,7 +25632,7 @@
                   "pt": "300 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "300 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25709,7 +25709,7 @@
                   "pt": "300 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "300 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25786,7 +25786,7 @@
                   "pt": "30m vento. Mostra as condições de vento previstas",
                   "ar": "30m الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25863,7 +25863,7 @@
                   "pt": "315K (Potential temperatura level) vento. Mostra as condições de vento previstas",
                   "ar": "315K (Potential درجة الحرارة level) الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -25940,7 +25940,7 @@
                   "pt": "500 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "500 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26017,7 +26017,7 @@
                   "pt": "500 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "500 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26094,7 +26094,7 @@
                   "pt": "600 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "600 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26171,7 +26171,7 @@
                   "pt": "600 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "600 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26248,7 +26248,7 @@
                   "pt": "700 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "700 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26325,7 +26325,7 @@
                   "pt": "700 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "700 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26402,7 +26402,7 @@
                   "pt": "800 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "800 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26479,7 +26479,7 @@
                   "pt": "800 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "800 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26556,7 +26556,7 @@
                   "pt": "850 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "850 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26633,7 +26633,7 @@
                   "pt": "925 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "925 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26710,7 +26710,7 @@
                   "pt": "925 hPa velocidade do vento. Mostra a velocidade do vento sustentada prevista",
                   "ar": "925 hPa سرعة الرياح. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26810,7 +26810,7 @@
                   "pt": "Imagem de satélite simulada – Reflectância visível at 0.635 microns. Imagem de satélite simulada gerada a partir de dados do modelo de previsão",
                   "ar": "صورة أقمار صناعية محاكاة – الانعكاسية المرئية at 0.635 microns. صورة أقمار صناعية محاكاة من بيانات نموذج التنبؤ"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -26885,7 +26885,7 @@
                   "pt": "Imagem de satélite simulada – Reflectância visível at 0.865 microns. Imagem de satélite simulada gerada a partir de dados do modelo de previsão",
                   "ar": "صورة أقمار صناعية محاكاة – الانعكاسية المرئية at 0.865 microns. صورة أقمار صناعية محاكاة من بيانات نموذج التنبؤ"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -28817,7 +28817,7 @@
                   "pt": "Impacto de inundação repentina baseado em radar. Monitora o risco de inundação repentina em rios",
                   "ar": "تأثير الفيضان المفاجئ القائم على الرادار. يراقب مخاطر الفيضانات المفاجئة في الأنهار"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -34393,7 +34393,7 @@
                   "pt": "Índice de previsão extrema (EFI) – Incêndio florestal. Mede quão extrema é a previsão de forest fire em comparação com o clima do modelo",
                   "ar": "مؤشر التنبؤ بالظواهر المتطرفة (EFI) – حريق الغابات. يقيس مدى تطرف التنبؤ بـ forest fire مقارنة بمناخ النموذج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -34470,7 +34470,7 @@
                   "pt": "Índice de probabilidade de incêndio – Incêndio florestal. Mostra o risco e as condições meteorológicas de incêndios",
                   "ar": "مؤشر احتمال حدوث حريق – حريق الغابات. يظهر مخاطر وأحوال الطقس المسببة للحرائق"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -34547,7 +34547,7 @@
                   "pt": "Índice quente-seco-ventoso – Incêndio florestal. Mostra as condições de vento previstas",
                   "ar": "مؤشر الطقس الحار الجاف العاصف – حريق الغابات. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -34635,7 +34635,7 @@
                   "pt": "10 m velocidade do vento in km/h – Incêndio florestal. Mostra a velocidade do vento sustentada prevista",
                   "ar": "10 م سرعة الرياح in km/h – حريق الغابات. يظهر التنبؤ بسرعة الرياح المستمرة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -34712,7 +34712,7 @@
                   "pt": "Last 30-day acumulada TP – Incêndio florestal. Mostra o risco e as condições meteorológicas de incêndios",
                   "ar": "Last 30-day متراكم TP – حريق الغابات. يظهر مخاطر وأحوال الطقس المسببة للحرائق"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -34789,7 +34789,7 @@
                   "pt": "Last 7-day acumulada TP – Incêndio florestal. Mostra o risco e as condições meteorológicas de incêndios",
                   "ar": "Last 7-day متراكم TP – حريق الغابات. يظهر مخاطر وأحوال الطقس المسببة للحرائق"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -34866,7 +34866,7 @@
                   "pt": "Percentile compared to Climate – Incêndio florestal. Mostra o risco e as condições meteorológicas de incêndios",
                   "ar": "Percentile compared to Climate – حريق الغابات. يظهر مخاطر وأحوال الطقس المسببة للحرائق"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -34943,7 +34943,7 @@
                   "pt": "Probabilidade of Fire. Mostra o risco e as condições meteorológicas de incêndios",
                   "ar": "الاحتمال of Fire. يظهر مخاطر وأحوال الطقس المسببة للحرائق"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -35020,7 +35020,7 @@
                   "pt": "Surface (2 m) relative umidade – Incêndio florestal. Shows the forecast moisture content of the air",
                   "ar": "Surface (2 م) relative الرطوبة – حريق الغابات. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -35097,7 +35097,7 @@
                   "pt": "Vapour pressão deficit – Incêndio florestal. Mostra o risco e as condições meteorológicas de incêndios",
                   "ar": "Vapour الضغط deficit – حريق الغابات. يظهر مخاطر وأحوال الطقس المسببة للحرائق"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -35174,7 +35174,7 @@
                   "pt": "Vegetation Optical Depth – Incêndio florestal. Mostra o risco e as condições meteorológicas de incêndios",
                   "ar": "Vegetation Optical Depth – حريق الغابات. يظهر مخاطر وأحوال الطقس المسببة للحرائق"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -36725,7 +36725,7 @@
                   "pt": "Índice de área foliar. Mostra a área total de folhas por unidade de superfície",
                   "ar": "مؤشر مساحة الأوراق. يظهر المساحة الكلية للأوراق لكل وحدة مساحة أرضية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -47194,7 +47194,7 @@
                   "pt": "Cobertura de gelo marinho como fração de uma célula. Mostra a fração do oceano coberta por gelo marinho",
                   "ar": "الغطاء الجليدي البحري كنسبة لخلية شبكية. يظهر نسبة المحيط المغطاة بالجليد البحري"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -47271,7 +47271,7 @@
                   "pt": "Média do conjunto – sea ice cover como fração de uma célula. Mostra a fração do oceano coberta por gelo marinho",
                   "ar": "متوسط المجموعة – الغطاء الجليدي البحري كنسبة لخلية شبكية. يظهر نسبة المحيط المغطاة بالجليد البحري"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -47348,7 +47348,7 @@
                   "pt": "Dispersão do conjunto – sea ice cover como fração de uma célula. Mostra a fração do oceano coberta por gelo marinho",
                   "ar": "تشتت المجموعة – الغطاء الجليدي البحري كنسبة لخلية شبكية. يظهر نسبة المحيط المغطاة بالجليد البحري"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -47425,7 +47425,7 @@
                   "pt": "Cobertura de gelo marinho como fração de uma célula. Mostra a fração do oceano coberta por gelo marinho",
                   "ar": "الغطاء الجليدي البحري كنسبة لخلية شبكية. يظهر نسبة المحيط المغطاة بالجليد البحري"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -47502,7 +47502,7 @@
                   "pt": "Temperatura da superfície do mar. Mostra a temperatura do ar prevista",
                   "ar": "درجة حرارة سطح البحر. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -47579,7 +47579,7 @@
                   "pt": "Média do conjunto – sea surface temperatura. Mostra a temperatura do ar prevista",
                   "ar": "متوسط المجموعة – sea surface درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -47656,7 +47656,7 @@
                   "pt": "Dispersão do conjunto – sea surface temperatura. Mostra a temperatura do ar prevista",
                   "ar": "تشتت المجموعة – sea surface درجة الحرارة. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -47733,7 +47733,7 @@
                   "pt": "Temperatura da superfície do mar. Mostra a temperatura do ar prevista",
                   "ar": "درجة حرارة سطح البحر. يظهر التنبؤ بدرجة حرارة الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51238,7 +51238,7 @@
                   "pt": "100 m vento. Mostra as condições de vento previstas",
                   "ar": "100 م الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51315,7 +51315,7 @@
                   "pt": "10 m vento. Mostra as condições de vento previstas",
                   "ar": "10 م الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51392,7 +51392,7 @@
                   "pt": "200 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "200 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51470,7 +51470,7 @@
                   "pt": "500 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "500 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51548,7 +51548,7 @@
                   "pt": "Cobertura de nuvens (total): Low L+M Medium M+H High H+L H+M+L clouds. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "الغطاء السحابي (total): Low L+M Medium M+H High H+L H+M+L clouds. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51625,7 +51625,7 @@
                   "pt": "Geopotential. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "Geopotential. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51702,7 +51702,7 @@
                   "pt": "High cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "High الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51779,7 +51779,7 @@
                   "pt": "Low cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "Low الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51856,7 +51856,7 @@
                   "pt": "Pressão ao nível do mar. Mostra a pressão atmosférica prevista ao nível do mar",
                   "ar": "الضغط على مستوى سطح البحر. يظهر التنبؤ بالضغط الجوي على مستوى سطح البحر"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -51933,7 +51933,7 @@
                   "pt": "Medium cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "Medium الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52010,7 +52010,7 @@
                   "pt": "Total column water. Mostra as condições meteorológicas previstas",
                   "ar": "Total column water. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52087,7 +52087,7 @@
                   "pt": "Total queda de neve. Mostra a acumulação de neve prevista",
                   "ar": "Total تساقط الثلوج. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52164,7 +52164,7 @@
                   "pt": "Vento. Mostra as condições de vento previstas",
                   "ar": "الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52241,7 +52241,7 @@
                   "pt": "100 m vento. Mostra as condições de vento previstas",
                   "ar": "100 م الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52318,7 +52318,7 @@
                   "pt": "10 m vento. Mostra as condições de vento previstas",
                   "ar": "10 م الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52395,7 +52395,7 @@
                   "pt": "200 hPa vento. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "200 hPa الرياح. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52472,7 +52472,7 @@
                   "pt": "500 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "500 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52549,7 +52549,7 @@
                   "pt": "Cobertura de nuvens (total): Low L+M Medium M+H High H+L H+M+L clouds. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "الغطاء السحابي (total): Low L+M Medium M+H High H+L H+M+L clouds. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52626,7 +52626,7 @@
                   "pt": "Geopotential. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "Geopotential. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52703,7 +52703,7 @@
                   "pt": "High cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "High الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52780,7 +52780,7 @@
                   "pt": "Low cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "Low الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52857,7 +52857,7 @@
                   "pt": "Pressão ao nível do mar. Mostra a pressão atmosférica prevista ao nível do mar",
                   "ar": "الضغط على مستوى سطح البحر. يظهر التنبؤ بالضغط الجوي على مستوى سطح البحر"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -52934,7 +52934,7 @@
                   "pt": "Medium cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "Medium الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53011,7 +53011,7 @@
                   "pt": "Total column water. Mostra as condições meteorológicas previstas",
                   "ar": "Total column water. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53088,7 +53088,7 @@
                   "pt": "Total queda de neve. Mostra a acumulação de neve prevista",
                   "ar": "Total تساقط الثلوج. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53165,7 +53165,7 @@
                   "pt": "Vento. Mostra as condições de vento previstas",
                   "ar": "الرياح. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53242,7 +53242,7 @@
                   "pt": "CAPE shear probabilidade. Combines thunderstorm energy and vento shear to assess severe weather risk",
                   "ar": "CAPE shear الاحتمال. يجمع بين طاقة العواصف الرعدية وقص الرياح لتقييم مخاطر الطقس العنيف"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53319,7 +53319,7 @@
                   "pt": "Média do conjunto – 10 hPa geopotencial height. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "متوسط المجموعة – 10 hPa الجهد الجغرافي height. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53396,7 +53396,7 @@
                   "pt": "Média do conjunto – 300 hPa geopotencial height. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "متوسط المجموعة – 300 hPa الجهد الجغرافي height. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53473,7 +53473,7 @@
                   "pt": "Média do conjunto – 500 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "متوسط المجموعة – 500 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53550,7 +53550,7 @@
                   "pt": "Média do conjunto – mean sea level pressão. Mostra a pressão atmosférica prevista ao nível do mar",
                   "ar": "متوسط المجموعة – mean sea level الضغط. يظهر التنبؤ بالضغط الجوي على مستوى سطح البحر"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53627,7 +53627,7 @@
                   "pt": "Dispersão do conjunto – 300 hPa geopotencial height. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "تشتت المجموعة – 300 hPa الجهد الجغرافي height. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53704,7 +53704,7 @@
                   "pt": "Dispersão do conjunto – 500 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "تشتت المجموعة – 500 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53781,7 +53781,7 @@
                   "pt": "Mean wave period probabilidade. Mostra a altura significativa das ondas prevista",
                   "ar": "Mean wave period الاحتمال. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53858,7 +53858,7 @@
                   "pt": "Model orography from HRES forecast. Mostra as condições meteorológicas previstas",
                   "ar": "Model orography from HRES forecast. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -53935,7 +53935,7 @@
                   "pt": "Model orography from ensemble forecast. Mostra as condições meteorológicas previstas",
                   "ar": "Model orography from ensemble forecast. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54012,7 +54012,7 @@
                   "pt": "Most unstable Convective available potential energy (MuCAPE) probabilidade. Measures the energy available for thunderstorm development",
                   "ar": "Most unstable Convective available potential energy (MuCAPE) الاحتمال. يقيس الطاقة المتاحة لتطور العواصف الرعدية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54089,7 +54089,7 @@
                   "pt": "Most unstable convective available potential energy (MUCAPE) probabilidade. Measures the energy available for thunderstorm development",
                   "ar": "Most unstable convective available potential energy (MUCAPE) الاحتمال. يقيس الطاقة المتاحة لتطور العواصف الرعدية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54166,7 +54166,7 @@
                   "pt": "Altura significativa das ondas probabilidade. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج الاحتمال. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54243,7 +54243,7 @@
                   "pt": "Imagem de satélite simulada – Infrared (IR) channel. Imagem de satélite simulada gerada a partir de dados do modelo de previsão",
                   "ar": "صورة أقمار صناعية محاكاة – Infrared (IR) channel. صورة أقمار صناعية محاكاة من بيانات نموذج التنبؤ"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54320,7 +54320,7 @@
                   "pt": "Imagem de satélite simulada – Water vapour (WV) ~300 hPa. Imagem de satélite simulada gerada a partir de dados do modelo de previsão",
                   "ar": "صورة أقمار صناعية محاكاة – Water vapour (WV) ~300 hPa. صورة أقمار صناعية محاكاة من بيانات نموذج التنبؤ"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54397,7 +54397,7 @@
                   "pt": "Imagem de satélite simulada – Water vapour (WV) ~500 hPa. Imagem de satélite simulada gerada a partir de dados do modelo de previsão",
                   "ar": "صورة أقمار صناعية محاكاة – Water vapour (WV) ~500 hPa. صورة أقمار صناعية محاكاة من بيانات نموذج التنبؤ"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54474,7 +54474,7 @@
                   "pt": "Spaghetti plot - 500 hPa geopotencial height (Z). Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "Spaghetti plot - 500 hPa الجهد الجغرافي height (Z). يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54551,7 +54551,7 @@
                   "pt": "Spaghetti plot - Pressão ao nível do mar (MSLP). Mostra a pressão atmosférica prevista ao nível do mar",
                   "ar": "Spaghetti plot - الضغط على مستوى سطح البحر (MSLP). يظهر التنبؤ بالضغط الجوي على مستوى سطح البحر"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54628,7 +54628,7 @@
                   "pt": "Sub-sazonal 10hPa geopotencial height weekly mean. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "دون الموسمي 10hPa الجهد الجغرافي height weekly mean. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54705,7 +54705,7 @@
                   "pt": "Sub-sazonal 200 hPa vento weekly mean anomaly. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "دون الموسمي 200 hPa الرياح weekly mean anomaly. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54782,7 +54782,7 @@
                   "pt": "Sub-sazonal 2t probabilidade dist. at various quantiles. Mostra a probabilidade de exceder limiares específicos",
                   "ar": "دون الموسمي 2t الاحتمال dist. at various quantiles. يظهر احتمال تجاوز عتبات محددة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54859,7 +54859,7 @@
                   "pt": "Sub-sazonal 500 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "دون الموسمي 500 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -54936,7 +54936,7 @@
                   "pt": "Sub-sazonal 500 hPa geopotencial anomaly. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "دون الموسمي 500 hPa الجهد الجغرافي anomaly. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55013,7 +55013,7 @@
                   "pt": "Sub-sazonal 500 hPa vento weekly mean anomaly. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "دون الموسمي 500 hPa الرياح weekly mean anomaly. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55090,7 +55090,7 @@
                   "pt": "Sub-sazonal 700 hPa vento weekly mean anomaly. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "دون الموسمي 700 hPa الرياح weekly mean anomaly. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55167,7 +55167,7 @@
                   "pt": "Sub-sazonal 850 hPa vento weekly mean anomaly. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "دون الموسمي 850 hPa الرياح weekly mean anomaly. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55244,7 +55244,7 @@
                   "pt": "Sub-sazonal MSLP probabilidade dist. at various quantiles. Mostra a probabilidade de exceder limiares específicos",
                   "ar": "دون الموسمي MSLP الاحتمال dist. at various quantiles. يظهر احتمال تجاوز عتبات محددة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55321,7 +55321,7 @@
                   "pt": "Sub-sazonal MSLP probabilidade of weekly mean anomalies > 0. Mostra a probabilidade de exceder limiares específicos",
                   "ar": "دون الموسمي MSLP الاحتمال of weekly mean anomalies > 0. يظهر احتمال تجاوز عتبات محددة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55398,7 +55398,7 @@
                   "pt": "Sub-sazonal MSLP weekly mean anomaly. Mostra as condições meteorológicas previstas",
                   "ar": "دون الموسمي MSLP weekly mean anomaly. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55475,7 +55475,7 @@
                   "pt": "Sub-sazonal Sunshine duration weekly mean of anomalous rate of accumulation. Mostra as condições meteorológicas previstas",
                   "ar": "دون الموسمي Sunshine duration weekly mean of anomalous rate of accumulation. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55552,7 +55552,7 @@
                   "pt": "Sunshine duration over the last 24 hours. Mostra as condições meteorológicas previstas",
                   "ar": "Sunshine duration over the last 24 hours. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55629,7 +55629,7 @@
                   "pt": "Surface albedo. Mostra as condições meteorológicas previstas",
                   "ar": "Surface albedo. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55706,7 +55706,7 @@
                   "pt": "Total queda de neve. Mostra a acumulação de neve prevista",
                   "ar": "Total تساقط الثلوج. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55783,7 +55783,7 @@
                   "pt": "Total queda de neve probabilidade. Mostra a acumulação de neve prevista",
                   "ar": "Total تساقط الثلوج الاحتمال. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -55860,7 +55860,7 @@
                   "pt": "Visibility. Shows the forecast visibilidade conditions",
                   "ar": "Visibility. Shows the forecast الرؤية conditions"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -56791,7 +56791,7 @@
                   "pt": "(EXPERIMENTAL) Probabilidade of CAT a vários níveis de voo. Mostra a probabilidade de exceder limiares específicos",
                   "ar": "(EXPERIMENTAL) الاحتمال of CAT على مستويات طيران مختلفة. يظهر احتمال تجاوز عتبات محددة"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -56868,7 +56868,7 @@
                   "pt": "(MuCAPE) Convective available potential energy. Measures the energy available for thunderstorm development",
                   "ar": "(MuCAPE) Convective available potential energy. يقيس الطاقة المتاحة لتطور العواصف الرعدية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -56945,7 +56945,7 @@
                   "pt": "0-6km shear vectors. Mostra as condições meteorológicas previstas",
                   "ar": "0-6km shear vectors. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57022,7 +57022,7 @@
                   "pt": "10 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "10 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57099,7 +57099,7 @@
                   "pt": "1000 hPa divergence. Mostra as condições meteorológicas previstas",
                   "ar": "1000 hPa divergence. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57176,7 +57176,7 @@
                   "pt": "1000 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "1000 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57253,7 +57253,7 @@
                   "pt": "1000 hPa specific umidade. Shows the forecast moisture content of the air",
                   "ar": "1000 hPa specific الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57330,7 +57330,7 @@
                   "pt": "200 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "200 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57407,7 +57407,7 @@
                   "pt": "200 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "200 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57484,7 +57484,7 @@
                   "pt": "24h 4-value-maximum CAPE from M-Climate at various percentiles. Measures the energy available for thunderstorm development",
                   "ar": "24h 4-value-maximum CAPE from M-Climate عند مئينات مختلفة. يقيس الطاقة المتاحة لتطور العواصف الرعدية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57561,7 +57561,7 @@
                   "pt": "24h 4-value-maximum CAPESHEAR from M-Climate at various percentiles. Combines thunderstorm energy and vento shear to assess severe weather risk",
                   "ar": "24h 4-value-maximum CAPESHEAR from M-Climate عند مئينات مختلفة. يجمع بين طاقة العواصف الرعدية وقص الرياح لتقييم مخاطر الطقس العنيف"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57638,7 +57638,7 @@
                   "pt": "24h maximum sig wave height from M-Climate at various percentiles. Mostra a altura significativa das ondas prevista",
                   "ar": "24h maximum sig wave height from M-Climate عند مئينات مختلفة. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57715,7 +57715,7 @@
                   "pt": "24h total queda de neve from M-Climate at various percentiles. Mostra a acumulação de neve prevista",
                   "ar": "24h total تساقط الثلوج from M-Climate عند مئينات مختلفة. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57792,7 +57792,7 @@
                   "pt": "250 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "250 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57869,7 +57869,7 @@
                   "pt": "250 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "250 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -57946,7 +57946,7 @@
                   "pt": "250 hPa relative vorticity. Mostra as condições meteorológicas previstas",
                   "ar": "250 hPa relative vorticity. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58023,7 +58023,7 @@
                   "pt": "300 hPa divergence. Mostra as condições meteorológicas previstas",
                   "ar": "300 hPa divergence. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58100,7 +58100,7 @@
                   "pt": "300 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "300 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58177,7 +58177,7 @@
                   "pt": "300 hPa potential vorticity. Mostra as condições meteorológicas previstas",
                   "ar": "300 hPa potential vorticity. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58254,7 +58254,7 @@
                   "pt": "300 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "300 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58331,7 +58331,7 @@
                   "pt": "300 hPa relative vorticity. Mostra as condições meteorológicas previstas",
                   "ar": "300 hPa relative vorticity. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58408,7 +58408,7 @@
                   "pt": "500 hPa divergence. Mostra as condições meteorológicas previstas",
                   "ar": "500 hPa divergence. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58485,7 +58485,7 @@
                   "pt": "500 hPa potential vorticity. Mostra as condições meteorológicas previstas",
                   "ar": "500 hPa potential vorticity. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58562,7 +58562,7 @@
                   "pt": "500 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "500 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58639,7 +58639,7 @@
                   "pt": "500 hPa relative vorticity. Mostra as condições meteorológicas previstas",
                   "ar": "500 hPa relative vorticity. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58716,7 +58716,7 @@
                   "pt": "600 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "600 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58793,7 +58793,7 @@
                   "pt": "600 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "600 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58870,7 +58870,7 @@
                   "pt": "700 hPa divergence. Mostra as condições meteorológicas previstas",
                   "ar": "700 hPa divergence. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -58947,7 +58947,7 @@
                   "pt": "700 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "700 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59024,7 +59024,7 @@
                   "pt": "700 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "700 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59101,7 +59101,7 @@
                   "pt": "700 hPa relative vorticity. Mostra as condições meteorológicas previstas",
                   "ar": "700 hPa relative vorticity. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59178,7 +59178,7 @@
                   "pt": "700 hPa vertical velocity. Mostra as condições meteorológicas previstas",
                   "ar": "700 hPa vertical velocity. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59255,7 +59255,7 @@
                   "pt": "800 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "800 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59332,7 +59332,7 @@
                   "pt": "800 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "800 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59409,7 +59409,7 @@
                   "pt": "850 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "850 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59486,7 +59486,7 @@
                   "pt": "850 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "850 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59563,7 +59563,7 @@
                   "pt": "850 hPa relative vorticity. Mostra as condições meteorológicas previstas",
                   "ar": "850 hPa relative vorticity. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59640,7 +59640,7 @@
                   "pt": "925 hPa divergence. Mostra as condições meteorológicas previstas",
                   "ar": "925 hPa divergence. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59717,7 +59717,7 @@
                   "pt": "925 hPa geopotencial. Shows the height of a pressão surface, indicating atmospheric circulation patterns",
                   "ar": "925 hPa الجهد الجغرافي. يظهر ارتفاع سطح الضغط مما يشير إلى أنماط الدوران الجوي"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59794,7 +59794,7 @@
                   "pt": "925 hPa relative umidade. Shows the forecast moisture content of the air",
                   "ar": "925 hPa relative الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59871,7 +59871,7 @@
                   "pt": "925 hPa specific umidade. Shows the forecast moisture content of the air",
                   "ar": "925 hPa specific الرطوبة. يظهر التنبؤ بمحتوى الرطوبة في الهواء"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -59948,7 +59948,7 @@
                   "pt": "Bulk vento shear (Compute from levels). Mostra as condições de vento previstas",
                   "ar": "Bulk الرياح shear (Compute from levels). يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60025,7 +60025,7 @@
                   "pt": "Bulk vento shear between 925 and 500 hPa. Mostra a velocidade e direção do vento previstas a uma altitude específica",
                   "ar": "Bulk الرياح shear between 925 and 500 hPa. يظهر التنبؤ بسرعة واتجاه الرياح على ارتفاع محدد"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60102,7 +60102,7 @@
                   "pt": "CAPE shear. Combines thunderstorm energy and vento shear to assess severe weather risk",
                   "ar": "CAPE shear. يجمع بين طاقة العواصف الرعدية وقص الرياح لتقييم مخاطر الطقس العنيف"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60179,7 +60179,7 @@
                   "pt": "Ceiling. Mostra as condições meteorológicas previstas",
                   "ar": "Ceiling. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60256,7 +60256,7 @@
                   "pt": "Clear air turbulance (CAT) a vários níveis de voo. Mostra as condições meteorológicas previstas",
                   "ar": "Clear air turbulance (CAT) على مستويات طيران مختلفة. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60333,7 +60333,7 @@
                   "pt": "Cloud base height. Mostra as condições meteorológicas previstas",
                   "ar": "Cloud base height. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60410,7 +60410,7 @@
                   "pt": "ERICHA 24-h accumulations. Mostra as condições meteorológicas previstas",
                   "ar": "ERICHA 24-h accumulations. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60487,7 +60487,7 @@
                   "pt": "Dead fuel moisture content anomaly. Mostra as condições meteorológicas previstas",
                   "ar": "Dead fuel moisture content anomaly. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60564,7 +60564,7 @@
                   "pt": "Dense dead wood moisture content. Mostra as condições meteorológicas previstas",
                   "ar": "Dense dead wood moisture content. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60641,7 +60641,7 @@
                   "pt": "Fine dead leaf moisture content. Mostra as condições meteorológicas previstas",
                   "ar": "Fine dead leaf moisture content. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60718,7 +60718,7 @@
                   "pt": "Fuel load. Mostra as condições meteorológicas previstas",
                   "ar": "Fuel load. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60795,7 +60795,7 @@
                   "pt": "Live fuel moisture content. Mostra as condições meteorológicas previstas",
                   "ar": "Live fuel moisture content. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60872,7 +60872,7 @@
                   "pt": "Live fuel moisture content anomaly. Mostra as condições meteorológicas previstas",
                   "ar": "Live fuel moisture content anomaly. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -60949,7 +60949,7 @@
                   "pt": "Height of convective cloud top. Mostra as condições meteorológicas previstas",
                   "ar": "Height of convective cloud top. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61026,7 +61026,7 @@
                   "pt": "High cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "High الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61103,7 +61103,7 @@
                   "pt": "Low cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "Low الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61180,7 +61180,7 @@
                   "pt": "Maximum CAPE over the last 6 hours. Measures the energy available for thunderstorm development",
                   "ar": "Maximum CAPE over the last 6 hours. يقيس الطاقة المتاحة لتطور العواصف الرعدية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61257,7 +61257,7 @@
                   "pt": "Maximum CAPE-SHEAR over the last 6 hours. Combines thunderstorm energy and vento shear to assess severe weather risk",
                   "ar": "Maximum CAPE-SHEAR over the last 6 hours. يجمع بين طاقة العواصف الرعدية وقص الرياح لتقييم مخاطر الطقس العنيف"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61334,7 +61334,7 @@
                   "pt": "Mean direction and height of total swell. Mostra as condições meteorológicas previstas",
                   "ar": "Mean direction and height of total swell. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61411,7 +61411,7 @@
                   "pt": "Mean direction and height of vento waves. Mostra as condições de vento previstas",
                   "ar": "Mean direction and height of الرياح waves. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61488,7 +61488,7 @@
                   "pt": "Mean period of total swell. Mostra as condições meteorológicas previstas",
                   "ar": "Mean period of total swell. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61565,7 +61565,7 @@
                   "pt": "Mean period of vento waves. Mostra as condições de vento previstas",
                   "ar": "Mean period of الرياح waves. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61642,7 +61642,7 @@
                   "pt": "Mean wave direction and height. Mostra a altura significativa das ondas prevista",
                   "ar": "Mean wave direction and height. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61719,7 +61719,7 @@
                   "pt": "Mean wave period. Mostra a altura significativa das ondas prevista",
                   "ar": "Mean wave period. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61796,7 +61796,7 @@
                   "pt": "Mean wave period percentile.. Mostra a altura significativa das ondas prevista",
                   "ar": "Mean wave period percentile.. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61873,7 +61873,7 @@
                   "pt": "Medium cobertura de nuvens. Mostra a fração do céu coberta por nuvens prevista",
                   "ar": "Medium الغطاء السحابي. يظهر التنبؤ بنسبة السماء المغطاة بالسحب"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -61950,7 +61950,7 @@
                   "pt": "Most unstable Convective inhibition (MUCIN). Mostra as condições meteorológicas previstas",
                   "ar": "Most unstable Convective inhibition (MUCIN). يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62027,7 +62027,7 @@
                   "pt": "Most unstable convective available potential energy (MUCAPE). Measures the energy available for thunderstorm development",
                   "ar": "Most unstable convective available potential energy (MUCAPE). يقيس الطاقة المتاحة لتطور العواصف الرعدية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62104,7 +62104,7 @@
                   "pt": "Significant height of total swell. Mostra as condições meteorológicas previstas",
                   "ar": "Significant height of total swell. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62181,7 +62181,7 @@
                   "pt": "Significant height of vento waves. Mostra as condições de vento previstas",
                   "ar": "Significant height of الرياح waves. يظهر التنبؤ بأحوال الرياح"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62258,7 +62258,7 @@
                   "pt": "Altura significativa das ondas. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62335,7 +62335,7 @@
                   "pt": "Altura significativa das ondas of all waves with period between 10 and 12 seconds. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج of all waves with period between 10 and 12 seconds. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62412,7 +62412,7 @@
                   "pt": "Altura significativa das ondas of all waves with period between 12 and 14 seconds. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج of all waves with period between 12 and 14 seconds. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62489,7 +62489,7 @@
                   "pt": "Altura significativa das ondas of all waves with period between 14 and 17 seconds. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج of all waves with period between 14 and 17 seconds. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62566,7 +62566,7 @@
                   "pt": "Altura significativa das ondas of all waves with period between 17 and 21 seconds. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج of all waves with period between 17 and 21 seconds. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62643,7 +62643,7 @@
                   "pt": "Altura significativa das ondas of all waves with period between 21 and 25 seconds. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج of all waves with period between 21 and 25 seconds. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62720,7 +62720,7 @@
                   "pt": "Altura significativa das ondas of all waves with period between 25 and 30 seconds. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج of all waves with period between 25 and 30 seconds. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62797,7 +62797,7 @@
                   "pt": "Altura significativa das ondas of all waves with period larger than 10s. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج of all waves with period larger than 10s. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62874,7 +62874,7 @@
                   "pt": "Altura significativa das ondas percentile. Mostra a altura significativa das ondas prevista",
                   "ar": "الارتفاع الملحوظ للأمواج percentile. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -62951,7 +62951,7 @@
                   "pt": "Snow coverage as percentage de uma célula.. Mostra a acumulação de neve prevista",
                   "ar": "Snow coverage as percentage لخلية شبكية.. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63028,7 +63028,7 @@
                   "pt": "Espessura de neve. Mostra a acumulação de neve prevista",
                   "ar": "عمق الثلج. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63105,7 +63105,7 @@
                   "pt": "Sunshine duration percentile. Mostra as condições meteorológicas previstas",
                   "ar": "Sunshine duration percentile. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63182,7 +63182,7 @@
                   "pt": "Thickness (Compute from levels). Mostra as condições meteorológicas previstas",
                   "ar": "Thickness (Compute from levels). يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63259,7 +63259,7 @@
                   "pt": "Thickness from 1000-500 hPa. Mostra as condições meteorológicas previstas",
                   "ar": "Thickness from 1000-500 hPa. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63336,7 +63336,7 @@
                   "pt": "Total column water. Mostra as condições meteorológicas previstas",
                   "ar": "Total column water. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63413,7 +63413,7 @@
                   "pt": "Total queda de neve deviation/anomaly, last 24hr. Mostra a acumulação de neve prevista",
                   "ar": "Total تساقط الثلوج deviation/anomaly, last 24hr. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63490,7 +63490,7 @@
                   "pt": "Total queda de neve rate. Mostra a acumulação de neve prevista",
                   "ar": "Total تساقط الثلوج rate. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63567,7 +63567,7 @@
                   "pt": "Total queda de neve rate probabilidade. Mostra a acumulação de neve prevista",
                   "ar": "Total تساقط الثلوج rate الاحتمال. يظهر التنبؤ بتراكم الثلوج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63644,7 +63644,7 @@
                   "pt": "Total totals index. Mostra as condições meteorológicas previstas",
                   "ar": "Total totals index. يظهر التنبؤ بالأحوال الجوية"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63721,7 +63721,7 @@
                   "pt": "Visibility probabilidade. Shows the forecast visibilidade conditions",
                   "ar": "Visibility الاحتمال. Shows the forecast الرؤية conditions"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63798,7 +63798,7 @@
                   "pt": "Wave energy flux magnitude. Mostra a altura significativa das ondas prevista",
                   "ar": "Wave energy flux magnitude. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
@@ -63875,7 +63875,7 @@
                   "pt": "Wave energy flux mean direction and magnitude. Mostra a altura significativa das ondas prevista",
                   "ar": "Wave energy flux mean direction and magnitude. يظهر التنبؤ بالارتفاع الملحوظ للأمواج"
                 },
-                "learn_more": "https://eccharts.ecmwf.int/wms/?token={ECMWF_TOKEN}&"
+                "learn_more": "https://charts.ecmwf.int/catalogue/packages/opencharts/"
               },
               "layers": [
                 {
