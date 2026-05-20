@@ -280,6 +280,13 @@ class CatalogEntry(models.Model):
                      "Each item: {data_key, label, data_type}."),
     )
 
+    # --- Popup toggle (wms) ---
+    popup = models.BooleanField(
+        default=False,
+        verbose_name=_("Enable popup"),
+        help_text=_("If checked, a popup will be displayed when clicking on the layer."),
+    )
+
     # --- Legend configuration ---
     legend_json = models.JSONField(
         blank=True, null=True,
