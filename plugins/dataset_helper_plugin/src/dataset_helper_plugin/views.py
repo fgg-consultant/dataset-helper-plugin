@@ -3,6 +3,7 @@ from geomanager.models.raster_style import RasterStyle
 from geomanager.models.wms import WmsLayer, WmsRequestLayer
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.db import transaction
@@ -54,7 +55,7 @@ def catalog_tree(request):
             'update_available': update_available,
         })
     except Exception as e:
-        return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
+        return JsonResponse({'status': 'error', 'message': _('Server error: %(error)s') % {'error': e}}, status=500)
 
 
 @csrf_exempt
@@ -65,10 +66,10 @@ def catalog_load_config(request):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError as e:
-            return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+            return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
 
         if not isinstance(data, dict):
-            return JsonResponse({'status': 'error', 'message': 'Expected a JSON object'}, status=400)
+            return JsonResponse({'status': 'error', 'message': _('Expected a JSON object')}, status=400)
 
         stats = services.load_catalog_from_config(data)
 
@@ -79,12 +80,13 @@ def catalog_load_config(request):
                 **stats,
             }, status=400)
 
-        msg = (
-            f"Catalog loaded: {stats['created']} created, "
-            f"{stats['updated']} updated, {stats['unchanged']} unchanged"
-        )
+        msg = _('Catalog loaded: %(created)d created, %(updated)d updated, %(unchanged)d unchanged') % {
+            'created': stats['created'],
+            'updated': stats['updated'],
+            'unchanged': stats['unchanged'],
+        }
         if stats.get('skipped_estation'):
-            msg += f", {stats['skipped_estation']} skipped (not on local eStation)"
+            msg += _(', %(count)d skipped (not on local eStation)') % {'count': stats['skipped_estation']}
 
         return JsonResponse({
             'status': 'success',
@@ -92,7 +94,7 @@ def catalog_load_config(request):
             **stats,
         })
     except Exception as e:
-        return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
+        return JsonResponse({'status': 'error', 'message': _('Server error: %(error)s') % {'error': e}}, status=500)
 
 
 def catalog_preview_embedded(request):
@@ -106,12 +108,12 @@ def catalog_preview_embedded(request):
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     except ValueError as e:
         return JsonResponse(
-            {'status': 'error', 'message': f'Invalid embedded catalog JSON: {e}'},
+            {'status': 'error', 'message': _('Invalid embedded catalog JSON: %(error)s') % {'error': e}},
             status=500,
         )
     except Exception as e:
         logger.exception("catalog_preview_embedded failed")
-        return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
+        return JsonResponse({'status': 'error', 'message': _('Server error: %(error)s') % {'error': e}}, status=500)
 
     return JsonResponse({'status': 'success', **changeset})
 
@@ -134,11 +136,12 @@ def catalog_load_embedded(request):
         try:
             body = json.loads(request.body)
         except json.JSONDecodeError as e:
-            return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+            return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
         policy = body.get('conflict_policy')
         if policy not in (None, 'skip', 'overwrite'):
             return JsonResponse(
-                {'status': 'error', 'message': f"conflict_policy must be 'skip' or 'overwrite', got {policy!r}"},
+                {'status': 'error',
+                 'message': _("conflict_policy must be 'skip' or 'overwrite', got %(policy)r") % {'policy': policy}},
                 status=400,
             )
         if policy is not None:
@@ -150,12 +153,12 @@ def catalog_load_embedded(request):
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     except ValueError as e:
         return JsonResponse(
-            {'status': 'error', 'message': f'Invalid embedded catalog JSON: {e}'},
+            {'status': 'error', 'message': _('Invalid embedded catalog JSON: %(error)s') % {'error': e}},
             status=500,
         )
     except Exception as e:
         logger.exception("catalog_load_embedded failed")
-        return JsonResponse({'status': 'error', 'message': f'Server error: {e}'}, status=500)
+        return JsonResponse({'status': 'error', 'message': _('Server error: %(error)s') % {'error': e}}, status=500)
 
     if stats['created'] == 0 and stats['updated'] == 0 and stats['errors']:
         return JsonResponse({
@@ -164,16 +167,17 @@ def catalog_load_embedded(request):
             **stats,
         }, status=400)
 
-    msg = (
-        f"Catalog loaded: {stats['created']} created, "
-        f"{stats['updated']} updated, {stats['unchanged']} unchanged"
-    )
+    msg = _('Catalog loaded: %(created)d created, %(updated)d updated, %(unchanged)d unchanged') % {
+        'created': stats['created'],
+        'updated': stats['updated'],
+        'unchanged': stats['unchanged'],
+    }
     if stats.get('conflict_skipped'):
-        msg += f", {stats['conflict_skipped']} conflicts kept local"
+        msg += _(', %(count)d conflicts kept local') % {'count': stats['conflict_skipped']}
     if stats.get('removed'):
-        msg += f", {stats['removed']} disabled (gone from JSON)"
+        msg += _(', %(count)d disabled (gone from JSON)') % {'count': stats['removed']}
     if stats.get('skipped_estation'):
-        msg += f", {stats['skipped_estation']} skipped (not on local eStation)"
+        msg += _(', %(count)d skipped (not on local eStation)') % {'count': stats['skipped_estation']}
 
     return JsonResponse({
         'status': 'success',
@@ -189,21 +193,21 @@ def catalog_sync(request):
     try:
         stats = services.sync_catalog_to_climweb()
         parts = [
-            f"{stats['added']} added",
-            f"{stats['removed']} removed",
-            f"{stats['reprovisioned']} updated",
-            f"{stats['orphans_cleared']} orphans cleared",
+            _('%(count)d added') % {'count': stats['added']},
+            _('%(count)d removed') % {'count': stats['removed']},
+            _('%(count)d updated') % {'count': stats['reprovisioned']},
+            _('%(count)d orphans cleared') % {'count': stats['orphans_cleared']},
         ]
         if stats.get('raster_file_drift'):
-            parts.append(f"{stats['raster_file_drift']} raster_file drift (skipped)")
+            parts.append(_('%(count)d raster_file drift (skipped)') % {'count': stats['raster_file_drift']})
         return JsonResponse({
             'status': 'success',
-            'message': "Sync complete: " + ", ".join(parts),
+            'message': _('Sync complete: %(parts)s') % {'parts': ", ".join(parts)},
             **stats,
         })
     except Exception as e:
         logger.exception("catalog_sync failed")
-        return JsonResponse({'status': 'error', 'message': f'Sync failed: {e}'}, status=500)
+        return JsonResponse({'status': 'error', 'message': _('Sync failed: %(error)s') % {'error': e}}, status=500)
 
 
 @csrf_exempt
@@ -213,7 +217,7 @@ def catalog_toggle(request, entry_id):
     try:
         entry = CatalogEntry.objects.get(id=entry_id)
     except CatalogEntry.DoesNotExist:
-        return JsonResponse({'status': 'error', 'message': 'Entry not found'}, status=404)
+        return JsonResponse({'status': 'error', 'message': _('Entry not found')}, status=404)
 
     entry.enabled = not entry.enabled
     entry.save(update_fields=['enabled', 'updated_at'])
@@ -232,13 +236,13 @@ def catalog_bulk_toggle(request):
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError as e:
-        return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+        return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
 
     entry_ids = data.get('entry_ids', [])
     enabled = data.get('enabled', True)
 
     if not entry_ids:
-        return JsonResponse({'status': 'error', 'message': 'No entry_ids provided'}, status=400)
+        return JsonResponse({'status': 'error', 'message': _('No entry_ids provided')}, status=400)
 
     updated = CatalogEntry.objects.filter(id__in=entry_ids).update(enabled=enabled)
     return JsonResponse({
@@ -274,19 +278,25 @@ def catalog_reset(request):
 
         return JsonResponse({
             'status': 'success',
-            'message': (
-                f"Catalog reset: {entries_deleted} catalog entries deleted, "
-                f"{clear_stats['datasets_deleted']} Climweb Dataset(s) removed, "
-                f"{clear_stats['metadata_deleted']} Metadata removed, "
-                f"{clear_stats['subcategories_deleted']} empty SubCategor(ies) swept, "
-                f"{clear_stats['categories_deleted']} empty Categor(ies) swept"
-            ),
+            'message': _(
+                'Catalog reset: %(entries)d catalog entries deleted, '
+                '%(datasets)d Climweb Dataset(s) removed, '
+                '%(metadata)d Metadata removed, '
+                '%(subcats)d empty SubCategor(ies) swept, '
+                '%(cats)d empty Categor(ies) swept'
+            ) % {
+                'entries': entries_deleted,
+                'datasets': clear_stats['datasets_deleted'],
+                'metadata': clear_stats['metadata_deleted'],
+                'subcats': clear_stats['subcategories_deleted'],
+                'cats': clear_stats['categories_deleted'],
+            },
             'deleted': entries_deleted,
             **clear_stats,
         })
     except Exception as e:
         logger.exception("catalog_reset failed")
-        return JsonResponse({'status': 'error', 'message': f'Reset failed: {e}'}, status=500)
+        return JsonResponse({'status': 'error', 'message': _('Reset failed: %(error)s') % {'error': e}}, status=500)
 
 
 @csrf_exempt
@@ -296,7 +306,7 @@ def catalog_add_entry(request):
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError as e:
-        return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+        return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
 
     # Always required
     required = ['category_title', 'subcategory_title']
@@ -312,14 +322,14 @@ def catalog_add_entry(request):
     if missing:
         return JsonResponse({
             'status': 'error',
-            'message': f"Missing required fields: {', '.join(missing)}",
+            'message': _('Missing required fields: %(fields)s') % {'fields': ', '.join(missing)},
         }, status=400)
 
     try:
         entry = services.add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL)
         return JsonResponse({
             'status': 'success',
-            'message': f"Entry '{entry.title}' added",
+            'message': _("Entry '%(title)s' added") % {'title': entry.title},
             'id': str(entry.id),
             'product_code': entry.product_code,
         })
@@ -338,11 +348,11 @@ def catalog_wms_capabilities(request):
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError as e:
-        return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+        return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
 
     wms_url = data.get('wms_url', '').strip()
     if not wms_url:
-        return JsonResponse({'status': 'error', 'message': 'Missing wms_url'}, status=400)
+        return JsonResponse({'status': 'error', 'message': _('Missing wms_url')}, status=400)
 
     # Build proper GetCapabilities URL
     separator = '&' if '?' in wms_url else '?'
@@ -354,12 +364,12 @@ def catalog_wms_capabilities(request):
     except ImportError:
         return JsonResponse({
             'status': 'error',
-            'message': 'owslib is not installed. Cannot read WMS capabilities.',
+            'message': _('owslib is not installed. Cannot read WMS capabilities.'),
         }, status=500)
     except Exception as e:
         return JsonResponse({
             'status': 'error',
-            'message': f'Failed to read WMS capabilities: {e}',
+            'message': _('Failed to read WMS capabilities: %(error)s') % {'error': e},
         }, status=400)
 
     layers = []
@@ -410,14 +420,14 @@ def settings_save(request):
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError as e:
-        return JsonResponse({'status': 'error', 'message': f'Invalid JSON: {e}'}, status=400)
+        return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
 
     s = PluginSettings.load()
 
     if 'language' in data:
         lang = data['language']
         if lang not in dict(PluginSettings.LANGUAGE_CHOICES):
-            return JsonResponse({'status': 'error', 'message': f'Invalid language: {lang}'}, status=400)
+            return JsonResponse({'status': 'error', 'message': _('Invalid language: %(lang)s') % {'lang': lang}}, status=400)
         s.language = lang
 
     if 'ecmwf_token' in data:
@@ -431,19 +441,19 @@ def settings_save(request):
         alpha3 = (data.get('country_alpha3') or '').strip().lower()[:3]
         if not alpha3 or len(alpha3) != 3 or not alpha3.isalpha():
             return JsonResponse(
-                {'status': 'error', 'message': 'country_alpha3 is required (ISO 3166-1 alpha-3)'},
+                {'status': 'error', 'message': _('country_alpha3 is required (ISO 3166-1 alpha-3)')},
                 status=400,
             )
         alpha2 = (data.get('country_alpha2') or '').strip().lower()[:2]
         if not alpha2 or len(alpha2) != 2 or not alpha2.isalpha():
             return JsonResponse(
-                {'status': 'error', 'message': 'country_alpha2 is required (ISO 3166-1 alpha-2)'},
+                {'status': 'error', 'message': _('country_alpha2 is required (ISO 3166-1 alpha-2)')},
                 status=400,
             )
         name = (data.get('country_name') or '').strip()[:255]
         if not name:
             return JsonResponse(
-                {'status': 'error', 'message': 'country_name is required'},
+                {'status': 'error', 'message': _('country_name is required')},
                 status=400,
             )
         bbox = data.get('country_bbox')
@@ -451,7 +461,7 @@ def settings_save(request):
                 and all(isinstance(v, (int, float)) for v in bbox)):
             return JsonResponse(
                 {'status': 'error',
-                 'message': 'country_bbox must be a list of 4 numbers [south, north, west, east]'},
+                 'message': _('country_bbox must be a list of 4 numbers [south, north, west, east]')},
                 status=400,
             )
         s.country_alpha3 = alpha3
@@ -462,7 +472,7 @@ def settings_save(request):
     s.save()
     return JsonResponse({
         'status': 'success',
-        'message': 'Settings saved',
+        'message': _('Settings saved'),
         'language': s.language,
         'ecmwf_token': s.ecmwf_token,
         'estation_url': s.estation_url,
@@ -484,18 +494,24 @@ def catalog_clear_provisioned(request):
         stats = services.clear_provisioned_datasets()
     except Exception as e:
         logger.exception("catalog_clear_provisioned failed")
-        return JsonResponse({'status': 'error', 'message': f'Clear failed: {e}'}, status=500)
+        return JsonResponse({'status': 'error', 'message': _('Clear failed: %(error)s') % {'error': e}}, status=500)
 
     return JsonResponse({
         'status': 'success',
-        'message': (
-            f"Cleared catalog-managed data: "
-            f"{stats['datasets_deleted']} Dataset(s), "
-            f"{stats['metadata_deleted']} Metadata, "
-            f"{stats['subcategories_deleted']} empty SubCategor(ies), "
-            f"{stats['categories_deleted']} empty Categor(ies). "
-            f"{stats['entries_reset']} catalog entries reset to pending_add."
-        ),
+        'message': _(
+            'Cleared catalog-managed data: '
+            '%(datasets)d Dataset(s), '
+            '%(metadata)d Metadata, '
+            '%(subcats)d empty SubCategor(ies), '
+            '%(cats)d empty Categor(ies). '
+            '%(entries)d catalog entries reset to pending_add.'
+        ) % {
+            'datasets': stats['datasets_deleted'],
+            'metadata': stats['metadata_deleted'],
+            'subcats': stats['subcategories_deleted'],
+            'cats': stats['categories_deleted'],
+            'entries': stats['entries_reset'],
+        },
         **stats,
     })
 
@@ -553,13 +569,13 @@ def clear_all(request):
     if errors:
         return JsonResponse({
             'status': 'partial',
-            'message': f'Completed with {len(errors)} error(s)',
+            'message': _('Completed with %(count)d error(s)') % {'count': len(errors)},
             'deleted': deleted,
             'errors': errors,
         })
 
     return JsonResponse({
         'status': 'success',
-        'message': 'All data cleared successfully',
+        'message': _('All data cleared successfully'),
         'deleted': deleted,
     })

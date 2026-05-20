@@ -1,6 +1,6 @@
 {% extends "wagtailadmin/base.html" %}
-{% load static %}
-{% block titletag %}Dataset Helper{% endblock %}
+{% load static i18n %}
+{% block titletag %}{% trans "Dataset Helper" %}{% endblock %}
 
 {% block extra_css %}
 {{ block.super }}
@@ -710,13 +710,16 @@
 {% endblock %}
 
 {% block content %}
-{% include "wagtailadmin/shared/header.html" with title="Dataset helper" icon="pick" %}
+{% trans "Dataset helper" as header_title %}
+{% url "dataset_helper_plugin:js_catalog" as js_catalog_url %}
+{% include "wagtailadmin/shared/header.html" with title=header_title icon="pick" %}
+<script src="{{ js_catalog_url }}"></script>
 
 <div class="nice-padding">
     <!-- Tab Navigation -->
     <div class="tabs">
-        <button class="tab-button active" data-tab="catalog">Layer Catalog</button>
-        <button class="tab-button" data-tab="danger-zone">Danger Zone</button>
+        <button class="tab-button active" data-tab="catalog">{% trans "Layer Catalog" %}</button>
+        <button class="tab-button" data-tab="danger-zone">{% trans "Danger Zone" %}</button>
     </div>
 
     <!-- Layer Catalog Tab -->
@@ -724,22 +727,22 @@
         <div class="catalog-stats" id="catalog-stats">
             <div class="catalog-stat">
                 <div class="number" id="stat-total">-</div>
-                <div class="label">Total Layers</div>
+                <div class="label">{% trans "Total Layers" %}</div>
             </div>
             <div class="catalog-stat">
                 <div class="number" id="stat-enabled">-</div>
-                <div class="label">Enabled</div>
+                <div class="label">{% trans "Enabled" %}</div>
             </div>
             <div class="catalog-stat">
                 <div class="number" id="stat-synced">-</div>
-                <div class="label">Synced</div>
+                <div class="label">{% trans "Synced" %}</div>
             </div>
         </div>
 
         <!-- Catalog version banner -->
         <div id="catalog-version-banner" class="catalog-version-banner">
             <div class="banner-text" id="catalog-version-banner-text"></div>
-            <button onclick="reviewCatalogChanges()" id="catalog-version-banner-btn">Review changes</button>
+            <button onclick="reviewCatalogChanges()" id="catalog-version-banner-btn">{% trans "Review changes" %}</button>
         </div>
 
         <!-- Catalog preview pane (filled by JS after a successful preview call) -->
@@ -749,10 +752,10 @@
 
         <!-- Settings Panel -->
         <details class="settings-panel" id="settings-panel">
-            <summary>Settings<span class="required-warning">— required setting missing</span></summary>
+            <summary>{% trans "Settings" %}<span class="required-warning">— {% trans "required setting missing" %}</span></summary>
             <div class="settings-grid">
                 <div class="settings-field">
-                    <label for="setting-language">Language</label>
+                    <label for="setting-language">{% trans "Language" %}</label>
                     <select id="setting-language">
                         <option value="en" {% if plugin_settings.language == 'en' %}selected{% endif %}>English</option>
                         <option value="fr" {% if plugin_settings.language == 'fr' %}selected{% endif %}>Français</option>
@@ -760,70 +763,70 @@
                         <option value="pt" {% if plugin_settings.language == 'pt' %}selected{% endif %}>Português</option>
                         <option value="ar" {% if plugin_settings.language == 'ar' %}selected{% endif %}>العربية</option>
                     </select>
-                    <span class="hint">Language for imported catalog labels</span>
+                    <span class="hint">{% trans "Language for imported catalog labels" %}</span>
                 </div>
                 <div class="settings-field">
-                    <label for="setting-ecmwf-token">ECMWF Token</label>
-                    <input type="text" id="setting-ecmwf-token" value="{{ plugin_settings.ecmwf_token }}" placeholder="(leave empty for public-only)">
-                    <span class="hint">Token for eccharts.ecmwf.int. Empty = public layers only; private layers (token={ECMWF_TOKEN}) are skipped.</span>
+                    <label for="setting-ecmwf-token">{% trans "ECMWF Token" %}</label>
+                    <input type="text" id="setting-ecmwf-token" value="{{ plugin_settings.ecmwf_token }}" placeholder="{% trans '(leave empty for public-only)' %}">
+                    <span class="hint">{% trans "Token for eccharts.ecmwf.int. Empty = public layers only; private layers (token={ECMWF_TOKEN}) are skipped." %}</span>
                 </div>
                 <div class="settings-field">
-                    <label for="setting-estation-url">Local eStation URL</label>
+                    <label for="setting-estation-url">{% trans "Local eStation URL" %}</label>
                     <input type="url" id="setting-estation-url" value="{{ plugin_settings.estation_url }}" placeholder="https://burkina.puma2025.com/http/c000/w04/climsa/mobile-app">
-                    <span class="hint">Leave empty to import all eStation products</span>
+                    <span class="hint">{% trans "Leave empty to import all eStation products" %}</span>
                 </div>
                 <div class="settings-field">
-                    <label for="setting-country">Country <span style="color:#dc2626;">*</span></label>
+                    <label for="setting-country">{% trans "Country" %} <span style="color:#dc2626;">*</span></label>
                     <select id="setting-country" required data-current-alpha3="{{ plugin_settings.country_alpha3|default:'' }}" style="min-width:260px;" disabled>
-                        <option value="">— Loading countries… —</option>
+                        <option value="">— {% trans "Loading countries…" %} —</option>
                     </select>
                     <span class="hint" id="country-bbox-hint">
-                        Required. Saves ISO codes (placeholders <code>{country_alpha3}</code> / <code>{country_alpha2}</code>), the official country name and the bounding box from OpenStreetMap Nominatim.
+                        {% blocktrans %}Required. Saves ISO codes (placeholders <code>{country_alpha3}</code> / <code>{country_alpha2}</code>), the official country name and the bounding box from OpenStreetMap Nominatim.{% endblocktrans %}
                     </span>
                     {{ plugin_settings.country_bbox|json_script:"current-country-bbox" }}
                     {{ plugin_settings.country_name|json_script:"current-country-name" }}
                 </div>
             </div>
             <div class="settings-actions">
-                <button class="import-button" onclick="saveSettings()">Save Settings</button>
+                <button class="import-button" onclick="saveSettings()">{% trans "Save Settings" %}</button>
                 <span id="settings-msg" class="settings-msg"></span>
             </div>
         </details>
 
         <details style="margin-bottom:20px;padding:10px 16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:13px;color:#374151;line-height:1.6;">
-            <summary style="cursor:pointer;font-weight:500;">How to use this page</summary>
+            <summary style="cursor:pointer;font-weight:500;">{% trans "How to use this page" %}</summary>
             <div style="margin-top:10px;">
-                This page manages the WMS layers available for your Climweb map viewer.
-                The tree below shows all layers grouped by <strong>Category</strong> and <strong>Subcategory</strong>.
+                {% blocktrans %}This page manages the WMS layers available for your Climweb map viewer.
+                The tree below shows all layers grouped by <strong>Category</strong> and <strong>Subcategory</strong>.{% endblocktrans %}
                 <ul style="margin:8px 0 0 16px;padding:0;">
-                    <li>Use the <strong>checkboxes</strong> to enable or disable individual layers.</li>
-                    <li>Status indicators:
-                        <span class="status-dot synced" style="display:inline-block;vertical-align:middle;"></span> synced (already in Climweb),
-                        <span class="status-dot pending_add" style="display:inline-block;vertical-align:middle;"></span> will be added on next load,
-                        <span class="status-dot pending_remove" style="display:inline-block;vertical-align:middle;"></span> will be removed on next load,
-                        <span class="status-dot disabled" style="display:inline-block;vertical-align:middle;"></span> inactive.
+                    <li>{% blocktrans %}Use the <strong>checkboxes</strong> to enable or disable individual layers.{% endblocktrans %}</li>
+                    <li>{% trans "Status indicators:" %}
+                        <span class="status-dot synced" style="display:inline-block;vertical-align:middle;"></span> {% trans "synced (already in Climweb)" %},
+                        <span class="status-dot pending_add" style="display:inline-block;vertical-align:middle;"></span> {% trans "will be added on next load" %},
+                        <span class="status-dot pending_remove" style="display:inline-block;vertical-align:middle;"></span> {% trans "will be removed on next load" %},
+                        <span class="status-dot disabled" style="display:inline-block;vertical-align:middle;"></span> {% trans "inactive" %}.
                     </li>
-                    <li>Click <strong>Synchronize with Climweb</strong> to apply your selection — enabled layers are created in the database, disabled ones are removed.</li>
-                    <li>You can extend the catalog by adding layers manually, importing from a remote WMS service, or loading a JSON configuration.</li>
+                    <li>{% blocktrans %}Click <strong>Synchronize with Climweb</strong> to apply your selection — enabled layers are created in the database, disabled ones are removed.{% endblocktrans %}</li>
+                    <li>{% trans "You can extend the catalog by adding layers manually, importing from a remote WMS service, or loading a JSON configuration." %}</li>
                 </ul>
             </div>
         </details>
 
         <div class="catalog-toolbar">
             <button class="import-button" onclick="syncCatalog()">
-                Synchronize with Climweb
+                {% trans "Synchronize with Climweb" %}
             </button>
             <button class="import-button" style="background: #6b7280;" onclick="toggleAddLayerForm()">
-                + Add Layer
+                + {% trans "Add Layer" %}
             </button>
             <button class="import-button" style="background: #6b7280;" onclick="toggleImportWmsForm()">
-                Import from WMS
+                {% trans "Import from WMS" %}
             </button>
             <button id="load-config-btn" class="import-button" style="background: #2563eb;" onclick="toggleLoadConfigForm()">
-                Load Config JSON
+                {% trans "Load Config JSON" %}
             </button>
             <button class="danger-button" onclick="resetCatalog()">
-                Reset Catalog
+                {% trans "Reset Catalog" %}
             </button>
         </div>
 
@@ -831,61 +834,61 @@
 
         <!-- Add Layer Form -->
         <div id="add-layer-form" class="add-layer-form">
-            <h3 style="margin-top: 0;">Add a Layer</h3>
+            <h3 style="margin-top: 0;">{% trans "Add a Layer" %}</h3>
             <div class="form-grid">
                 <div class="form-field">
-                    <label>Category *</label>
-                    <input type="text" id="add-category" placeholder="e.g. Rainfall">
+                    <label>{% trans "Category" %} *</label>
+                    <input type="text" id="add-category" placeholder="{% trans 'e.g. Rainfall' %}">
                 </div>
                 <div class="form-field">
-                    <label>Subcategory *</label>
-                    <input type="text" id="add-subcategory" placeholder="e.g. Observation">
+                    <label>{% trans "Subcategory" %} *</label>
+                    <input type="text" id="add-subcategory" placeholder="{% trans 'e.g. Observation' %}">
                 </div>
                 <div class="form-field">
-                    <label>Title</label>
-                    <input type="text" id="add-title" placeholder="Dataset title">
+                    <label>{% trans "Title" %}</label>
+                    <input type="text" id="add-title" placeholder="{% trans 'Dataset title' %}">
                 </div>
                 <div class="form-field">
-                    <label>WMS Layer Name *</label>
-                    <input type="text" id="add-layer-name" placeholder="WMS LAYERS parameter">
+                    <label>{% trans "WMS Layer Name" %} *</label>
+                    <input type="text" id="add-layer-name" placeholder="{% trans 'WMS LAYERS parameter' %}">
                 </div>
                 <div class="form-field full-width">
-                    <label>WMS Base URL *</label>
+                    <label>{% trans "WMS Base URL" %} *</label>
                     <input type="url" id="add-wms-url" placeholder="https://...">
                 </div>
                 <div class="form-field">
-                    <label>Source</label>
-                    <input type="text" id="add-source" placeholder="Data provider">
+                    <label>{% trans "Source" %}</label>
+                    <input type="text" id="add-source" placeholder="{% trans 'Data provider' %}">
                 </div>
                 <div class="form-field">
-                    <label>Resolution</label>
-                    <input type="text" id="add-resolution" placeholder="e.g. 1km">
+                    <label>{% trans "Resolution" %}</label>
+                    <input type="text" id="add-resolution" placeholder="{% trans 'e.g. 1km' %}">
                 </div>
             </div>
             <div style="margin-top: 12px; display: flex; gap: 8px;">
-                <button class="import-button" onclick="submitAddLayer()">Add</button>
-                <button class="import-button" style="background: #6b7280;" onclick="toggleAddLayerForm()">Cancel</button>
+                <button class="import-button" onclick="submitAddLayer()">{% trans "Add" %}</button>
+                <button class="import-button" style="background: #6b7280;" onclick="toggleAddLayerForm()">{% trans "Cancel" %}</button>
             </div>
         </div>
 
         <!-- Import WMS Form -->
         <div id="import-wms-form" class="add-layer-form">
-            <h3 style="margin-top: 0;">Import from WMS</h3>
+            <h3 style="margin-top: 0;">{% trans "Import from WMS" %}</h3>
 
             <!-- Step 1: Enter URL and fetch capabilities -->
             <div id="wms-step-url">
                 <div class="form-grid">
                     <div class="form-field full-width">
-                        <label>WMS Service URL *</label>
+                        <label>{% trans "WMS Service URL" %} *</label>
                         <input type="url" id="import-wms-url" placeholder="https://example.com/wms">
-                        <span style="font-size:11px;color:#9ca3af;">GetCapabilities will be called automatically</span>
+                        <span style="font-size:11px;color:#9ca3af;">{% trans "GetCapabilities will be called automatically" %}</span>
                     </div>
                 </div>
                 <div style="margin-top: 12px; display: flex; gap: 8px;">
                     <button class="import-button" onclick="fetchWmsCapabilities()" id="wms-fetch-btn">
-                        Fetch Layers
+                        {% trans "Fetch Layers" %}
                     </button>
-                    <button class="import-button" style="background: #6b7280;" onclick="toggleImportWmsForm()">Cancel</button>
+                    <button class="import-button" style="background: #6b7280;" onclick="toggleImportWmsForm()">{% trans "Cancel" %}</button>
                 </div>
             </div>
 
@@ -893,9 +896,9 @@
             <div id="wms-step-pick" style="display:none;">
                 <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
                     <span id="wms-layers-count" style="font-size:13px;color:#374151;font-weight:500;"></span>
-                    <button style="font-size:12px;color:#6b7280;background:none;border:none;cursor:pointer;text-decoration:underline;" onclick="resetWmsImport()">Change URL</button>
+                    <button style="font-size:12px;color:#6b7280;background:none;border:none;cursor:pointer;text-decoration:underline;" onclick="resetWmsImport()">{% trans "Change URL" %}</button>
                 </div>
-                <input type="text" id="wms-search" placeholder="Search by layer name, title, or abstract..."
+                <input type="text" id="wms-search" placeholder="{% trans 'Search by layer name, title, or abstract...' %}"
                     oninput="filterWmsLayers()"
                     style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:4px;font-size:13px;margin-bottom:8px;">
                 <div id="wms-layers-list" style="max-height:300px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:6px;"></div>
@@ -903,32 +906,32 @@
 
             <!-- Step 3: Configure selected layer -->
             <div id="wms-step-config" style="display:none;margin-top:16px;padding:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;">
-                <h4 style="margin-top:0;color:#166534;">Configure selected layer</h4>
+                <h4 style="margin-top:0;color:#166534;">{% trans "Configure selected layer" %}</h4>
                 <div class="form-grid">
                     <div class="form-field">
-                        <label>Layer Name</label>
+                        <label>{% trans "Layer Name" %}</label>
                         <input type="text" id="wms-cfg-layer-name" readonly style="background:#f3f4f6;">
                     </div>
                     <div class="form-field">
-                        <label>Title</label>
+                        <label>{% trans "Title" %}</label>
                         <input type="text" id="wms-cfg-title">
                     </div>
                     <div class="form-field">
-                        <label>Category *</label>
-                        <input type="text" id="wms-cfg-category" placeholder="e.g. Environment">
+                        <label>{% trans "Category" %} *</label>
+                        <input type="text" id="wms-cfg-category" placeholder="{% trans 'e.g. Environment' %}">
                     </div>
                     <div class="form-field">
-                        <label>Subcategory *</label>
-                        <input type="text" id="wms-cfg-subcategory" placeholder="e.g. Observation">
+                        <label>{% trans "Subcategory" %} *</label>
+                        <input type="text" id="wms-cfg-subcategory" placeholder="{% trans 'e.g. Observation' %}">
                     </div>
                     <div class="form-field full-width">
-                        <label>Description</label>
+                        <label>{% trans "Description" %}</label>
                         <textarea id="wms-cfg-abstract" rows="2" style="resize:vertical;"></textarea>
                     </div>
                 </div>
                 <div style="margin-top:12px;display:flex;gap:8px;">
-                    <button class="import-button" onclick="addWmsLayerToCatalog()">Add to Catalog</button>
-                    <button class="import-button" style="background:#6b7280;" onclick="clearWmsSelection()">Back to list</button>
+                    <button class="import-button" onclick="addWmsLayerToCatalog()">{% trans "Add to Catalog" %}</button>
+                    <button class="import-button" style="background:#6b7280;" onclick="clearWmsSelection()">{% trans "Back to list" %}</button>
                 </div>
             </div>
         </div>
@@ -936,28 +939,28 @@
         <!-- Load Config Form -->
         <div id="load-config-form" class="add-layer-form">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0;">
-                <h3 style="margin: 0;">Load JSON Config into Catalog</h3>
+                <h3 style="margin: 0;">{% trans "Load JSON Config into Catalog" %}</h3>
                 <button class="import-button" style="background: #059669;" onclick="reviewCatalogChanges()">
-                    Review embedded catalog
+                    {% trans "Review embedded catalog" %}
                 </button>
             </div>
             <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px; margin-top: 12px;">
-                Paste a bulk config JSON. This loads entries into the catalog (does NOT create Climweb objects yet).
+                {% trans "Paste a bulk config JSON. This loads entries into the catalog (does NOT create Climweb objects yet)." %}
             </p>
-            <textarea id="config-json-input" class="json-textarea" style="min-height: 200px;" placeholder="Paste JSON config here..."></textarea>
+            <textarea id="config-json-input" class="json-textarea" style="min-height: 200px;" placeholder="{% trans 'Paste JSON config here...' %}"></textarea>
             <div style="margin-top: 12px; display: flex; gap: 8px;">
-                <button class="import-button" onclick="submitLoadConfig()">Load into Catalog</button>
-                <button class="import-button" style="background: #6b7280;" onclick="toggleLoadConfigForm()">Cancel</button>
+                <button class="import-button" onclick="submitLoadConfig()">{% trans "Load into Catalog" %}</button>
+                <button class="import-button" style="background: #6b7280;" onclick="toggleLoadConfigForm()">{% trans "Cancel" %}</button>
             </div>
         </div>
 
         <!-- Tree controls -->
         <div style="display:flex;gap:4px;margin-bottom:6px;margin-top:6px;justify-content:flex-start;">
-            <button onclick="expandAllNodes()" title="Expand all"
+            <button onclick="expandAllNodes()" title="{% trans 'Expand all' %}"
                 style="padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;background:#fff;cursor:pointer;font-size:14px;line-height:1;color:#374151;">
                 &#9660;
             </button>
-            <button onclick="collapseAllNodes()" title="Collapse all"
+            <button onclick="collapseAllNodes()" title="{% trans 'Collapse all' %}"
                 style="padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;background:#fff;cursor:pointer;font-size:14px;line-height:1;color:#374151;">
                 &#9654;
             </button>
@@ -970,34 +973,34 @@
     <!-- Danger Zone Tab -->
     <div id="danger-zone" class="tab-content">
         <div class="danger-zone">
-            <h3>Danger Zone</h3>
+            <h3>{% trans "Danger Zone" %}</h3>
 
-            <h4 style="margin-top: 8px;">Clear catalog-managed datasets</h4>
+            <h4 style="margin-top: 8px;">{% trans "Clear catalog-managed datasets" %}</h4>
             <p style="margin-bottom: 12px;">
-                Delete every Climweb Dataset this plugin provisioned (tracked via
+                {% blocktrans %}Delete every Climweb Dataset this plugin provisioned (tracked via
                 <code>CatalogEntry.dataset_id</code>) and its dedicated Metadata,
                 then sweep any SubCategories and Categories that no longer hold
                 anything. <strong>Datasets you created outside the plugin are kept</strong>;
                 so are taxonomy nodes still pointed to by non-plugin Datasets.
                 Catalog entries go back to <em>pending_add</em> and can be
-                re-provisioned by clicking <em>Synchronize with Climweb</em>.
+                re-provisioned by clicking <em>Synchronize with Climweb</em>.{% endblocktrans %}
             </p>
             <button id="clear-provisioned-button" class="danger-button" onclick="clearProvisioned()">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="3 6 5 6 21 6"></polyline>
                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                 </svg>
-                Clear catalog-managed datasets
+                {% trans "Clear catalog-managed datasets" %}
             </button>
             <div id="clear-provisioned-results" class="results-panel" style="margin-top: 16px;"></div>
 
             <hr style="margin: 28px 0; border: none; border-top: 1px solid #fecaca;">
 
-            <h4 style="color: #991b1b;">Wipe ALL Climweb data (nuclear)</h4>
+            <h4 style="color: #991b1b;">{% trans "Wipe ALL Climweb data (nuclear)" %}</h4>
             <p style="margin-bottom: 12px;">
-                This deletes <strong>every</strong> Dataset, SubCategory, and Category
+                {% blocktrans %}This deletes <strong>every</strong> Dataset, SubCategory, and Category
                 in the Climweb geomanager — including any not created by this plugin.
-                Use only if you understand what this implies. Cannot be undone.
+                Use only if you understand what this implies. Cannot be undone.{% endblocktrans %}
             </p>
             <button id="clear-all-button" class="danger-button" onclick="clearAll()">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1006,7 +1009,7 @@
                     <line x1="10" y1="11" x2="10" y2="17"></line>
                     <line x1="14" y1="11" x2="14" y2="17"></line>
                 </svg>
-                Clear All Datasets & Categories
+                {% trans "Clear All Datasets & Categories" %}
             </button>
             <div id="clear-results-panel" class="results-panel" style="margin-top: 16px;"></div>
         </div>
@@ -1014,6 +1017,10 @@
 </div>
 
 <script>
+  // i18n fallback (in case JavaScriptCatalog hasn't loaded)
+  if (typeof window.gettext === 'undefined') { window.gettext = s => s }
+  if (typeof window.interpolate === 'undefined') { window.interpolate = (fmt, obj, named) => named ? fmt.replace(/%\(\w+\)s/g, m => obj[m.slice(2, -2)]) : fmt }
+
   // Get CSRF token from cookie
   function getCookie(name) {
     let cookieValue = null
@@ -1047,10 +1054,10 @@
   // Clear only plugin-provisioned datasets (selective).
   async function clearProvisioned() {
     const confirmed = confirm(
-      'Delete all Climweb Datasets that this plugin provisioned?\n\n' +
-      'Datasets created outside the plugin will be kept.\n' +
-      'Catalog entries will be reset to pending_add.\n\n' +
-      'This action cannot be undone.'
+      gettext('Delete all Climweb Datasets that this plugin provisioned?') + '\n\n' +
+      gettext('Datasets created outside the plugin will be kept.') + '\n' +
+      gettext('Catalog entries will be reset to pending_add.') + '\n\n' +
+      gettext('This action cannot be undone.')
     )
     if (!confirmed) return
 
@@ -1059,7 +1066,7 @@
 
     const originalHtml = button.innerHTML
     button.disabled = true
-    button.innerHTML = '<span class="loading-spinner"></span>Clearing…'
+    button.innerHTML = '<span class="loading-spinner"></span>' + gettext('Clearing…')
 
     try {
       const csrftoken = getCookie('csrftoken')
@@ -1078,45 +1085,44 @@
         resultsPanel.classList.remove('error')
         resultsPanel.classList.add('success')
         resultsPanel.innerHTML = `
-          <h4 style="color: #059669; margin-top: 0;">Catalog datasets cleared</h4>
+          <h4 style="color: #059669; margin-top: 0;">${gettext('Catalog datasets cleared')}</h4>
           <div class="results-summary">
             <div class="result-stat">
               <div class="number">${data.datasets_deleted}</div>
-              <div class="label">Datasets Deleted</div>
+              <div class="label">${gettext('Datasets Deleted')}</div>
             </div>
             <div class="result-stat">
               <div class="number">${data.metadata_deleted}</div>
-              <div class="label">Metadata Deleted</div>
+              <div class="label">${gettext('Metadata Deleted')}</div>
             </div>
             <div class="result-stat">
               <div class="number">${data.subcategories_deleted}</div>
-              <div class="label">Empty SubCategories Swept</div>
+              <div class="label">${gettext('Empty SubCategories Swept')}</div>
             </div>
             <div class="result-stat">
               <div class="number">${data.categories_deleted}</div>
-              <div class="label">Empty Categories Swept</div>
+              <div class="label">${gettext('Empty Categories Swept')}</div>
             </div>
             <div class="result-stat">
               <div class="number">${data.entries_reset}</div>
-              <div class="label">Catalog Entries Reset</div>
+              <div class="label">${gettext('Catalog Entries Reset')}</div>
             </div>
           </div>
           <p style="margin-top: 16px;">
-            Datasets, SubCategories and Categories that did not come from this plugin
-            were preserved.
-            <a href="javascript:window.location.reload()" style="color: #059669;">Refresh the page</a>
-            to see the updated state.
+            ${gettext('Datasets, SubCategories and Categories that did not come from this plugin were preserved.')}
+            <a href="javascript:window.location.reload()" style="color: #059669;">${gettext('Refresh the page')}</a>
+            ${gettext('to see the updated state.')}
           </p>
         `
       } else {
         resultsPanel.classList.remove('success')
         resultsPanel.classList.add('error')
-        resultsPanel.innerHTML = `<p style="color: #dc2626;">Error: ${escapeHtml(data.message || 'Clear failed')}</p>`
+        resultsPanel.innerHTML = `<p style="color: #dc2626;">${gettext('Error')}: ${escapeHtml(data.message || gettext('Clear failed'))}</p>`
       }
     } catch (error) {
       resultsPanel.classList.add('visible', 'error')
       resultsPanel.classList.remove('success')
-      resultsPanel.innerHTML = `<p style="color: #dc2626;">Error: ${escapeHtml(error.message)}</p>`
+      resultsPanel.innerHTML = `<p style="color: #dc2626;">${gettext('Error')}: ${escapeHtml(error.message)}</p>`
     }
 
     button.disabled = false
@@ -1126,16 +1132,16 @@
   // Clear all datasets and categories
   async function clearAll() {
     const confirmed = confirm(
-      'Are you sure you want to delete ALL datasets, subcategories, and categories?\n\n' +
-      'This action CANNOT be undone!'
+      gettext('Are you sure you want to delete ALL datasets, subcategories, and categories?') + '\n\n' +
+      gettext('This action CANNOT be undone!')
     )
 
     if (!confirmed) return
 
     // Double confirmation for safety
     const doubleConfirmed = confirm(
-      'This is your LAST CHANCE to cancel.\n\n' +
-      'Click OK to permanently delete all data, or Cancel to abort.'
+      gettext('This is your LAST CHANCE to cancel.') + '\n\n' +
+      gettext('Click OK to permanently delete all data, or Cancel to abort.')
     )
 
     if (!doubleConfirmed) return
@@ -1145,7 +1151,7 @@
 
     // Show loading state
     button.disabled = true
-    button.innerHTML = '<span class="loading-spinner"></span>Clearing...'
+    button.innerHTML = '<span class="loading-spinner"></span>' + gettext('Clearing...')
 
     try {
       const csrftoken = getCookie('csrftoken')
@@ -1172,7 +1178,7 @@
         if (data.errors && data.errors.length) {
           errorsHtml = `
             <div style="margin-top: 16px; padding: 12px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px;">
-              <h5 style="color: #92400e; margin: 0 0 8px 0;">${data.errors.length} item(s) could not be deleted:</h5>
+              <h5 style="color: #92400e; margin: 0 0 8px 0;">${interpolate(gettext('%(count)s item(s) could not be deleted:'), {count: data.errors.length}, true)}</h5>
               <ul style="margin: 0; padding-left: 20px; color: #92400e; font-size: 13px;">
                 ${data.errors.map(e => `<li>${e}</li>`).join('')}
               </ul>
@@ -1181,44 +1187,44 @@
         }
 
         resultsPanel.innerHTML = `
-          <h4 style="color: ${color}; margin-top: 0;">${isPartial ? 'Completed with some errors' : 'All data cleared successfully!'}</h4>
+          <h4 style="color: ${color}; margin-top: 0;">${isPartial ? gettext('Completed with some errors') : gettext('All data cleared successfully!')}</h4>
           <div class="results-summary">
             <div class="result-stat">
               <div class="number">${data.deleted.categories}</div>
-              <div class="label">Categories Deleted</div>
+              <div class="label">${gettext('Categories Deleted')}</div>
             </div>
             <div class="result-stat">
               <div class="number">${data.deleted.subcategories}</div>
-              <div class="label">Subcategories Deleted</div>
+              <div class="label">${gettext('Subcategories Deleted')}</div>
             </div>
             <div class="result-stat">
               <div class="number">${data.deleted.datasets}</div>
-              <div class="label">Datasets Deleted</div>
+              <div class="label">${gettext('Datasets Deleted')}</div>
             </div>
             <div class="result-stat">
               <div class="number">${data.deleted.metadata}</div>
-              <div class="label">Metadata Deleted</div>
+              <div class="label">${gettext('Metadata Deleted')}</div>
             </div>
             <div class="result-stat">
               <div class="number">${data.deleted.wms_layers}</div>
-              <div class="label">WMS Layers Deleted</div>
+              <div class="label">${gettext('WMS Layers Deleted')}</div>
             </div>
           </div>
           ${errorsHtml}
           <p style="margin-top: 16px;">
-            <a href="javascript:window.location.reload()" style="color: ${color};">Refresh the page</a> to see the updated state.
+            <a href="javascript:window.location.reload()" style="color: ${color};">${gettext('Refresh the page')}</a> ${gettext('to see the updated state.')}
           </p>
         `
       } else {
         resultsPanel.classList.remove('success')
         resultsPanel.classList.add('error')
-        resultsPanel.innerHTML = `<p style="color: #dc2626;">Error: ${data.message}</p>`
+        resultsPanel.innerHTML = `<p style="color: #dc2626;">${gettext('Error')}: ${data.message}</p>`
       }
 
     } catch (error) {
       resultsPanel.classList.add('visible', 'error')
       resultsPanel.classList.remove('success')
-      resultsPanel.innerHTML = `<p style="color: #dc2626;">Error: ${error.message}</p>`
+      resultsPanel.innerHTML = `<p style="color: #dc2626;">${gettext('Error')}: ${error.message}</p>`
     }
 
     // Reset button
@@ -1230,7 +1236,7 @@
         <line x1="10" y1="11" x2="10" y2="17"></line>
         <line x1="14" y1="11" x2="14" y2="17"></line>
       </svg>
-      Clear All Datasets & Categories
+      ${gettext('Clear All Datasets & Categories')}
     `
   }
 
@@ -1253,7 +1259,7 @@
       panel.open = true
       if (loadBtn) {
         loadBtn.disabled = true
-        loadBtn.title = 'Set the required Country setting first'
+        loadBtn.title = gettext('Set the required Country setting first')
       }
     }
   }
@@ -1267,7 +1273,7 @@
     const alpha2 = opt && opt.dataset && opt.dataset.alpha2
 
     if (!alpha3 || !alpha2) {
-      msgEl.textContent = 'Please pick a country before saving'
+      msgEl.textContent = gettext('Please pick a country before saving')
       msgEl.style.color = '#dc2626'
       countrySelect.focus()
       return
@@ -1275,7 +1281,7 @@
 
     // Ensure we have a bbox + country name; fetch if missing.
     if ((!window._countryBbox || !window._countryName) && window._fetchCountryInfo) {
-      msgEl.textContent = 'Fetching country info…'
+      msgEl.textContent = gettext('Fetching country info…')
       msgEl.style.color = '#6b7280'
       try {
         const info = await window._fetchCountryInfo(alpha2)
@@ -1283,7 +1289,7 @@
         window._countryName = info.name
         if (window._renderCountryHint) window._renderCountryHint()
       } catch (err) {
-        msgEl.textContent = 'Could not fetch country info: ' + err.message
+        msgEl.textContent = gettext('Could not fetch country info: ') + err.message
         msgEl.style.color = '#dc2626'
         return
       }
@@ -1299,7 +1305,7 @@
       country_bbox: window._countryBbox,
     }
 
-    msgEl.textContent = 'Saving...'
+    msgEl.textContent = gettext('Saving...')
     msgEl.style.color = '#6b7280'
 
     try {
@@ -1316,16 +1322,16 @@
       const result = await response.json()
 
       if (result.status === 'success') {
-        msgEl.textContent = 'Settings saved'
+        msgEl.textContent = gettext('Settings saved')
         msgEl.style.color = '#059669'
         countrySelect.dataset.currentAlpha3 = alpha3
         updateSettingsValidity()
       } else {
-        msgEl.textContent = 'Error: ' + result.message
+        msgEl.textContent = gettext('Error') + ': ' + result.message
         msgEl.style.color = '#dc2626'
       }
     } catch (error) {
-      msgEl.textContent = 'Error: ' + error.message
+      msgEl.textContent = gettext('Error') + ': ' + error.message
       msgEl.style.color = '#dc2626'
     }
 
@@ -1361,55 +1367,64 @@
 
     const fromV = data.loaded_version
       ? `v${escapeHtml(data.loaded_version)}`
-      : '(no version)'
+      : gettext('(no version)')
     const toV = data.catalog_version
       ? `v${escapeHtml(data.catalog_version)}`
-      : '(no version)'
+      : gettext('(no version)')
 
     const hasChange = toAdd.length + cleanUpd.length + conflicts.length + toRemove.length > 0
 
     let html = `
-      <h3>Review catalog update — ${fromV} → ${toV}</h3>
-      <div class="preview-sub">Nothing has been written yet. Pick an apply mode or cancel.</div>
+      <h3>${interpolate(gettext('Review catalog update — %(from)s → %(to)s'), {from: fromV, to: toV}, true)}</h3>
+      <div class="preview-sub">${gettext('Nothing has been written yet. Pick an apply mode or cancel.')}</div>
       <div class="preview-counts">
-        <span class="pc"><span class="pc-dot add"></span><strong>${toAdd.length}</strong> new</span>
-        <span class="pc"><span class="pc-dot update"></span><strong>${cleanUpd.length}</strong> updated</span>
-        <span class="pc"><span class="pc-dot drift"></span><strong>${drift.length}</strong> local drift</span>
-        <span class="pc"><span class="pc-dot conflict"></span><strong>${conflicts.length}</strong> conflict${conflicts.length === 1 ? '' : 's'}</span>
-        <span class="pc"><span class="pc-dot remove"></span><strong>${toRemove.length}</strong> to remove</span>
-        <span class="pc"><span class="pc-dot unchanged"></span><strong>${unchanged}</strong> unchanged</span>
+        <span class="pc"><span class="pc-dot add"></span><strong>${toAdd.length}</strong> ${gettext('new')}</span>
+        <span class="pc"><span class="pc-dot update"></span><strong>${cleanUpd.length}</strong> ${gettext('updated')}</span>
+        <span class="pc"><span class="pc-dot drift"></span><strong>${drift.length}</strong> ${gettext('local drift')}</span>
+        <span class="pc"><span class="pc-dot conflict"></span><strong>${conflicts.length}</strong> ${conflicts.length === 1 ? gettext('conflict') : gettext('conflicts')}</span>
+        <span class="pc"><span class="pc-dot remove"></span><strong>${toRemove.length}</strong> ${gettext('to remove')}</span>
+        <span class="pc"><span class="pc-dot unchanged"></span><strong>${unchanged}</strong> ${gettext('unchanged')}</span>
       </div>
     `
 
-    html += _renderBucketSection('Conflicts (catalog changed AND Wagtail edited)', conflicts, 'conflict', { open: true })
-    html += _renderBucketSection('New entries to add',                              toAdd,     'add',      {})
-    html += _renderBucketSection('Clean updates (catalog moved, no local edits)',  cleanUpd,  'update',   {})
-    html += _renderBucketSection('Local drift (Wagtail-edited, catalog unchanged)', drift,    'drift',    {})
-    html += _renderBucketSection('To remove (gone from catalog source)',           toRemove,  'remove',   {})
+    html += _renderBucketSection(gettext('Conflicts (catalog changed AND Wagtail edited)'), conflicts, 'conflict', { open: true })
+    html += _renderBucketSection(gettext('New entries to add'),                              toAdd,     'add',      {})
+    html += _renderBucketSection(gettext('Clean updates (catalog moved, no local edits)'),  cleanUpd,  'update',   {})
+    html += _renderBucketSection(gettext('Local drift (Wagtail-edited, catalog unchanged)'), drift,    'drift',    {})
+    html += _renderBucketSection(gettext('To remove (gone from catalog source)'),           toRemove,  'remove',   {})
 
     if (data.errors && data.errors.length) {
       const errs = data.errors.map(e => `<li>${escapeHtml(e)}</li>`).join('')
       html += `<details class="bucket conflict" open>
-        <summary>Errors (${data.errors.length})</summary><ul>${errs}</ul></details>`
+        <summary>${gettext('Errors')} (${data.errors.length})</summary><ul>${errs}</ul></details>`
     }
 
     if (!hasChange) {
       html += `<div class="preview-sub" style="margin-top:14px;">
-        Nothing to apply — catalog and database are in sync.</div>`
+        ${gettext('Nothing to apply — catalog and database are in sync.')}</div>`
     }
 
     const skipLabel = conflicts.length
-      ? `Apply — keep ${conflicts.length} local edit${conflicts.length === 1 ? '' : 's'}`
-      : `Apply changes`
+      ? interpolate(
+          conflicts.length === 1
+            ? gettext('Apply — keep %(count)s local edit')
+            : gettext('Apply — keep %(count)s local edits'),
+          {count: conflicts.length}, true)
+      : gettext('Apply changes')
 
     html += `<div class="preview-actions">`
     if (hasChange) {
       html += `<button class="btn-apply" onclick="applyPreview('skip')">${escapeHtml(skipLabel)}</button>`
       if (conflicts.length) {
-        html += `<button class="btn-overwrite" onclick="applyPreview('overwrite')">Apply — overwrite ${conflicts.length} conflict${conflicts.length === 1 ? '' : 's'}</button>`
+        const overwriteLabel = interpolate(
+          conflicts.length === 1
+            ? gettext('Apply — overwrite %(count)s conflict')
+            : gettext('Apply — overwrite %(count)s conflicts'),
+          {count: conflicts.length}, true)
+        html += `<button class="btn-overwrite" onclick="applyPreview('overwrite')">${escapeHtml(overwriteLabel)}</button>`
       }
     }
-    html += `<button class="btn-cancel" onclick="cancelPreview()">Cancel</button>`
+    html += `<button class="btn-cancel" onclick="cancelPreview()">${gettext('Cancel')}</button>`
     html += `</div>`
 
     body.innerHTML = html
@@ -1424,7 +1439,7 @@
     if (pane) pane.classList.add('visible')
     if (body) {
       body.innerHTML = `<div class="preview-loading">
-        <span class="loading-spinner"></span> Computing changeset…</div>`
+        <span class="loading-spinner"></span> ${gettext('Computing changeset…')}</div>`
     }
 
     try {
@@ -1437,8 +1452,8 @@
       const data = await response.json()
       if (data.status !== 'success') {
         body.innerHTML = `<div class="preview-loading" style="color:#b91c1c;">
-          ${escapeHtml(data.message || 'Preview failed')}</div>
-          <div class="preview-actions"><button class="btn-cancel" onclick="cancelPreview()">Close</button></div>`
+          ${escapeHtml(data.message || gettext('Preview failed'))}</div>
+          <div class="preview-actions"><button class="btn-cancel" onclick="cancelPreview()">${gettext('Close')}</button></div>`
         return
       }
       // Use the loaded_version we already had on catalogData so the title is meaningful
@@ -1447,8 +1462,8 @@
       renderPreviewPane(data)
     } catch (err) {
       body.innerHTML = `<div class="preview-loading" style="color:#b91c1c;">
-        Preview failed: ${escapeHtml(err.message)}</div>
-        <div class="preview-actions"><button class="btn-cancel" onclick="cancelPreview()">Close</button></div>`
+        ${gettext('Preview failed:')} ${escapeHtml(err.message)}</div>
+        <div class="preview-actions"><button class="btn-cancel" onclick="cancelPreview()">${gettext('Close')}</button></div>`
     }
   }
 
@@ -1464,7 +1479,7 @@
     const body = document.getElementById('catalog-preview-body')
     if (body) {
       body.innerHTML = `<div class="preview-loading">
-        <span class="loading-spinner"></span> Applying changes (${escapeHtml(conflictPolicy)})…</div>`
+        <span class="loading-spinner"></span> ${interpolate(gettext('Applying changes (%(policy)s)…'), {policy: escapeHtml(conflictPolicy)}, true)}</div>`
     }
     const resultsEl = document.getElementById('sync-results')
 
@@ -1483,16 +1498,16 @@
       if (pane) pane.classList.remove('visible')
       if (result.status === 'success') {
         resultsEl.className = 'sync-results visible success'
-        resultsEl.innerHTML = escapeHtml(result.message || 'Catalog loaded')
+        resultsEl.innerHTML = escapeHtml(result.message || gettext('Catalog loaded'))
       } else {
         resultsEl.className = 'sync-results visible error'
-        resultsEl.innerHTML = escapeHtml(result.message || 'Apply failed')
+        resultsEl.innerHTML = escapeHtml(result.message || gettext('Apply failed'))
       }
       await loadCatalog(false)
     } catch (err) {
       if (pane) pane.classList.remove('visible')
       resultsEl.className = 'sync-results visible error'
-      resultsEl.innerHTML = 'Apply failed: ' + escapeHtml(err.message)
+      resultsEl.innerHTML = gettext('Apply failed: ') + escapeHtml(err.message)
     }
   }
 
@@ -1523,17 +1538,17 @@
 
     if (!loaded) {
       banner.classList.add('visible', 'info')
-      textEl.innerHTML = `No catalog loaded yet. Bundled catalog: <strong>v${embedded}</strong>.`
-      btn.textContent = `Review changes`
+      textEl.innerHTML = interpolate(gettext('No catalog loaded yet. Bundled catalog: <strong>v%(version)s</strong>.'), {version: embedded}, true)
+      btn.textContent = gettext('Review changes')
       return
     }
 
     if (updateAvailable) {
       banner.classList.add('visible', 'update')
       textEl.innerHTML =
-        `A catalog update is available: <strong>v${loaded}</strong> → <strong>v${embedded}</strong>. ` +
-        `Review the changeset before applying — entries you edited in Wagtail can be kept.`
-      btn.textContent = `Review changes`
+        interpolate(gettext('A catalog update is available: <strong>v%(from)s</strong> → <strong>v%(to)s</strong>. '), {from: loaded, to: embedded}, true) +
+        gettext('Review the changeset before applying — entries you edited in Wagtail can be kept.')
+      btn.textContent = gettext('Review changes')
       return
     }
 
@@ -1541,8 +1556,8 @@
     // which catalog revision is live.
     banner.classList.add('visible', 'passive')
     textEl.innerHTML = loadedAt
-      ? `Catalog <strong>v${loaded}</strong> · loaded ${loadedAt}`
-      : `Catalog <strong>v${loaded}</strong> loaded`
+      ? interpolate(gettext('Catalog <strong>v%(version)s</strong> · loaded %(date)s'), {version: loaded, date: loadedAt}, true)
+      : interpolate(gettext('Catalog <strong>v%(version)s</strong> loaded'), {version: loaded}, true)
   }
 
   let catalogData = null
@@ -1584,8 +1599,8 @@
 
     if (categories.length === 0) {
       tree.innerHTML = `<div class="catalog-empty">
-        <h3>Catalog is empty</h3>
-        <p>Load a JSON config or add layers manually to get started.</p>
+        <h3>${gettext('Catalog is empty')}</h3>
+        <p>${gettext('Load a JSON config or add layers manually to get started.')}</p>
       </div>`
       return
     }
@@ -1608,11 +1623,11 @@
           <input type="checkbox" ${catChecked}
             ${catIndeterminate ? 'data-indeterminate="true"' : ''}
             onclick="event.stopPropagation(); bulkToggleEntries(${JSON.stringify(allCatIds).replace(/"/g, '&quot;')}, this.checked)"
-            title="Check/uncheck all layers in this category"
+            title="${gettext('Check/uncheck all layers in this category')}"
             style="margin-right:4px;">
           <span class="arrow${isOpen ? ' open' : ''}" id="arrow-${catId}">&#9654;</span>
           <strong>${escapeHtml(cat.title)}</strong>
-          <span class="cat-count">${enabledEntries}/${totalEntries} enabled</span>
+          <span class="cat-count">${interpolate(gettext('%(enabled)s/%(total)s enabled'), {enabled: enabledEntries, total: totalEntries}, true)}</span>
         </div>
         <div class="collapsible-content${isOpen ? ' open' : ''}" id="${catId}">`
 
@@ -1629,7 +1644,7 @@
             <input type="checkbox" ${scChecked}
               ${scIndeterminate ? 'data-indeterminate="true"' : ''}
               onclick="event.stopPropagation(); bulkToggleEntries(${JSON.stringify(scIds).replace(/"/g, '&quot;')}, this.checked)"
-              title="Check/uncheck all layers in this subcategory"
+              title="${gettext('Check/uncheck all layers in this subcategory')}"
               style="margin-right:4px;">
             <span class="arrow${isSubOpen ? ' open' : ''}" id="arrow-${subcatId}">&#9654;</span>
             ${escapeHtml(subcat.title)}
@@ -1651,7 +1666,7 @@
 
           html += `<div class="entry-row" onclick="toggleDetail('${entry.id}', event)" style="cursor:pointer;">
             <input type="checkbox" ${checked}
-              onchange="toggleEntry('${entry.id}')" onclick="event.stopPropagation()" title="Enable/disable this layer">
+              onchange="toggleEntry('${entry.id}')" onclick="event.stopPropagation()" title="${gettext('Enable/disable this layer')}">
             <span class="status-dot ${entry.status}" title="${entry.status}"></span>
             <span class="entry-title">
               <span class="title-text">${escapeHtml(entry.title)}</span>
@@ -1697,27 +1712,27 @@
 
     // Type-specific rows
     const typeRows = []
-    typeRows.push(['Type', lt])
+    typeRows.push([gettext('Type'), lt])
     if (lt === 'wms') {
-      if (entry.layer_name) typeRows.push(['Layer name', entry.layer_name])
-      if (entry.wms_url) typeRows.push(['WMS URL', entry.wms_url])
+      if (entry.layer_name) typeRows.push([gettext('Layer name'), entry.layer_name])
+      if (entry.wms_url) typeRows.push([gettext('WMS URL'), entry.wms_url])
     } else if (lt === 'raster_tile' || lt === 'vector_tile') {
-      if (entry.tile_url) typeRows.push(['Tile URL', entry.tile_url])
+      if (entry.tile_url) typeRows.push([gettext('Tile URL'), entry.tile_url])
     } else if (lt === 'raster_file' || lt === 'vector_file') {
-      if (entry.file_url) typeRows.push(['File URL', entry.file_url])
+      if (entry.file_url) typeRows.push([gettext('File URL'), entry.file_url])
     }
 
     const metaRows = [
       ...typeRows,
-      ['Source', entry.meta_source],
-      ['Function', entry.meta_function],
-      ['Resolution', entry.meta_resolution],
-      ['Coverage', entry.meta_geographic_coverage],
-      ['Update freq.', entry.meta_frequency_of_update],
-      ['License', entry.meta_license],
-      ['Multi-temporal', entry.multi_temporal ? 'Yes' : 'No'],
-      ['Origin', entry.origin],
-      ['Status', entry.status],
+      [gettext('Source'), entry.meta_source],
+      [gettext('Function'), entry.meta_function],
+      [gettext('Resolution'), entry.meta_resolution],
+      [gettext('Coverage'), entry.meta_geographic_coverage],
+      [gettext('Update freq.'), entry.meta_frequency_of_update],
+      [gettext('License'), entry.meta_license],
+      [gettext('Multi-temporal'), entry.multi_temporal ? gettext('Yes') : gettext('No')],
+      [gettext('Origin'), entry.origin],
+      [gettext('Status'), entry.status],
     ].filter(([, v]) => v)
 
     let tableHtml = metaRows.map(([label, value]) =>
@@ -1725,7 +1740,7 @@
     ).join('')
 
     const learnMore = entry.meta_learn_more
-      ? `<tr><td>Learn more</td><td><a href="${escapeHtml(entry.meta_learn_more)}" target="_blank" rel="noopener" style="color:#059669;text-decoration:underline;">${escapeHtml(entry.meta_learn_more)}</a></td></tr>`
+      ? `<tr><td>${gettext('Learn more')}</td><td><a href="${escapeHtml(entry.meta_learn_more)}" target="_blank" rel="noopener" style="color:#059669;text-decoration:underline;">${escapeHtml(entry.meta_learn_more)}</a></td></tr>`
       : ''
 
     const description = entry.meta_overview || entry.summary
@@ -1738,9 +1753,9 @@
     if (lt === 'wms' && entry.wms_url && entry.layer_name) {
       const previewUrl = buildWmsPreviewUrl(entry)
       previewHtml = `<div class="detail-preview">
-        <img src="${escapeHtml(previewUrl)}" alt="WMS Preview" loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.textContent='Preview not available'">
-        <span class="preview-label">WMS preview</span>
+        <img src="${escapeHtml(previewUrl)}" alt="${gettext('WMS Preview')}" loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.textContent='${gettext('Preview not available')}'">
+        <span class="preview-label">${gettext('WMS preview')}</span>
       </div>`
     }
 
@@ -1853,17 +1868,17 @@
     const total = (catalogData && catalogData.total) || 0
     const synced = (catalogData && catalogData.synced) || 0
     const confirmed = confirm(
-      'Reset the entire catalog?\n\n' +
-      `• ${total} catalog entries will be deleted (config, manual, wms_import).\n` +
-      `• ~${synced} Climweb Dataset(s) provisioned by the plugin will be removed.\n` +
-      '• Categories, SubCategories and Datasets not managed by the plugin are kept.\n\n' +
-      'This action cannot be undone.'
+      gettext('Reset the entire catalog?') + '\n\n' +
+      interpolate(gettext('• %(count)s catalog entries will be deleted (config, manual, wms_import).'), {count: total}, true) + '\n' +
+      interpolate(gettext('• ~%(count)s Climweb Dataset(s) provisioned by the plugin will be removed.'), {count: synced}, true) + '\n' +
+      gettext('• Categories, SubCategories and Datasets not managed by the plugin are kept.') + '\n\n' +
+      gettext('This action cannot be undone.')
     )
     if (!confirmed) return
 
     const resultsEl = document.getElementById('sync-results')
     resultsEl.className = 'sync-results visible'
-    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #dc2626; border-top-color: transparent;"></span> Resetting...'
+    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #dc2626; border-top-color: transparent;"></span> ' + gettext('Resetting...')
 
     try {
       const csrftoken = getCookie('csrftoken')
@@ -1888,7 +1903,7 @@
       await loadCatalog()
     } catch (error) {
       resultsEl.className = 'sync-results visible error'
-      resultsEl.innerHTML = 'Reset failed: ' + error.message
+      resultsEl.innerHTML = gettext('Reset failed: ') + error.message
     }
   }
 
@@ -1898,7 +1913,7 @@
     try {
       const csrftoken = getCookie('csrftoken')
       resultsEl.className = 'sync-results visible'
-      resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> Syncing...'
+      resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> ' + gettext('Syncing...')
 
       const response = await fetch('{% url "dataset_helper_plugin:catalog_sync" %}', {
         method: 'POST',
@@ -1914,7 +1929,7 @@
         resultsEl.className = 'sync-results visible success'
         let msg = data.message
         if (data.errors && data.errors.length > 0) {
-          msg += '<br><br><strong>Warnings:</strong><ul style="margin:4px 0;">'
+          msg += '<br><br><strong>' + gettext('Warnings:') + '</strong><ul style="margin:4px 0;">'
           data.errors.forEach(e => msg += `<li style="font-size:12px;color:#dc2626;">${escapeHtml(e)}</li>`)
           msg += '</ul>'
         }
@@ -1927,7 +1942,7 @@
       await loadCatalog()
     } catch (error) {
       resultsEl.className = 'sync-results visible error'
-      resultsEl.innerHTML = 'Sync failed: ' + error.message
+      resultsEl.innerHTML = gettext('Sync failed: ') + error.message
     }
   }
 
@@ -1970,7 +1985,7 @@
     }
 
     if (!data.category_title || !data.subcategory_title || !data.layer_name || !data.wms_url) {
-      alert('Please fill in all required fields (*).')
+      alert(gettext('Please fill in all required fields (*).'))
       return
     }
 
@@ -1990,10 +2005,10 @@
         toggleAddLayerForm()
         await loadCatalog(true)
       } else {
-        alert('Error: ' + result.message)
+        alert(gettext('Error') + ': ' + result.message)
       }
     } catch (error) {
-      alert('Error: ' + error.message)
+      alert(gettext('Error') + ': ' + error.message)
     }
   }
 
@@ -2006,14 +2021,14 @@
     const urlInput = document.getElementById('import-wms-url')
     const wmsUrl = urlInput.value.trim()
     if (!wmsUrl) {
-      alert('Please enter a WMS URL.')
+      alert(gettext('Please enter a WMS URL.'))
       return
     }
 
     wmsBaseUrl = wmsUrl
     const btn = document.getElementById('wms-fetch-btn')
     btn.disabled = true
-    btn.innerHTML = '<span class="loading-spinner"></span> Fetching...'
+    btn.innerHTML = '<span class="loading-spinner"></span> ' + gettext('Fetching...')
 
     try {
       const csrftoken = getCookie('csrftoken')
@@ -2033,7 +2048,7 @@
 
       const result = await response.json()
       if (result.status !== 'success') {
-        alert('Error: ' + result.message)
+        alert(gettext('Error') + ': ' + result.message)
         return
       }
 
@@ -2043,22 +2058,22 @@
       document.getElementById('wms-step-pick').style.display = 'block'
       document.getElementById('wms-step-config').style.display = 'none'
       document.getElementById('wms-layers-count').textContent =
-        `${result.total} layers from ${escapeHtml(wmsUrl)}`
+        interpolate(gettext('%(count)s layers from %(url)s'), {count: result.total, url: escapeHtml(wmsUrl)}, true)
       document.getElementById('wms-search').value = ''
       renderWmsLayers(result.layers)
 
     } catch (error) {
-      alert('Failed to fetch capabilities: ' + error.message)
+      alert(gettext('Failed to fetch capabilities: ') + error.message)
     } finally {
       btn.disabled = false
-      btn.innerHTML = 'Fetch Layers'
+      btn.innerHTML = gettext('Fetch Layers')
     }
   }
 
   function renderWmsLayers(layers) {
     const container = document.getElementById('wms-layers-list')
     if (!layers || layers.length === 0) {
-      container.innerHTML = '<div style="padding:20px;text-align:center;color:#6b7280;">No layers found</div>'
+      container.innerHTML = '<div style="padding:20px;text-align:center;color:#6b7280;">' + gettext('No layers found') + '</div>'
       return
     }
 
@@ -2134,7 +2149,7 @@
     const abstract = document.getElementById('wms-cfg-abstract').value.trim()
 
     if (!category || !subcategory) {
-      alert('Please fill in Category and Subcategory.')
+      alert(gettext('Please fill in Category and Subcategory.'))
       return
     }
 
@@ -2163,7 +2178,7 @@
         // Show brief success, keep picker open for more selections
         const configEl = document.getElementById('wms-step-config')
         configEl.innerHTML = `<div style="color:#166534;font-weight:500;padding:8px;">
-          Added "${escapeHtml(title || layerName)}" to catalog.
+          ${interpolate(gettext('Added "%(name)s" to catalog.'), {name: escapeHtml(title || layerName)}, true)}
         </div>`
         setTimeout(() => {
           configEl.style.display = 'none'
@@ -2173,41 +2188,41 @@
         }, 1500)
         await loadCatalog(true)
       } else {
-        alert('Error: ' + result.message)
+        alert(gettext('Error') + ': ' + result.message)
       }
     } catch (error) {
-      alert('Error: ' + error.message)
+      alert(gettext('Error') + ': ' + error.message)
     }
   }
 
   function rebuildWmsConfigForm() {
     document.getElementById('wms-step-config').innerHTML = `
-      <h4 style="margin-top:0;color:#166534;">Configure selected layer</h4>
+      <h4 style="margin-top:0;color:#166534;">${gettext('Configure selected layer')}</h4>
       <div class="form-grid">
         <div class="form-field">
-          <label>Layer Name</label>
+          <label>${gettext('Layer Name')}</label>
           <input type="text" id="wms-cfg-layer-name" readonly style="background:#f3f4f6;">
         </div>
         <div class="form-field">
-          <label>Title</label>
+          <label>${gettext('Title')}</label>
           <input type="text" id="wms-cfg-title">
         </div>
         <div class="form-field">
-          <label>Category *</label>
-          <input type="text" id="wms-cfg-category" placeholder="e.g. Environment">
+          <label>${gettext('Category')} *</label>
+          <input type="text" id="wms-cfg-category" placeholder="${gettext('e.g. Environment')}">
         </div>
         <div class="form-field">
-          <label>Subcategory *</label>
-          <input type="text" id="wms-cfg-subcategory" placeholder="e.g. Observation">
+          <label>${gettext('Subcategory')} *</label>
+          <input type="text" id="wms-cfg-subcategory" placeholder="${gettext('e.g. Observation')}">
         </div>
         <div class="form-field full-width">
-          <label>Description</label>
+          <label>${gettext('Description')}</label>
           <textarea id="wms-cfg-abstract" rows="2" style="resize:vertical;"></textarea>
         </div>
       </div>
       <div style="margin-top:12px;display:flex;gap:8px;">
-        <button class="import-button" onclick="addWmsLayerToCatalog()">Add to Catalog</button>
-        <button class="import-button" style="background:#6b7280;" onclick="clearWmsSelection()">Back to list</button>
+        <button class="import-button" onclick="addWmsLayerToCatalog()">${gettext('Add to Catalog')}</button>
+        <button class="import-button" style="background:#6b7280;" onclick="clearWmsSelection()">${gettext('Back to list')}</button>
       </div>`
   }
 
@@ -2217,13 +2232,13 @@
     try {
       config = JSON.parse(textarea.value)
     } catch (e) {
-      alert('Invalid JSON: ' + e.message)
+      alert(gettext('Invalid JSON: ') + e.message)
       return
     }
 
     const resultsEl = document.getElementById('sync-results')
     resultsEl.className = 'sync-results visible'
-    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> Loading config...'
+    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> ' + gettext('Loading config...')
 
     try {
       const csrftoken = getCookie('csrftoken')
@@ -2252,7 +2267,7 @@
       }
     } catch (error) {
       resultsEl.className = 'sync-results visible error'
-      resultsEl.innerHTML = 'Load failed: ' + error.message
+      resultsEl.innerHTML = gettext('Load failed: ') + error.message
     }
   }
 
@@ -2288,17 +2303,20 @@ function renderHint(extra) {
   const bb = window._countryBbox
   const bbStr = bb && bb.length === 4
     ? `[S ${bb[0]}, N ${bb[1]}, W ${bb[2]}, E ${bb[3]}]`
-    : 'none'
+    : window.gettext ? window.gettext('none') : 'none'
   const nameStr = window._countryName ? ` "${window._countryName}"` : ''
-  hint.textContent = `Country${nameStr} — Bounding box: ${bbStr}${extra ? ' — ' + extra : ''}`
+  const _ = window.gettext || (s => s)
+  hint.textContent = `${_('Country')}${nameStr} — ${_('Bounding box:')} ${bbStr}${extra ? ' — ' + extra : ''}`
 }
+
+const _t = window.gettext || (s => s)
 
 async function loadLocale(lang) {
   try {
     const mod = await import(`https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.7.0/langs/${lang}.json/+esm`)
     return [lang, mod.default || mod]
   } catch (_) {
-    if (lang === 'en') throw new Error('Failed to load English locale')
+    if (lang === 'en') throw new Error(_t('Failed to load English locale'))
     const en = await import('https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.7.0/langs/en.json/+esm')
     return ['en', en.default || en]
   }
@@ -2316,7 +2334,7 @@ async function loadLocale(lang) {
     const sortedAlpha2 = Object.keys(names).sort((a, b) => collator.compare(names[a], names[b]))
     const currentAlpha3 = (select.dataset.currentAlpha3 || '').toUpperCase()
 
-    const opts = ['<option value="">— Select a country —</option>']
+    const opts = [`<option value="">— ${_t('Select a country')} —</option>`]
     for (const a2 of sortedAlpha2) {
       const a3 = countries.alpha2ToAlpha3(a2)
       if (!a3) continue
@@ -2327,8 +2345,8 @@ async function loadLocale(lang) {
     select.disabled = false
     renderHint()
   } catch (err) {
-    select.innerHTML = '<option value="">— Failed to load countries —</option>'
-    renderHint('Could not load country list (' + err.message + ')')
+    select.innerHTML = `<option value="">— ${_t('Failed to load countries')} —</option>`
+    renderHint(_t('Could not load country list') + ' (' + err.message + ')')
   }
 })()
 
@@ -2365,7 +2383,7 @@ select.addEventListener('change', async () => {
     renderHint()
     return
   }
-  renderHint('Fetching country info…')
+  renderHint(_t('Fetching country info…'))
   try {
     const info = await fetchCountryInfo(alpha2)
     window._countryBbox = info.bbox
@@ -2374,7 +2392,7 @@ select.addEventListener('change', async () => {
   } catch (err) {
     window._countryBbox = null
     window._countryName = ''
-    renderHint('Failed to fetch country info: ' + err.message)
+    renderHint(_t('Failed to fetch country info:') + ' ' + err.message)
   }
 })
 </script>

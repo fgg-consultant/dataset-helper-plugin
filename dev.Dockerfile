@@ -5,6 +5,9 @@ FROM climweb_dev:latest
 
 USER root
 
+# gettext is required by django-admin makemessages / compilemessages
+RUN apt-get update && apt-get install -y --no-install-recommends gettext && rm -rf /var/lib/apt/lists/*
+
 ARG PLUGIN_BUILD_UID
 ENV PLUGIN_BUILD_UID=${PLUGIN_BUILD_UID:-9999}
 ARG PLUGIN_BUILD_GID

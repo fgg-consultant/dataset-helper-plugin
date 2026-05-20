@@ -32,5 +32,12 @@ setup(
     package_dir={"": "src"},
     packages=find_packages("src"),
     include_package_data=True,
+    package_data={
+        "dataset_helper_plugin": [
+            "locale/*/LC_MESSAGES/*.po",
+            "locale/*/LC_MESSAGES/*.mo",
+            "templates/dataset_helper_plugin/*.html",
+        ],
+    },
     install_requires=install_requires
 )
