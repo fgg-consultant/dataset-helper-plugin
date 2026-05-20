@@ -61,7 +61,8 @@ SOURCE_HASH_FIELDS = (
     'file_url', 'file_bearer',
     'cog_url_template', 'cog_time_start', 'cog_time_end',
     'cog_time_step_value', 'cog_time_step_unit', 'cog_date_format',
-    'raster_style_json', 'render_layers_json', 'popup_config_json', 'popup', 'legend_json',
+    'raster_style_json', 'render_layers_json', 'popup_config_json', 'popup',
+    'legend_json', 'legend_from_capabilities',
     'meta_source', 'meta_resolution', 'meta_geographic_coverage',
     'meta_license', 'meta_frequency_of_update', 'meta_function',
     'meta_overview', 'meta_learn_more',
@@ -109,6 +110,7 @@ def _project_provisioned_layer(dataset):
             'height': wms.height,
             'transparent': wms.transparent,
             'popup': wms.popup,
+            'legend_from_capabilities': wms.legend_from_capabilities,
             'request_layers': sorted(
                 WmsRequestLayer.objects.filter(layer=wms).values_list('name', flat=True)
             ),
@@ -664,6 +666,7 @@ def _load_nested_format(json_data, stats, lang='en', ecmwf_token='', estation_pr
                         'render_layers_json': layer_data.get('render_layers') or None,
                         'popup_config_json': layer_data.get('popup_config') or None,
                         'popup': bool(layer_data.get('popup', False)),
+                        'legend_from_capabilities': bool(layer_data.get('legend_from_capabilities', False)),
                         'extra_params_json': layer_data.get('extra_params') or None,
                         'legend_json': layer_data.get('legend') or None,
                         'multi_temporal': dataset_data.get('multi_temporal', True),
@@ -1152,7 +1155,7 @@ def _provision_wms(entry, dataset):
         format='image/png',
         default=True,
         request_time_from_capabilities=True,
-        legend_from_capabilities=True,
+        legend_from_capabilities=entry.legend_from_capabilities,
         popup=entry.popup,
     )
 
@@ -1559,6 +1562,7 @@ def add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL):
         render_layers_json=data.get('render_layers_json'),
         popup_config_json=data.get('popup_config_json'),
         popup=bool(data.get('popup', False)),
+        legend_from_capabilities=bool(data.get('legend_from_capabilities', False)),
         extra_params_json=data.get('extra_params_json'),
         legend_json=data.get('legend_json'),
         multi_temporal=data.get('multi_temporal', True),
@@ -1625,6 +1629,7 @@ def get_catalog_tree():
             'render_layers_json': entry.render_layers_json,
             'popup_config_json': entry.popup_config_json,
             'popup': entry.popup,
+            'legend_from_capabilities': entry.legend_from_capabilities,
             'extra_params_json': entry.extra_params_json,
             'legend_json': entry.legend_json,
             'multi_temporal': entry.multi_temporal,

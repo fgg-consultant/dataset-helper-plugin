@@ -64,7 +64,9 @@ El JSON debe seguir la estructura anidada **Categories → Subcategories → Dat
                   "title": "RFE 10-day",
                   "layer_name": "rfe_10d",
                   "wms_url": "https://example.org/wms",
-                  "default": true
+                  "default": true,
+                  "popup": true,
+                  "legend_from_capabilities": true
                 }
               ]
             }
@@ -96,3 +98,14 @@ El campo `type` dentro de `layers[]` puede tomar:
 - `raster_cog` — Cloud-Optimized GeoTIFF con plantilla temporal.
 
 Cada tipo tiene sus propios campos (URL plantilla, intervalo temporal, estilo ráster, configuración de popup…). Consulte el catálogo incluido para ver ejemplos completos.
+
+### Campos específicos de WMS
+
+Para las capas `wms`, dos opciones booleanas controlan lo que se activa en el lado de Climweb:
+
+| Campo                       | Por defecto | Efecto en el `WmsLayer` de Climweb                                                                  |
+|-----------------------------|-------------|-----------------------------------------------------------------------------------------------------|
+| `popup`                     | `false`     | Activa **Enable popup**: se muestra un popup al hacer clic en la capa.                              |
+| `legend_from_capabilities`  | `false`     | Activa **Load legend from WMS capabilities**: la leyenda se lee desde el `<LegendURL>` del GetCapabilities. |
+
+Ambos son opt-in y deben definirse explícitamente por capa. En cada resincronización, el valor del JSON sobrescribe el valor del lado de Climweb.

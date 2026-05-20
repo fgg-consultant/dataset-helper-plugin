@@ -64,7 +64,9 @@ The JSON must follow the nested **Categories → Subcategories → Datasets → 
                   "title": "RFE 10-day",
                   "layer_name": "rfe_10d",
                   "wms_url": "https://example.org/wms",
-                  "default": true
+                  "default": true,
+                  "popup": true,
+                  "legend_from_capabilities": true
                 }
               ]
             }
@@ -96,3 +98,14 @@ The `type` field inside `layers[]` accepts:
 - `raster_cog` — Cloud-Optimized GeoTIFF with a time template.
 
 Each type has its own fields (URL template, time range, raster style, popup configuration…). Refer to the bundled catalog for complete examples.
+
+### WMS-specific fields
+
+For `wms` layers, two boolean options control what gets enabled on the Climweb side:
+
+| Field                       | Default | Effect on the Climweb `WmsLayer`                                                                  |
+|-----------------------------|---------|---------------------------------------------------------------------------------------------------|
+| `popup`                     | `false` | Toggles **Enable popup** — a popup is shown when the user clicks the layer.                       |
+| `legend_from_capabilities`  | `false` | Toggles **Load legend from WMS capabilities** — the legend is read from the GetCapabilities `<LegendURL>`. |
+
+Both are opt-in and must be set explicitly per layer. On every resync, the JSON value overwrites the Climweb-side value.

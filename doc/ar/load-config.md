@@ -64,7 +64,9 @@
                   "title": "RFE 10-day",
                   "layer_name": "rfe_10d",
                   "wms_url": "https://example.org/wms",
-                  "default": true
+                  "default": true,
+                  "popup": true,
+                  "legend_from_capabilities": true
                 }
               ]
             }
@@ -96,3 +98,14 @@
 - `raster_cog` — Cloud-Optimized GeoTIFF مع قالب زمني.
 
 كل نوع له حقوله الخاصة (قالب URL، الفاصل الزمني، نمط raster، تكوين النوافذ المنبثقة…). راجع الكتالوج المدمج للحصول على أمثلة كاملة.
+
+### حقول خاصة بـ WMS
+
+لطبقات `wms`، يتحكم خياران منطقيان في ما يتم تفعيله في جانب Climweb:
+
+| الحقل                         | القيمة الافتراضية | التأثير على `WmsLayer` في Climweb                                                            |
+|-------------------------------|--------------------|-------------------------------------------------------------------------------------------|
+| `popup`                       | `false`            | يفعّل **Enable popup**: تظهر نافذة منبثقة عند النقر على الطبقة.                            |
+| `legend_from_capabilities`    | `false`            | يفعّل **Load legend from WMS capabilities**: يتم قراءة وسيلة الإيضاح من `<LegendURL>` في GetCapabilities. |
+
+كلاهما opt-in ويجب تعيينهما بشكل صريح لكل طبقة. عند كل إعادة مزامنة، تكتب قيمة JSON فوق القيمة الموجودة في جانب Climweb.

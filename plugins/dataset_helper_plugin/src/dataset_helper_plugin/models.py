@@ -287,6 +287,14 @@ class CatalogEntry(models.Model):
         help_text=_("If checked, a popup will be displayed when clicking on the layer."),
     )
 
+    # --- Legend toggle (wms) ---
+    legend_from_capabilities = models.BooleanField(
+        default=False,
+        verbose_name=_("Load legend from WMS capabilities"),
+        help_text=_("If checked, the legend will be loaded from the WMS "
+                    "GetCapabilities response (LegendURL)."),
+    )
+
     # --- Legend configuration ---
     legend_json = models.JSONField(
         blank=True, null=True,

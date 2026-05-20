@@ -260,6 +260,8 @@ const I18N = {
     autoUpdate: 'Auto-update interval (min)',
     nearRealtime: 'Near real-time',
     extraParams: 'Extra WMS params',
+    popup: 'Enable popup',
+    legendFromCapabilities: 'Load legend from WMS capabilities',
     noResults: 'No dataset matches your search.',
   },
   fr: {
@@ -298,6 +300,8 @@ const I18N = {
     autoUpdate: 'Intervalle d\'auto-update (min)',
     nearRealtime: 'Temps quasi-réel',
     extraParams: 'Paramètres WMS supplémentaires',
+    popup: 'Popup activé',
+    legendFromCapabilities: 'Légende issue des capabilities WMS',
     noResults: 'Aucun dataset ne correspond à votre recherche.',
   },
   es: {
@@ -336,6 +340,8 @@ const I18N = {
     autoUpdate: 'Intervalo de auto-actualización (min)',
     nearRealtime: 'Casi tiempo real',
     extraParams: 'Parámetros WMS adicionales',
+    popup: 'Popup activado',
+    legendFromCapabilities: 'Leyenda desde capabilities WMS',
     noResults: 'Ningún dataset coincide con su búsqueda.',
   },
   pt: {
@@ -374,6 +380,8 @@ const I18N = {
     autoUpdate: 'Intervalo de auto-update (min)',
     nearRealtime: 'Quase em tempo real',
     extraParams: 'Parâmetros WMS adicionais',
+    popup: 'Popup ativado',
+    legendFromCapabilities: 'Legenda a partir das capabilities WMS',
     noResults: 'Nenhum dataset corresponde à sua busca.',
   },
   ar: {
@@ -412,6 +420,8 @@ const I18N = {
     autoUpdate: 'فاصل التحديث التلقائي (دقيقة)',
     nearRealtime: 'شبه فوري',
     extraParams: 'معلمات WMS إضافية',
+    popup: 'تفعيل النافذة المنبثقة',
+    legendFromCapabilities: 'تحميل وسيلة الإيضاح من قدرات WMS',
     noResults: 'لا توجد مجموعة بيانات تطابق بحثك.',
   },
 }
@@ -640,6 +650,14 @@ const t = computed(() => I18N[lang.value] || I18N.en)
                             <td>
                               <code>{{ JSON.stringify(layer.extra_params) }}</code>
                             </td>
+                          </tr>
+                          <tr v-if="layer.type === 'wms' && layer.popup">
+                            <td>{{ t.popup }}</td>
+                            <td>✓</td>
+                          </tr>
+                          <tr v-if="layer.type === 'wms' && layer.legend_from_capabilities">
+                            <td>{{ t.legendFromCapabilities }}</td>
+                            <td>✓</td>
                           </tr>
                         </tbody>
                       </table>
