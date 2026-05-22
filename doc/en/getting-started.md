@@ -2,6 +2,28 @@
 
 This page walks through the minimum steps to make a first set of WMS layers appear in the Climweb mapviewer using the Dataset Helper plugin.
 
+## Install the plugin in Climweb
+
+Before using the plugin from the Wagtail admin, it needs to be installed on the Climweb side. Edit your Climweb instance's `.env` file:
+
+1. Update Climweb to the compatible version:
+   ```ini
+   CLIMWEB_VERSION=1.1.3
+   ```
+2. Declare the plugin repository:
+   ```ini
+   CLIMWEB_PLUGIN_GIT_REPOS=https://github.com/fgg-consultant/dataset-helper-plugin
+   ```
+
+Then restart Climweb so the declared plugin is fetched and installed:
+
+```bash
+docker compose down
+docker compose up -d
+```
+
+For the full procedure and advanced options (multiple plugins, specific branch/tag, private plugins…), see the [official Climweb documentation](https://climweb.readthedocs.io/en/v1.1.1/_docs/technical/extending-climweb/plugin-installation.html).
+
 ## 1. Open the Dataset helper page
 
 In the Wagtail admin, open **GeoManager → Dataset helper**.

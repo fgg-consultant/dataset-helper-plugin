@@ -2,6 +2,28 @@
 
 تصف هذه الصفحة الخطوات الدنيا لإظهار أول مجموعة من طبقات WMS في عارض خرائط Climweb باستخدام مكوّن Dataset Helper.
 
+## تثبيت المكوّن في Climweb
+
+قبل استخدام المكوّن من إدارة Wagtail، يجب تثبيته في جانب Climweb. عدّل ملف `.env` الخاص بنسخة Climweb لديك:
+
+1. حدّث Climweb إلى الإصدار المتوافق:
+   ```ini
+   CLIMWEB_VERSION=1.1.3
+   ```
+2. صرّح بمستودع المكوّن:
+   ```ini
+   CLIMWEB_PLUGIN_GIT_REPOS=https://github.com/fgg-consultant/dataset-helper-plugin
+   ```
+
+ثم أعد تشغيل Climweb حتى يتم جلب المكوّن المُعلن وتثبيته:
+
+```bash
+docker compose down
+docker compose up -d
+```
+
+للحصول على الإجراء الكامل والخيارات المتقدمة (عدة مكوّنات، فرع/علامة محددة، مكوّنات خاصة…)، راجع [الوثائق الرسمية لـ Climweb](https://climweb.readthedocs.io/ar/v1.1.1/_docs/technical/extending-climweb/plugin-installation.html).
+
 ## 1. افتح صفحة Dataset helper
 
 في إدارة Wagtail، افتح **GeoManager → Dataset helper**.

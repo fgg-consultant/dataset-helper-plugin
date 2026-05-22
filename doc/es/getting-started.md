@@ -2,6 +2,28 @@
 
 Esta página describe el recorrido mínimo para hacer aparecer un primer conjunto de capas WMS en el mapviewer de Climweb usando el plugin Dataset Helper.
 
+## Instalar el plugin en Climweb
+
+Antes de usar el plugin desde la administración de Wagtail, debe estar instalado del lado de Climweb. Edite el archivo `.env` de su instancia de Climweb:
+
+1. Actualice Climweb a la versión compatible:
+   ```ini
+   CLIMWEB_VERSION=1.1.3
+   ```
+2. Declare el repositorio del plugin:
+   ```ini
+   CLIMWEB_PLUGIN_GIT_REPOS=https://github.com/fgg-consultant/dataset-helper-plugin
+   ```
+
+Luego reinicie Climweb para que el plugin declarado sea descargado e instalado:
+
+```bash
+docker compose down
+docker compose up -d
+```
+
+Para el procedimiento completo y las opciones avanzadas (varios plugins, rama/etiqueta específica, plugins privados…), consulte la [documentación oficial de Climweb](https://climweb.readthedocs.io/es/v1.1.1/_docs/technical/extending-climweb/plugin-installation.html).
+
 ## 1. Abrir la página Dataset helper
 
 En la administración de Wagtail, abra el menú **GeoManager → Dataset helper**.

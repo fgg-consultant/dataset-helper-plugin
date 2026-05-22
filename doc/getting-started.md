@@ -2,6 +2,28 @@
 
 Cette page décrit le parcours minimal pour faire apparaître un premier jeu de couches WMS dans le mapviewer Climweb avec le plugin Dataset Helper.
 
+## Installer le plugin dans Climweb
+
+Avant d'utiliser le plugin dans l'admin Wagtail, il doit être installé côté Climweb. Éditez le fichier `.env` de votre instance Climweb :
+
+1. Mettez à jour Climweb à la version compatible :
+   ```ini
+   CLIMWEB_VERSION=1.1.3
+   ```
+2. Déclarez le dépôt du plugin :
+   ```ini
+   CLIMWEB_PLUGIN_GIT_REPOS=https://github.com/fgg-consultant/dataset-helper-plugin
+   ```
+
+Puis relancez Climweb pour que le plugin déclaré soit récupéré et installé :
+
+```bash
+docker compose down
+docker compose up -d
+```
+
+Pour la procédure complète et les options avancées (plusieurs plugins, branche/tag spécifique, plugins privés…), voir la [documentation officielle Climweb](https://climweb.readthedocs.io/fr/v1.1.1/_docs/technical/extending-climweb/plugin-installation.html).
+
 ## 1. Ouvrir la page Dataset helper
 
 Dans l'admin Wagtail, ouvrez le menu **GeoManager → Dataset helper**.
