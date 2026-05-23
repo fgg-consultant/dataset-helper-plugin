@@ -1,11 +1,11 @@
 {
   "name": "Dataset Helper Plugin",
   "version": "0.0.1",
-  "description": "TODO",
-  "author": "TODO",
-  "author_url": "TODO",
-  "url": "TODO",
-  "license": "TODO",
-  "contact": "TODO",
+  "description": "A plugin to assist with dataset management.",
+  "author": "FGG Consultant",
+  "author_url": "https://fgg-consultant.github.io/dataset-helper-plugin/en/",
+  "url": "https://github.com/fgg-consultant/dataset-helper-plugin.git",
+  "license": "MIT",
+  "contact": "",
   "django_apps": []
 }
