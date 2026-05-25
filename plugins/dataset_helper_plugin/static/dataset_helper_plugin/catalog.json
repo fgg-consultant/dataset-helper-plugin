@@ -1,5 +1,5 @@
 {
-  "version": "2026.05.20",
+  "version": "2026.05.25",
   "schema_version": 1,
   "categories": [
     {
@@ -27005,8 +27005,6 @@
               "multi_temporal": true,
               "near_realtime": true,
               "public": true,
-              "initial_visible": true,
-              "auto_update_interval": 15,
               "metadata": {
                 "title": {
                   "en": "Enhanced Natural Colour Image – Europe & Africa (MSG)",
@@ -51409,7 +51407,6 @@
                   "default": true,
                   "extra_params": {},
                   "popup": true,
-                  "legend_from_capabilities":true,
                   "legend_from_capabilities":true
                 }
               ],
@@ -51487,7 +51484,6 @@
                   "default": true,
                   "extra_params": {},
                   "popup": true,
-                  "legend_from_capabilities":true,
                   "legend_from_capabilities":true
                 }
               ],
