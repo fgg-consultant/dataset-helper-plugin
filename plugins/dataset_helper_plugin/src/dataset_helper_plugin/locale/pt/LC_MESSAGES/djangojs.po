@@ -447,8 +447,8 @@ msgstr "Falha ao carregar o status"
 msgid "The boundary manager is not available in this instance."
 msgstr "O boundary manager não está disponível nesta instância."
 
-msgid "No country configured. Set the country in the Layer Catalog settings first."
-msgstr "Nenhum país configurado. Defina o país primeiro nas configurações do Catálogo de camadas."
+msgid "No country configured. Set the country on the Settings tab first."
+msgstr "Nenhum país configurado. Defina o país primeiro na aba Configurações."
 
 msgid "No boundaries loaded yet for this country."
 msgstr "Ainda não há limites carregados para este país."
@@ -482,3 +482,72 @@ msgstr "Falha na importação"
 
 msgid "Delete all admin boundaries for the configured country?"
 msgstr "Excluir todos os limites administrativos do país configurado?"
+
+# ── Settings tab gating ──
+
+msgid "Complete the required settings first"
+msgstr "Preencha primeiro as configurações obrigatórias"
+
+# ── Added: catalog redesign (JS) ──
+
+msgid "%(n)s to create"
+msgstr "%(n)s a criar"
+
+msgid "%(n)s to remove"
+msgstr "%(n)s a remover"
+
+msgid "%(n)s to update"
+msgstr "%(n)s a atualizar"
+
+msgid "Auto-update interval"
+msgstr "Intervalo de atualização automática"
+
+msgid "Catalog <b>v%(v)s</b>"
+msgstr "Catálogo <b>v%(v)s</b>"
+
+msgid "Catalog out of sync with Climweb"
+msgstr "Catálogo dessincronizado com o Climweb"
+
+msgid "Disabled"
+msgstr "Desativadas"
+
+msgid "Initially visible"
+msgstr "Visível inicialmente"
+
+msgid "Load failed"
+msgstr "Falha ao carregar"
+
+msgid "Loading catalog…"
+msgstr "Carregando o catálogo…"
+
+msgid "Near real-time"
+msgstr "Quase em tempo real"
+
+msgid "Synced"
+msgstr "Sincronizadas"
+
+msgid "Synchronize with Climweb"
+msgstr "Sincronizar com o Climweb"
+
+msgid "To add"
+msgstr "A adicionar"
+
+msgid "To remove"
+msgstr "A remover"
+
+msgid "loaded %(d)s"
+msgstr "carregado em %(d)s"
+
+msgid "min"
+msgstr "min"
+
+msgid "not loaded"
+msgstr "não carregado"
+
+msgid "removed"
+msgstr "removidos"
+
+msgid "%(n)s pending change"
+msgid_plural "%(n)s pending changes"
+msgstr[0] "%(n)s alteração pendente"
+msgstr[1] "%(n)s alterações pendentes"

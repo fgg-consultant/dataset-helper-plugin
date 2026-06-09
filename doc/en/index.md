@@ -44,9 +44,11 @@ The plugin ships with a default catalog and provides a UI to:
 
 ## Where to find the plugin
 
-In the Wagtail admin, open the **GeoManager → Dataset helper** menu. The page is split into two tabs:
+In the Wagtail admin, open the **GeoManager → Dataset helper** menu. The page is split into four tabs:
 
-- **Layer Catalog** — the main working screen (settings, layer tree, synchronization and import actions).
+- **Settings** — the plugin's global configuration (country, language, tokens). The other tabs unlock once the required Country is set.
+- **Layer Catalog** — the main working screen (layer tree, synchronization and import actions).
+- **Admin Boundaries** — import administrative boundaries (OCHA COD-AB).
 - **Danger Zone** — destructive operations (purge of provisioned data, full wipe).
 
 ## Mental model

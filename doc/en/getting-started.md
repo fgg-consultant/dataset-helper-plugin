@@ -32,7 +32,7 @@ On the first launch the central tree is empty: the plugin knows that a default c
 
 ## 2. Fill in the required settings
 
-Before loading the bundled catalog, expand the **Settings** panel (collapsed just under the counters). At minimum:
+Before loading the bundled catalog, go to the **Settings** tab — the first one, which opens automatically on a fresh instance (the other tabs are locked until you finish here). At minimum:
 
 - **Country** *(required)* — pick the target country. This is used to substitute the `{country_alpha3}` / `{country_alpha2}` placeholders in layer URLs and to set the map's initial framing (bbox from Nominatim).
 - **Language** — language in which titles and descriptions are imported (`en`, `fr`, `es`, `pt`, `ar`).
@@ -42,21 +42,21 @@ Optional, depending on which providers you want to enable:
 - **ECMWF Token** — required for the private `eccharts.ecmwf.int` layers (the ones whose URL contains `token={ECMWF_TOKEN}`). Without a token, those layers are simply skipped on load.
 - **Local eStation URL** — if filled in, only eStation products actually available on your local instance are imported. Leave empty to import everything.
 
-Click **Save Settings**. While `Country` is missing the panel shows a warning.
+Click **Save Settings**. While `Country` is missing the other tabs stay locked; once it is saved, the Settings tab unlocks them and offers shortcuts to the catalog and the boundaries.
 
 See [Settings](./settings) for details.
 
 ## 3. Load the bundled catalog
 
-Click **Load embedded catalog**. The plugin computes a *changeset* without writing anything and shows you:
+While the catalog is empty, the tab shows a single warning block — *No catalog loaded yet* — with a **Load catalog** button. Click it: since the local catalog is empty, the bundled catalog is **applied directly** (no preview needed — there is nothing to conflict with).
 
-- what will be **added** to the catalog,
-- what will be **updated**,
-- what will be **removed** (if you had loaded a previous version).
-
-Click **Apply changes** to commit. The tree fills up and all entries default to `pending_add` (orange dot).
+The tree fills up and all entries default to `pending_add` (orange dot).
 
 At this point **no Climweb object has been created yet**: the catalog has only been populated on the plugin side.
+
+::: tip
+The preview/diff step is only used **later**, for *updates*: when a newer catalog version ships, a banner lets you review the changeset before applying. See [Catalog updates](./updates).
+:::
 
 ## 4. Refine the selection
 
@@ -70,7 +70,7 @@ See [The layer catalog](./catalog).
 
 ## 5. Synchronize with Climweb
 
-Click **Synchronize with Climweb**. The plugin:
+As soon as your selection differs from Climweb, an **out-of-sync banner** appears below the overview, summarizing what is pending. Click its **Synchronize with Climweb** button. The plugin:
 
 - creates the `Category`, `SubCategory`, `Dataset`, `Metadata` and `WmsLayer` objects matching the checked entries,
 - deletes those that correspond to entries you unchecked but were still in the database.

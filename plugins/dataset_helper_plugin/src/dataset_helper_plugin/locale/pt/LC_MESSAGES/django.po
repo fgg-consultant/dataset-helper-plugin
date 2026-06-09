@@ -814,8 +814,8 @@ msgstr "não configurado"
 msgid "How it works"
 msgstr "Como funciona"
 
-msgid "The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Layer Catalog</em> tab first."
-msgstr "O país vem das <strong>configurações do plugin</strong> (códigos ISO). Defina-o primeiro na aba <em>Catálogo de camadas</em>."
+msgid "The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Settings</em> tab first."
+msgstr "O país vem das <strong>configurações do plugin</strong> (códigos ISO). Defina-o primeiro na aba <em>Configurações</em>."
 
 msgid "The COD-AB shapefile ZIP is located on HDX automatically (<code>cod-ab-&lt;iso3&gt;</code>) and downloaded."
 msgstr "O ZIP shapefile COD-AB é localizado automaticamente no HDX (<code>cod-ab-&lt;iso3&gt;</code>) e baixado."
@@ -861,3 +861,67 @@ msgstr ", %(failed)d nível(is) com falha"
 #, python-format
 msgid "%(count)d boundary feature(s) deleted"
 msgstr "%(count)d feição(ões) de limites excluída(s)"
+
+# ── Settings tab (separate tab, gating, next steps) ──
+
+msgid "Complete the required settings first"
+msgstr "Preencha primeiro as configurações obrigatórias"
+
+msgid "Configure the plugin for this Climweb instance. The Country is required — the Catalog and Boundaries tabs stay locked until it is set."
+msgstr "Configure o plugin para esta instância do Climweb. O país é obrigatório — as abas Catálogo e Limites permanecem bloqueadas até que seja definido."
+
+msgid "Complete the required settings below to unlock the other tabs."
+msgstr "Preencha as configurações obrigatórias abaixo para desbloquear as outras abas."
+
+msgid "Settings saved. What would you like to configure next?"
+msgstr "Configurações salvas. O que você gostaria de configurar em seguida?"
+
+msgid "Configure the catalog"
+msgstr "Configurar o catálogo"
+
+msgid "Configure the boundaries"
+msgstr "Configurar os limites"
+
+msgid "Load, review and synchronize the layer catalog with Climweb."
+msgstr "Carregue, revise e sincronize o catálogo de camadas com o Climweb."
+
+msgid "Import the administrative boundaries for your country."
+msgstr "Importe os limites administrativos do seu país."
+
+# ── Added: catalog/settings/boundaries redesign ──
+
+msgid "A new catalog version is available"
+msgstr "Uma nova versão do catálogo está disponível"
+
+msgid "Catalog"
+msgstr "Catálogo"
+
+msgid "Catalog layers"
+msgstr "Camadas do catálogo"
+
+msgid "Compare the changeset and import the new version."
+msgstr "Compare as alterações e importe a nova versão."
+
+msgid "Dismiss"
+msgstr "Fechar"
+
+msgid "Import language"
+msgstr "Idioma de importação"
+
+msgid "Later"
+msgstr "Mais tarde"
+
+msgid "Layer catalog for the Climweb map viewer"
+msgstr "Catálogo de camadas do visualizador de mapas Climweb"
+
+msgid "Load catalog"
+msgstr "Carregar o catálogo"
+
+msgid "No catalog loaded yet"
+msgstr "Nenhum catálogo carregado ainda"
+
+msgid "Plugin Documentation"
+msgstr "Documentação do plugin"
+
+msgid "The local catalog is empty. Load the embedded catalog to populate it, then synchronize with Climweb."
+msgstr "O catálogo local está vazio. Carregue o catálogo embarcado para preenchê-lo e depois sincronize com o Climweb."

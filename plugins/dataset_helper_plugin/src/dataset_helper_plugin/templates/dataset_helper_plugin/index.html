@@ -36,6 +36,16 @@
         border-bottom-color: #059669;
     }
 
+    /* Locked tabs: inaccessible until the mandatory settings are saved. */
+    .tab-button.locked {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+    .tab-button.locked:hover {
+        color: #9ca3af;
+        background: transparent;
+    }
+
     .tab-content {
         display: none;
         padding: 20px 0;
@@ -160,27 +170,6 @@
     }
 
     /* Catalog tree styles */
-    .catalog-stats {
-        display: flex;
-        gap: 24px;
-        margin-bottom: 20px;
-        padding: 16px;
-        background: #f9fafb;
-        border-radius: 8px;
-    }
-    .catalog-stat {
-        text-align: center;
-    }
-    .catalog-stat .number {
-        font-size: 28px;
-        font-weight: bold;
-        color: #059669;
-    }
-    .catalog-stat .label {
-        font-size: 12px;
-        color: #6b7280;
-    }
-
     .catalog-toolbar {
         display: flex;
         gap: 12px;
@@ -397,97 +386,6 @@
         display: block;
     }
 
-    /* Catalog version banner */
-    .catalog-version-banner {
-        margin-bottom: 16px;
-        padding: 12px 16px;
-        border-radius: 6px;
-        display: none;
-        font-size: 13px;
-        line-height: 1.5;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-    .catalog-version-banner.visible { display: flex; }
-    .catalog-version-banner.update {
-        background: #fef3c7;
-        border: 1px solid #fcd34d;
-        color: #78350f;
-    }
-    .catalog-version-banner.info {
-        background: #eff6ff;
-        border: 1px solid #bfdbfe;
-        color: #1e3a8a;
-    }
-    .catalog-version-banner.passive {
-        background: transparent;
-        border: none;
-        padding: 4px 2px;
-        margin-bottom: 10px;
-        color: #6b7280;
-        font-size: 12px;
-    }
-    .catalog-version-banner.passive button { display: none; }
-    .catalog-version-banner.passive .banner-text strong { color: #374151; }
-    .catalog-version-banner .banner-text { flex: 1 1 auto; min-width: 0; }
-    .catalog-version-banner .banner-text strong { font-weight: 600; }
-    .catalog-version-banner button {
-        flex: 0 0 auto;
-        padding: 6px 12px;
-        border: none;
-        border-radius: 4px;
-        background: #059669;
-        color: #fff;
-        cursor: pointer;
-        font-size: 13px;
-        font-weight: 500;
-    }
-    .catalog-version-banner button:hover { background: #047857; }
-
-    /* Climweb sync-status banner — always visible: green when in sync,
-       amber when the catalog selection/content differs from Climweb. */
-    .catalog-sync-banner {
-        margin-bottom: 16px;
-        padding: 12px 16px;
-        border-radius: 6px;
-        display: none;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-        font-size: 13px;
-        line-height: 1.5;
-    }
-    .catalog-sync-banner.synced,
-    .catalog-sync-banner.out-of-sync { display: flex; }
-    .catalog-sync-banner .banner-text { flex: 1 1 auto; min-width: 0; }
-    .catalog-sync-banner .banner-text strong { font-weight: 600; }
-    .catalog-sync-banner.synced {
-        background: #ecfdf5;
-        border: 1px solid #a7f3d0;
-        color: #065f46;
-    }
-    .catalog-sync-banner.out-of-sync {
-        background: #fef3c7;
-        border: 1px solid #fcd34d;
-        color: #78350f;
-    }
-    .catalog-sync-banner button {
-        flex: 0 0 auto;
-        padding: 6px 12px;
-        border: none;
-        border-radius: 4px;
-        background: #d97706;
-        color: #fff;
-        cursor: pointer;
-        font-size: 13px;
-        font-weight: 500;
-    }
-    .catalog-sync-banner button:hover { background: #b45309; }
-    .catalog-sync-banner.synced button { display: none; }
-
     /* Catalog preview pane (review changes before apply) */
     .catalog-preview-pane {
         margin-bottom: 16px;
@@ -584,6 +482,102 @@
     .catalog-preview-pane .btn-overwrite:hover { background: #b91c1c; }
     .catalog-preview-pane .btn-cancel       { background: #e5e7eb; color: #374151; }
     .catalog-preview-pane .btn-cancel:hover { background: #d1d5db; }
+    /* ============================================================
+       Redesigned upper section (Claude Design handoff) — scoped tokens
+       ============================================================ */
+    .nice-padding {
+      --dh-accent: #00a16c; --dh-accent-ink: #007a52; --dh-accent-soft: #e4f4ee; --dh-accent-softer: #f1faf6;
+      --dh-ink: #1b1b1f; --dh-ink-2: #44464b; --dh-ink-3: #6b6e76; --dh-ink-4: #9a9da6;
+      --dh-line: #e7e8ec; --dh-line-2: #eef0f3; --dh-surface: #fff; --dh-surface-2: #f7f8fa; --dh-surface-3: #f1f3f6;
+      --dh-st-synced: #00a16c; --dh-st-add: #e8830c; --dh-st-add-bg: #fdf0df; --dh-st-remove: #e0392b; --dh-st-disabled: #aeb2bb;
+      --dh-bk-new: #00a16c; --dh-bk-updated: #2563d8; --dh-bk-conflict: #d4520f; --dh-bk-remove: #e0392b;
+      --dh-r-sm: 6px; --dh-r-md: 9px; --dh-r-lg: 14px;
+      --dh-shadow-1: 0 1px 2px rgba(20,22,30,.05), 0 1px 3px rgba(20,22,30,.04);
+      --dh-sans: "Mulish", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .dh-update, .dh-overview, .dh-toprow, .dh-btn { font-family: var(--dh-sans); }
+    .dh-tab-badge { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; margin-left: 7px; font-size: 11px; font-weight: 800; border-radius: 9px; background: var(--dh-st-add-bg); color: var(--dh-st-add); vertical-align: middle; font-family: var(--dh-sans); }
+
+    /* empty state: no catalog loaded yet (warning block) */
+    .dh-empty-warn { display: none; align-items: center; gap: 16px; padding: 20px 22px; margin-bottom: 18px; font-family: var(--dh-sans); background: #fef3c7; border: 1px solid #fcd34d; border-left: 4px solid var(--dh-st-add); border-radius: var(--dh-r-lg); }
+    .dh-empty-ic { width: 44px; height: 44px; border-radius: 12px; background: var(--dh-st-add); color: #fff; display: grid; place-items: center; flex: 0 0 auto; }
+    .dh-empty-body { flex: 1; min-width: 0; }
+    .dh-empty-title { font-size: 15.5px; font-weight: 800; color: #78350f; }
+    .dh-empty-text { font-size: 13px; color: #8a5a12; margin-top: 3px; line-height: 1.45; }
+    .dh-empty-warn .dh-btn { flex: 0 0 auto; }
+
+    /* top row: crumb + version chip + doc link */
+    .dh-toprow { display: flex; align-items: center; gap: 12px; margin: 4px 0 18px; flex-wrap: wrap; }
+    .dh-toprow .dh-crumb { font-size: 13px; color: var(--dh-ink-3); font-weight: 600; }
+    .dh-toprow-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .dh-vchip { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700; color: var(--dh-ink-2); background: var(--dh-surface); border: 1px solid var(--dh-line); border-radius: 999px; padding: 6px 12px; }
+    .dh-vchip b { color: var(--dh-ink); }
+    .dh-vchip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--dh-accent); }
+    .dh-doclink { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--dh-accent-ink); text-decoration: none; padding: 6px 4px; }
+    .dh-doclink:hover { text-decoration: underline; }
+
+    /* buttons */
+    .dh-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--dh-r-md); font-weight: 700; border: 1px solid transparent; transition: .14s; white-space: nowrap; line-height: 1; }
+    .dh-btn-md { padding: 10px 15px; font-size: 13.5px; }
+    .dh-btn-sm { padding: 7px 11px; font-size: 12.5px; }
+    .dh-btn-full { width: 100%; }
+    .dh-btn:disabled { opacity: .5; cursor: not-allowed; }
+    .dh-btn-primary { background: var(--dh-accent); color: #fff; box-shadow: 0 2px 8px rgba(0,161,108,.28); }
+    .dh-btn-primary:hover:not(:disabled) { background: #00925f; }
+    .dh-btn-outline { background: var(--dh-surface); color: var(--dh-ink-2); border-color: var(--dh-line); }
+    .dh-btn-outline:hover:not(:disabled) { border-color: #cdd0d7; background: var(--dh-surface-2); color: var(--dh-ink); }
+    .dh-btn-ghost { background: transparent; color: var(--dh-ink-2); }
+    .dh-btn-ghost:hover:not(:disabled) { background: var(--dh-surface-3); color: var(--dh-ink); }
+    .dh-btn-badge { display: inline-grid; place-items: center; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 10px; font-size: 11px; font-weight: 800; background: rgba(255,255,255,.26); }
+    .dh-btn-outline .dh-btn-badge { background: var(--dh-st-add-bg); color: var(--dh-st-add); }
+
+    /* update banner */
+    .dh-update { display: none; align-items: center; gap: 16px; padding: 16px 18px; margin-bottom: 18px;
+      background: linear-gradient(100deg, var(--dh-accent-softer), #fff 70%); border: 1px solid #bfe6d6; border-left: 4px solid var(--dh-accent); border-radius: var(--dh-r-lg); box-shadow: var(--dh-shadow-1); }
+    .dh-update.visible { display: flex; }
+    .dh-update-ic { width: 40px; height: 40px; border-radius: 11px; background: var(--dh-accent); color: #fff; display: grid; place-items: center; flex: 0 0 auto; box-shadow: 0 3px 10px rgba(0,161,108,.32); }
+    .dh-update-body { flex: 1; min-width: 0; }
+    .dh-update-title { font-size: 15px; font-weight: 800; letter-spacing: -.01em; color: var(--dh-ink); }
+    .dh-update-title b { color: var(--dh-accent-ink); }
+    .dh-update-sub { font-size: 13px; color: var(--dh-ink-2); margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+    .dh-update-sub .s { display: inline-flex; align-items: center; gap: 5px; font-weight: 700; }
+    .dh-update-sub .s svg { width: 13px; height: 13px; }
+    .dh-update-actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+
+    /* overview card */
+    .dh-card { background: var(--dh-surface); border: 1px solid var(--dh-line); border-radius: var(--dh-r-lg); box-shadow: var(--dh-shadow-1); }
+    .dh-overview { display: block; margin-bottom: 18px; overflow: hidden; }
+    .dh-ov-left { padding: 20px 24px; }
+    .dh-counters { display: flex; gap: 30px; }
+    .dh-counter .n { font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: var(--dh-ink); }
+    .dh-counter .n.accent { color: var(--dh-accent); }
+    .dh-counter .l { font-size: 12.5px; font-weight: 700; color: var(--dh-ink-3); margin-top: 6px; }
+    .dh-gauge-wrap { margin-top: 20px; }
+    .dh-segbar { display: flex; width: 100%; height: 9px; border-radius: 6px; overflow: hidden; background: var(--dh-surface-3); }
+    .dh-segbar > div { height: 100%; }
+    .dh-gauge-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; }
+    .dh-gl { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--dh-ink-2); font-weight: 600; }
+    .dh-gl b { color: var(--dh-ink); font-weight: 800; }
+    .dh-gl .sw { width: 10px; height: 10px; border-radius: 3px; }
+    .dh-version-line { font-size: 12px; color: var(--dh-ink-3); margin-top: 16px; }
+    .dh-version-line b { color: var(--dh-ink); font-weight: 700; }
+
+    /* Prominent out-of-sync banner (below the counters; hidden when in sync) */
+    .dh-syncbar { display: none; align-items: center; gap: 16px; padding: 16px 20px; margin-bottom: 18px; font-family: var(--dh-sans);
+      background: var(--dh-st-add-bg); border: 1px solid #fcd34d; border-left: 4px solid var(--dh-st-add); border-radius: var(--dh-r-lg); box-shadow: var(--dh-shadow-1); }
+    .dh-syncbar.visible { display: flex; }
+    .dh-syncbar .ic { width: 40px; height: 40px; border-radius: 11px; background: var(--dh-st-add); color: #fff; display: grid; place-items: center; flex: 0 0 auto; }
+    .dh-syncbar .body { flex: 1; min-width: 0; }
+    .dh-syncbar .t { font-size: 15px; font-weight: 800; color: #78350f; }
+    .dh-syncbar .d { font-size: 13px; color: #8a5a12; margin-top: 3px; line-height: 1.45; }
+    .dh-syncbar .dh-btn { flex: 0 0 auto; }
+
+    /* NOTE: the Settings tab's own styles live in _settings.html. */
+
+    @media (max-width: 920px) {
+      .dh-syncbar { flex-wrap: wrap; }
+    }
+
     .catalog-preview-pane .preview-loading {
         padding: 20px;
         text-align: center;
@@ -592,103 +586,53 @@
     }
 
     /* Sync results */
+    /* Sync result banner — same place & visual language as the out-of-sync
+       banner (.dh-syncbar): full-width, left-accent, rounded card. */
     .sync-results {
-        margin-top: 16px;
-        padding: 16px;
-        border-radius: 6px;
         display: none;
+        padding: 16px 46px 16px 20px;
+        margin-bottom: 18px;
+        border-radius: var(--dh-r-lg);
+        font-family: var(--dh-sans);
+        font-size: 13.5px;
+        font-weight: 600;
+        line-height: 1.45;
+        border: 1px solid var(--dh-line);
+        border-left: 4px solid var(--dh-ink-4);
+        background: var(--dh-surface-2);
+        color: var(--dh-ink-2);
+        box-shadow: var(--dh-shadow-1);
     }
-    .sync-results.visible {
-        display: block;
-    }
+    .sync-results.visible { display: block; }
     .sync-results.success {
-        background: #d1fae5;
-        border: 1px solid #6ee7b7;
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+        border-left-color: var(--dh-st-synced);
+        color: #065f46;
     }
     .sync-results.error {
-        background: #fee2e2;
-        border: 1px solid #fca5a5;
+        background: #fbe6e4;
+        border-color: #f0cdc9;
+        border-left-color: var(--dh-st-remove);
+        color: #8a2c22;
     }
-
-    /* Settings panel */
-    .settings-panel {
-        margin-bottom: 20px;
-        padding: 16px 20px;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        background: #fff;
-    }
-    .settings-panel.invalid {
-        border-color: #dc2626;
-        border-width: 2px;
-        background: #fef2f2;
-    }
-    .settings-panel.invalid summary {
-        color: #dc2626;
-    }
-    .settings-panel .required-warning {
+    /* dismiss (×) — sibling of #sync-results, shown only while a result is visible */
+    .sync-results-close {
         display: none;
-        margin-left: 8px;
-        font-weight: 500;
-        font-size: 12px;
-        color: #dc2626;
-    }
-    .settings-panel.invalid .required-warning {
-        display: inline;
-    }
-    .settings-panel summary {
+        position: absolute;
+        top: 50%;
+        right: 14px;
+        transform: translateY(-50%);
+        border: 0;
+        background: none;
+        padding: 4px;
+        margin: 0;
+        line-height: 0;
         cursor: pointer;
-        font-weight: 600;
-        font-size: 14px;
-        color: #374151;
-        user-select: none;
+        color: var(--dh-accent);
     }
-    .settings-panel summary:hover {
-        color: #059669;
-    }
-    .settings-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 16px;
-        margin-top: 14px;
-    }
-    .settings-field {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-    .settings-field label {
-        font-size: 12px;
-        font-weight: 500;
-        color: #374151;
-    }
-    .settings-field select,
-    .settings-field input {
-        padding: 8px 10px;
-        border: 1px solid #d1d5db;
-        border-radius: 4px;
-        font-size: 13px;
-    }
-    .settings-field select:focus,
-    .settings-field input:focus {
-        outline: none;
-        border-color: #059669;
-        box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.1);
-    }
-    .settings-field .hint {
-        font-size: 11px;
-        color: #9ca3af;
-    }
-    .settings-actions {
-        margin-top: 12px;
-        display: flex;
-        gap: 8px;
-        align-items: center;
-    }
-    .settings-msg {
-        font-size: 13px;
-        transition: opacity 0.3s;
-    }
+    .sync-results-close:hover { color: var(--dh-accent-ink); }
+    .sync-results.visible ~ .sync-results-close { display: block; }
 
     /* Admin Boundaries tab */
     .boundary-config {
@@ -765,41 +709,66 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <div class="nice-padding">
+    {% get_current_language as LANGUAGE_CODE %}
     <!-- Tab Navigation -->
+    {% trans "Complete the required settings first" as locked_title %}
     <div class="tabs">
-        <button class="tab-button active" data-tab="catalog">{% trans "Layer Catalog" %}</button>
-        <button class="tab-button" data-tab="admin-boundaries">{% trans "Admin Boundaries" %}</button>
-        <button class="tab-button" data-tab="danger-zone">{% trans "Danger Zone" %}</button>
+        <button class="tab-button{% if settings_valid %} active{% else %} locked{% endif %}" data-tab="catalog"{% if not settings_valid %} title="{{ locked_title }}"{% endif %}>{% trans "Layer Catalog" %}<span class="dh-tab-badge" id="tab-pending-badge" style="display:none;"></span></button>
+        <button class="tab-button{% if not settings_valid %} locked{% endif %}" data-tab="admin-boundaries"{% if not settings_valid %} title="{{ locked_title }}"{% endif %}>{% trans "Admin Boundaries" %}</button>
+        <button class="tab-button{% if not settings_valid %} active{% endif %}" data-tab="settings">{% trans "Settings" %}</button>
+        <button class="tab-button{% if not settings_valid %} locked{% endif %}" data-tab="danger-zone"{% if not settings_valid %} title="{{ locked_title }}"{% endif %}>{% trans "Danger Zone" %}</button>
     </div>
 
+    <!-- Settings Tab (self-contained partial) -->
+    {% include "dataset_helper_plugin/_settings.html" %}
+
     <!-- Layer Catalog Tab -->
-    <div id="catalog" class="tab-content active">
-        <div class="catalog-stats" id="catalog-stats">
-            <div class="catalog-stat">
-                <div class="number" id="stat-total">-</div>
-                <div class="label">{% trans "Total Layers" %}</div>
-            </div>
-            <div class="catalog-stat">
-                <div class="number" id="stat-enabled">-</div>
-                <div class="label">{% trans "Enabled" %}</div>
-            </div>
-            <div class="catalog-stat">
-                <div class="number" id="stat-synced">-</div>
-                <div class="label">{% trans "Synced" %}</div>
+    <div id="catalog" class="tab-content{% if settings_valid %} active{% endif %}">
+        <!-- Catalog header: description, catalog state, documentation link -->
+        <div class="dh-toprow">
+            <div class="dh-crumb">GeoManager · {% trans "Layer catalog for the Climweb map viewer" %}</div>
+            <div class="dh-toprow-right">
+                <span class="dh-vchip" id="dh-version-chip" style="display:none;"><span class="dot"></span>{% trans "Catalog" %} <b id="dh-version-chip-v"></b></span>
+                <a class="dh-doclink" href="https://fgg-consultant.github.io/dataset-helper-plugin/{% if LANGUAGE_CODE != 'fr' %}en/{% endif %}" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    {% trans "Plugin Documentation" %}
+                </a>
             </div>
         </div>
 
-        <!-- Climweb sync-status banner (live: catalog selection vs provisioned datasets) -->
-        <div id="catalog-sync-banner" class="catalog-sync-banner">
-            <div class="banner-text" id="catalog-sync-banner-text"></div>
-            <button id="catalog-sync-banner-btn" onclick="syncCatalog()">{% trans "Synchronize with Climweb" %}</button>
+        <!-- Update banner: shown only when a newer embedded catalog version is available -->
+        <div id="catalog-version-banner" class="dh-update">
+            <div class="dh-update-ic">
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>
+            </div>
+            <div class="dh-update-body">
+                <div class="dh-update-title">{% trans "A new catalog version is available" %} — <b id="dh-update-version"></b></div>
+                <div class="dh-update-sub" id="dh-update-sub">{% trans "Compare the changeset and import the new version." %}</div>
+            </div>
+            <div class="dh-update-actions">
+                <button class="dh-btn dh-btn-ghost dh-btn-sm" onclick="dismissUpdateBanner()">{% trans "Later" %}</button>
+                <button class="dh-btn dh-btn-primary dh-btn-md" onclick="reviewCatalogChanges()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    {% trans "Review changes" %}
+                </button>
+            </div>
         </div>
 
-        <!-- Catalog version banner -->
-        <div id="catalog-version-banner" class="catalog-version-banner">
-            <div class="banner-text" id="catalog-version-banner-text"></div>
-            <button onclick="reviewCatalogChanges()" id="catalog-version-banner-btn">{% trans "Review changes" %}</button>
+        <!-- Empty state: no catalog loaded yet — shown alone (warning block) -->
+        <div id="catalog-empty-state" class="dh-empty-warn">
+            <div class="dh-empty-ic">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg>
+            </div>
+            <div class="dh-empty-body">
+                <div class="dh-empty-title">{% trans "No catalog loaded yet" %}</div>
+                <div class="dh-empty-text">{% trans "The local catalog is empty. Load the embedded catalog to populate it, then synchronize with Climweb." %}</div>
+            </div>
+            <button id="load-catalog-btn-empty" class="dh-btn dh-btn-primary dh-btn-md js-load-btn" onclick="loadEmbeddedCatalogDirect()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 4 5-4"/><path d="M5 21h14"/></svg>
+                {% trans "Load catalog" %}
+            </button>
         </div>
 
         <!-- Catalog preview pane (filled by JS after a successful preview call) -->
@@ -807,94 +776,42 @@
             <div id="catalog-preview-body"></div>
         </div>
 
-        <!-- Settings Panel -->
-        <details class="settings-panel" id="settings-panel">
-            <summary>{% trans "Settings" %}<span class="required-warning">— {% trans "required setting missing" %}</span></summary>
-            <div class="settings-grid">
-                <div class="settings-field">
-                    <label for="setting-language">{% trans "Language" %}</label>
-                    <select id="setting-language">
-                        <option value="en" {% if plugin_settings.language == 'en' %}selected{% endif %}>English</option>
-                        <option value="fr" {% if plugin_settings.language == 'fr' %}selected{% endif %}>Français</option>
-                        <option value="es" {% if plugin_settings.language == 'es' %}selected{% endif %}>Español</option>
-                        <option value="pt" {% if plugin_settings.language == 'pt' %}selected{% endif %}>Português</option>
-                        <option value="ar" {% if plugin_settings.language == 'ar' %}selected{% endif %}>العربية</option>
-                    </select>
-                    <span class="hint">{% trans "Language for imported catalog labels" %}</span>
+        <!-- Overview: counters + status gauge + Climweb sync state -->
+        <div class="dh-card dh-overview" id="catalog-overview">
+            <div class="dh-ov-left">
+                <div class="dh-counters">
+                    <div class="dh-counter"><div class="n" id="stat-total">-</div><div class="l">{% trans "Catalog layers" %}</div></div>
+                    <div class="dh-counter"><div class="n accent" id="stat-enabled">-</div><div class="l">{% trans "Enabled" %}</div></div>
+                    <div class="dh-counter"><div class="n" id="stat-synced">-</div><div class="l">{% trans "Synced" %}</div></div>
                 </div>
-                <div class="settings-field">
-                    <label for="setting-ecmwf-token">{% trans "ECMWF Token" %}</label>
-                    <input type="text" id="setting-ecmwf-token" value="{{ plugin_settings.ecmwf_token }}" placeholder="{% trans '(leave empty for public-only)' %}">
-                    <span class="hint">{% trans "Token for eccharts.ecmwf.int. Empty = public layers only; private layers (token={ECMWF_TOKEN}) are skipped." %}</span>
+                <div class="dh-gauge-wrap">
+                    <div class="dh-segbar" id="dh-gauge"></div>
+                    <div class="dh-gauge-legend" id="dh-gauge-legend"></div>
                 </div>
-                <div class="settings-field">
-                    <label for="setting-estation-url">{% trans "Local eStation URL" %}</label>
-                    <input type="url" id="setting-estation-url" value="{{ plugin_settings.estation_url }}" placeholder="https://burkina.puma2025.com/http/c000/w04/climsa/mobile-app">
-                    <span class="hint">{% trans "Leave empty to import all eStation products" %}</span>
-                </div>
-                <div class="settings-field">
-                    <label for="setting-country">{% trans "Country" %} <span style="color:#dc2626;">*</span></label>
-                    <select id="setting-country" required data-current-alpha3="{{ plugin_settings.country_alpha3|default:'' }}" style="min-width:260px;" disabled>
-                        <option value="">— {% trans "Loading countries…" %} —</option>
-                    </select>
-                    <span class="hint" id="country-bbox-hint">
-                        {% blocktrans %}Required. Saves ISO codes (placeholders <code>{country_alpha3}</code> / <code>{country_alpha2}</code>), the official country name and the bounding box from OpenStreetMap Nominatim.{% endblocktrans %}
-                    </span>
-                    {{ plugin_settings.country_bbox|json_script:"current-country-bbox" }}
-                    {{ plugin_settings.country_name|json_script:"current-country-name" }}
-                </div>
+                <div class="dh-version-line" id="dh-version-line"></div>
             </div>
-            <div class="settings-actions">
-                <button class="import-button" onclick="saveSettings()">{% trans "Save Settings" %}</button>
-                <span id="settings-msg" class="settings-msg"></span>
-            </div>
-        </details>
-
-        {% get_current_language as LANGUAGE_CODE %}
-        <div style="margin: 0 0 12px; font-size: 13px;">
-            <a href="https://fgg-consultant.github.io/dataset-helper-plugin/{% if LANGUAGE_CODE != 'fr' %}en/{% endif %}"
-               target="_blank" rel="noopener"
-               style="display: inline-flex; align-items: center; gap: 6px; color: #059669; text-decoration: none; font-weight: 500;">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                {% trans "Plugin Documentation" %}
-            </a>
         </div>
 
-        <details style="margin-bottom:20px;padding:10px 16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:13px;color:#374151;line-height:1.6;">
-            <summary style="cursor:pointer;font-weight:500;">{% trans "How to use this page" %}</summary>
-            <div style="margin-top:10px;">
-                {% blocktrans %}This page manages the WMS layers available for your Climweb map viewer.
-                The tree below shows all layers grouped by <strong>Category</strong> and <strong>Subcategory</strong>.{% endblocktrans %}
-                <ul style="margin:8px 0 0 16px;padding:0;">
-                    <li>{% blocktrans %}Use the <strong>checkboxes</strong> to enable or disable individual layers.{% endblocktrans %}</li>
-                    <li>{% trans "Status indicators:" %}
-                        <span class="status-dot synced" style="display:inline-block;vertical-align:middle;"></span> {% trans "synced (already in Climweb)" %},
-                        <span class="status-dot pending_add" style="display:inline-block;vertical-align:middle;"></span> {% trans "will be added on next load" %},
-                        <span class="status-dot pending_remove" style="display:inline-block;vertical-align:middle;"></span> {% trans "will be removed on next load" %},
-                        <span class="status-dot disabled" style="display:inline-block;vertical-align:middle;"></span> {% trans "inactive" %}.
-                    </li>
-                    <li>{% blocktrans %}Click <strong>Synchronize with Climweb</strong> to apply your selection — enabled layers are created in the database, disabled ones are removed.{% endblocktrans %}</li>
-                    <li>{% blocktrans %}Click <strong>Load embedded catalog</strong> to review and apply the catalog bundled with the plugin.{% endblocktrans %}</li>
-                </ul>
-            </div>
-        </details>
+        <!-- Out-of-sync banner — prominent, shown only when Climweb differs from the local catalog -->
+        <div id="dh-sync-panel" class="dh-syncbar" style="display:none;"></div>
 
-        <div class="catalog-toolbar">
-            <button id="load-catalog-btn" class="import-button" style="background: #2563eb;" onclick="reviewCatalogChanges()">
-                {% trans "Load embedded catalog" %}
+        <!-- Sync result — appears in the same spot, in the same visual language -->
+        <div style="position:relative;">
+            <div id="sync-results" class="sync-results"></div>
+            <button class="sync-results-close" onclick="dismissSyncResult()" title="{% trans 'Dismiss' %}" aria-label="{% trans 'Dismiss' %}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
             </button>
-            <button class="danger-button" onclick="resetCatalog()">
+        </div>
+
+        <div id="catalog-toolbar" class="catalog-toolbar" style="display:flex;gap:9px;align-items:center;margin-bottom:16px;flex-wrap:wrap;justify-content:flex-end;">
+            <button class="dh-btn dh-btn-md" style="background:#fff;color:#cf3b2e;border:1px solid #f0cdc9;" onclick="resetCatalog()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"/></svg>
                 {% trans "Reset Catalog" %}
             </button>
         </div>
 
-        <div id="sync-results" class="sync-results"></div>
-
         <!-- Tree controls -->
-        <div style="display:flex;gap:4px;margin-bottom:6px;margin-top:6px;justify-content:flex-start;">
+        <div id="tree-controls" style="display:flex;gap:4px;margin-bottom:6px;margin-top:6px;justify-content:flex-start;">
             <button onclick="expandAllNodes()" title="{% trans 'Expand all' %}"
                 style="padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;background:#fff;cursor:pointer;font-size:14px;line-height:1;color:#374151;">
                 &#9660;
@@ -937,7 +854,7 @@
         <details style="margin:16px 0;padding:10px 16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:13px;color:#374151;line-height:1.6;">
             <summary style="cursor:pointer;font-weight:500;">{% trans "How it works" %}</summary>
             <ol style="margin:8px 0 0 16px;padding:0;">
-                <li>{% blocktrans %}The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Layer Catalog</em> tab first.{% endblocktrans %}</li>
+                <li>{% blocktrans %}The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Settings</em> tab first.{% endblocktrans %}</li>
                 <li>{% blocktrans %}The COD-AB shapefile ZIP is located on HDX automatically (<code>cod-ab-&lt;iso3&gt;</code>) and downloaded.{% endblocktrans %}</li>
                 <li>{% blocktrans %}Each admin level (adm0, adm1, …) is extracted, its columns are normalized, re-zipped and loaded.{% endblocktrans %}</li>
                 <li>{% blocktrans %}Re-running the import replaces the previously loaded levels for this country (idempotent).{% endblocktrans %}</li>
@@ -1033,19 +950,33 @@
     return cookieValue
   }
 
-  // Tab switching logic
-  document.querySelectorAll('.tab-button').forEach(button => {
-    button.addEventListener('click', function() {
-      // Remove active class from all buttons and contents
-      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'))
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'))
+  // Tab switching. Tabs flagged "locked" (until the mandatory settings are
+  // saved) are not navigable. activateTab/setTabsLocked are exposed on window
+  // so the Settings tab (_settings.html) can unlock the others and jump to them.
+  function activateTab(tabId) {
+    const btn = document.querySelector('.tab-button[data-tab="' + tabId + '"]')
+    if (!btn || btn.classList.contains('locked')) return
+    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'))
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'))
+    btn.classList.add('active')
+    const content = document.getElementById(tabId)
+    if (content) content.classList.add('active')
+    if (tabId === 'admin-boundaries') onBoundariesTabShown()
+  }
+  window.activateTab = activateTab
 
-      // Add active class to clicked button and corresponding content
-      this.classList.add('active')
-      const tabId = this.getAttribute('data-tab')
-      document.getElementById(tabId).classList.add('active')
-      if (tabId === 'admin-boundaries') onBoundariesTabShown()
+  function setTabsLocked(locked) {
+    document.querySelectorAll('.tab-button').forEach(b => {
+      if (b.getAttribute('data-tab') === 'settings') return
+      b.classList.toggle('locked', locked)
+      if (locked) b.setAttribute('title', gettext('Complete the required settings first'))
+      else b.removeAttribute('title')
     })
+  }
+  window.setTabsLocked = setTabsLocked
+
+  document.querySelectorAll('.tab-button').forEach(button => {
+    button.addEventListener('click', function() { activateTab(this.getAttribute('data-tab')) })
   })
 
   // Clear only plugin-provisioned datasets (selective).
@@ -1237,104 +1168,6 @@
     `
   }
 
-  // ── Settings functions ────────────────────────────────────────────────────
-
-  function updateSettingsValidity() {
-    const select = document.getElementById('setting-country')
-    const currentAlpha3 = (select.dataset.currentAlpha3 || '').trim()
-    const isValid = currentAlpha3.length === 3
-    const panel = document.getElementById('settings-panel')
-    const loadBtn = document.getElementById('load-catalog-btn')
-    if (isValid) {
-      panel.classList.remove('invalid')
-      if (loadBtn) {
-        loadBtn.disabled = false
-        loadBtn.title = ''
-      }
-    } else {
-      panel.classList.add('invalid')
-      panel.open = true
-      if (loadBtn) {
-        loadBtn.disabled = true
-        loadBtn.title = gettext('Set the required Country setting first')
-      }
-    }
-  }
-  window.updateSettingsValidity = updateSettingsValidity
-
-  async function saveSettings() {
-    const countrySelect = document.getElementById('setting-country')
-    const msgEl = document.getElementById('settings-msg')
-    const alpha3 = (countrySelect.value || '').toLowerCase()
-    const opt = countrySelect.options[countrySelect.selectedIndex]
-    const alpha2 = opt && opt.dataset && opt.dataset.alpha2
-
-    if (!alpha3 || !alpha2) {
-      msgEl.textContent = gettext('Please pick a country before saving')
-      msgEl.style.color = '#dc2626'
-      countrySelect.focus()
-      return
-    }
-
-    // Ensure we have a bbox + country name; fetch if missing.
-    if ((!window._countryBbox || !window._countryName) && window._fetchCountryInfo) {
-      msgEl.textContent = gettext('Fetching country info…')
-      msgEl.style.color = '#6b7280'
-      try {
-        const info = await window._fetchCountryInfo(alpha2)
-        window._countryBbox = info.bbox
-        window._countryName = info.name
-        if (window._renderCountryHint) window._renderCountryHint()
-      } catch (err) {
-        msgEl.textContent = gettext('Could not fetch country info: ') + err.message
-        msgEl.style.color = '#dc2626'
-        return
-      }
-    }
-
-    const data = {
-      language: document.getElementById('setting-language').value,
-      ecmwf_token: document.getElementById('setting-ecmwf-token').value.trim(),
-      estation_url: document.getElementById('setting-estation-url').value.trim(),
-      country_alpha3: alpha3,
-      country_alpha2: alpha2,
-      country_name: window._countryName || '',
-      country_bbox: window._countryBbox,
-    }
-
-    msgEl.textContent = gettext('Saving...')
-    msgEl.style.color = '#6b7280'
-
-    try {
-      const csrftoken = getCookie('csrftoken')
-      const response = await fetch('{% url "dataset_helper_plugin:settings_save" %}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken,
-        },
-        body: JSON.stringify(data),
-        credentials: 'include'
-      })
-      const result = await response.json()
-
-      if (result.status === 'success') {
-        msgEl.textContent = gettext('Settings saved')
-        msgEl.style.color = '#059669'
-        countrySelect.dataset.currentAlpha3 = alpha3
-        updateSettingsValidity()
-      } else {
-        msgEl.textContent = gettext('Error') + ': ' + result.message
-        msgEl.style.color = '#dc2626'
-      }
-    } catch (error) {
-      msgEl.textContent = gettext('Error') + ': ' + error.message
-      msgEl.style.color = '#dc2626'
-    }
-
-    setTimeout(() => { msgEl.textContent = '' }, 3000)
-  }
-
   // ── Catalog functions ──────────────────────────────────────────────────────
 
   // ── Preview / Apply flow ───────────────────────────────────────────────────
@@ -1508,6 +1341,37 @@
     }
   }
 
+  // Load the embedded catalog directly, without the review/diff step. Used from
+  // the empty state where the local catalog is empty, so there is nothing to
+  // conflict with — applying straight away is the fast, expected path.
+  async function loadEmbeddedCatalogDirect() {
+    const resultsEl = document.getElementById('sync-results')
+    if (resultsEl) {
+      resultsEl.className = 'sync-results visible'
+      resultsEl.innerHTML = '<span class="loading-spinner" style="border-color:#059669;border-top-color:transparent;"></span> ' + gettext('Loading catalog…')
+    }
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const response = await fetch('{% url "dataset_helper_plugin:catalog_load_embedded" %}', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ conflict_policy: 'overwrite' }),
+        credentials: 'include',
+      })
+      const result = await response.json()
+      if (resultsEl) {
+        resultsEl.className = 'sync-results visible ' + (result.status === 'success' ? 'success' : 'error')
+        resultsEl.innerHTML = escapeHtml(result.message || (result.status === 'success' ? gettext('Catalog loaded') : gettext('Load failed')))
+      }
+      await loadCatalog(false)
+    } catch (err) {
+      if (resultsEl) {
+        resultsEl.className = 'sync-results visible error'
+        resultsEl.innerHTML = gettext('Load failed: ') + escapeHtml(err.message)
+      }
+    }
+  }
+
   function _formatLoadedAt(iso) {
     if (!iso) return ''
     const d = new Date(iso)
@@ -1515,77 +1379,157 @@
     return d.toLocaleString()
   }
 
-  function renderSyncStatus(data) {
-    // Live indicator of whether the catalog selection/content matches what
-    // is actually provisioned in Climweb. Always visible.
-    const banner = document.getElementById('catalog-sync-banner')
-    const textEl = document.getElementById('catalog-sync-banner-text')
-    if (!banner || !textEl) return
+  // Inline Lucide-ish icons for JS-rendered upper UI
+  function _dhIcon(name, size, sw) {
+    const P = {
+      check: '<path d="M20 6 9 17l-5-5"/>',
+      alert: '<path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/>',
+      sync: '<path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-7.5-4"/><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 7.5 4"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/>',
+      plus: '<path d="M12 5v14M5 12h14"/>',
+      trash: '<path d="M4 7h16"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"/>',
+    }
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw || 2}" stroke-linecap="round" stroke-linejoin="round">${P[name] || ''}</svg>`
+  }
 
+
+  function renderSyncStatus(data) {
+    const total = data.total || 0
+    const enabled = data.enabled || 0
+    const synced = data.synced || 0
     const add = data.pending_add || 0
     const remove = data.pending_remove || 0
     const update = data.pending_update || 0
-    const out = (typeof data.out_of_sync === 'number') ? data.out_of_sync : (add + remove + update)
+    const disabled = Math.max(0, total - enabled - remove)
+    const pending = add + remove + update
 
-    banner.classList.remove('synced', 'out-of-sync')
-
-    if (out === 0) {
-      banner.classList.add('synced')
-      textEl.innerHTML = '✓ <strong>' + gettext('Catalog is in sync with Climweb.') + '</strong>'
-      return
+    // ---- status gauge + legend ----
+    const gauge = document.getElementById('dh-gauge')
+    const legend = document.getElementById('dh-gauge-legend')
+    if (gauge && legend) {
+      const segs = [
+        { label: gettext('Synced'), value: synced, color: 'var(--dh-st-synced)' },
+        { label: gettext('To add'), value: add, color: 'var(--dh-st-add)' },
+        { label: gettext('To remove'), value: remove, color: 'var(--dh-st-remove)' },
+        { label: gettext('Disabled'), value: disabled, color: 'var(--dh-st-disabled)' },
+      ]
+      const tot = segs.reduce((a, s) => a + s.value, 0) || 1
+      gauge.innerHTML = segs.filter(s => s.value > 0).map(s =>
+        `<div title="${escapeHtml(s.label)}: ${s.value}" style="width:${(s.value / tot * 100)}%;background:${s.color};"></div>`).join('')
+      legend.innerHTML = segs.map(s =>
+        `<span class="dh-gl"><span class="sw" style="background:${s.color};"></span><b>${s.value}</b> ${escapeHtml(s.label)}</span>`).join('')
     }
 
-    banner.classList.add('out-of-sync')
-    const parts = []
-    if (add) parts.push(interpolate(gettext('%(n)s to add'), {n: add}, true))
-    if (remove) parts.push(interpolate(gettext('%(n)s to remove'), {n: remove}, true))
-    if (update) parts.push(interpolate(gettext('%(n)s to update'), {n: update}, true))
-    textEl.innerHTML =
-      '⚠ <strong>' + gettext('Catalog is out of sync with Climweb') + '</strong> — ' +
-      escapeHtml(parts.join(' · ')) + '. ' +
-      gettext('Click Synchronize with Climweb to apply.')
+    // ---- pending badge on the catalog tab ----
+    const tabBadge = document.getElementById('tab-pending-badge')
+    if (tabBadge) {
+      if (pending > 0) { tabBadge.textContent = pending; tabBadge.style.display = 'inline-block' }
+      else { tabBadge.style.display = 'none' }
+    }
+
+    // ---- version line (always shown under the gauge) ----
+    const verLine = document.getElementById('dh-version-line')
+    if (verLine) {
+      const loaded = data.loaded_version || ''
+      const loadedAt = _formatLoadedAt(data.loaded_at)
+      if (!loaded) {
+        verLine.innerHTML = ''
+      } else {
+        let s = interpolate(gettext('Catalog <b>v%(v)s</b>'), {v: escapeHtml(loaded)}, true)
+        if (loadedAt) s += ' · ' + interpolate(gettext('loaded %(d)s'), {d: escapeHtml(loadedAt)}, true)
+        verLine.innerHTML = s
+      }
+    }
+
+    // ---- out-of-sync banner: prominent, below the counters, ONLY when desynced ----
+    const panel = document.getElementById('dh-sync-panel')
+    if (!panel) return
+    if (total === 0 || pending === 0) {
+      panel.style.display = 'none'
+      panel.innerHTML = ''
+      return
+    }
+    const noteParts = []
+    if (add) noteParts.push(interpolate(gettext('%(n)s to create'), {n: add}, true))
+    if (remove) noteParts.push(interpolate(gettext('%(n)s to remove'), {n: remove}, true))
+    if (update) noteParts.push(interpolate(gettext('%(n)s to update'), {n: update}, true))
+    panel.innerHTML =
+      `<div class="ic">${_dhIcon('alert', 22, 2.2)}</div>` +
+      `<div class="body">` +
+        `<div class="t">${gettext('Catalog out of sync with Climweb')}</div>` +
+        `<div class="d">${interpolate(ngettext('%(n)s pending change', '%(n)s pending changes', pending), {n: pending}, true)} — ${escapeHtml(noteParts.join(', '))}.</div>` +
+      `</div>` +
+      `<button class="dh-btn dh-btn-primary dh-btn-md" onclick="syncCatalog()">${_dhIcon('sync', 17)}<span>${gettext('Synchronize with Climweb')}</span><span class="dh-btn-badge">${pending}</span></button>`
+    panel.style.display = 'flex'
+  }
+
+  let _updateBannerDismissed = false
+  let _previewedFor = null   // embedded_version whose bucket counts we already fetched
+
+  function dismissUpdateBanner() {
+    _updateBannerDismissed = true
+    const b = document.getElementById('catalog-version-banner')
+    if (b) b.classList.remove('visible')
+  }
+
+  function dismissSyncResult() {
+    const el = document.getElementById('sync-results')
+    if (el) { el.className = 'sync-results'; el.innerHTML = '' }
   }
 
   function renderCatalogVersionBanner(data) {
-    const banner = document.getElementById('catalog-version-banner')
-    const textEl = document.getElementById('catalog-version-banner-text')
-    const btn = document.getElementById('catalog-version-banner-btn')
-    if (!banner || !textEl || !btn) return
-
     const embedded = data.embedded_version || ''
     const loaded = data.loaded_version || ''
     const updateAvailable = !!data.update_available
-    const loadedAt = _formatLoadedAt(data.loaded_at)
 
-    banner.classList.remove('visible', 'update', 'info', 'passive')
-
-    if (!embedded) {
-      // No version info in the bundled file — nothing meaningful to display.
-      return
+    // Version chip in the top row — always reflects the loaded revision.
+    const chip = document.getElementById('dh-version-chip')
+    const chipV = document.getElementById('dh-version-chip-v')
+    if (chip && chipV) {
+      if (loaded) { chipV.textContent = 'v' + loaded; chip.style.display = 'inline-flex' }
+      else if (embedded) { chipV.textContent = gettext('not loaded'); chip.style.display = 'inline-flex' }
+      else { chip.style.display = 'none' }
     }
 
-    if (!loaded) {
-      banner.classList.add('visible', 'info')
-      textEl.innerHTML = interpolate(gettext('No catalog loaded yet. Bundled catalog: <strong>v%(version)s</strong>.'), {version: embedded}, true)
-      btn.textContent = gettext('Review changes')
-      return
+    // Update banner — only when a newer embedded version is available AND a
+    // catalog is actually loaded. When nothing is loaded, the empty-state
+    // warning block is the only thing shown.
+    const banner = document.getElementById('catalog-version-banner')
+    if (!banner) return
+    const nothingLoaded = (data.total || 0) === 0
+    if (updateAvailable && embedded && loaded && !nothingLoaded && !_updateBannerDismissed) {
+      banner.classList.add('visible')
+      const verEl = document.getElementById('dh-update-version')
+      if (verEl) verEl.textContent = 'v' + embedded
+      if (_previewedFor !== embedded) { _previewedFor = embedded; _fillUpdateBuckets() }
+    } else {
+      banner.classList.remove('visible')
     }
+  }
 
-    if (updateAvailable) {
-      banner.classList.add('visible', 'update')
-      textEl.innerHTML =
-        interpolate(gettext('A catalog update is available: <strong>v%(from)s</strong> → <strong>v%(to)s</strong>. '), {from: loaded, to: embedded}, true) +
-        gettext('Review the changeset before applying — entries you edited in Wagtail can be kept.')
-      btn.textContent = gettext('Review changes')
-      return
-    }
-
-    // Versions match — show a passive indicator so the admin always knows
-    // which catalog revision is live.
-    banner.classList.add('visible', 'passive')
-    textEl.innerHTML = loadedAt
-      ? interpolate(gettext('Catalog <strong>v%(version)s</strong> · loaded %(date)s'), {version: loaded, date: loadedAt}, true)
-      : interpolate(gettext('Catalog <strong>v%(version)s</strong> loaded'), {version: loaded}, true)
+  // Fill the update banner's one-line changeset summary (new / updated / conflicts
+  // / removed) by reusing the dry-run preview endpoint. Degrades gracefully.
+  async function _fillUpdateBuckets() {
+    const sub = document.getElementById('dh-update-sub')
+    if (!sub) return
+    try {
+      const csrftoken = getCookie('csrftoken')
+      const r = await fetch('{% url "dataset_helper_plugin:catalog_preview_embedded" %}', {
+        method: 'POST', headers: { 'X-CSRFToken': csrftoken }, credentials: 'include',
+      })
+      const d = await r.json()
+      if (d.status !== 'success') return
+      const nNew = (d.to_add || []).length
+      const nUpd = (d.clean_update || []).length + (d.local_drift || []).length
+      const nConf = (d.conflict || []).length
+      const nRem = (d.to_remove || []).length
+      const seg = (color, icon, n, label) =>
+        `<span class="s" style="color:${color};">${_dhIcon(icon, 13, 2.4)}${n} ${label}</span>`
+      sub.innerHTML =
+        seg('var(--dh-bk-new)', 'plus', nNew, gettext('new')) +
+        seg('var(--dh-bk-updated)', 'sync', nUpd, gettext('updated')) +
+        seg('var(--dh-bk-conflict)', 'alert', nConf, gettext('conflicts')) +
+        seg('var(--dh-bk-remove)', 'trash', nRem, gettext('removed'))
+    } catch (e) { /* keep the generic sub-line */ }
   }
 
   let catalogData = null
@@ -1625,12 +1569,20 @@
 
     const tree = document.getElementById('catalog-tree')
     const categories = catalogData.categories || []
+    const isEmpty = categories.length === 0
 
-    if (categories.length === 0) {
-      tree.innerHTML = `<div class="catalog-empty">
-        <h3>${gettext('Catalog is empty')}</h3>
-        <p>${gettext('Load a JSON config to get started.')}</p>
-      </div>`
+    // Empty catalog → show only the warning block; hide the overview, the
+    // action bar, the tree controls and the (empty) tree.
+    const emptyBlock = document.getElementById('catalog-empty-state')
+    if (emptyBlock) emptyBlock.style.display = isEmpty ? 'flex' : 'none'
+    const _toggle = (id, shown) => { const el = document.getElementById(id); if (el) el.style.display = isEmpty ? 'none' : shown }
+    _toggle('catalog-overview', 'grid')
+    _toggle('catalog-toolbar', 'flex')
+    _toggle('tree-controls', 'flex')
+    _toggle('catalog-tree', 'block')
+
+    if (isEmpty) {
+      tree.innerHTML = ''
       return
     }
 
@@ -1988,6 +1940,8 @@
   document.addEventListener('DOMContentLoaded', function() {
     openGroups.clear()
     loadCatalog(false)
+    // Apply the initial tab lock based on whether the mandatory settings exist.
+    if (typeof window.updateSettingsValidity === 'function') window.updateSettingsValidity()
   })
 
   // ───────────────────────── Admin Boundaries ─────────────────────────
@@ -2044,7 +1998,7 @@
       warning = gettext('The boundary manager is not available in this instance.') +
         (data.error ? ' (' + escapeHtml(data.error) + ')' : '')
     } else if (!country.alpha3) {
-      warning = gettext('No country configured. Set the country in the Layer Catalog settings first.')
+      warning = gettext('No country configured. Set the country on the Settings tab first.')
     }
     if (warning) {
       warn.style.display = 'block'
@@ -2223,116 +2177,5 @@
   }
 </script>
 
-<script type="module">
-// Country picker — populated via i18n-iso-countries (jsdelivr ESM) in the configured language.
-const select = document.getElementById('setting-country')
-const hint = document.getElementById('country-bbox-hint')
-const requestedLang = '{{ plugin_settings.language|default:"en" }}'
 
-window._countryBbox = (() => {
-  try { return JSON.parse(document.getElementById('current-country-bbox').textContent) }
-  catch (_) { return null }
-})()
-window._countryName = (() => {
-  try { return JSON.parse(document.getElementById('current-country-name').textContent) || '' }
-  catch (_) { return '' }
-})()
-
-function renderHint(extra) {
-  const bb = window._countryBbox
-  const bbStr = bb && bb.length === 4
-    ? `[S ${bb[0]}, N ${bb[1]}, W ${bb[2]}, E ${bb[3]}]`
-    : window.gettext ? window.gettext('none') : 'none'
-  const nameStr = window._countryName ? ` "${window._countryName}"` : ''
-  const _ = window.gettext || (s => s)
-  hint.textContent = `${_('Country')}${nameStr} — ${_('Bounding box:')} ${bbStr}${extra ? ' — ' + extra : ''}`
-}
-
-const _t = window.gettext || (s => s)
-
-async function loadLocale(lang) {
-  try {
-    const mod = await import(`https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.7.0/langs/${lang}.json/+esm`)
-    return [lang, mod.default || mod]
-  } catch (_) {
-    if (lang === 'en') throw new Error(_t('Failed to load English locale'))
-    const en = await import('https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.7.0/langs/en.json/+esm')
-    return ['en', en.default || en]
-  }
-}
-
-(async () => {
-  try {
-    const countriesMod = await import('https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.7.0/+esm')
-    const countries = countriesMod.default || countriesMod
-    const [lang, locale] = await loadLocale(requestedLang)
-    countries.registerLocale(locale)
-
-    const names = countries.getNames(lang, { select: 'official' })
-    const collator = new Intl.Collator(lang)
-    const sortedAlpha2 = Object.keys(names).sort((a, b) => collator.compare(names[a], names[b]))
-    const currentAlpha3 = (select.dataset.currentAlpha3 || '').toUpperCase()
-
-    const opts = [`<option value="">— ${_t('Select a country')} —</option>`]
-    for (const a2 of sortedAlpha2) {
-      const a3 = countries.alpha2ToAlpha3(a2)
-      if (!a3) continue
-      const selected = a3 === currentAlpha3 ? ' selected' : ''
-      opts.push(`<option value="${a3.toLowerCase()}" data-alpha2="${a2.toLowerCase()}"${selected}>${names[a2]}</option>`)
-    }
-    select.innerHTML = opts.join('')
-    select.disabled = false
-    renderHint()
-  } catch (err) {
-    select.innerHTML = `<option value="">— ${_t('Failed to load countries')} —</option>`
-    renderHint(_t('Could not load country list') + ' (' + err.message + ')')
-  }
-})()
-
-if (typeof window.updateSettingsValidity === 'function') {
-  window.updateSettingsValidity()
-}
-
-async function fetchCountryInfo(alpha2) {
-  const r = await fetch(
-    `https://nominatim.openstreetmap.org/search?country=${alpha2}&featuretype=country&format=json&limit=1`,
-    { headers: { 'Accept': 'application/json' } }
-  )
-  if (!r.ok) throw new Error('HTTP ' + r.status)
-  const data = await r.json()
-  const first = data && data[0]
-  if (!first) throw new Error('No country result returned')
-  const bbox = first.boundingbox
-  if (!bbox || bbox.length !== 4) throw new Error('No bounding box returned')
-  return {
-    bbox: bbox.map(parseFloat),
-    name: first.display_name || first.name || '',
-  }
-}
-
-window._fetchCountryInfo = fetchCountryInfo
-window._renderCountryHint = renderHint
-
-select.addEventListener('change', async () => {
-  const opt = select.options[select.selectedIndex]
-  const alpha2 = opt && opt.dataset.alpha2
-  if (!alpha2) {
-    window._countryBbox = null
-    window._countryName = ''
-    renderHint()
-    return
-  }
-  renderHint(_t('Fetching country info…'))
-  try {
-    const info = await fetchCountryInfo(alpha2)
-    window._countryBbox = info.bbox
-    window._countryName = info.name
-    renderHint()
-  } catch (err) {
-    window._countryBbox = null
-    window._countryName = ''
-    renderHint(_t('Failed to fetch country info:') + ' ' + err.message)
-  }
-})
-</script>
 {% endblock %}

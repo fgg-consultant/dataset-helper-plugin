@@ -439,8 +439,8 @@ msgstr "فشل تحميل الحالة"
 msgid "The boundary manager is not available in this instance."
 msgstr "مدير الحدود غير متوفر في هذه النسخة."
 
-msgid "No country configured. Set the country in the Layer Catalog settings first."
-msgstr "لا يوجد بلد مُهيأ. عيّن البلد أولاً في إعدادات كتالوج الطبقات."
+msgid "No country configured. Set the country on the Settings tab first."
+msgstr "لا يوجد بلد مُهيأ. عيّن البلد أولاً في تبويب الإعدادات."
 
 msgid "No boundaries loaded yet for this country."
 msgstr "لم يتم تحميل أي حدود لهذا البلد بعد."
@@ -474,3 +474,72 @@ msgstr "فشل الاستيراد"
 
 msgid "Delete all admin boundaries for the configured country?"
 msgstr "حذف جميع الحدود الإدارية للبلد المُهيأ؟"
+
+# ── Settings tab gating ──
+
+msgid "Complete the required settings first"
+msgstr "أكمل الإعدادات المطلوبة أولاً"
+
+# ── Added: catalog redesign (JS) ──
+
+msgid "%(n)s to create"
+msgstr "%(n)s للإنشاء"
+
+msgid "%(n)s to remove"
+msgstr "%(n)s للإزالة"
+
+msgid "%(n)s to update"
+msgstr "%(n)s للتحديث"
+
+msgid "Auto-update interval"
+msgstr "فترة التحديث التلقائي"
+
+msgid "Catalog <b>v%(v)s</b>"
+msgstr "الكتالوج <b>v%(v)s</b>"
+
+msgid "Catalog out of sync with Climweb"
+msgstr "الكتالوج غير متزامن مع Climweb"
+
+msgid "Disabled"
+msgstr "معطّلة"
+
+msgid "Initially visible"
+msgstr "ظاهرة في البداية"
+
+msgid "Load failed"
+msgstr "فشل التحميل"
+
+msgid "Loading catalog…"
+msgstr "جارٍ تحميل الكتالوج…"
+
+msgid "Near real-time"
+msgstr "شبه آني"
+
+msgid "Synced"
+msgstr "متزامنة"
+
+msgid "Synchronize with Climweb"
+msgstr "المزامنة مع Climweb"
+
+msgid "To add"
+msgstr "للإضافة"
+
+msgid "To remove"
+msgstr "للإزالة"
+
+msgid "loaded %(d)s"
+msgstr "حُمّل في %(d)s"
+
+msgid "min"
+msgstr "د"
+
+msgid "not loaded"
+msgstr "غير مُحمَّل"
+
+msgid "removed"
+msgstr "محذوفة"
+
+msgid "%(n)s pending change"
+msgid_plural "%(n)s pending changes"
+msgstr[0] "%(n)s تغيير معلّق"
+msgstr[1] "%(n)s تغييرات معلّقة"

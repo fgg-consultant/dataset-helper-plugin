@@ -26,6 +26,7 @@ function sidebarFr() {
         { text: 'Explorer le catalogue embarqué', link: '/catalog-browser' },
         { text: 'Synchroniser avec Climweb', link: '/sync' },
         { text: 'Mises à jour du catalogue', link: '/updates' },
+        { text: 'Limites administratives', link: '/admin-boundaries' },
       ],
     },
     {
@@ -52,6 +53,7 @@ function sidebarEn() {
         { text: 'Embedded catalog browser', link: '/en/catalog-browser' },
         { text: 'Synchronize with Climweb', link: '/en/sync' },
         { text: 'Catalog updates', link: '/en/updates' },
+        { text: 'Administrative boundaries', link: '/en/admin-boundaries' },
       ],
     },
     {
@@ -78,6 +80,7 @@ function sidebarEs() {
         { text: 'Explorar el catálogo incluido', link: '/es/catalog-browser' },
         { text: 'Sincronizar con Climweb', link: '/es/sync' },
         { text: 'Actualizaciones del catálogo', link: '/es/updates' },
+        { text: 'Límites administrativos', link: '/es/admin-boundaries' },
       ],
     },
     {
@@ -104,6 +107,7 @@ function sidebarPt() {
         { text: 'Explorar o catálogo embarcado', link: '/pt/catalog-browser' },
         { text: 'Sincronizar com Climweb', link: '/pt/sync' },
         { text: 'Atualizações do catálogo', link: '/pt/updates' },
+        { text: 'Limites administrativos', link: '/pt/admin-boundaries' },
       ],
     },
     {
@@ -130,6 +134,7 @@ function sidebarAr() {
         { text: 'استعراض الكتالوج المدمج', link: '/ar/catalog-browser' },
         { text: 'المزامنة مع Climweb', link: '/ar/sync' },
         { text: 'تحديثات الكتالوج', link: '/ar/updates' },
+        { text: 'الحدود الإدارية', link: '/ar/admin-boundaries' },
       ],
     },
     {

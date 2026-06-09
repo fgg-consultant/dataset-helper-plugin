@@ -1,8 +1,8 @@
 # Configuración
 
-El panel **Settings** se encuentra en la parte superior de la pestaña *Layer Catalog*, plegado debajo de los contadores. Agrupa la configuración global del plugin (un único juego de valores por instancia Climweb).
+**Settings** es ahora una pestaña propia — la primera. Agrupa la configuración global del plugin (un único juego de valores por instancia Climweb) y actúa como puerta de entrada al resto del plugin: el **país** es obligatorio, y las pestañas *Layer Catalog*, *Admin Boundaries* y *Danger Zone* permanecen **bloqueadas** hasta que se guarde.
 
-Mientras falte un ajuste obligatorio, el título del panel muestra la advertencia *« required setting missing »*.
+En una instancia nueva, la página se abre directamente en esta pestaña, con las demás bloqueadas. En cuanto guarde una configuración válida, la pestaña desbloquea las demás y muestra accesos directos para continuar con el catálogo o los límites.
 
 ## Language
 
@@ -44,3 +44,13 @@ URL de una instancia eStation local, por ejemplo `https://burkina.example.org/ht
 ## Guardar
 
 El botón **Save Settings** persiste los valores y muestra un breve mensaje de confirmación. Sin efecto colateral en Climweb: la configuración solo se propaga en la siguiente acción de carga o sincronización.
+
+
+## Próximos pasos
+
+Una vez que los ajustes son válidos, la pestaña Settings muestra dos accesos directos:
+
+- **Configurar el catálogo** — cambia a la pestaña *Layer Catalog*.
+- **Configurar los límites** — cambia a la pestaña *Admin Boundaries*.
+
+Solo cambian de pestaña; no se escribe nada hasta que actúe allí.

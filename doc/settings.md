@@ -1,8 +1,8 @@
 # Réglages
 
-Le panneau **Settings** se trouve en haut de l'onglet *Layer Catalog*, replié sous les compteurs. Il regroupe les paramètres globaux du plugin (un seul jeu de réglages par instance Climweb).
+**Settings** est désormais un onglet à part entière — le premier. Il regroupe les paramètres globaux du plugin (un seul jeu de réglages par instance Climweb) et sert de porte d'entrée au reste du plugin : le **pays** est obligatoire, et les onglets *Layer Catalog*, *Admin Boundaries* et *Danger Zone* restent **verrouillés** tant qu'il n'est pas enregistré.
 
-Tant qu'un réglage obligatoire manque, un avertissement *« required setting missing »* s'affiche dans le titre du panneau.
+Sur une instance neuve, la page s'ouvre directement sur cet onglet, les autres étant verrouillés. Dès que vous enregistrez une configuration valide, l'onglet déverrouille les autres et propose des raccourcis pour poursuivre avec le catalogue ou les limites.
 
 ## Language
 
@@ -44,3 +44,13 @@ Utile quand vous déployez Climweb adossé à une eStation locale qui n'expose q
 ## Enregistrer
 
 Le bouton **Save Settings** persiste les valeurs et affiche un court message de confirmation. Aucun effet de bord côté Climweb : les réglages ne se propagent qu'à la prochaine action de chargement ou de synchro.
+
+
+## Étapes suivantes
+
+Une fois les réglages valides, l'onglet Settings affiche deux raccourcis :
+
+- **Configurer le catalogue** — bascule sur l'onglet *Layer Catalog*.
+- **Configurer les limites** — bascule sur l'onglet *Admin Boundaries*.
+
+Ces boutons ne font que changer d'onglet ; rien n'est écrit tant que vous n'agissez pas dans ces onglets.

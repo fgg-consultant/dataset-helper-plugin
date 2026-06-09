@@ -795,8 +795,8 @@ msgstr "غير مهيأ"
 msgid "How it works"
 msgstr "كيف يعمل"
 
-msgid "The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Layer Catalog</em> tab first."
-msgstr "يأتي البلد من <strong>إعدادات الإضافة</strong> (رموز ISO). عيّنه أولاً في تبويب <em>كتالوج الطبقات</em>."
+msgid "The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Settings</em> tab first."
+msgstr "يأتي البلد من <strong>إعدادات الإضافة</strong> (رموز ISO). عيّنه أولاً في تبويب <em>الإعدادات</em>."
 
 msgid "The COD-AB shapefile ZIP is located on HDX automatically (<code>cod-ab-&lt;iso3&gt;</code>) and downloaded."
 msgstr "يُحدَّد أرشيف ZIP لملف COD-AB تلقائيًا على HDX ‏(<code>cod-ab-&lt;iso3&gt;</code>) ويُنزَّل."
@@ -842,3 +842,67 @@ msgstr "، فشل %(failed)d مستوى/مستويات"
 #, python-format
 msgid "%(count)d boundary feature(s) deleted"
 msgstr "تم حذف %(count)d من معالم الحدود"
+
+# ── Settings tab (separate tab, gating, next steps) ──
+
+msgid "Complete the required settings first"
+msgstr "أكمل الإعدادات المطلوبة أولاً"
+
+msgid "Configure the plugin for this Climweb instance. The Country is required — the Catalog and Boundaries tabs stay locked until it is set."
+msgstr "اضبط المكوّن لهذه النسخة من Climweb. الدولة مطلوبة — تبقى علامتا تبويب الكتالوج والحدود مقفلتين حتى يتم تعيينها."
+
+msgid "Complete the required settings below to unlock the other tabs."
+msgstr "أكمل الإعدادات المطلوبة أدناه لإلغاء قفل علامات التبويب الأخرى."
+
+msgid "Settings saved. What would you like to configure next?"
+msgstr "تم حفظ الإعدادات. ما الذي تريد إعداده تاليًا؟"
+
+msgid "Configure the catalog"
+msgstr "إعداد الكتالوج"
+
+msgid "Configure the boundaries"
+msgstr "إعداد الحدود"
+
+msgid "Load, review and synchronize the layer catalog with Climweb."
+msgstr "حمّل وراجع وزامن كتالوج الطبقات مع Climweb."
+
+msgid "Import the administrative boundaries for your country."
+msgstr "استورد الحدود الإدارية لبلدك."
+
+# ── Added: catalog/settings/boundaries redesign ──
+
+msgid "A new catalog version is available"
+msgstr "تتوفّر نسخة جديدة من الكتالوج"
+
+msgid "Catalog"
+msgstr "الكتالوج"
+
+msgid "Catalog layers"
+msgstr "طبقات الكتالوج"
+
+msgid "Compare the changeset and import the new version."
+msgstr "قارن التغييرات واستورد النسخة الجديدة."
+
+msgid "Dismiss"
+msgstr "إغلاق"
+
+msgid "Import language"
+msgstr "لغة الاستيراد"
+
+msgid "Later"
+msgstr "لاحقًا"
+
+msgid "Layer catalog for the Climweb map viewer"
+msgstr "كتالوج طبقات عارض خرائط Climweb"
+
+msgid "Load catalog"
+msgstr "تحميل الكتالوج"
+
+msgid "No catalog loaded yet"
+msgstr "لم يُحمَّل أي كتالوج بعد"
+
+msgid "Plugin Documentation"
+msgstr "توثيق الإضافة"
+
+msgid "The local catalog is empty. Load the embedded catalog to populate it, then synchronize with Climweb."
+msgstr "الكتالوج المحلي فارغ. حمّل الكتالوج المُضمَّن لملئه ثم زامن مع Climweb."

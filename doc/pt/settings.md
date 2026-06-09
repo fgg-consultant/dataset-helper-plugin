@@ -1,8 +1,8 @@
 # Configurações
 
-O painel **Settings** fica no topo da aba *Layer Catalog*, recolhido sob os contadores. Reúne as configurações globais do plugin (um único conjunto de valores por instância Climweb).
+**Settings** agora é uma aba própria — a primeira. Reúne as configurações globais do plugin (um único conjunto de valores por instância Climweb) e funciona como porta de entrada para o restante do plugin: o **país** é obrigatório, e as abas *Layer Catalog*, *Admin Boundaries* e *Danger Zone* permanecem **bloqueadas** até que seja salvo.
 
-Enquanto uma configuração obrigatória estiver ausente, um aviso *« required setting missing »* aparece no título do painel.
+Em uma instância nova, a página abre diretamente nesta aba, com as demais bloqueadas. Assim que você salvar uma configuração válida, a aba desbloqueia as demais e exibe atalhos para continuar com o catálogo ou os limites.
 
 ## Language
 
@@ -44,3 +44,13 @@ URL de uma instância eStation local, por exemplo `https://burkina.example.org/h
 ## Salvar
 
 O botão **Save Settings** persiste os valores e exibe uma breve mensagem de confirmação. Sem efeito colateral no Climweb: as configurações só se propagam na próxima ação de carregamento ou sincronia.
+
+
+## Próximos passos
+
+Assim que as configurações são válidas, a aba Settings exibe dois atalhos:
+
+- **Configurar o catálogo** — muda para a aba *Layer Catalog*.
+- **Configurar os limites** — muda para a aba *Admin Boundaries*.
+
+Eles apenas mudam de aba; nada é gravado até você agir lá.

@@ -1,29 +1,44 @@
 # Le catalogue de couches
 
-L'onglet **Layer Catalog** est l'écran principal du plugin. Il affiche l'arbre des couches **Category › SubCategory › Layer** et permet de piloter ce qui sera provisionné dans Climweb.
+L'onglet **Layer Catalog** est l'écran principal du plugin. Il affiche l'arbre **Category › SubCategory › Layer** et permet de piloter ce qui sera provisionné dans Climweb.
 
-## Compteurs
+En haut de l'onglet, un en-tête rappelle le contexte — *GeoManager · Layer catalog for the Climweb map viewer* — avec une pastille indiquant la version du catalogue actuellement chargée (ou *not loaded*) et un lien vers cette documentation.
 
-En haut de page, trois compteurs résument l'état du catalogue :
+## Vue d'ensemble
 
-- **Total Layers** — nombre total de `CatalogEntry`, toutes origines confondues.
-- **Enabled** — entrées cochées (qui seront ou sont déjà dans Climweb).
+Une carte en haut de page résume l'état du catalogue.
+
+Trois compteurs :
+
+- **Catalog layers** — nombre total de `CatalogEntry`, toutes origines confondues.
+- **Enabled** — entrées cochées (celles qui seront ou sont déjà dans Climweb).
 - **Synced** — entrées effectivement provisionnées dans Climweb.
 
-L'écart entre *Enabled* et *Synced* est ce qui sera modifié à la prochaine synchro.
+Une **jauge de statut** décompose ensuite le catalogue par état — **Synced**, **To add**, **To remove**, **Disabled** — avec une légende colorée, pour voir d'un coup d'œil l'écart entre le catalogue et Climweb.
 
-## Statuts d'une couche
+Une ligne discrète rappelle la version chargée : *Catalog vX · loaded DATE*.
+
+## État de synchronisation
+
+Le plugin indique immédiatement si Climweb est aligné avec votre sélection locale :
+
+- **In sync** — rien n'est affiché ; Climweb reflète exactement votre catalogue.
+- **Out of sync** — un bandeau bien visible apparaît juste sous la vue d'ensemble : *Catalog out of sync with Climweb — N pending changes — X to create, Y to remove, Z to update*, accompagné d'un bouton **Synchronize with Climweb**.
+
+Après l'exécution d'une synchro (ou d'un chargement / reset), le **résultat** s'affiche au même endroit, dans le même style — vert en cas de succès, rouge en cas d'erreur — avec un **×** vert pour le masquer.
+
+## Statut d'une couche
 
 Chaque ligne de couche affiche une pastille colorée :
 
-| Pastille | Statut          | Signification                                                    |
-|----------|-----------------|------------------------------------------------------------------|
-| 🟢       | `synced`         | Cochée et provisionnée dans Climweb.                            |
-| 🟠       | `pending_add`    | Cochée mais pas encore provisionnée.                            |
-| 🔴       | `pending_remove` | Décochée mais encore présente dans Climweb.                     |
-| ⚪       | `disabled`       | Décochée et absente de Climweb.                                  |
+| Pastille | Statut              | Signification                                                    |
+|----------|---------------------|------------------------------------------------------------------|
+| 🟢       | `synced`             | Cochée et provisionnée dans Climweb.                            |
+| 🟠       | `pending_add`        | Cochée mais pas encore provisionnée.                            |
+| 🔴       | `pending_remove`     | Décochée mais encore présente dans Climweb.                     |
+| ⚪       | `disabled`           | Décochée et absente de Climweb.                                  |
 
-C'est le passage à **Synchronize with Climweb** qui résorbe les états orange et rouge.
+Seul **Synchronize with Climweb** résorbe les états orange et rouge.
 
 ## Naviguer dans l'arbre
 
@@ -31,32 +46,38 @@ L'arbre est entièrement repliable. Trois interactions principales :
 
 - Cliquer sur l'en-tête d'une **catégorie** ou d'une **sous-catégorie** la déplie / replie.
 - Les boutons ▼ et ▶ en haut de l'arbre déplient ou replient **tout** l'arbre.
-- Cliquer sur la ligne d'une couche ouvre / referme son **panneau de détails** (URL WMS, identifiant de couche, métadonnées sources…).
+- Cliquer sur la ligne d'une couche ouvre / referme son **panneau de détails** (URL WMS, identifiant de couche, métadonnées sources, multi-temporel, visible au départ, temps quasi réel, intervalle de mise à jour automatique…).
 
 ## Cocher / décocher
 
-- **Une couche** : la case à cocher à gauche du titre active ou désactive cette entrée.
-- **Une sous-catégorie** : la case dans l'en-tête bascule **toutes les couches** de la sous-catégorie en une fois (bulk toggle).
-- **Une catégorie** : idem, mais sur l'ensemble des couches de la catégorie.
+- **Une seule couche** : la case à cocher à gauche du titre active ou désactive cette entrée.
+- **Une sous-catégorie** : la case dans son en-tête bascule **toutes les couches** de la sous-catégorie en une fois (bulk toggle).
+- **Une catégorie** : idem, mais sur l'ensemble de la catégorie.
 
-L'effet est immédiat côté plugin (le statut passe à `pending_add`/`pending_remove`) mais **rien n'est encore écrit côté Climweb**. Il faut cliquer sur **Synchronize with Climweb**.
+L'effet est immédiat côté plugin (le statut passe à `pending_add` / `pending_remove`) mais **rien n'est encore écrit côté Climweb**. Le bandeau out-of-sync apparaît alors — cliquez sur **Synchronize with Climweb** pour appliquer.
 
 ## Origine d'une couche
 
 Chaque entrée porte une **origine** qui décrit comment elle est arrivée dans le catalogue :
 
-| Origine      | Comment elle est apparue                                                    |
-|--------------|------------------------------------------------------------------------------|
-| `config`     | Chargée depuis le catalogue JSON embarqué (ou un JSON importé manuellement). |
-| `manual`     | Ajoutée via le formulaire *+ Add Layer*.                                     |
-| `wms_import` | Importée depuis un GetCapabilities WMS distant.                              |
+| Origine      | Comment elle est apparue                                                        |
+|--------------|----------------------------------------------------------------------------------|
+| `config`     | Chargée depuis le catalogue JSON embarqué. C'est la seule origine créée aujourd'hui. |
+| `manual` / `wms_import` | Origines héritées de versions antérieures du plugin (ajout manuel / import WMS). Ces parcours ont été supprimés ; de telles entrées peuvent encore exister sur d'anciennes instances. |
 
-L'origine compte surtout pour les **mises à jour** du catalogue embarqué : seules les entrées `config` peuvent être déclarées `to_remove` quand elles disparaissent d'une nouvelle version du JSON. Les entrées `manual` et `wms_import` ne sont jamais touchées par les mises à jour automatiques.
+L'origine compte surtout pour les **mises à jour** du catalogue embarqué : seules les entrées `config` peuvent être déclarées `to_remove` lorsqu'elles disparaissent d'une nouvelle version du catalogue. Les entrées héritées `manual` / `wms_import` ne sont jamais touchées par les mises à jour automatiques.
 
-## Actions de la barre d'outils
+## Catalogue vide
 
-Sous le panneau de réglages, la barre d'outils regroupe les actions principales :
+Tant qu'aucun catalogue n'a été chargé, l'onglet n'affiche **qu'un** bloc d'avertissement — *No catalog loaded yet* — avec un bouton **Load catalog**. Cliquer dessus charge le catalogue embarqué **directement** (pas de prévisualisation, puisqu'il n'y a rien avec quoi entrer en conflit). La vue d'ensemble et l'arbre apparaissent alors. Voir [Premiers pas](./getting-started).
 
-- **Synchronize with Climweb** — applique la sélection actuelle (voir [Synchroniser](./sync.md)).
-- **Load embedded catalog** — prévisualise et applique le catalogue embarqué avec le plugin (voir [Mises à jour](./updates.md)).
-- **Reset Catalog** — opération **destructive** ; voir [Zone dangereuse](./danger-zone.md).
+## Barre d'outils
+
+Une fois un catalogue chargé, une seule action subsiste dans la barre d'outils :
+
+- **Reset Catalog** — opération **destructive** ; voir [Zone dangereuse](./danger-zone).
+
+Le chargement et la synchronisation sont pilotés par les bandeaux décrits plus haut plutôt que par des boutons de la barre d'outils :
+
+- le bouton **Load catalog** (état vide) ou le **Review changes** du bandeau de mise à jour (voir [Mises à jour du catalogue](./updates)) remplissent le catalogue,
+- le bouton **Synchronize with Climweb** (bandeau out-of-sync) propage la sélection vers Climweb (voir [Synchroniser](./sync)).

@@ -6,11 +6,9 @@ The plugin ships a `catalog.json` file that describes the layers delivered by de
 
 When the on-disk version differs from the loaded version, a banner appears at the top of the *Layer Catalog* tab:
 
-> A new catalog version is available — review changes
+> A new catalog version is available — vX.  *(with a one-line summary: N new · N updated · N conflicts · N removed)*
 
-Clicking **Review changes** opens the preview. **Nothing is written to the database** at this stage.
-
-You can also trigger the preview manually with the **Load embedded catalog** button.
+Clicking **Review changes** opens the preview; **Later** dismisses the banner for the session. **Nothing is written to the database** at this stage.
 
 ## The changeset
 

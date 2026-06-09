@@ -44,9 +44,11 @@ Le plugin embarque un catalogue par défaut et fournit une interface pour :
 
 ## Où trouver le plugin
 
-Dans l'admin Wagtail, ouvrez le menu **GeoManager → Dataset helper**. La page se divise en deux onglets :
+Dans l'admin Wagtail, ouvrez le menu **GeoManager → Dataset helper**. La page se divise en quatre onglets :
 
-- **Layer Catalog** — l'écran principal de travail (réglages, arbre des couches, actions de synchronisation et d'import).
+- **Settings** — la configuration globale du plugin (pays, langue, jetons). Les autres onglets se déverrouillent une fois le pays obligatoire renseigné.
+- **Layer Catalog** — l'écran principal de travail (arbre des couches, actions de synchronisation et d'import).
+- **Admin Boundaries** — import des limites administratives (OCHA COD-AB).
 - **Danger Zone** — les opérations destructives (purge des données provisionnées, wipe complet).
 
 ## Modèle mental

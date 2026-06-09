@@ -1,8 +1,8 @@
 # Settings
 
-The **Settings** panel sits at the top of the *Layer Catalog* tab, collapsed under the counters. It groups the plugin's global settings (a single set of values per Climweb instance).
+**Settings** is now its own tab — the first one. It groups the plugin's global settings (a single set of values per Climweb instance) and acts as the gateway to the rest of the plugin: the **Country** is required, and the *Layer Catalog*, *Admin Boundaries* and *Danger Zone* tabs stay **locked** until it is saved.
 
-While a required setting is missing, a *« required setting missing »* warning shows in the panel title.
+On a fresh instance the page opens directly on this tab, with the other tabs locked. As soon as you save a valid configuration, the tab unlocks the others and reveals shortcuts to continue with the catalog or the boundaries.
 
 ## Language
 
@@ -44,3 +44,13 @@ Useful when you deploy Climweb backed by a local eStation that only exposes a su
 ## Saving
 
 The **Save Settings** button persists the values and shows a short confirmation message. No side effect on Climweb: settings only propagate on the next load or sync action.
+
+
+## Next steps
+
+Once the settings are valid, the Settings tab shows two shortcuts:
+
+- **Configure the catalog** — switches to the *Layer Catalog* tab.
+- **Configure the boundaries** — switches to the *Admin Boundaries* tab.
+
+They only change tabs; nothing is written until you act there.

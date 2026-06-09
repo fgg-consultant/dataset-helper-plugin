@@ -44,9 +44,11 @@ El plugin incluye un catálogo por defecto y ofrece una interfaz para:
 
 ## Dónde encontrar el plugin
 
-En la administración de Wagtail, abra el menú **GeoManager → Dataset helper**. La página se divide en dos pestañas:
+En la administración de Wagtail, abra el menú **GeoManager → Dataset helper**. La página se divide en cuatro pestañas:
 
-- **Layer Catalog** — la pantalla principal de trabajo (configuración, árbol de capas, acciones de sincronización e importación).
+- **Settings** — la configuración global del plugin (país, idioma, tokens). Las demás pestañas se desbloquean una vez definido el país obligatorio.
+- **Layer Catalog** — la pantalla principal de trabajo (árbol de capas, acciones de sincronización e importación).
+- **Admin Boundaries** — importación de los límites administrativos (OCHA COD-AB).
 - **Danger Zone** — las operaciones destructivas (purga de los datos provisionados, borrado completo).
 
 ## Modelo mental

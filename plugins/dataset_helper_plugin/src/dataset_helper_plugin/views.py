@@ -23,7 +23,14 @@ VALID_LAYER_TYPES = ('raster_file', 'vector_file', 'wms', 'raster_tile', 'vector
 
 def index(request):
     template_name = "dataset_helper_plugin/index.html"
-    return render(request, template_name, {'plugin_settings': PluginSettings.load()})
+    s = PluginSettings.load()
+    # Country is the only mandatory setting. While it is unset the UI lands on
+    # the Settings tab and locks the others until it is saved.
+    settings_valid = bool(s.country_alpha3 and len(s.country_alpha3) == 3)
+    return render(request, template_name, {
+        'plugin_settings': s,
+        'settings_valid': settings_valid,
+    })
 
 
 # ── Catalog API ──────────────────────────────────────────────────────────────
