@@ -58,7 +58,5 @@
 تحت لوحة الإعدادات، يجمع شريط الأدوات الإجراءات الرئيسية:
 
 - **Synchronize with Climweb** — يطبق الاختيار الحالي (راجع [المزامنة](./sync)).
-- **+ Add Layer** — يضيف طبقة يدويًا (راجع [إضافة طبقة](./add-layer)).
-- **Import from WMS** — يختار طبقات من GetCapabilities بعيد (راجع [الاستيراد من WMS](./import-wms)).
-- **Load Config JSON** — يحمّل ملف JSON أو يعاين الكتالوج المدمج (راجع [تحميل JSON](./load-config) و [التحديثات](./updates)).
+- **Load embedded catalog** — يعاين ويطبّق الكتالوج المدمج مع المكوّن (راجع [التحديثات](./updates)).
 - **Reset Catalog** — عملية **تدميرية**؛ راجع [المنطقة الخطرة](./danger-zone).

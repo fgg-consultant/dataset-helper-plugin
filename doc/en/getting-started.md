@@ -48,7 +48,7 @@ See [Settings](./settings) for details.
 
 ## 3. Load the bundled catalog
 
-Click **Load Config JSON** then **Review embedded catalog**. The plugin computes a *changeset* without writing anything and shows you:
+Click **Load embedded catalog**. The plugin computes a *changeset* without writing anything and shows you:
 
 - what will be **added** to the catalog,
 - what will be **updated**,
@@ -81,7 +81,4 @@ See [Synchronize with Climweb](./sync).
 
 ## What's next?
 
-- [Manually add a layer](./add-layer) that is not in the catalog.
-- [Import every layer from a WMS server](./import-wms).
-- [Load another JSON file](./load-config) (other provider, in-house catalog…).
 - Later, when a new version of the plugin ships an updated catalog, see [Catalog updates](./updates).

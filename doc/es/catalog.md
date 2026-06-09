@@ -58,7 +58,5 @@ El origen importa sobre todo para las **actualizaciones** del catálogo incluido
 Debajo del panel de configuración, la barra de herramientas agrupa las acciones principales:
 
 - **Synchronize with Climweb** — aplica la selección actual (vea [Sincronizar](./sync)).
-- **+ Add Layer** — añade una capa manualmente (vea [Añadir una capa](./add-layer)).
-- **Import from WMS** — toma capas de un GetCapabilities remoto (vea [Importar desde un WMS](./import-wms)).
-- **Load Config JSON** — carga un archivo JSON o previsualiza el catálogo incluido (vea [Cargar un JSON](./load-config) y [Actualizaciones](./updates)).
+- **Load embedded catalog** — previsualiza y aplica el catálogo incluido con el plugin (vea [Actualizaciones](./updates)).
 - **Reset Catalog** — operación **destructiva**; vea [Zona peligrosa](./danger-zone).

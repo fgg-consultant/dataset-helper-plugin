@@ -58,7 +58,5 @@ L'origine compte surtout pour les **mises à jour** du catalogue embarqué : seu
 Sous le panneau de réglages, la barre d'outils regroupe les actions principales :
 
 - **Synchronize with Climweb** — applique la sélection actuelle (voir [Synchroniser](./sync.md)).
-- **+ Add Layer** — ajoute manuellement une couche (voir [Ajouter une couche](./add-layer.md)).
-- **Import from WMS** — pioche des couches dans un GetCapabilities distant (voir [Importer depuis un WMS](./import-wms.md)).
-- **Load Config JSON** — charge un fichier JSON ou prévisualise le catalogue embarqué (voir [Charger un JSON](./load-config.md) et [Mises à jour](./updates.md)).
+- **Load embedded catalog** — prévisualise et applique le catalogue embarqué avec le plugin (voir [Mises à jour](./updates.md)).
 - **Reset Catalog** — opération **destructive** ; voir [Zone dangereuse](./danger-zone.md).

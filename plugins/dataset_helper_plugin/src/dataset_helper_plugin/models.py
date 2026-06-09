@@ -1,4 +1,3 @@
-import hashlib
 import uuid
 
 from django.db import models
@@ -404,9 +403,3 @@ class CatalogEntry(models.Model):
         elif not self.enabled and self.is_provisioned:
             return self.STATUS_PENDING_REMOVE
         return self.STATUS_DISABLED
-
-    @staticmethod
-    def generate_product_code(identifier, url, origin='manual', layer_type='wms'):
-        key = f"{layer_type}:{identifier}:{url}"
-        digest = hashlib.md5(key.encode()).hexdigest()[:12]
-        return f"{origin}_{digest}"

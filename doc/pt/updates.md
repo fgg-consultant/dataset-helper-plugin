@@ -10,7 +10,7 @@ Se a versão em disco difere da versão carregada na base, uma faixa aparece no 
 
 Clicar em **Review changes** abre a pré-visualização. **Nada é escrito ainda na base** nessa etapa.
 
-Você também pode disparar a pré-visualização manualmente: **Load Config JSON → Review embedded catalog**.
+Você também pode disparar a pré-visualização manualmente com o botão **Load embedded catalog**.
 
 ## O changeset
 

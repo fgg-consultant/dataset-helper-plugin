@@ -10,7 +10,7 @@ Si la versión en disco difiere de la versión cargada en base, aparece una fran
 
 Al hacer clic en **Review changes** se abre la previsualización. **Nada se escribe aún en la base** en esta etapa.
 
-También puede disparar la previsualización manualmente: **Load Config JSON → Review embedded catalog**.
+También puede disparar la previsualización manualmente con el botón **Load embedded catalog**.
 
 ## El changeset
 

@@ -48,7 +48,7 @@ Vea [Configuración](./settings) para los detalles.
 
 ## 3. Cargar el catálogo incluido
 
-Haga clic en **Load Config JSON** y después en **Review embedded catalog**. El plugin calcula un *changeset* sin escribir nada y le muestra:
+Haga clic en **Load embedded catalog**. El plugin calcula un *changeset* sin escribir nada y le muestra:
 
 - lo que se **añadirá** al catálogo,
 - lo que se **actualizará**,
@@ -81,7 +81,4 @@ Vea [Sincronizar con Climweb](./sync).
 
 ## ¿Y después?
 
-- [Añadir manualmente una capa](./add-layer) que no esté en el catálogo.
-- [Importar todas las capas de un servidor WMS](./import-wms).
-- [Cargar otro archivo JSON](./load-config) (otro proveedor, catálogo propio…).
 - Más adelante, cuando una nueva versión del plugin traiga un catálogo actualizado, vea [Actualizaciones del catálogo](./updates).

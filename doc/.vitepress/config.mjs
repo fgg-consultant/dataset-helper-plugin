@@ -29,14 +29,6 @@ function sidebarFr() {
       ],
     },
     {
-      text: 'Étendre le catalogue',
-      items: [
-        { text: 'Ajouter une couche', link: '/add-layer' },
-        { text: 'Importer depuis un WMS', link: '/import-wms' },
-        { text: 'Charger un fichier JSON', link: '/load-config' },
-      ],
-    },
-    {
       text: 'Administration',
       items: [{ text: 'Zone dangereuse', link: '/danger-zone' }],
     },
@@ -60,14 +52,6 @@ function sidebarEn() {
         { text: 'Embedded catalog browser', link: '/en/catalog-browser' },
         { text: 'Synchronize with Climweb', link: '/en/sync' },
         { text: 'Catalog updates', link: '/en/updates' },
-      ],
-    },
-    {
-      text: 'Extending the catalog',
-      items: [
-        { text: 'Add a layer', link: '/en/add-layer' },
-        { text: 'Import from a WMS', link: '/en/import-wms' },
-        { text: 'Load a JSON file', link: '/en/load-config' },
       ],
     },
     {
@@ -97,14 +81,6 @@ function sidebarEs() {
       ],
     },
     {
-      text: 'Ampliar el catálogo',
-      items: [
-        { text: 'Añadir una capa', link: '/es/add-layer' },
-        { text: 'Importar desde un WMS', link: '/es/import-wms' },
-        { text: 'Cargar un archivo JSON', link: '/es/load-config' },
-      ],
-    },
-    {
       text: 'Administración',
       items: [{ text: 'Zona peligrosa', link: '/es/danger-zone' }],
     },
@@ -131,14 +107,6 @@ function sidebarPt() {
       ],
     },
     {
-      text: 'Ampliar o catálogo',
-      items: [
-        { text: 'Adicionar uma camada', link: '/pt/add-layer' },
-        { text: 'Importar de um WMS', link: '/pt/import-wms' },
-        { text: 'Carregar um arquivo JSON', link: '/pt/load-config' },
-      ],
-    },
-    {
       text: 'Administração',
       items: [{ text: 'Zona perigosa', link: '/pt/danger-zone' }],
     },
@@ -162,14 +130,6 @@ function sidebarAr() {
         { text: 'استعراض الكتالوج المدمج', link: '/ar/catalog-browser' },
         { text: 'المزامنة مع Climweb', link: '/ar/sync' },
         { text: 'تحديثات الكتالوج', link: '/ar/updates' },
-      ],
-    },
-    {
-      text: 'توسيع الكتالوج',
-      items: [
-        { text: 'إضافة طبقة', link: '/ar/add-layer' },
-        { text: 'الاستيراد من WMS', link: '/ar/import-wms' },
-        { text: 'تحميل ملف JSON', link: '/ar/load-config' },
       ],
     },
     {

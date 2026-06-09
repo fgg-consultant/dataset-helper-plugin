@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.db import transaction
+from django.db.models import F
 import json
 import logging
 
@@ -35,6 +36,26 @@ def catalog_tree(request):
         enabled = CatalogEntry.objects.filter(enabled=True).count()
         synced = CatalogEntry.objects.exclude(dataset_id=None).filter(enabled=True).count()
 
+        # Live drift between the catalog selection and what is actually
+        # provisioned in Climweb. Surfaced so the admin sees immediately
+        # whether a "Synchronize with Climweb" is pending.
+        pending_add = CatalogEntry.objects.filter(
+            enabled=True, dataset_id__isnull=True,
+        ).count()
+        pending_remove = CatalogEntry.objects.filter(
+            enabled=False, dataset_id__isnull=False,
+        ).count()
+        # Synced entries whose catalog content moved since the last sync:
+        # Climweb still holds the stale version until re-synced.
+        pending_update = (
+            CatalogEntry.objects
+            .filter(enabled=True, dataset_id__isnull=False)
+            .exclude(provisioned_source_hash='')
+            .exclude(source_hash=F('provisioned_source_hash'))
+            .count()
+        )
+        out_of_sync = pending_add + pending_remove + pending_update
+
         embedded_version, embedded_schema = services.get_embedded_catalog_version()
         state = CatalogState.load()
         update_available = bool(
@@ -46,6 +67,10 @@ def catalog_tree(request):
             'total': total,
             'enabled': enabled,
             'synced': synced,
+            'pending_add': pending_add,
+            'pending_remove': pending_remove,
+            'pending_update': pending_update,
+            'out_of_sync': out_of_sync,
             'categories': tree,
             'embedded_version': embedded_version,
             'embedded_schema_version': embedded_schema,
@@ -53,45 +78,6 @@ def catalog_tree(request):
             'loaded_schema_version': state.loaded_schema_version,
             'loaded_at': state.loaded_at.isoformat() if state.loaded_at else None,
             'update_available': update_available,
-        })
-    except Exception as e:
-        return JsonResponse({'status': 'error', 'message': _('Server error: %(error)s') % {'error': e}}, status=500)
-
-
-@csrf_exempt
-@require_POST
-def catalog_load_config(request):
-    """Load a JSON config into the catalog (CatalogEntry table)."""
-    try:
-        try:
-            data = json.loads(request.body)
-        except json.JSONDecodeError as e:
-            return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
-
-        if not isinstance(data, dict):
-            return JsonResponse({'status': 'error', 'message': _('Expected a JSON object')}, status=400)
-
-        stats = services.load_catalog_from_config(data)
-
-        if stats['created'] == 0 and stats['updated'] == 0 and stats['errors']:
-            return JsonResponse({
-                'status': 'error',
-                'message': stats['errors'][0],
-                **stats,
-            }, status=400)
-
-        msg = _('Catalog loaded: %(created)d created, %(updated)d updated, %(unchanged)d unchanged') % {
-            'created': stats['created'],
-            'updated': stats['updated'],
-            'unchanged': stats['unchanged'],
-        }
-        if stats.get('skipped_estation'):
-            msg += _(', %(count)d skipped (not on local eStation)') % {'count': stats['skipped_estation']}
-
-        return JsonResponse({
-            'status': 'success',
-            'message': msg,
-            **stats,
         })
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': _('Server error: %(error)s') % {'error': e}}, status=500)
@@ -297,102 +283,6 @@ def catalog_reset(request):
     except Exception as e:
         logger.exception("catalog_reset failed")
         return JsonResponse({'status': 'error', 'message': _('Reset failed: %(error)s') % {'error': e}}, status=500)
-
-
-@csrf_exempt
-@require_POST
-def catalog_add_entry(request):
-    """Add a manual catalog entry."""
-    try:
-        data = json.loads(request.body)
-    except json.JSONDecodeError as e:
-        return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
-
-    # Always required
-    required = ['category_title', 'subcategory_title']
-    # Type-specific required fields
-    layer_type = data.get('layer_type', 'wms')
-    if layer_type == 'wms':
-        required += ['layer_name', 'wms_url']
-    elif layer_type in ('raster_tile', 'vector_tile'):
-        required += ['tile_url']
-    elif layer_type in ('raster_file', 'vector_file'):
-        required += ['file_url']
-    missing = [f for f in required if not data.get(f)]
-    if missing:
-        return JsonResponse({
-            'status': 'error',
-            'message': _('Missing required fields: %(fields)s') % {'fields': ', '.join(missing)},
-        }, status=400)
-
-    try:
-        entry = services.add_entry(data, origin=CatalogEntry.ORIGIN_MANUAL)
-        return JsonResponse({
-            'status': 'success',
-            'message': _("Entry '%(title)s' added") % {'title': entry.title},
-            'id': str(entry.id),
-            'product_code': entry.product_code,
-        })
-    except Exception as e:
-        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
-
-
-@csrf_exempt
-@require_POST
-def catalog_wms_capabilities(request):
-    """
-    Fetch layers from a remote WMS GetCapabilities.
-    Expects: { "wms_url": "https://..." }
-    Returns list of layers with name, title, abstract for the UI picker.
-    """
-    try:
-        data = json.loads(request.body)
-    except json.JSONDecodeError as e:
-        return JsonResponse({'status': 'error', 'message': _('Invalid JSON: %(error)s') % {'error': e}}, status=400)
-
-    wms_url = data.get('wms_url', '').strip()
-    if not wms_url:
-        return JsonResponse({'status': 'error', 'message': _('Missing wms_url')}, status=400)
-
-    # Build proper GetCapabilities URL
-    separator = '&' if '?' in wms_url else '?'
-    caps_url = f"{wms_url}{separator}service=WMS&request=GetCapabilities&version=1.3.0"
-
-    try:
-        from owslib.wms import WebMapService
-        wms = WebMapService(caps_url, version='1.3.0')
-    except ImportError:
-        return JsonResponse({
-            'status': 'error',
-            'message': _('owslib is not installed. Cannot read WMS capabilities.'),
-        }, status=500)
-    except Exception as e:
-        return JsonResponse({
-            'status': 'error',
-            'message': _('Failed to read WMS capabilities: %(error)s') % {'error': e},
-        }, status=400)
-
-    layers = []
-    for layer_name, layer_meta in wms.contents.items():
-        layer_info = {
-            'name': layer_name,
-            'title': layer_meta.title or layer_name,
-            'abstract': layer_meta.abstract or '',
-        }
-        # Extract bounding box if available
-        if hasattr(layer_meta, 'boundingBoxWGS84') and layer_meta.boundingBoxWGS84:
-            layer_info['bbox'] = list(layer_meta.boundingBoxWGS84)
-        # Extract available SRS/CRS
-        if hasattr(layer_meta, 'crsOptions') and layer_meta.crsOptions:
-            layer_info['crs'] = list(layer_meta.crsOptions)[:5]
-        layers.append(layer_info)
-
-    return JsonResponse({
-        'status': 'success',
-        'wms_url': wms_url,
-        'total': len(layers),
-        'layers': layers,
-    })
 
 
 # ── Settings API ────────────────────────────────────────────────────────────

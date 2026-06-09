@@ -10,7 +10,7 @@ When the on-disk version differs from the loaded version, a banner appears at th
 
 Clicking **Review changes** opens the preview. **Nothing is written to the database** at this stage.
 
-You can also trigger the preview manually: **Load Config JSON → Review embedded catalog**.
+You can also trigger the preview manually with the **Load embedded catalog** button.
 
 ## The changeset
 

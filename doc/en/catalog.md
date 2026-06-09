@@ -58,7 +58,5 @@ The origin matters mostly for bundled-catalog **updates**: only `config` entries
 Below the settings panel, the toolbar groups the main actions:
 
 - **Synchronize with Climweb** — applies the current selection (see [Synchronize](./sync)).
-- **+ Add Layer** — manually adds a layer (see [Add a layer](./add-layer)).
-- **Import from WMS** — picks layers from a remote GetCapabilities (see [Import from a WMS](./import-wms)).
-- **Load Config JSON** — loads a JSON file or previews the bundled catalog (see [Load a JSON file](./load-config) and [Catalog updates](./updates)).
+- **Load embedded catalog** — previews and applies the catalog bundled with the plugin (see [Catalog updates](./updates)).
 - **Reset Catalog** — **destructive** operation; see [Danger zone](./danger-zone).

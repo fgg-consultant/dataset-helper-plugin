@@ -38,8 +38,34 @@ The plugin acts as a **managed catalog** of WMS layers for Climweb:
 4. **Tracks sync state** between the catalog and Climweb via the `CatalogEntry` model:
    - Each catalog entry has a `product_code` (natural key) and a nullable `dataset_id` (loose UUID ref to Climweb Dataset)
    - Status: `synced` (green), `pending_add` (orange), `pending_remove` (red), `disabled` (gray)
-5. **Supports custom layers**: admin can add layers manually or import from a remote WMS GetCapabilities
-6. **Origin tracking**: each entry is tagged as `config`, `manual`, or `wms_import`
+5. **Origin tracking**: each entry carries an `origin`. New entries are created with `config` (loaded from the embedded/JSON catalog). The `manual` and `wms_import` origins are retained on the model for backward compatibility with legacy data — the in-app "Add Layer" and "Import from WMS" creation flows have been removed. Automatic catalog updates only touch `config` entries.
+
+## Documentation & Translations
+
+**IMPORTANT — keep docs and translations in sync with every feature change.**
+Whenever you add or change a plugin behavior, you must update **all languages**, not just one.
+
+### User documentation (VitePress)
+
+Located in `doc/`. Five languages, kept in **strict parity** (same set of pages, same structure):
+
+| Locale | Folder      | Label     |
+|--------|-------------|-----------|
+| French (default) | `doc/` (root) | Français |
+| English | `doc/en/`  | English   |
+| Spanish | `doc/es/`  | Español   |
+| Portuguese | `doc/pt/` | Português |
+| Arabic | `doc/ar/`  | العربية   |
+
+- Locales and sidebars are declared in `doc/.vitepress/config.mjs`.
+- When you add/rename/remove a doc page or document a new feature, apply the change to **all five locales** and update the sidebar for each in `config.mjs`.
+
+### UI strings (Django gettext)
+
+Located in `plugins/dataset_helper_plugin/src/dataset_helper_plugin/locale/`. Translated languages: **fr, es, pt, ar** (`django.po` for Python/templates, `djangojs.po` for JS in `index.html`). English is the source (the `gettext(...)` / `{% trans %}` msgid — no English `.po`).
+
+- Wrap every new user-facing string in `gettext(...)` (JS) or `{% trans %}` (templates).
+- After adding strings, regenerate the catalogs (`makemessages -a` + `makemessages -d djangojs -a`), translate the new `msgid`s in **all four** `.po` files, then `compilemessages`.
 
 ## Development Commands
 

@@ -45,23 +45,6 @@
         display: block;
     }
 
-    .json-textarea {
-        width: 100%;
-        min-height: 400px;
-        font-family: monospace;
-        font-size: 13px;
-        padding: 12px;
-        border: 1px solid #d1d5db;
-        border-radius: 6px;
-        resize: vertical;
-    }
-
-    .json-textarea:focus {
-        outline: none;
-        border-color: #059669;
-        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
-    }
-
     .import-button {
         padding: 10px 24px;
         background: #059669;
@@ -414,48 +397,6 @@
         display: block;
     }
 
-    /* Add layer form */
-    .add-layer-form {
-        margin-top: 20px;
-        padding: 20px;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        background: #fafafa;
-        display: none;
-    }
-    .add-layer-form.visible {
-        display: block;
-    }
-    .add-layer-form .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-    .add-layer-form .form-field {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-    .add-layer-form .form-field.full-width {
-        grid-column: 1 / -1;
-    }
-    .add-layer-form label {
-        font-size: 12px;
-        font-weight: 500;
-        color: #374151;
-    }
-    .add-layer-form input, .add-layer-form textarea {
-        padding: 8px 10px;
-        border: 1px solid #d1d5db;
-        border-radius: 4px;
-        font-size: 13px;
-    }
-    .add-layer-form input:focus, .add-layer-form textarea:focus {
-        outline: none;
-        border-color: #059669;
-        box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.1);
-    }
-
     /* Catalog version banner */
     .catalog-version-banner {
         margin-bottom: 16px;
@@ -504,6 +445,48 @@
         font-weight: 500;
     }
     .catalog-version-banner button:hover { background: #047857; }
+
+    /* Climweb sync-status banner — always visible: green when in sync,
+       amber when the catalog selection/content differs from Climweb. */
+    .catalog-sync-banner {
+        margin-bottom: 16px;
+        padding: 12px 16px;
+        border-radius: 6px;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    .catalog-sync-banner.synced,
+    .catalog-sync-banner.out-of-sync { display: flex; }
+    .catalog-sync-banner .banner-text { flex: 1 1 auto; min-width: 0; }
+    .catalog-sync-banner .banner-text strong { font-weight: 600; }
+    .catalog-sync-banner.synced {
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        color: #065f46;
+    }
+    .catalog-sync-banner.out-of-sync {
+        background: #fef3c7;
+        border: 1px solid #fcd34d;
+        color: #78350f;
+    }
+    .catalog-sync-banner button {
+        flex: 0 0 auto;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        background: #d97706;
+        color: #fff;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .catalog-sync-banner button:hover { background: #b45309; }
+    .catalog-sync-banner.synced button { display: none; }
 
     /* Catalog preview pane (review changes before apply) */
     .catalog-preview-pane {
@@ -739,6 +722,12 @@
             </div>
         </div>
 
+        <!-- Climweb sync-status banner (live: catalog selection vs provisioned datasets) -->
+        <div id="catalog-sync-banner" class="catalog-sync-banner">
+            <div class="banner-text" id="catalog-sync-banner-text"></div>
+            <button id="catalog-sync-banner-btn" onclick="syncCatalog()">{% trans "Synchronize with Climweb" %}</button>
+        </div>
+
         <!-- Catalog version banner -->
         <div id="catalog-version-banner" class="catalog-version-banner">
             <div class="banner-text" id="catalog-version-banner-text"></div>
@@ -820,7 +809,7 @@
                         <span class="status-dot disabled" style="display:inline-block;vertical-align:middle;"></span> {% trans "inactive" %}.
                     </li>
                     <li>{% blocktrans %}Click <strong>Synchronize with Climweb</strong> to apply your selection — enabled layers are created in the database, disabled ones are removed.{% endblocktrans %}</li>
-                    <li>{% trans "You can extend the catalog by adding layers manually, importing from a remote WMS service, or loading a JSON configuration." %}</li>
+                    <li>{% blocktrans %}Click <strong>Load embedded catalog</strong> to review and apply the catalog bundled with the plugin.{% endblocktrans %}</li>
                 </ul>
             </div>
         </details>
@@ -829,14 +818,8 @@
             <button class="import-button" onclick="syncCatalog()">
                 {% trans "Synchronize with Climweb" %}
             </button>
-            <button class="import-button" style="background: #6b7280;" onclick="toggleAddLayerForm()">
-                + {% trans "Add Layer" %}
-            </button>
-            <button class="import-button" style="background: #6b7280;" onclick="toggleImportWmsForm()">
-                {% trans "Import from WMS" %}
-            </button>
-            <button id="load-config-btn" class="import-button" style="background: #2563eb;" onclick="toggleLoadConfigForm()">
-                {% trans "Load Config JSON" %}
+            <button id="load-catalog-btn" class="import-button" style="background: #2563eb;" onclick="reviewCatalogChanges()">
+                {% trans "Load embedded catalog" %}
             </button>
             <button class="danger-button" onclick="resetCatalog()">
                 {% trans "Reset Catalog" %}
@@ -844,128 +827,6 @@
         </div>
 
         <div id="sync-results" class="sync-results"></div>
-
-        <!-- Add Layer Form -->
-        <div id="add-layer-form" class="add-layer-form">
-            <h3 style="margin-top: 0;">{% trans "Add a Layer" %}</h3>
-            <div class="form-grid">
-                <div class="form-field">
-                    <label>{% trans "Category" %} *</label>
-                    <input type="text" id="add-category" placeholder="{% trans 'e.g. Rainfall' %}">
-                </div>
-                <div class="form-field">
-                    <label>{% trans "Subcategory" %} *</label>
-                    <input type="text" id="add-subcategory" placeholder="{% trans 'e.g. Observation' %}">
-                </div>
-                <div class="form-field">
-                    <label>{% trans "Title" %}</label>
-                    <input type="text" id="add-title" placeholder="{% trans 'Dataset title' %}">
-                </div>
-                <div class="form-field">
-                    <label>{% trans "WMS Layer Name" %} *</label>
-                    <input type="text" id="add-layer-name" placeholder="{% trans 'WMS LAYERS parameter' %}">
-                </div>
-                <div class="form-field full-width">
-                    <label>{% trans "WMS Base URL" %} *</label>
-                    <input type="url" id="add-wms-url" placeholder="https://...">
-                </div>
-                <div class="form-field">
-                    <label>{% trans "Source" %}</label>
-                    <input type="text" id="add-source" placeholder="{% trans 'Data provider' %}">
-                </div>
-                <div class="form-field">
-                    <label>{% trans "Resolution" %}</label>
-                    <input type="text" id="add-resolution" placeholder="{% trans 'e.g. 1km' %}">
-                </div>
-            </div>
-            <div style="margin-top: 12px; display: flex; gap: 8px;">
-                <button class="import-button" onclick="submitAddLayer()">{% trans "Add" %}</button>
-                <button class="import-button" style="background: #6b7280;" onclick="toggleAddLayerForm()">{% trans "Cancel" %}</button>
-            </div>
-        </div>
-
-        <!-- Import WMS Form -->
-        <div id="import-wms-form" class="add-layer-form">
-            <h3 style="margin-top: 0;">{% trans "Import from WMS" %}</h3>
-
-            <!-- Step 1: Enter URL and fetch capabilities -->
-            <div id="wms-step-url">
-                <div class="form-grid">
-                    <div class="form-field full-width">
-                        <label>{% trans "WMS Service URL" %} *</label>
-                        <input type="url" id="import-wms-url" placeholder="https://example.com/wms">
-                        <span style="font-size:11px;color:#9ca3af;">{% trans "GetCapabilities will be called automatically" %}</span>
-                    </div>
-                </div>
-                <div style="margin-top: 12px; display: flex; gap: 8px;">
-                    <button class="import-button" onclick="fetchWmsCapabilities()" id="wms-fetch-btn">
-                        {% trans "Fetch Layers" %}
-                    </button>
-                    <button class="import-button" style="background: #6b7280;" onclick="toggleImportWmsForm()">{% trans "Cancel" %}</button>
-                </div>
-            </div>
-
-            <!-- Step 2: Browse and pick layers -->
-            <div id="wms-step-pick" style="display:none;">
-                <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
-                    <span id="wms-layers-count" style="font-size:13px;color:#374151;font-weight:500;"></span>
-                    <button style="font-size:12px;color:#6b7280;background:none;border:none;cursor:pointer;text-decoration:underline;" onclick="resetWmsImport()">{% trans "Change URL" %}</button>
-                </div>
-                <input type="text" id="wms-search" placeholder="{% trans 'Search by layer name, title, or abstract...' %}"
-                    oninput="filterWmsLayers()"
-                    style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:4px;font-size:13px;margin-bottom:8px;">
-                <div id="wms-layers-list" style="max-height:300px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:6px;"></div>
-            </div>
-
-            <!-- Step 3: Configure selected layer -->
-            <div id="wms-step-config" style="display:none;margin-top:16px;padding:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;">
-                <h4 style="margin-top:0;color:#166534;">{% trans "Configure selected layer" %}</h4>
-                <div class="form-grid">
-                    <div class="form-field">
-                        <label>{% trans "Layer Name" %}</label>
-                        <input type="text" id="wms-cfg-layer-name" readonly style="background:#f3f4f6;">
-                    </div>
-                    <div class="form-field">
-                        <label>{% trans "Title" %}</label>
-                        <input type="text" id="wms-cfg-title">
-                    </div>
-                    <div class="form-field">
-                        <label>{% trans "Category" %} *</label>
-                        <input type="text" id="wms-cfg-category" placeholder="{% trans 'e.g. Environment' %}">
-                    </div>
-                    <div class="form-field">
-                        <label>{% trans "Subcategory" %} *</label>
-                        <input type="text" id="wms-cfg-subcategory" placeholder="{% trans 'e.g. Observation' %}">
-                    </div>
-                    <div class="form-field full-width">
-                        <label>{% trans "Description" %}</label>
-                        <textarea id="wms-cfg-abstract" rows="2" style="resize:vertical;"></textarea>
-                    </div>
-                </div>
-                <div style="margin-top:12px;display:flex;gap:8px;">
-                    <button class="import-button" onclick="addWmsLayerToCatalog()">{% trans "Add to Catalog" %}</button>
-                    <button class="import-button" style="background:#6b7280;" onclick="clearWmsSelection()">{% trans "Back to list" %}</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Load Config Form -->
-        <div id="load-config-form" class="add-layer-form">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0;">
-                <h3 style="margin: 0;">{% trans "Load JSON Config into Catalog" %}</h3>
-                <button class="import-button" style="background: #059669;" onclick="reviewCatalogChanges()">
-                    {% trans "Review embedded catalog" %}
-                </button>
-            </div>
-            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px; margin-top: 12px;">
-                {% trans "Paste a bulk config JSON. This loads entries into the catalog (does NOT create Climweb objects yet)." %}
-            </p>
-            <textarea id="config-json-input" class="json-textarea" style="min-height: 200px;" placeholder="{% trans 'Paste JSON config here...' %}"></textarea>
-            <div style="margin-top: 12px; display: flex; gap: 8px;">
-                <button class="import-button" onclick="submitLoadConfig()">{% trans "Load into Catalog" %}</button>
-                <button class="import-button" style="background: #6b7280;" onclick="toggleLoadConfigForm()">{% trans "Cancel" %}</button>
-            </div>
-        </div>
 
         <!-- Tree controls -->
         <div style="display:flex;gap:4px;margin-bottom:6px;margin-top:6px;justify-content:flex-start;">
@@ -1260,7 +1121,7 @@
     const currentAlpha3 = (select.dataset.currentAlpha3 || '').trim()
     const isValid = currentAlpha3.length === 3
     const panel = document.getElementById('settings-panel')
-    const loadBtn = document.getElementById('load-config-btn')
+    const loadBtn = document.getElementById('load-catalog-btn')
     if (isValid) {
       panel.classList.remove('invalid')
       if (loadBtn) {
@@ -1531,6 +1392,37 @@
     return d.toLocaleString()
   }
 
+  function renderSyncStatus(data) {
+    // Live indicator of whether the catalog selection/content matches what
+    // is actually provisioned in Climweb. Always visible.
+    const banner = document.getElementById('catalog-sync-banner')
+    const textEl = document.getElementById('catalog-sync-banner-text')
+    if (!banner || !textEl) return
+
+    const add = data.pending_add || 0
+    const remove = data.pending_remove || 0
+    const update = data.pending_update || 0
+    const out = (typeof data.out_of_sync === 'number') ? data.out_of_sync : (add + remove + update)
+
+    banner.classList.remove('synced', 'out-of-sync')
+
+    if (out === 0) {
+      banner.classList.add('synced')
+      textEl.innerHTML = '✓ <strong>' + gettext('Catalog is in sync with Climweb.') + '</strong>'
+      return
+    }
+
+    banner.classList.add('out-of-sync')
+    const parts = []
+    if (add) parts.push(interpolate(gettext('%(n)s to add'), {n: add}, true))
+    if (remove) parts.push(interpolate(gettext('%(n)s to remove'), {n: remove}, true))
+    if (update) parts.push(interpolate(gettext('%(n)s to update'), {n: update}, true))
+    textEl.innerHTML =
+      '⚠ <strong>' + gettext('Catalog is out of sync with Climweb') + '</strong> — ' +
+      escapeHtml(parts.join(' · ')) + '. ' +
+      gettext('Click Synchronize with Climweb to apply.')
+  }
+
   function renderCatalogVersionBanner(data) {
     const banner = document.getElementById('catalog-version-banner')
     const textEl = document.getElementById('catalog-version-banner-text')
@@ -1605,6 +1497,7 @@
     document.getElementById('stat-enabled').textContent = catalogData.enabled || 0
     document.getElementById('stat-synced').textContent = catalogData.synced || 0
 
+    renderSyncStatus(catalogData)
     renderCatalogVersionBanner(catalogData)
 
     const tree = document.getElementById('catalog-tree')
@@ -1613,7 +1506,7 @@
     if (categories.length === 0) {
       tree.innerHTML = `<div class="catalog-empty">
         <h3>${gettext('Catalog is empty')}</h3>
-        <p>${gettext('Load a JSON config or add layers manually to get started.')}</p>
+        <p>${gettext('Load a JSON config to get started.')}</p>
       </div>`
       return
     }
@@ -1744,6 +1637,9 @@
       [gettext('Update freq.'), entry.meta_frequency_of_update],
       [gettext('License'), entry.meta_license],
       [gettext('Multi-temporal'), entry.multi_temporal ? gettext('Yes') : gettext('No')],
+      [gettext('Initially visible'), entry.initial_visible ? gettext('Yes') : gettext('No')],
+      [gettext('Near real-time'), entry.near_realtime ? gettext('Yes') : gettext('No')],
+      [gettext('Auto-update interval'), entry.auto_update_interval ? entry.auto_update_interval + ' ' + gettext('min') : null],
       [gettext('Origin'), entry.origin],
       [gettext('Status'), entry.status],
     ].filter(([, v]) => v)
@@ -1956,331 +1852,6 @@
     } catch (error) {
       resultsEl.className = 'sync-results visible error'
       resultsEl.innerHTML = gettext('Sync failed: ') + error.message
-    }
-  }
-
-  function toggleAddLayerForm() {
-    const form = document.getElementById('add-layer-form')
-    form.classList.toggle('visible')
-    // Close others
-    document.getElementById('import-wms-form').classList.remove('visible')
-    document.getElementById('load-config-form').classList.remove('visible')
-  }
-
-  function toggleImportWmsForm() {
-    const form = document.getElementById('import-wms-form')
-    const wasVisible = form.classList.contains('visible')
-    form.classList.toggle('visible')
-    document.getElementById('add-layer-form').classList.remove('visible')
-    document.getElementById('load-config-form').classList.remove('visible')
-    // Reset to step 1 when closing
-    if (wasVisible) {
-      resetWmsImport()
-    }
-  }
-
-  function toggleLoadConfigForm() {
-    const form = document.getElementById('load-config-form')
-    form.classList.toggle('visible')
-    document.getElementById('add-layer-form').classList.remove('visible')
-    document.getElementById('import-wms-form').classList.remove('visible')
-  }
-
-  async function submitAddLayer() {
-    const data = {
-      category_title: document.getElementById('add-category').value,
-      subcategory_title: document.getElementById('add-subcategory').value,
-      title: document.getElementById('add-title').value,
-      layer_name: document.getElementById('add-layer-name').value,
-      wms_url: document.getElementById('add-wms-url').value,
-      meta_source: document.getElementById('add-source').value,
-      meta_resolution: document.getElementById('add-resolution').value,
-    }
-
-    if (!data.category_title || !data.subcategory_title || !data.layer_name || !data.wms_url) {
-      alert(gettext('Please fill in all required fields (*).'))
-      return
-    }
-
-    try {
-      const csrftoken = getCookie('csrftoken')
-      const response = await fetch('{% url "dataset_helper_plugin:catalog_add_entry" %}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken,
-        },
-        body: JSON.stringify(data),
-        credentials: 'include'
-      })
-      const result = await response.json()
-      if (result.status === 'success') {
-        toggleAddLayerForm()
-        await loadCatalog(true)
-      } else {
-        alert(gettext('Error') + ': ' + result.message)
-      }
-    } catch (error) {
-      alert(gettext('Error') + ': ' + error.message)
-    }
-  }
-
-  // ── WMS Import (multi-step) ────────────────────────────────────────────────
-
-  let wmsCapabilitiesData = null  // { wms_url, layers: [...] }
-  let wmsBaseUrl = ''
-
-  async function fetchWmsCapabilities() {
-    const urlInput = document.getElementById('import-wms-url')
-    const wmsUrl = urlInput.value.trim()
-    if (!wmsUrl) {
-      alert(gettext('Please enter a WMS URL.'))
-      return
-    }
-
-    wmsBaseUrl = wmsUrl
-    const btn = document.getElementById('wms-fetch-btn')
-    btn.disabled = true
-    btn.innerHTML = '<span class="loading-spinner"></span> ' + gettext('Fetching...')
-
-    try {
-      const csrftoken = getCookie('csrftoken')
-      const response = await fetch('{% url "dataset_helper_plugin:catalog_wms_capabilities" %}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken,
-        },
-        body: JSON.stringify({ wms_url: wmsUrl }),
-        credentials: 'include'
-      })
-
-      if (!response.ok && response.headers.get('content-type')?.indexOf('application/json') === -1) {
-        throw new Error(`Server error ${response.status}`)
-      }
-
-      const result = await response.json()
-      if (result.status !== 'success') {
-        alert(gettext('Error') + ': ' + result.message)
-        return
-      }
-
-      wmsCapabilitiesData = result
-      // Show picker step
-      document.getElementById('wms-step-url').style.display = 'none'
-      document.getElementById('wms-step-pick').style.display = 'block'
-      document.getElementById('wms-step-config').style.display = 'none'
-      document.getElementById('wms-layers-count').textContent =
-        interpolate(gettext('%(count)s layers from %(url)s'), {count: result.total, url: escapeHtml(wmsUrl)}, true)
-      document.getElementById('wms-search').value = ''
-      renderWmsLayers(result.layers)
-
-    } catch (error) {
-      alert(gettext('Failed to fetch capabilities: ') + error.message)
-    } finally {
-      btn.disabled = false
-      btn.innerHTML = gettext('Fetch Layers')
-    }
-  }
-
-  function renderWmsLayers(layers) {
-    const container = document.getElementById('wms-layers-list')
-    if (!layers || layers.length === 0) {
-      container.innerHTML = '<div style="padding:20px;text-align:center;color:#6b7280;">' + gettext('No layers found') + '</div>'
-      return
-    }
-
-    let html = ''
-    layers.forEach((layer, i) => {
-      const abstract = layer.abstract ? escapeHtml(layer.abstract).substring(0, 120) : ''
-      html += `<div class="wms-layer-item" data-index="${i}"
-        onclick="selectWmsLayer(${i})"
-        style="padding:10px 12px;border-bottom:1px solid #f3f4f6;cursor:pointer;transition:background 0.1s;"
-        onmouseover="this.style.background='#f0fdf4'"
-        onmouseout="this.style.background=''">
-        <div style="font-weight:500;font-size:13px;">${escapeHtml(layer.title)}</div>
-        <div style="font-size:11px;color:#6b7280;font-family:monospace;">${escapeHtml(layer.name)}</div>
-        ${abstract ? `<div style="font-size:11px;color:#9ca3af;margin-top:2px;">${abstract}</div>` : ''}
-      </div>`
-    })
-    container.innerHTML = html
-  }
-
-  function filterWmsLayers() {
-    if (!wmsCapabilitiesData) return
-    const query = document.getElementById('wms-search').value.toLowerCase().trim()
-    if (!query) {
-      renderWmsLayers(wmsCapabilitiesData.layers)
-      return
-    }
-    const filtered = wmsCapabilitiesData.layers.filter(l =>
-      l.name.toLowerCase().includes(query) ||
-      l.title.toLowerCase().includes(query) ||
-      (l.abstract && l.abstract.toLowerCase().includes(query))
-    )
-    renderWmsLayers(filtered)
-  }
-
-  function selectWmsLayer(index) {
-    if (!wmsCapabilitiesData) return
-    const layer = wmsCapabilitiesData.layers[index]
-    if (!layer) return
-
-    // Fill the config form
-    document.getElementById('wms-cfg-layer-name').value = layer.name
-    document.getElementById('wms-cfg-title').value = layer.title || layer.name
-    document.getElementById('wms-cfg-abstract').value = layer.abstract || ''
-    // Pre-fill category/subcategory if empty
-    if (!document.getElementById('wms-cfg-category').value) {
-      document.getElementById('wms-cfg-category').value = ''
-    }
-    if (!document.getElementById('wms-cfg-subcategory').value) {
-      document.getElementById('wms-cfg-subcategory').value = 'Observation'
-    }
-
-    document.getElementById('wms-step-config').style.display = 'block'
-    // Scroll config into view
-    document.getElementById('wms-step-config').scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-  }
-
-  function clearWmsSelection() {
-    document.getElementById('wms-step-config').style.display = 'none'
-  }
-
-  function resetWmsImport() {
-    wmsCapabilitiesData = null
-    document.getElementById('wms-step-url').style.display = 'block'
-    document.getElementById('wms-step-pick').style.display = 'none'
-    document.getElementById('wms-step-config').style.display = 'none'
-  }
-
-  async function addWmsLayerToCatalog() {
-    const category = document.getElementById('wms-cfg-category').value.trim()
-    const subcategory = document.getElementById('wms-cfg-subcategory').value.trim()
-    const layerName = document.getElementById('wms-cfg-layer-name').value.trim()
-    const title = document.getElementById('wms-cfg-title').value.trim()
-    const abstract = document.getElementById('wms-cfg-abstract').value.trim()
-
-    if (!category || !subcategory) {
-      alert(gettext('Please fill in Category and Subcategory.'))
-      return
-    }
-
-    try {
-      const csrftoken = getCookie('csrftoken')
-      const response = await fetch('{% url "dataset_helper_plugin:catalog_add_entry" %}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken,
-        },
-        body: JSON.stringify({
-          layer_type: 'wms',
-          layer_name: layerName,
-          wms_url: wmsBaseUrl,
-          title: title || layerName,
-          layer_title: title || layerName,
-          category_title: category,
-          subcategory_title: subcategory,
-          meta_overview: abstract,
-        }),
-        credentials: 'include'
-      })
-      const result = await response.json()
-      if (result.status === 'success') {
-        // Show brief success, keep picker open for more selections
-        const configEl = document.getElementById('wms-step-config')
-        configEl.innerHTML = `<div style="color:#166534;font-weight:500;padding:8px;">
-          ${interpolate(gettext('Added "%(name)s" to catalog.'), {name: escapeHtml(title || layerName)}, true)}
-        </div>`
-        setTimeout(() => {
-          configEl.style.display = 'none'
-          configEl.innerHTML = '' // will be rebuilt on next selection
-          // Restore config form HTML
-          rebuildWmsConfigForm()
-        }, 1500)
-        await loadCatalog(true)
-      } else {
-        alert(gettext('Error') + ': ' + result.message)
-      }
-    } catch (error) {
-      alert(gettext('Error') + ': ' + error.message)
-    }
-  }
-
-  function rebuildWmsConfigForm() {
-    document.getElementById('wms-step-config').innerHTML = `
-      <h4 style="margin-top:0;color:#166534;">${gettext('Configure selected layer')}</h4>
-      <div class="form-grid">
-        <div class="form-field">
-          <label>${gettext('Layer Name')}</label>
-          <input type="text" id="wms-cfg-layer-name" readonly style="background:#f3f4f6;">
-        </div>
-        <div class="form-field">
-          <label>${gettext('Title')}</label>
-          <input type="text" id="wms-cfg-title">
-        </div>
-        <div class="form-field">
-          <label>${gettext('Category')} *</label>
-          <input type="text" id="wms-cfg-category" placeholder="${gettext('e.g. Environment')}">
-        </div>
-        <div class="form-field">
-          <label>${gettext('Subcategory')} *</label>
-          <input type="text" id="wms-cfg-subcategory" placeholder="${gettext('e.g. Observation')}">
-        </div>
-        <div class="form-field full-width">
-          <label>${gettext('Description')}</label>
-          <textarea id="wms-cfg-abstract" rows="2" style="resize:vertical;"></textarea>
-        </div>
-      </div>
-      <div style="margin-top:12px;display:flex;gap:8px;">
-        <button class="import-button" onclick="addWmsLayerToCatalog()">${gettext('Add to Catalog')}</button>
-        <button class="import-button" style="background:#6b7280;" onclick="clearWmsSelection()">${gettext('Back to list')}</button>
-      </div>`
-  }
-
-  async function submitLoadConfig() {
-    const textarea = document.getElementById('config-json-input')
-    let config
-    try {
-      config = JSON.parse(textarea.value)
-    } catch (e) {
-      alert(gettext('Invalid JSON: ') + e.message)
-      return
-    }
-
-    const resultsEl = document.getElementById('sync-results')
-    resultsEl.className = 'sync-results visible'
-    resultsEl.innerHTML = '<span class="loading-spinner" style="border-color: #059669; border-top-color: transparent;"></span> ' + gettext('Loading config...')
-
-    try {
-      const csrftoken = getCookie('csrftoken')
-      const response = await fetch('{% url "dataset_helper_plugin:catalog_load_config" %}', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken,
-        },
-        body: JSON.stringify(config),
-        credentials: 'include'
-      })
-      if (!response.ok && response.headers.get('content-type')?.indexOf('application/json') === -1) {
-        throw new Error(`Server error ${response.status}. Check Django logs for details.`)
-      }
-      const result = await response.json()
-      if (result.status === 'success') {
-        resultsEl.className = 'sync-results visible success'
-        resultsEl.innerHTML = result.message
-        document.getElementById('config-json-input').value = ''
-        toggleLoadConfigForm()
-        await loadCatalog(false)
-      } else {
-        resultsEl.className = 'sync-results visible error'
-        resultsEl.innerHTML = result.message
-      }
-    } catch (error) {
-      resultsEl.className = 'sync-results visible error'
-      resultsEl.innerHTML = gettext('Load failed: ') + error.message
     }
   }
 

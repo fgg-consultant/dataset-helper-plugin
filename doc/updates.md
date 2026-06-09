@@ -10,7 +10,7 @@ Si la version sur disque diffère de la version chargée en base, un bandeau app
 
 Cliquer sur **Review changes** ouvre la pré-visualisation. **Rien n'est encore écrit en base** à ce stade.
 
-Vous pouvez aussi déclencher la pré-visualisation manuellement : **Load Config JSON → Review embedded catalog**.
+Vous pouvez aussi déclencher la pré-visualisation manuellement avec le bouton **Load embedded catalog**.
 
 ## Le changeset
 
