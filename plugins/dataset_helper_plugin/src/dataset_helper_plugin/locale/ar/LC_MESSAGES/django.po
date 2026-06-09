@@ -777,3 +777,68 @@ msgstr "اكتمل مع %(count)d خطأ/أخطاء"
 
 msgid "All data cleared successfully"
 msgstr "تم حذف جميع البيانات بنجاح"
+
+# ── Template (Admin Boundaries) ──────────────────────────────────────────────
+
+msgid "Admin Boundaries"
+msgstr "الحدود الإدارية"
+
+msgid "Bootstrap the Climweb <strong>administrative boundaries</strong> layer from the OCHA Common Operational Datasets (COD-AB) published on HDX. The shapefile archive for the configured country is downloaded, its columns are normalized per admin level, and every level is loaded into the boundary manager (served as vector tiles)."
+msgstr "يهيئ طبقة <strong>الحدود الإدارية</strong> في Climweb من مجموعات البيانات التشغيلية المشتركة لمكتب OCHA ‏(COD-AB) المنشورة على HDX. يتم تنزيل أرشيف shapefile للبلد المُهيأ، وتُوحَّد أعمدته حسب المستوى الإداري، ويُحمَّل كل مستوى في مدير الحدود (يُقدَّم كبلاطات متجهية)."
+
+msgid "Features loaded"
+msgstr "المعالم المحمّلة"
+
+msgid "not configured"
+msgstr "غير مهيأ"
+
+msgid "How it works"
+msgstr "كيف يعمل"
+
+msgid "The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Layer Catalog</em> tab first."
+msgstr "يأتي البلد من <strong>إعدادات الإضافة</strong> (رموز ISO). عيّنه أولاً في تبويب <em>كتالوج الطبقات</em>."
+
+msgid "The COD-AB shapefile ZIP is located on HDX automatically (<code>cod-ab-&lt;iso3&gt;</code>) and downloaded."
+msgstr "يُحدَّد أرشيف ZIP لملف COD-AB تلقائيًا على HDX ‏(<code>cod-ab-&lt;iso3&gt;</code>) ويُنزَّل."
+
+msgid "Each admin level (adm0, adm1, …) is extracted, its columns are normalized, re-zipped and loaded."
+msgstr "يُستخرج كل مستوى إداري ‏(adm0، adm1، …)، وتُوحَّد أعمدته، ويُعاد ضغطه ثم يُحمَّل."
+
+msgid "Re-running the import replaces the previously loaded levels for this country (idempotent)."
+msgstr "تؤدي إعادة تشغيل الاستيراد إلى استبدال المستويات المحمّلة سابقًا لهذا البلد (عملية مُتكافئة)."
+
+msgid "Import boundaries from OCHA"
+msgstr "استيراد الحدود من OCHA"
+
+msgid "Clear boundaries"
+msgstr "حذف الحدود"
+
+msgid "Loaded admin levels"
+msgstr "المستويات الإدارية المحمّلة"
+
+msgid "Loading…"
+msgstr "جارٍ التحميل…"
+
+msgid "Map preview"
+msgstr "معاينة الخريطة"
+
+msgid "Vector tiles served by the boundary manager."
+msgstr "بلاطات متجهية يقدّمها مدير الحدود."
+
+# ── views.py messages (Admin Boundaries) ─────────────────────────────────────
+
+#, python-format
+msgid "Import failed: %(error)s"
+msgstr "فشل الاستيراد: %(error)s"
+
+#, python-format
+msgid "Boundaries imported: %(ok)d level(s), %(features)d features"
+msgstr "تم استيراد الحدود: %(ok)d مستوى/مستويات، %(features)d معلمًا"
+
+#, python-format
+msgid ", %(failed)d level(s) failed"
+msgstr "، فشل %(failed)d مستوى/مستويات"
+
+#, python-format
+msgid "%(count)d boundary feature(s) deleted"
+msgstr "تم حذف %(count)d من معالم الحدود"

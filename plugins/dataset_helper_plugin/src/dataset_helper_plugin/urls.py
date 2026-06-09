@@ -22,6 +22,11 @@ urlpatterns = [
     path('settings/', views.settings_get, name='settings_get'),
     path('settings/save/', views.settings_save, name='settings_save'),
 
+    # Admin Boundaries API (OCHA / HDX COD-AB)
+    path('boundaries/status/', views.boundaries_status, name='boundaries_status'),
+    path('boundaries/import/', views.boundaries_import, name='boundaries_import'),
+    path('boundaries/clear/', views.boundaries_clear, name='boundaries_clear'),
+
     # Legacy endpoints
     path('clear-all/', views.clear_all, name='clear_all'),
     path('', views.index, name='index'),

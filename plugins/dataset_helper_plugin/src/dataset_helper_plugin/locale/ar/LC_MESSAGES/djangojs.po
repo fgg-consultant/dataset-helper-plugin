@@ -430,3 +430,47 @@ msgstr "جارٍ تحميل التهيئة…"
 
 msgid "Load failed: "
 msgstr "فشل التحميل: "
+
+# ── Admin Boundaries ─────────────────────────────────────────────────────────
+
+msgid "Failed to load status"
+msgstr "فشل تحميل الحالة"
+
+msgid "The boundary manager is not available in this instance."
+msgstr "مدير الحدود غير متوفر في هذه النسخة."
+
+msgid "No country configured. Set the country in the Layer Catalog settings first."
+msgstr "لا يوجد بلد مُهيأ. عيّن البلد أولاً في إعدادات كتالوج الطبقات."
+
+msgid "No boundaries loaded yet for this country."
+msgstr "لم يتم تحميل أي حدود لهذا البلد بعد."
+
+msgid "Level"
+msgstr "المستوى"
+
+msgid "Admin level"
+msgstr "المستوى الإداري"
+
+msgid "Features"
+msgstr "المعالم"
+
+msgid "Map library could not be loaded."
+msgstr "تعذّر تحميل مكتبة الخرائط."
+
+msgid "Importing…"
+msgstr "جارٍ الاستيراد…"
+
+msgid "Downloading and loading boundaries — this can take a while…"
+msgstr "تنزيل وتحميل الحدود — قد يستغرق ذلك بعض الوقت…"
+
+msgid "features"
+msgstr "معلمًا"
+
+msgid "failed"
+msgstr "فشل"
+
+msgid "Import failed"
+msgstr "فشل الاستيراد"
+
+msgid "Delete all admin boundaries for the configured country?"
+msgstr "حذف جميع الحدود الإدارية للبلد المُهيأ؟"

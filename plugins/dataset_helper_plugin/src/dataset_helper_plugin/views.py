@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 from .models import CatalogEntry, CatalogState, PluginSettings
 from . import services
+from . import boundaries
 
 # Valid layer types from Dataset.DATASET_TYPE_CHOICES
 VALID_LAYER_TYPES = ('raster_file', 'vector_file', 'wms', 'raster_tile', 'vector_tile')
@@ -402,6 +403,62 @@ def catalog_clear_provisioned(request):
             'cats': stats['categories_deleted'],
             'entries': stats['entries_reset'],
         },
+        **stats,
+    })
+
+
+# ── Admin Boundaries API (OCHA / HDX COD-AB) ─────────────────────────────────
+
+
+def boundaries_status(request):
+    """Return the current state of the admin-boundaries feature."""
+    try:
+        return JsonResponse({'status': 'success', **boundaries.get_boundaries_status()})
+    except Exception as e:
+        logger.exception("boundaries_status failed")
+        return JsonResponse({'status': 'error', 'message': _('Server error: %(error)s') % {'error': e}}, status=500)
+
+
+@csrf_exempt
+@require_POST
+def boundaries_import(request):
+    """
+    Download the OCHA COD-AB boundaries for the configured country and load
+    every admin level into the boundary manager.
+    """
+    try:
+        result = boundaries.import_admin_boundaries()
+    except boundaries.BoundaryImportError as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    except Exception as e:
+        logger.exception("boundaries_import failed")
+        return JsonResponse({'status': 'error', 'message': _('Import failed: %(error)s') % {'error': e}}, status=500)
+
+    ok = sum(1 for lvl in result['levels'] if lvl['status'] == 'ok')
+    failed = sum(1 for lvl in result['levels'] if lvl['status'] == 'error')
+    features = sum(lvl.get('features', 0) for lvl in result['levels'])
+    msg = _('Boundaries imported: %(ok)d level(s), %(features)d features') % {'ok': ok, 'features': features}
+    if failed:
+        msg += _(', %(failed)d level(s) failed') % {'failed': failed}
+
+    return JsonResponse({'status': 'success', 'message': msg, **result})
+
+
+@csrf_exempt
+@require_POST
+def boundaries_clear(request):
+    """Delete every AdminBoundary row for the configured country."""
+    try:
+        stats = boundaries.clear_admin_boundaries()
+    except boundaries.BoundaryImportError as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    except Exception as e:
+        logger.exception("boundaries_clear failed")
+        return JsonResponse({'status': 'error', 'message': _('Clear failed: %(error)s') % {'error': e}}, status=500)
+
+    return JsonResponse({
+        'status': 'success',
+        'message': _('%(count)d boundary feature(s) deleted') % {'count': stats['deleted']},
         **stats,
     })
 

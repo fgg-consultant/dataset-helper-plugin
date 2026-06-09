@@ -792,3 +792,68 @@ msgstr "Terminé avec %(count)d erreur(s)"
 
 msgid "All data cleared successfully"
 msgstr "Toutes les données ont été supprimées avec succès"
+
+# ── Template (Admin Boundaries) ──────────────────────────────────────────────
+
+msgid "Admin Boundaries"
+msgstr "Limites administratives"
+
+msgid "Bootstrap the Climweb <strong>administrative boundaries</strong> layer from the OCHA Common Operational Datasets (COD-AB) published on HDX. The shapefile archive for the configured country is downloaded, its columns are normalized per admin level, and every level is loaded into the boundary manager (served as vector tiles)."
+msgstr "Initialise la couche des <strong>limites administratives</strong> de Climweb à partir des Common Operational Datasets de l’OCHA (COD-AB) publiés sur HDX. L’archive shapefile du pays configuré est téléchargée, ses colonnes sont normalisées par niveau administratif, et chaque niveau est chargé dans le boundary manager (servi en tuiles vectorielles)."
+
+msgid "Features loaded"
+msgstr "Entités chargées"
+
+msgid "not configured"
+msgstr "non configuré"
+
+msgid "How it works"
+msgstr "Comment ça marche"
+
+msgid "The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Layer Catalog</em> tab first."
+msgstr "Le pays provient des <strong>paramètres du plugin</strong> (codes ISO). Renseignez-le d’abord dans l’onglet <em>Catalogue de couches</em>."
+
+msgid "The COD-AB shapefile ZIP is located on HDX automatically (<code>cod-ab-&lt;iso3&gt;</code>) and downloaded."
+msgstr "L’archive ZIP shapefile COD-AB est localisée automatiquement sur HDX (<code>cod-ab-&lt;iso3&gt;</code>) puis téléchargée."
+
+msgid "Each admin level (adm0, adm1, …) is extracted, its columns are normalized, re-zipped and loaded."
+msgstr "Chaque niveau administratif (adm0, adm1, …) est extrait, ses colonnes sont normalisées, re-zippé puis chargé."
+
+msgid "Re-running the import replaces the previously loaded levels for this country (idempotent)."
+msgstr "Relancer l’import remplace les niveaux précédemment chargés pour ce pays (idempotent)."
+
+msgid "Import boundaries from OCHA"
+msgstr "Importer les limites depuis OCHA"
+
+msgid "Clear boundaries"
+msgstr "Supprimer les limites"
+
+msgid "Loaded admin levels"
+msgstr "Niveaux administratifs chargés"
+
+msgid "Loading…"
+msgstr "Chargement…"
+
+msgid "Map preview"
+msgstr "Aperçu cartographique"
+
+msgid "Vector tiles served by the boundary manager."
+msgstr "Tuiles vectorielles servies par le boundary manager."
+
+# ── views.py messages (Admin Boundaries) ─────────────────────────────────────
+
+#, python-format
+msgid "Import failed: %(error)s"
+msgstr "Échec de l’import : %(error)s"
+
+#, python-format
+msgid "Boundaries imported: %(ok)d level(s), %(features)d features"
+msgstr "Limites importées : %(ok)d niveau(x), %(features)d entités"
+
+#, python-format
+msgid ", %(failed)d level(s) failed"
+msgstr ", %(failed)d niveau(x) en échec"
+
+#, python-format
+msgid "%(count)d boundary feature(s) deleted"
+msgstr "%(count)d entité(s) de limites supprimée(s)"

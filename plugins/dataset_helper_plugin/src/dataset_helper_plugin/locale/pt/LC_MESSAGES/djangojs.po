@@ -438,3 +438,47 @@ msgstr "A carregar configuração…"
 
 msgid "Load failed: "
 msgstr "Carregamento falhou: "
+
+# ── Admin Boundaries ─────────────────────────────────────────────────────────
+
+msgid "Failed to load status"
+msgstr "Falha ao carregar o status"
+
+msgid "The boundary manager is not available in this instance."
+msgstr "O boundary manager não está disponível nesta instância."
+
+msgid "No country configured. Set the country in the Layer Catalog settings first."
+msgstr "Nenhum país configurado. Defina o país primeiro nas configurações do Catálogo de camadas."
+
+msgid "No boundaries loaded yet for this country."
+msgstr "Ainda não há limites carregados para este país."
+
+msgid "Level"
+msgstr "Nível"
+
+msgid "Admin level"
+msgstr "Nível administrativo"
+
+msgid "Features"
+msgstr "Feições"
+
+msgid "Map library could not be loaded."
+msgstr "Não foi possível carregar a biblioteca de mapas."
+
+msgid "Importing…"
+msgstr "Importando…"
+
+msgid "Downloading and loading boundaries — this can take a while…"
+msgstr "Baixando e carregando limites — isso pode demorar um pouco…"
+
+msgid "features"
+msgstr "feições"
+
+msgid "failed"
+msgstr "falhou"
+
+msgid "Import failed"
+msgstr "Falha na importação"
+
+msgid "Delete all admin boundaries for the configured country?"
+msgstr "Excluir todos os limites administrativos do país configurado?"

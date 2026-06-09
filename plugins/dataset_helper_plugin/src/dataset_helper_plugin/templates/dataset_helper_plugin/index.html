@@ -689,6 +689,71 @@
         font-size: 13px;
         transition: opacity 0.3s;
     }
+
+    /* Admin Boundaries tab */
+    .boundary-config {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        padding: 16px;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        margin-bottom: 12px;
+    }
+    .boundary-config-item .label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #6b7280;
+        margin-bottom: 4px;
+    }
+    .boundary-config-item .value {
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+    }
+    .boundary-warning {
+        padding: 10px 14px;
+        border-radius: 6px;
+        background: #fef3c7;
+        border: 1px solid #fcd34d;
+        color: #92400e;
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    .boundary-levels-table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 480px;
+        font-size: 13px;
+    }
+    .boundary-levels-table th,
+    .boundary-levels-table td {
+        border: 1px solid #e5e7eb;
+        padding: 6px 12px;
+        text-align: left;
+    }
+    .boundary-levels-table th {
+        background: #f9fafb;
+        font-weight: 600;
+        color: #374151;
+    }
+    .boundary-map {
+        width: 100%;
+        height: 460px;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        background: #eef2f7;
+    }
+    .boundary-map .placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: #6b7280;
+        font-size: 14px;
+    }
 </style>
 {% endblock %}
 
@@ -697,11 +762,14 @@
 {% url "dataset_helper_plugin:js_catalog" as js_catalog_url %}
 {% include "wagtailadmin/shared/header.html" with title=header_title icon="pick" %}
 <script src="{{ js_catalog_url }}"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
 <div class="nice-padding">
     <!-- Tab Navigation -->
     <div class="tabs">
         <button class="tab-button active" data-tab="catalog">{% trans "Layer Catalog" %}</button>
+        <button class="tab-button" data-tab="admin-boundaries">{% trans "Admin Boundaries" %}</button>
         <button class="tab-button" data-tab="danger-zone">{% trans "Danger Zone" %}</button>
     </div>
 
@@ -815,9 +883,6 @@
         </details>
 
         <div class="catalog-toolbar">
-            <button class="import-button" onclick="syncCatalog()">
-                {% trans "Synchronize with Climweb" %}
-            </button>
             <button id="load-catalog-btn" class="import-button" style="background: #2563eb;" onclick="reviewCatalogChanges()">
                 {% trans "Load embedded catalog" %}
             </button>
@@ -842,6 +907,63 @@
 
         <!-- Catalog Tree -->
         <div id="catalog-tree" class="catalog-tree"></div>
+    </div>
+
+    <!-- Admin Boundaries Tab -->
+    <div id="admin-boundaries" class="tab-content">
+        <p style="margin:0 0 16px;color:#374151;font-size:14px;line-height:1.6;">
+            {% blocktrans %}Bootstrap the Climweb <strong>administrative boundaries</strong> layer from the OCHA Common Operational Datasets (COD-AB) published on HDX. The shapefile archive for the configured country is downloaded, its columns are normalized per admin level, and every level is loaded into the boundary manager (served as vector tiles).{% endblocktrans %}
+        </p>
+
+        <div class="boundary-config">
+            <div class="boundary-config-item">
+                <div class="label">{% trans "Source" %}</div>
+                <div class="value" id="boundary-source">OCHA COD-AB</div>
+            </div>
+            <div class="boundary-config-item">
+                <div class="label">{% trans "Country" %}</div>
+                <div class="value" id="boundary-country">
+                    {% if plugin_settings.country_name %}{{ plugin_settings.country_name }} ({{ plugin_settings.country_alpha3|upper }}){% else %}<span style="color:#dc2626;">{% trans "not configured" %}</span>{% endif %}
+                </div>
+            </div>
+            <div class="boundary-config-item">
+                <div class="label">{% trans "Features loaded" %}</div>
+                <div class="value" id="boundary-total">-</div>
+            </div>
+        </div>
+
+        <div id="boundary-warning" class="boundary-warning" style="display:none;"></div>
+
+        <details style="margin:16px 0;padding:10px 16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:13px;color:#374151;line-height:1.6;">
+            <summary style="cursor:pointer;font-weight:500;">{% trans "How it works" %}</summary>
+            <ol style="margin:8px 0 0 16px;padding:0;">
+                <li>{% blocktrans %}The country comes from the <strong>plugin settings</strong> (ISO codes). Set it on the <em>Layer Catalog</em> tab first.{% endblocktrans %}</li>
+                <li>{% blocktrans %}The COD-AB shapefile ZIP is located on HDX automatically (<code>cod-ab-&lt;iso3&gt;</code>) and downloaded.{% endblocktrans %}</li>
+                <li>{% blocktrans %}Each admin level (adm0, adm1, …) is extracted, its columns are normalized, re-zipped and loaded.{% endblocktrans %}</li>
+                <li>{% blocktrans %}Re-running the import replaces the previously loaded levels for this country (idempotent).{% endblocktrans %}</li>
+            </ol>
+        </details>
+
+        <div class="catalog-toolbar">
+            <button id="boundary-import-btn" class="import-button" onclick="importBoundaries()">
+                {% trans "Import boundaries from OCHA" %}
+            </button>
+            <button class="danger-button" onclick="clearBoundaries()">
+                {% trans "Clear boundaries" %}
+            </button>
+        </div>
+
+        <div id="boundary-results" class="results-panel" style="margin-top:16px;"></div>
+
+        <h4 style="margin:24px 0 8px;">{% trans "Loaded admin levels" %}</h4>
+        <div id="boundary-levels" style="font-size:13px;color:#6b7280;">{% trans "Loading…" %}</div>
+
+        <h4 style="margin:24px 0 8px;">{% trans "Map preview" %}</h4>
+        <p style="margin:0 0 8px;font-size:12px;color:#6b7280;">
+            {% trans "Vector tiles served by the boundary manager." %}
+            <code id="boundary-tiles-url"></code>
+        </p>
+        <div id="boundary-map" class="boundary-map"></div>
     </div>
 
     <!-- Danger Zone Tab -->
@@ -922,6 +1044,7 @@
       this.classList.add('active')
       const tabId = this.getAttribute('data-tab')
       document.getElementById(tabId).classList.add('active')
+      if (tabId === 'admin-boundaries') onBoundariesTabShown()
     })
   })
 
@@ -1866,6 +1989,238 @@
     openGroups.clear()
     loadCatalog(false)
   })
+
+  // ───────────────────────── Admin Boundaries ─────────────────────────
+
+  let _boundaryStatus = null
+  let _boundaryMap = null
+  let _boundaryStatusLoaded = false
+
+  // Called every time the Admin Boundaries tab is shown. Loads status once,
+  // then (re)sizes the map (MapLibre needs a visible container to lay out).
+  function onBoundariesTabShown() {
+    if (!_boundaryStatusLoaded) {
+      _boundaryStatusLoaded = true
+      loadBoundariesStatus()
+    } else if (_boundaryMap) {
+      setTimeout(() => _boundaryMap.resize(), 50)
+    }
+  }
+
+  async function loadBoundariesStatus() {
+    try {
+      const r = await fetch('{% url "dataset_helper_plugin:boundaries_status" %}',
+        { headers: { 'Accept': 'application/json' } })
+      const data = await r.json()
+      _boundaryStatus = data
+      renderBoundariesStatus(data)
+    } catch (error) {
+      document.getElementById('boundary-levels').textContent =
+        gettext('Failed to load status') + ': ' + error.message
+    }
+  }
+
+  function renderBoundariesStatus(data) {
+    // Config summary
+    const country = data.country || {}
+    if (country.name || country.alpha3) {
+      document.getElementById('boundary-country').textContent =
+        (country.name || '') + (country.alpha3 ? ` (${country.alpha3})` : '')
+    }
+    document.getElementById('boundary-source').textContent =
+      (data.source_label && data.source_label.indexOf('OCHA') === 0) ? 'OCHA COD-AB' : (data.source_label || '-')
+    document.getElementById('boundary-total').textContent =
+      (typeof data.total_features === 'number') ? data.total_features.toLocaleString() : '-'
+
+    // Tiles URL
+    const tilesEl = document.getElementById('boundary-tiles-url')
+    if (tilesEl) tilesEl.textContent = data.tiles_url_template || ''
+
+    // Warnings / blockers
+    const warn = document.getElementById('boundary-warning')
+    const importBtn = document.getElementById('boundary-import-btn')
+    let warning = ''
+    if (!data.available) {
+      warning = gettext('The boundary manager is not available in this instance.') +
+        (data.error ? ' (' + escapeHtml(data.error) + ')' : '')
+    } else if (!country.alpha3) {
+      warning = gettext('No country configured. Set the country in the Layer Catalog settings first.')
+    }
+    if (warning) {
+      warn.style.display = 'block'
+      warn.innerHTML = warning
+      if (importBtn) importBtn.disabled = true
+    } else {
+      warn.style.display = 'none'
+      if (importBtn) importBtn.disabled = false
+    }
+
+    // Per-level table
+    const levelsEl = document.getElementById('boundary-levels')
+    const levels = data.levels || []
+    if (!levels.length) {
+      levelsEl.innerHTML = `<em>${gettext('No boundaries loaded yet for this country.')}</em>`
+    } else {
+      const rows = levels.map(l =>
+        `<tr><td>${gettext('Level')} ${l.level}</td><td>${(l.features || 0).toLocaleString()}</td></tr>`
+      ).join('')
+      levelsEl.innerHTML = `<table class="boundary-levels-table">
+        <thead><tr><th>${gettext('Admin level')}</th><th>${gettext('Features')}</th></tr></thead>
+        <tbody>${rows}</tbody></table>`
+    }
+
+    initBoundaryMap(data)
+  }
+
+  function initBoundaryMap(data) {
+    const container = document.getElementById('boundary-map')
+    if (!container) return
+    if (typeof maplibregl === 'undefined') {
+      container.innerHTML = `<div class="placeholder">${gettext('Map library could not be loaded.')}</div>`
+      return
+    }
+    if (_boundaryMap) { refreshBoundaryTiles(); return }
+
+    _boundaryMap = new maplibregl.Map({
+      container: 'boundary-map',
+      style: {
+        version: 8,
+        sources: {
+          osm: {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution: '© OpenStreetMap contributors',
+          },
+        },
+        layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
+      },
+      center: [0, 0],
+      zoom: 1.5,
+    })
+    _boundaryMap.addControl(new maplibregl.NavigationControl(), 'top-right')
+    _boundaryMap.on('load', () => {
+      addBoundaryLayers()
+      fitBoundaryToCountry(data)
+    })
+  }
+
+  function boundaryTilesUrl(bust) {
+    const tpl = (_boundaryStatus && _boundaryStatus.tiles_url_template) ||
+      '/api/admin-boundary/tiles/{z}/{x}/{y}'
+    let url = window.location.origin + tpl
+    if (bust) url += (url.indexOf('?') === -1 ? '?' : '&') + '_=' + Date.now()
+    return url
+  }
+
+  function addBoundaryLayers(bust) {
+    if (!_boundaryMap) return
+    _boundaryMap.addSource('admin', {
+      type: 'vector',
+      tiles: [boundaryTilesUrl(bust)],
+      minzoom: 0,
+      maxzoom: 14,
+    })
+    // The boundary manager emits the MVT layer under the name 'default'.
+    _boundaryMap.addLayer({
+      id: 'admin-fill', type: 'fill', source: 'admin', 'source-layer': 'default',
+      paint: { 'fill-color': '#059669', 'fill-opacity': 0.12 },
+    })
+    _boundaryMap.addLayer({
+      id: 'admin-line', type: 'line', source: 'admin', 'source-layer': 'default',
+      paint: { 'line-color': '#047857', 'line-width': 0.8 },
+    })
+  }
+
+  // Re-load the vector source so freshly imported features appear.
+  function refreshBoundaryTiles() {
+    if (!_boundaryMap || !_boundaryMap.isStyleLoaded()) return
+    for (const id of ['admin-fill', 'admin-line']) {
+      if (_boundaryMap.getLayer(id)) _boundaryMap.removeLayer(id)
+    }
+    if (_boundaryMap.getSource('admin')) _boundaryMap.removeSource('admin')
+    addBoundaryLayers(true)
+  }
+
+  function fitBoundaryToCountry(data) {
+    const bbox = data && data.country && data.country.bbox
+    // PluginSettings stores bbox as [south, north, west, east].
+    if (!_boundaryMap || !Array.isArray(bbox) || bbox.length !== 4) return
+    const [south, north, west, east] = bbox
+    try {
+      _boundaryMap.fitBounds([[west, south], [east, north]], { padding: 24, duration: 0 })
+    } catch (e) { /* ignore invalid bbox */ }
+  }
+
+  async function importBoundaries() {
+    const btn = document.getElementById('boundary-import-btn')
+    const panel = document.getElementById('boundary-results')
+    const original = btn.innerHTML
+    btn.disabled = true
+    btn.innerHTML = '<span class="loading-spinner"></span>' + gettext('Importing…')
+    panel.classList.add('visible')
+    panel.classList.remove('success', 'error')
+    panel.innerHTML = `<p>${gettext('Downloading and loading boundaries — this can take a while…')}</p>`
+
+    try {
+      const r = await fetch('{% url "dataset_helper_plugin:boundaries_import" %}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+        credentials: 'include',
+      })
+      const data = await r.json()
+      if (data.status === 'success') {
+        panel.classList.add('success')
+        const levelRows = (data.levels || []).map(l =>
+          l.status === 'ok'
+            ? `<li>${gettext('Level')} ${l.level}: <strong>${(l.features || 0).toLocaleString()}</strong> ${gettext('features')}</li>`
+            : `<li style="color:#dc2626;">${gettext('Level')} ${l.level}: ${escapeHtml(l.message || gettext('failed'))}</li>`
+        ).join('')
+        panel.innerHTML = `
+          <h4 style="color:#059669;margin-top:0;">${escapeHtml(data.message)}</h4>
+          <p style="font-size:12px;color:#6b7280;word-break:break-all;">${gettext('Source')}: ${escapeHtml(data.source_url || '')}</p>
+          <ul style="margin:8px 0 0 16px;">${levelRows}</ul>`
+        await loadBoundariesStatus()
+        refreshBoundaryTiles()
+      } else {
+        panel.classList.add('error')
+        panel.innerHTML = `<p style="color:#dc2626;">${gettext('Error')}: ${escapeHtml(data.message || gettext('Import failed'))}</p>`
+      }
+    } catch (error) {
+      panel.classList.add('visible', 'error')
+      panel.innerHTML = `<p style="color:#dc2626;">${gettext('Error')}: ${escapeHtml(error.message)}</p>`
+    }
+    btn.disabled = false
+    btn.innerHTML = original
+  }
+
+  async function clearBoundaries() {
+    if (!confirm(gettext('Delete all admin boundaries for the configured country?') + '\n\n' +
+        gettext('This action cannot be undone.'))) return
+    const panel = document.getElementById('boundary-results')
+    panel.classList.add('visible')
+    panel.classList.remove('success', 'error')
+    try {
+      const r = await fetch('{% url "dataset_helper_plugin:boundaries_clear" %}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+        credentials: 'include',
+      })
+      const data = await r.json()
+      if (data.status === 'success') {
+        panel.classList.add('success')
+        panel.innerHTML = `<p style="color:#059669;">${escapeHtml(data.message)}</p>`
+        await loadBoundariesStatus()
+        refreshBoundaryTiles()
+      } else {
+        panel.classList.add('error')
+        panel.innerHTML = `<p style="color:#dc2626;">${gettext('Error')}: ${escapeHtml(data.message || gettext('Clear failed'))}</p>`
+      }
+    } catch (error) {
+      panel.classList.add('error')
+      panel.innerHTML = `<p style="color:#dc2626;">${gettext('Error')}: ${escapeHtml(error.message)}</p>`
+    }
+  }
 </script>
 
 <script type="module">
