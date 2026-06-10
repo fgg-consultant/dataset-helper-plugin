@@ -543,3 +543,29 @@ msgid "%(n)s pending change"
 msgid_plural "%(n)s pending changes"
 msgstr[0] "%(n)s تغيير معلّق"
 msgstr[1] "%(n)s تغييرات معلّقة"
+
+# ── Added: layer tree controls/detail ──
+
+msgid "Climweb options"
+msgstr "خيارات Climweb"
+
+msgid "GetMap preview"
+msgstr "معاينة GetMap"
+
+msgid "No layer matches your search."
+msgstr "لا توجد طبقة تطابق بحثك."
+
+msgid "Popup"
+msgstr "نافذة منبثقة"
+
+msgid "Provider"
+msgstr "المزوّد"
+
+msgid "Service URL"
+msgstr "رابط الخدمة"
+
+msgid "WMS legend"
+msgstr "وسيلة إيضاح WMS"
+
+msgid "enabled"
+msgstr "مفعّلة"

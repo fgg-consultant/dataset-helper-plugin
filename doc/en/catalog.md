@@ -42,17 +42,31 @@ Only **Synchronize with Climweb** clears the orange and red states.
 
 ## Navigating the tree
 
+A control bar sits above the tree: a **search box**, **status filter chips**, **select-all / deselect-all** buttons, and **expand / collapse-all** buttons.
+
 The tree is fully collapsible. Three main interactions:
 
 - Clicking a **category** or **subcategory** header expands / collapses it.
-- The ▼ and ▶ buttons above the tree expand or collapse **everything**.
-- Clicking a layer row opens / closes its **detail panel** (WMS URL, layer identifier, source metadata, multi-temporal, initially visible, near real-time, auto-update interval…).
+- The expand / collapse buttons (top-right of the control bar) open or close **every** category and subcategory at once.
+- Clicking a layer row opens / closes its **detail panel** (layer name, service URL, provider, resolution, frequency, origin, and the Climweb options — popup, WMS legend, multi-temporal, initially visible, near real-time — plus a GetMap preview).
+
+Each row shows, at a glance: a tri-state **checkbox**, a colored **status dot**, the layer **name**, and **badges** for the provider, the layer type and (for legacy entries) the origin. Each category header also carries a small **status mini-bar** summarizing its layers.
+
+## Search and filter
+
+The control bar above the tree lets you narrow what is displayed — purely client-side, nothing is sent to the server:
+
+- **Search box** — type to keep only the layers whose name, layer identifier, provider, category or subcategory matches. Matching categories and subcategories auto-expand. Clear it with the **×** button or the **Esc** key.
+- **Filter chips** — **All**, **To add**, **To remove**, **Disabled** restrict the tree to layers in that state. The chips show a live count for each pending state.
+
+While a search or a filter is active, only matching branches are shown and expanded; clearing it collapses the tree back to your previous expand/collapse state. If nothing matches, the tree shows *No layer matches your search.*
 
 ## Check / uncheck
 
 - **A single layer**: the checkbox to the left of the title enables or disables that entry.
 - **A subcategory**: the checkbox in its header toggles **every layer** of the subcategory at once (bulk toggle).
 - **A category**: same, but across the whole category.
+- **The whole catalog**: the **select-all** / **deselect-all** buttons in the control bar enable or disable *every* layer at once.
 
 The effect is immediate on the plugin side (status flips to `pending_add` / `pending_remove`) but **nothing is yet written to Climweb**. The out-of-sync banner then appears — click **Synchronize with Climweb** to apply.
 

@@ -42,17 +42,31 @@ Solo **Synchronize with Climweb** resuelve los estados naranja y rojo.
 
 ## Navegar en el árbol
 
+Una barra de control se sitúa encima del árbol: un **cuadro de búsqueda**, **chips de filtro por estado**, botones de **select-all / deselect-all** y botones para **desplegar / plegar todo**.
+
 El árbol es totalmente plegable. Tres interacciones principales:
 
 - Hacer clic en la cabecera de una **categoría** o **subcategoría** la despliega / pliega.
-- Los botones ▼ y ▶ encima del árbol despliegan o pliegan **todo**.
-- Hacer clic en la línea de una capa abre / cierra su **panel de detalles** (URL WMS, identificador de capa, metadatos de origen, multitemporal, visible inicialmente, casi en tiempo real, intervalo de actualización automática…).
+- Los botones de desplegar / plegar (arriba a la derecha de la barra de control) abren o cierran **todas** las categorías y subcategorías a la vez.
+- Hacer clic en la línea de una capa abre / cierra su **panel de detalles** (nombre de la capa, URL del servicio, proveedor, resolución, frecuencia, origen y las opciones de Climweb — popup, leyenda WMS, multitemporal, visible inicialmente, casi en tiempo real — más una previsualización GetMap).
+
+Cada línea muestra, de un vistazo: una **casilla** de tres estados, un **punto de estado** de color, el **nombre** de la capa y **etiquetas** para el proveedor, el tipo de capa y (para las entradas heredadas) el origen. Cada cabecera de categoría lleva además una pequeña **mini-barra de estado** que resume sus capas.
+
+## Buscar y filtrar
+
+La barra de control encima del árbol permite acotar lo que se muestra — puramente del lado del cliente, no se envía nada al servidor:
+
+- **Cuadro de búsqueda** — escriba para conservar solo las capas cuyo nombre, identificador de capa, proveedor, categoría o subcategoría coincida. Las categorías y subcategorías coincidentes se despliegan automáticamente. Bórrelo con el botón **×** o la tecla **Esc**.
+- **Chips de filtro** — **All**, **To add**, **To remove**, **Disabled** restringen el árbol a las capas en ese estado. Los chips muestran un recuento en vivo para cada estado pendiente.
+
+Mientras una búsqueda o un filtro está activo, solo se muestran y despliegan las ramas coincidentes; al borrarlo el árbol se pliega de nuevo a su estado de plegado/desplegado anterior. Si no hay coincidencias, el árbol muestra *No layer matches your search.*
 
 ## Marcar / desmarcar
 
 - **Una sola capa**: la casilla a la izquierda del título activa o desactiva esa entrada.
 - **Una subcategoría**: la casilla en su cabecera conmuta **todas las capas** de la subcategoría a la vez (bulk toggle).
 - **Una categoría**: igual, pero para toda la categoría.
+- **Todo el catálogo**: los botones de **select-all** / **deselect-all** de la barra de control activan o desactivan *todas* las capas a la vez.
 
 El efecto es inmediato del lado del plugin (el estado pasa a `pending_add` / `pending_remove`) pero **nada se escribe aún en Climweb**. Aparece entonces la franja de desincronización — haga clic en **Synchronize with Climweb** para aplicar.
 

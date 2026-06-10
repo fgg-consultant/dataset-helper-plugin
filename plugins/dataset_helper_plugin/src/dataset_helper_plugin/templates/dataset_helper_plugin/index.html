@@ -578,6 +578,85 @@
       .dh-syncbar { flex-wrap: wrap; }
     }
 
+    /* ============================================================
+       Layer tree (Claude Design handoff): controls + tree + detail
+       ============================================================ */
+    .dh-treebar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; font-family: var(--dh-sans); }
+    .dh-searchbox { position: relative; flex: 1; min-width: 220px; max-width: 380px; }
+    .dh-searchbox .dh-search-ic { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--dh-ink-4); pointer-events: none; display: grid; }
+    .dh-searchbox input { width: 100%; font-family: inherit; font-size: 13.5px; padding: 9px 34px 9px 36px; border: 1px solid var(--dh-line); border-radius: var(--dh-r-md); background: var(--dh-surface); color: var(--dh-ink); }
+    .dh-searchbox input:focus { outline: none; border-color: var(--dh-accent); box-shadow: 0 0 0 3px var(--dh-accent-soft); }
+    .dh-search-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: none; border: 0; background: none; padding: 3px; margin: 0; cursor: pointer; color: var(--dh-ink-4); line-height: 0; }
+    .dh-search-clear svg { display: block; }
+    .dh-search-clear:hover { color: var(--dh-ink-2); }
+    .dh-search-clear.show { display: block; }
+    .dh-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .dh-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; padding: 7px 11px; border-radius: 999px; border: 1px solid var(--dh-line); background: var(--dh-surface); color: var(--dh-ink-2); cursor: pointer; transition: .12s; font-family: var(--dh-sans); }
+    .dh-chip:hover { border-color: #cdd0d7; }
+    .dh-chip.active { background: var(--dh-ink); color: #fff; border-color: var(--dh-ink); }
+    .dh-chip .c { font-weight: 800; opacity: .8; }
+    .dh-chip .cd { width: 8px; height: 8px; border-radius: 50%; }
+    .dh-expand-btns { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .dh-iconbtn { width: 34px; height: 34px; padding: 0; border-radius: var(--dh-r-sm); border: 1px solid var(--dh-line); background: var(--dh-surface); color: var(--dh-ink-2); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; line-height: 0; }
+    .dh-iconbtn svg { display: block; }
+    .dh-iconbtn:hover { background: var(--dh-surface-2); color: var(--dh-ink); border-color: #cdd0d7; }
+
+    .dh-tree { background: var(--dh-surface); border: 1px solid var(--dh-line); border-radius: var(--dh-r-lg); overflow: hidden; box-shadow: var(--dh-shadow-1); font-family: var(--dh-sans); }
+    .dh-collapsible { display: none; }
+    .dh-collapsible.open { display: block; }
+    .dh-cat { border-bottom: 1px solid var(--dh-line-2); }
+    .dh-cat:last-child { border-bottom: 0; }
+    .dh-row { display: flex; align-items: center; gap: 11px; padding: 11px 16px; cursor: pointer; position: relative; }
+    .dh-row:hover { background: var(--dh-surface-2); }
+    .dh-cat-row { font-weight: 800; }
+    .dh-cat-ic { width: 30px; height: 30px; border-radius: 9px; background: var(--dh-accent-soft); color: var(--dh-accent-ink); display: grid; place-items: center; flex: 0 0 auto; }
+    .dh-chev { color: var(--dh-ink-4); transition: transform .16s; flex: 0 0 auto; display: grid; place-items: center; width: 18px; }
+    .dh-chev.open { transform: rotate(90deg); }
+    .dh-name { font-size: 14.5px; color: var(--dh-ink); min-width: 0; }
+    .dh-cat-row .dh-name { font-size: 15px; }
+    .dh-row-right { margin-left: auto; display: flex; align-items: center; gap: 14px; flex: 0 0 auto; }
+    .dh-count { font-size: 12.5px; color: var(--dh-ink-3); font-weight: 700; white-space: nowrap; }
+    .dh-count b { color: var(--dh-accent-ink); }
+    .dh-minibar { width: 86px; }
+    .dh-sub-row { padding-left: 52px; }
+    .dh-sub-row .dh-name { font-weight: 700; font-size: 13.5px; color: var(--dh-ink-2); }
+    .dh-layers { background: #fcfcfd; border-top: 1px solid var(--dh-line-2); }
+    .dh-layer-row { padding-left: 80px; padding-top: 9px; padding-bottom: 9px; }
+    .dh-layer-row .dh-name { font-size: 13.5px; }
+    .dh-layer-meta { display: flex; align-items: center; gap: 8px; }
+
+    /* custom checkbox (tri-state) */
+    .dh-check { width: 19px; height: 19px; border-radius: 5px; border: 2px solid #c4c8d0; display: grid; place-items: center; flex: 0 0 auto; background: #fff; transition: .12s; color: #fff; }
+    .dh-check.on, .dh-check.mixed { background: var(--dh-accent); border-color: var(--dh-accent); }
+    .dh-check.mixed::after { content: ""; width: 9px; height: 2.5px; border-radius: 2px; background: #fff; }
+    .dh-check:hover { border-color: var(--dh-accent); }
+
+    /* badges + status dot */
+    .dh-badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 2.5px 7px; border-radius: 5px; }
+    .dh-badge-type { background: #eef2fb; color: #3a5fb0; text-transform: uppercase; font-size: 10px; letter-spacing: .04em; }
+    .dh-badge-provider { background: #f3f0fb; color: #6a52c7; }
+    .dh-badge-origin { background: #fff4e6; color: #b5701a; }
+    .dh-dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+
+    /* layer detail panel */
+    .dh-detail { padding: 4px 16px 18px 80px; background: #fcfcfd; }
+    .dh-detail-card { display: grid; grid-template-columns: 1fr 200px; gap: 18px; background: var(--dh-surface); border: 1px solid var(--dh-line); border-radius: var(--dh-r-md); padding: 16px 18px; }
+    .dh-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; }
+    .dh-meta { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .dh-meta .k { font-size: 11px; font-weight: 800; color: var(--dh-ink-4); text-transform: uppercase; letter-spacing: .04em; }
+    .dh-meta .v { font-size: 13px; color: var(--dh-ink); font-weight: 600; word-break: break-word; }
+    .dh-meta .v.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; }
+    .dh-meta .v a { color: var(--dh-accent-ink); }
+    .dh-flags { display: flex; gap: 7px; margin-top: 2px; flex-wrap: wrap; }
+    .dh-flag { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
+    .dh-flag.on { background: var(--dh-accent-soft); color: var(--dh-accent-ink); }
+    .dh-flag.off { background: var(--dh-surface-3); color: var(--dh-ink-4); }
+    .dh-thumb { border-radius: var(--dh-r-sm); background: repeating-conic-gradient(#eef0f3 0% 25%, #f7f8fa 0% 50%) 50% / 16px 16px; border: 1px solid var(--dh-line); display: grid; place-items: center; color: var(--dh-ink-4); font-size: 11px; font-weight: 700; text-align: center; min-height: 130px; padding: 8px; }
+    .dh-thumb img { max-width: 100%; border-radius: 4px; }
+    .dh-empty { padding: 50px 20px; text-align: center; color: var(--dh-ink-3); font-size: 14px; }
+    .dh-empty .ic { color: var(--dh-ink-4); margin-bottom: 10px; display: grid; place-items: center; }
+    @media (max-width: 920px) { .dh-detail-card { grid-template-columns: 1fr; } }
+
     .catalog-preview-pane .preview-loading {
         padding: 20px;
         text-align: center;
@@ -810,20 +889,30 @@
             </button>
         </div>
 
-        <!-- Tree controls -->
-        <div id="tree-controls" style="display:flex;gap:4px;margin-bottom:6px;margin-top:6px;justify-content:flex-start;">
-            <button onclick="expandAllNodes()" title="{% trans 'Expand all' %}"
-                style="padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;background:#fff;cursor:pointer;font-size:14px;line-height:1;color:#374151;">
-                &#9660;
-            </button>
-            <button onclick="collapseAllNodes()" title="{% trans 'Collapse all' %}"
-                style="padding:4px 8px;border:1px solid #d1d5db;border-radius:4px;background:#fff;cursor:pointer;font-size:14px;line-height:1;color:#374151;">
-                &#9654;
-            </button>
+        <!-- Tree controls: search + status filters + expand/collapse -->
+        <div id="tree-controls" class="dh-treebar">
+            <div class="dh-searchbox">
+                <span class="dh-search-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></span>
+                <input type="text" id="catalog-search" oninput="onCatalogSearch(this.value)" onkeydown="if(event.key==='Escape'){event.preventDefault();clearCatalogSearch();}" placeholder="{% trans 'Search a layer, a provider…' %}">
+                <button type="button" class="dh-search-clear" id="catalog-search-clear" onclick="clearCatalogSearch()" title="{% trans 'Clear search' %}" aria-label="{% trans 'Clear search' %}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="dh-chips" id="catalog-chips">
+                <button class="dh-chip active" id="chip-all" onclick="onCatalogFilter('all')">{% trans "All" %}</button>
+                <button class="dh-chip" id="chip-pending_add" onclick="onCatalogFilter('pending_add')"><span class="cd" style="background:var(--dh-st-add)"></span>{% trans "To add" %}<span class="c" id="chip-count-pending_add"></span></button>
+                <button class="dh-chip" id="chip-pending_remove" onclick="onCatalogFilter('pending_remove')"><span class="cd" style="background:var(--dh-st-remove)"></span>{% trans "To remove" %}<span class="c" id="chip-count-pending_remove"></span></button>
+                <button class="dh-chip" id="chip-disabled" onclick="onCatalogFilter('disabled')"><span class="cd" style="background:var(--dh-st-disabled)"></span>{% trans "Disabled" %}<span class="c" id="chip-count-disabled"></span></button>
+            </div>
+            <div class="dh-expand-btns">
+                <button class="dh-iconbtn" onclick="selectAllLayers()" title="{% trans 'Select all layers' %}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m8 12 3 3 5-6"/></svg></button>
+                <button class="dh-iconbtn" onclick="deselectAllLayers()" title="{% trans 'Deselect all layers' %}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></button>
+                <span style="width:1px;height:20px;background:var(--dh-line);margin:0 3px;"></span>
+                <button class="dh-iconbtn" onclick="expandAllNodes()" title="{% trans 'Expand all' %}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 6 5 5 5-5"/><path d="m7 13 5 5 5-5"/></svg></button>
+                <button class="dh-iconbtn" onclick="collapseAllNodes()" title="{% trans 'Collapse all' %}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 18 5-5 5 5"/><path d="m7 11 5-5 5 5"/></svg></button>
+            </div>
         </div>
 
         <!-- Catalog Tree -->
-        <div id="catalog-tree" class="catalog-tree"></div>
+        <div id="catalog-tree" class="dh-tree"></div>
     </div>
 
     <!-- Admin Boundaries Tab -->
@@ -1535,6 +1624,76 @@
   let catalogData = null
   // Track which groups are open so we can restore state after re-render
   let openGroups = new Set()
+  let catalogSearch = ''
+  let catalogFilter = 'all'   // all | pending_add | pending_remove | disabled
+
+  // --- tree helpers ---
+  const DH_STATUS_COLOR = {
+    synced: 'var(--dh-st-synced)', pending_add: 'var(--dh-st-add)',
+    pending_remove: 'var(--dh-st-remove)', disabled: 'var(--dh-st-disabled)',
+  }
+  function _chev(size) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>`
+  }
+  function _checkHtml(state) {
+    const check = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+    return `<span class="dh-check ${state}">${state === 'on' ? check : ''}</span>`
+  }
+  function _nodeState(entries) {
+    const on = entries.filter(e => e.enabled).length
+    if (on === 0) return 'off'
+    if (on === entries.length) return 'on'
+    return 'mixed'
+  }
+  function _miniSegbar(entries) {
+    const segs = [
+      ['synced', 'var(--dh-st-synced)'], ['pending_add', 'var(--dh-st-add)'],
+      ['pending_remove', 'var(--dh-st-remove)'], ['disabled', 'var(--dh-st-disabled)'],
+    ].map(([st, c]) => [entries.filter(e => e.status === st).length, c])
+    const tot = segs.reduce((a, [v]) => a + v, 0) || 1
+    return `<span class="dh-minibar"><span class="dh-segbar" style="height:6px;">` +
+      segs.filter(([v]) => v > 0).map(([v, c]) => `<div style="width:${v / tot * 100}%;background:${c};"></div>`).join('') +
+      `</span></span>`
+  }
+  function _matchEntry(entry, catTitle, subTitle) {
+    if (catalogFilter !== 'all' && entry.status !== catalogFilter) return false
+    const q = catalogSearch.trim().toLowerCase()
+    if (!q) return true
+    return [(entry.title || ''), (entry.layer_name || ''), (entry.meta_source || ''),
+            (catTitle || ''), (subTitle || '')].some(s => s.toLowerCase().includes(q))
+  }
+
+  function onCatalogSearch(value) {
+    catalogSearch = value
+    const clr = document.getElementById('catalog-search-clear')
+    if (clr) clr.classList.toggle('show', value.trim() !== '')
+    renderCatalog(false)
+  }
+  function clearCatalogSearch() {
+    const input = document.getElementById('catalog-search')
+    if (input) { input.value = ''; input.focus() }
+    onCatalogSearch('')   // empties the search → tree re-collapses to its manual state
+  }
+  function onCatalogFilter(f) {
+    catalogFilter = f
+    document.querySelectorAll('#catalog-chips .dh-chip').forEach(c => c.classList.remove('active'))
+    const el = document.getElementById('chip-' + f)
+    if (el) el.classList.add('active')
+    renderCatalog(false)
+  }
+  function renderTreeChips(data) {
+    const set = (id, v) => { const e = document.getElementById('chip-count-' + id); if (e) e.textContent = v }
+    set('pending_add', data.pending_add || 0)
+    set('pending_remove', data.pending_remove || 0)
+    set('disabled', Math.max(0, (data.total || 0) - (data.enabled || 0) - (data.pending_remove || 0)))
+  }
+
+  function _allEntryIds() {
+    if (!catalogData) return []
+    return (catalogData.categories || []).flatMap(c => c.subcategories.flatMap(s => s.entries.map(e => e.id)))
+  }
+  function selectAllLayers() { const ids = _allEntryIds(); if (ids.length) bulkToggleEntries(ids, true) }
+  function deselectAllLayers() { const ids = _allEntryIds(); if (ids.length) bulkToggleEntries(ids, false) }
 
   async function loadCatalog(expandAll) {
     try {
@@ -1554,25 +1713,26 @@
   function renderCatalog(expandAll) {
     if (!catalogData) return
 
-    // Save currently open groups before re-render
-    document.querySelectorAll('.collapsible-content.open').forEach(el => {
-      openGroups.add(el.id)
-    })
+    const searching = catalogSearch.trim() !== '' || catalogFilter !== 'all'
+    // NB: openGroups is the source of truth for manual expand state (maintained
+    // by toggleCollapsible / expand-collapse-all). We do NOT snapshot the DOM
+    // here — otherwise the nodes force-opened by a search would get persisted,
+    // and clearing the search would leave the tree expanded instead of
+    // collapsing back to the user's manual state.
 
-    // Update stats
+    // Update overview counters + live panels + filter chip counts
     document.getElementById('stat-total').textContent = catalogData.total || 0
     document.getElementById('stat-enabled').textContent = catalogData.enabled || 0
     document.getElementById('stat-synced').textContent = catalogData.synced || 0
-
     renderSyncStatus(catalogData)
     renderCatalogVersionBanner(catalogData)
+    renderTreeChips(catalogData)
 
     const tree = document.getElementById('catalog-tree')
     const categories = catalogData.categories || []
     const isEmpty = categories.length === 0
 
-    // Empty catalog → show only the warning block; hide the overview, the
-    // action bar, the tree controls and the (empty) tree.
+    // Empty catalog → show only the warning block; hide overview/toolbar/tree.
     const emptyBlock = document.getElementById('catalog-empty-state')
     if (emptyBlock) emptyBlock.style.display = isEmpty ? 'flex' : 'none'
     const _toggle = (id, shown) => { const el = document.getElementById(id); if (el) el.style.display = isEmpty ? 'none' : shown }
@@ -1581,97 +1741,84 @@
     _toggle('tree-controls', 'flex')
     _toggle('catalog-tree', 'block')
 
-    if (isEmpty) {
-      tree.innerHTML = ''
-      return
-    }
+    if (isEmpty) { tree.innerHTML = ''; return }
 
     let html = ''
+    let shownLayers = 0
 
     categories.forEach((cat, ci) => {
       const catId = 'cat-' + ci
-      const isOpen = expandAll || openGroups.has(catId)
-      const totalEntries = cat.subcategories.reduce((sum, sc) => sum + sc.entries.length, 0)
-      const enabledEntries = cat.subcategories.reduce((sum, sc) =>
-        sum + sc.entries.filter(e => e.enabled).length, 0)
+      const allEntries = cat.subcategories.flatMap(sc => sc.entries)
+      const visSubs = cat.subcategories.map((sc, si) => ({
+        sc, si, vis: sc.entries.filter(e => _matchEntry(e, cat.title, sc.title)),
+      })).filter(x => !searching || x.vis.length > 0)
+      if (searching && visSubs.length === 0) return
 
-      const allCatIds = cat.subcategories.flatMap(sc => sc.entries.map(e => e.id))
-      const catChecked = enabledEntries === totalEntries && totalEntries > 0 ? 'checked' : ''
-      const catIndeterminate = enabledEntries > 0 && enabledEntries < totalEntries
+      const catOpen = searching || expandAll || openGroups.has(catId)
+      const enabledEntries = allEntries.filter(e => e.enabled).length
+      const catIds = allEntries.map(e => e.id)
+      const catTarget = _nodeState(allEntries) !== 'on'
 
-      html += `<div class="cat-group">
-        <div class="cat-header" onclick="toggleCollapsible('${catId}')">
-          <input type="checkbox" ${catChecked}
-            ${catIndeterminate ? 'data-indeterminate="true"' : ''}
-            onclick="event.stopPropagation(); bulkToggleEntries(${JSON.stringify(allCatIds).replace(/"/g, '&quot;')}, this.checked)"
-            title="${gettext('Check/uncheck all layers in this category')}"
-            style="margin-right:4px;">
-          <span class="arrow${isOpen ? ' open' : ''}" id="arrow-${catId}">&#9654;</span>
-          <strong>${escapeHtml(cat.title)}</strong>
-          <span class="cat-count">${interpolate(gettext('%(enabled)s/%(total)s enabled'), {enabled: enabledEntries, total: totalEntries}, true)}</span>
+      html += `<div class="dh-cat">
+        <div class="dh-row dh-cat-row" onclick="toggleCollapsible('${catId}')">
+          <span class="dh-chev${catOpen ? ' open' : ''}" id="arrow-${catId}">${_chev(17)}</span>
+          <span onclick="event.stopPropagation(); bulkToggleEntries(${JSON.stringify(catIds).replace(/"/g, '&quot;')}, ${catTarget})" title="${gettext('Check/uncheck all layers in this category')}">${_checkHtml(_nodeState(allEntries))}</span>
+          <span class="dh-cat-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg></span>
+          <span class="dh-name">${escapeHtml(cat.title)}</span>
+          <span class="dh-row-right">
+            ${_miniSegbar(allEntries)}
+            <span class="dh-count"><b>${enabledEntries}</b>/${allEntries.length} ${gettext('enabled')}</span>
+          </span>
         </div>
-        <div class="collapsible-content${isOpen ? ' open' : ''}" id="${catId}">`
+        <div class="dh-collapsible${catOpen ? ' open' : ''}" id="${catId}">`
 
-      cat.subcategories.forEach((subcat, si) => {
+      visSubs.forEach(({ sc, si, vis }) => {
         const subcatId = 'subcat-' + ci + '-' + si
-        const isSubOpen = expandAll || openGroups.has(subcatId)
-        const scEnabled = subcat.entries.filter(e => e.enabled).length
-        const scIds = subcat.entries.map(e => e.id)
-        const scChecked = scEnabled === subcat.entries.length && subcat.entries.length > 0 ? 'checked' : ''
-        const scIndeterminate = scEnabled > 0 && scEnabled < subcat.entries.length
+        const subOpen = searching || expandAll || openGroups.has(subcatId)
+        const scEnabled = sc.entries.filter(e => e.enabled).length
+        const scIds = sc.entries.map(e => e.id)
+        const scTarget = _nodeState(sc.entries) !== 'on'
+        const rows = searching ? vis : sc.entries
 
-        html += `<div class="subcat-group">
-          <div class="subcat-header" onclick="toggleCollapsible('${subcatId}')">
-            <input type="checkbox" ${scChecked}
-              ${scIndeterminate ? 'data-indeterminate="true"' : ''}
-              onclick="event.stopPropagation(); bulkToggleEntries(${JSON.stringify(scIds).replace(/"/g, '&quot;')}, this.checked)"
-              title="${gettext('Check/uncheck all layers in this subcategory')}"
-              style="margin-right:4px;">
-            <span class="arrow${isSubOpen ? ' open' : ''}" id="arrow-${subcatId}">&#9654;</span>
-            ${escapeHtml(subcat.title)}
-            <span class="subcat-count">${scEnabled}/${subcat.entries.length}</span>
+        html += `<div class="dh-sub">
+          <div class="dh-row dh-sub-row" onclick="toggleCollapsible('${subcatId}')">
+            <span class="dh-chev${subOpen ? ' open' : ''}" id="arrow-${subcatId}">${_chev(16)}</span>
+            <span onclick="event.stopPropagation(); bulkToggleEntries(${JSON.stringify(scIds).replace(/"/g, '&quot;')}, ${scTarget})" title="${gettext('Check/uncheck all layers in this subcategory')}">${_checkHtml(_nodeState(sc.entries))}</span>
+            <span class="dh-name">${escapeHtml(sc.title)}</span>
+            <span class="dh-row-right"><span class="dh-count">${scEnabled}/${sc.entries.length}</span></span>
           </div>
-          <div class="collapsible-content${isSubOpen ? ' open' : ''}" id="${subcatId}">`
+          <div class="dh-collapsible${subOpen ? ' open' : ''}" id="${subcatId}"><div class="dh-layers">`
 
-        subcat.entries.forEach(entry => {
-          const checked = entry.enabled ? 'checked' : ''
-          const metaParts = [entry.meta_source, entry.meta_resolution].filter(Boolean)
-          const metaStr = metaParts.length ? metaParts.join(' · ') : ''
-          const originLabel = entry.origin === 'config' ? '' :
-            `<span class="entry-origin">${entry.origin}</span>`
+        rows.forEach(entry => {
+          shownLayers++
           const detailId = 'detail-' + entry.id
           const isDetailOpen = openGroups.has(detailId)
-
-          const typeLabel = entry.layer_type && entry.layer_type !== 'wms'
-            ? `<span class="entry-type-badge">${escapeHtml(entry.layer_type)}</span>` : ''
-
-          html += `<div class="entry-row" onclick="toggleDetail('${entry.id}', event)" style="cursor:pointer;">
-            <input type="checkbox" ${checked}
-              onchange="toggleEntry('${entry.id}')" onclick="event.stopPropagation()" title="${gettext('Enable/disable this layer')}">
-            <span class="status-dot ${entry.status}" title="${entry.status}"></span>
-            <span class="entry-title">
-              <span class="title-text">${escapeHtml(entry.title)}</span>
-              ${metaStr ? `<br><span class="meta-text">${escapeHtml(metaStr)}</span>` : ''}
+          const provider = entry.meta_source ? `<span class="dh-badge dh-badge-provider">${escapeHtml(entry.meta_source)}</span>` : ''
+          const type = `<span class="dh-badge dh-badge-type">${escapeHtml(entry.layer_type || 'wms')}</span>`
+          const origin = (entry.origin && entry.origin !== 'config') ? `<span class="dh-badge dh-badge-origin">${escapeHtml(entry.origin)}</span>` : ''
+          html += `<div class="dh-row dh-layer-row" onclick="toggleDetail('${entry.id}', event)">
+            <span onclick="event.stopPropagation(); toggleEntry('${entry.id}')" title="${gettext('Enable/disable this layer')}">${_checkHtml(entry.enabled ? 'on' : 'off')}</span>
+            <span class="dh-dot" style="background:${DH_STATUS_COLOR[entry.status] || 'var(--dh-st-disabled)'}" title="${escapeHtml(entry.status || '')}"></span>
+            <span class="dh-name">${escapeHtml(entry.title)}</span>
+            <span class="dh-row-right">
+              <span class="dh-layer-meta">${provider}${type}${origin}</span>
+              <span class="dh-chev${isDetailOpen ? ' open' : ''}" id="arrow-${detailId}">${_chev(16)}</span>
             </span>
-            ${typeLabel}${originLabel}
           </div>
-          <div class="entry-detail${isDetailOpen ? ' open' : ''}" id="${detailId}">
-            ${buildDetailPanel(entry)}
-          </div>`
+          <div class="dh-collapsible${isDetailOpen ? ' open' : ''}" id="${detailId}">${buildDetailPanel(entry)}</div>`
         })
 
-        html += `</div></div>`
+        html += `</div></div></div>`
       })
 
       html += `</div></div>`
     })
 
-    tree.innerHTML = html
+    if (searching && shownLayers === 0) {
+      html = `<div class="dh-empty"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></div>${gettext('No layer matches your search.')}</div>`
+    }
 
-    // Set indeterminate state on checkboxes (can't be done via HTML attribute)
-    tree.querySelectorAll('input[data-indeterminate="true"]').forEach(cb => {
-      cb.indeterminate = true
-    })
+    tree.innerHTML = html
   }
 
   function buildWmsPreviewUrl(entry) {
@@ -1690,66 +1837,57 @@
 
   function buildDetailPanel(entry) {
     const lt = entry.layer_type || 'wms'
+    const url = lt === 'wms' ? entry.wms_url
+      : (lt === 'raster_tile' || lt === 'vector_tile') ? entry.tile_url
+      : entry.file_url
 
-    // Type-specific rows
-    const typeRows = []
-    typeRows.push([gettext('Type'), lt])
-    if (lt === 'wms') {
-      if (entry.layer_name) typeRows.push([gettext('Layer name'), entry.layer_name])
-      if (entry.wms_url) typeRows.push([gettext('WMS URL'), entry.wms_url])
-    } else if (lt === 'raster_tile' || lt === 'vector_tile') {
-      if (entry.tile_url) typeRows.push([gettext('Tile URL'), entry.tile_url])
-    } else if (lt === 'raster_file' || lt === 'vector_file') {
-      if (entry.file_url) typeRows.push([gettext('File URL'), entry.file_url])
+    const cell = (k, v, mono) => v
+      ? `<div class="dh-meta"><span class="k">${escapeHtml(k)}</span><span class="v${mono ? ' mono' : ''}">${escapeHtml(String(v))}</span></div>` : ''
+    const flag = (label, on) => {
+      const ic = on
+        ? '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+        : '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>'
+      return `<span class="dh-flag ${on ? 'on' : 'off'}">${ic}${escapeHtml(label)}</span>`
     }
 
-    const metaRows = [
-      ...typeRows,
-      [gettext('Source'), entry.meta_source],
-      [gettext('Function'), entry.meta_function],
-      [gettext('Resolution'), entry.meta_resolution],
-      [gettext('Coverage'), entry.meta_geographic_coverage],
-      [gettext('Update freq.'), entry.meta_frequency_of_update],
-      [gettext('License'), entry.meta_license],
-      [gettext('Multi-temporal'), entry.multi_temporal ? gettext('Yes') : gettext('No')],
-      [gettext('Initially visible'), entry.initial_visible ? gettext('Yes') : gettext('No')],
-      [gettext('Near real-time'), entry.near_realtime ? gettext('Yes') : gettext('No')],
-      [gettext('Auto-update interval'), entry.auto_update_interval ? entry.auto_update_interval + ' ' + gettext('min') : null],
-      [gettext('Origin'), entry.origin],
-      [gettext('Status'), entry.status],
-    ].filter(([, v]) => v)
+    const urlCell = url
+      ? `<div class="dh-meta" style="grid-column:1/-1"><span class="k">${gettext('Service URL')}</span><span class="v mono" style="word-break:break-all;">${escapeHtml(url)}</span></div>` : ''
+    const autoUpd = entry.auto_update_interval ? entry.auto_update_interval + ' ' + gettext('min') : ''
+    const desc = entry.meta_overview || entry.summary || ''
+    const descCell = desc
+      ? `<div class="dh-meta" style="grid-column:1/-1"><span class="k">${gettext('Description')}</span><span class="v" style="font-weight:500;">${escapeHtml(desc)}</span></div>` : ''
 
-    let tableHtml = metaRows.map(([label, value]) =>
-      `<tr><td>${escapeHtml(label)}</td><td>${escapeHtml(String(value))}</td></tr>`
-    ).join('')
+    const flags = `<div class="dh-meta" style="grid-column:1/-1"><span class="k">${gettext('Climweb options')}</span><div class="dh-flags">` +
+      flag(gettext('Popup'), !!entry.popup) +
+      flag(gettext('WMS legend'), !!entry.legend_from_capabilities) +
+      flag(gettext('Multi-temporal'), !!entry.multi_temporal) +
+      flag(gettext('Initially visible'), !!entry.initial_visible) +
+      flag(gettext('Near real-time'), !!entry.near_realtime) +
+      `</div></div>`
 
-    const learnMore = entry.meta_learn_more
-      ? `<tr><td>${gettext('Learn more')}</td><td><a href="${escapeHtml(entry.meta_learn_more)}" target="_blank" rel="noopener" style="color:#059669;text-decoration:underline;">${escapeHtml(entry.meta_learn_more)}</a></td></tr>`
-      : ''
-
-    const description = entry.meta_overview || entry.summary
-    const descHtml = description
-      ? `<div class="detail-description">${escapeHtml(description)}</div>`
-      : ''
-
-    // Only show WMS preview for wms type
-    let previewHtml = ''
+    let thumb = `<div class="dh-thumb">${gettext('GetMap preview')}<br>320×240 · EPSG:3857</div>`
     if (lt === 'wms' && entry.wms_url && entry.layer_name) {
       const previewUrl = buildWmsPreviewUrl(entry)
-      previewHtml = `<div class="detail-preview">
-        <img src="${escapeHtml(previewUrl)}" alt="${gettext('WMS Preview')}" loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.textContent='${gettext('Preview not available')}'">
-        <span class="preview-label">${gettext('WMS preview')}</span>
-      </div>`
+      thumb = `<div class="dh-thumb"><img src="${escapeHtml(previewUrl)}" alt="${gettext('GetMap preview')}" loading="lazy" onerror="this.parentNode.textContent='${gettext('Preview not available')}'"></div>`
     }
 
-    return `<div class="detail-grid">
-      <div class="detail-meta">
-        ${descHtml}
-        <table>${tableHtml}${learnMore}</table>
+    return `<div class="dh-detail"><div class="dh-detail-card">
+      <div class="dh-meta-grid">
+        ${cell(gettext('Layer name'), entry.layer_name, true)}
+        ${cell(gettext('Type'), (entry.layer_type || 'wms'))}
+        ${urlCell}
+        ${cell(gettext('Provider'), entry.meta_source)}
+        ${cell(gettext('Resolution'), entry.meta_resolution)}
+        ${cell(gettext('Update freq.'), entry.meta_frequency_of_update)}
+        ${cell(gettext('Coverage'), entry.meta_geographic_coverage)}
+        ${cell(gettext('License'), entry.meta_license)}
+        ${cell(gettext('Origin'), entry.origin)}
+        ${autoUpd ? cell(gettext('Auto-update interval'), autoUpd) : ''}
+        ${descCell}
+        ${flags}
       </div>
-      ${previewHtml}
-    </div>`
+      ${thumb}
+    </div></div>`
   }
 
   async function bulkToggleEntries(entryIds, enabled) {
@@ -1772,19 +1910,9 @@
   }
 
   function toggleDetail(entryId, event) {
-    // Don't toggle if clicking on a checkbox or link
-    if (event.target.tagName === 'INPUT' || event.target.tagName === 'A') return
-
-    const detailId = 'detail-' + entryId
-    const el = document.getElementById(detailId)
-    if (el) {
-      el.classList.toggle('open')
-      if (el.classList.contains('open')) {
-        openGroups.add(detailId)
-      } else {
-        openGroups.delete(detailId)
-      }
-    }
+    // The custom checkbox stops propagation, so any click that reaches here is
+    // a row click → open / close the layer detail panel (and rotate its chevron).
+    toggleCollapsible('detail-' + entryId)
   }
 
   function toggleCollapsible(id) {
@@ -1803,7 +1931,8 @@
   }
 
   function expandAllNodes() {
-    document.querySelectorAll('.catalog-tree .collapsible-content').forEach(el => {
+    document.querySelectorAll('#catalog-tree .dh-collapsible').forEach(el => {
+      if (el.id.startsWith('detail-')) return   // categories & subcategories only
       el.classList.add('open')
       openGroups.add(el.id)
       const arrow = document.getElementById('arrow-' + el.id)
@@ -1812,7 +1941,8 @@
   }
 
   function collapseAllNodes() {
-    document.querySelectorAll('.catalog-tree .collapsible-content').forEach(el => {
+    document.querySelectorAll('#catalog-tree .dh-collapsible').forEach(el => {
+      if (el.id.startsWith('detail-')) return
       el.classList.remove('open')
       openGroups.delete(el.id)
       const arrow = document.getElementById('arrow-' + el.id)

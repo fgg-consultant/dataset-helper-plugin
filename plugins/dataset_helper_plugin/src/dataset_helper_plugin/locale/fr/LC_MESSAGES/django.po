@@ -921,3 +921,33 @@ msgstr "Documentation du plugin"
 
 msgid "The local catalog is empty. Load the embedded catalog to populate it, then synchronize with Climweb."
 msgstr "Le catalogue local est vide. Chargez le catalogue embarqué pour le remplir, puis synchronisez avec Climweb."
+
+# ── Added: layer tree controls/detail ──
+
+msgid "All"
+msgstr "Toutes"
+
+msgid "Disabled"
+msgstr "Désactivées"
+
+msgid "Search a layer, a provider…"
+msgstr "Rechercher une couche, un fournisseur…"
+
+msgid "To add"
+msgstr "À ajouter"
+
+msgid "To remove"
+msgstr "À retirer"
+
+# ── Added: tree select-all/deselect-all ──
+
+msgid "Select all layers"
+msgstr "Tout sélectionner"
+
+msgid "Deselect all layers"
+msgstr "Tout désélectionner"
+
+# ── Added: clear search ──
+
+msgid "Clear search"
+msgstr "Effacer la recherche"

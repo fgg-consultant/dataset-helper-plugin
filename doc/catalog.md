@@ -42,17 +42,31 @@ Seul **Synchronize with Climweb** résorbe les états orange et rouge.
 
 ## Naviguer dans l'arbre
 
+Une barre de contrôle se trouve au-dessus de l'arbre : un **champ de recherche**, des **puces de filtre par statut**, des boutons **select-all / deselect-all** et des boutons **tout déplier / tout replier**.
+
 L'arbre est entièrement repliable. Trois interactions principales :
 
 - Cliquer sur l'en-tête d'une **catégorie** ou d'une **sous-catégorie** la déplie / replie.
-- Les boutons ▼ et ▶ en haut de l'arbre déplient ou replient **tout** l'arbre.
-- Cliquer sur la ligne d'une couche ouvre / referme son **panneau de détails** (URL WMS, identifiant de couche, métadonnées sources, multi-temporel, visible au départ, temps quasi réel, intervalle de mise à jour automatique…).
+- Les boutons déplier / replier (en haut à droite de la barre de contrôle) ouvrent ou ferment **toutes** les catégories et sous-catégories d'un coup.
+- Cliquer sur la ligne d'une couche ouvre / referme son **panneau de détails** (nom de la couche, URL du service, fournisseur, résolution, fréquence, origine, ainsi que les options Climweb — popup, légende WMS, multi-temporel, visible au départ, temps quasi réel — plus un aperçu GetMap).
+
+Chaque ligne affiche, d'un coup d'œil : une **case à cocher** à trois états, une **pastille de statut** colorée, le **nom** de la couche, et des **badges** pour le fournisseur, le type de couche et (pour les entrées héritées) l'origine. Chaque en-tête de catégorie porte aussi une petite **mini-barre de statut** qui résume ses couches.
+
+## Rechercher et filtrer
+
+La barre de contrôle au-dessus de l'arbre permet de restreindre ce qui est affiché — entièrement côté client, rien n'est envoyé au serveur :
+
+- **Champ de recherche** — tapez pour ne conserver que les couches dont le nom, l'identifiant de couche, le fournisseur, la catégorie ou la sous-catégorie correspond. Les catégories et sous-catégories correspondantes se déplient automatiquement. Effacez-le avec le bouton **×** ou la touche **Esc**.
+- **Puces de filtre** — **All**, **To add**, **To remove**, **Disabled** restreignent l'arbre aux couches dans cet état. Les puces affichent un compteur en direct pour chaque état en attente.
+
+Tant qu'une recherche ou un filtre est actif, seules les branches correspondantes sont affichées et dépliées ; les effacer replie l'arbre vers votre état de dépliage / repliage précédent. Si rien ne correspond, l'arbre affiche *No layer matches your search.*
 
 ## Cocher / décocher
 
 - **Une seule couche** : la case à cocher à gauche du titre active ou désactive cette entrée.
 - **Une sous-catégorie** : la case dans son en-tête bascule **toutes les couches** de la sous-catégorie en une fois (bulk toggle).
 - **Une catégorie** : idem, mais sur l'ensemble de la catégorie.
+- **Tout le catalogue** : les boutons **select-all** / **deselect-all** de la barre de contrôle activent ou désactivent *toutes* les couches en une fois.
 
 L'effet est immédiat côté plugin (le statut passe à `pending_add` / `pending_remove`) mais **rien n'est encore écrit côté Climweb**. Le bandeau out-of-sync apparaît alors — cliquez sur **Synchronize with Climweb** pour appliquer.
 

@@ -42,17 +42,31 @@ Somente **Synchronize with Climweb** resolve os estados laranja e vermelho.
 
 ## Navegar pela árvore
 
+Uma barra de controle fica acima da árvore: uma **caixa de pesquisa**, **chips de filtro por status**, botões **select-all / deselect-all** e botões para **expandir / recolher tudo**.
+
 A árvore é totalmente recolhível. Três interações principais:
 
 - Clicar no cabeçalho de uma **categoria** ou **subcategoria** a expande / recolhe.
-- Os botões ▼ e ▶ acima da árvore expandem ou recolhem **tudo**.
-- Clicar na linha de uma camada abre / fecha seu **painel de detalhes** (URL WMS, identificador de camada, metadados de origem, multitemporal, visível inicialmente, near real-time, intervalo de atualização automática…).
+- Os botões de expandir / recolher (no canto superior direito da barra de controle) abrem ou fecham **todas** as categorias e subcategorias de uma vez.
+- Clicar na linha de uma camada abre / fecha seu **painel de detalhes** (nome da camada, URL do serviço, provedor, resolução, frequência, origem e as opções do Climweb — popup, legenda WMS, multitemporal, visível inicialmente, near real-time — além de uma pré-visualização GetMap).
+
+Cada linha exibe, num relance: uma **caixa de seleção** de três estados, um **ponto de status** colorido, o **nome** da camada e **badges** para o provedor, o tipo de camada e (para entradas legadas) a origem. O cabeçalho de cada categoria também traz uma pequena **mini-barra de status** que resume suas camadas.
+
+## Pesquisar e filtrar
+
+A barra de controle acima da árvore permite restringir o que é exibido — puramente do lado do cliente, nada é enviado ao servidor:
+
+- **Caixa de pesquisa** — digite para manter apenas as camadas cujo nome, identificador de camada, provedor, categoria ou subcategoria corresponda. As categorias e subcategorias correspondentes se expandem automaticamente. Limpe-a com o botão **×** ou a tecla **Esc**.
+- **Chips de filtro** — **All**, **To add**, **To remove**, **Disabled** restringem a árvore às camadas naquele estado. Os chips exibem uma contagem ao vivo para cada estado pendente.
+
+Enquanto uma pesquisa ou um filtro está ativo, somente os ramos correspondentes são exibidos e expandidos; ao limpar, a árvore volta a recolher para o seu estado anterior de expansão/recolhimento. Se nada corresponder, a árvore exibe *No layer matches your search.*
 
 ## Marcar / desmarcar
 
 - **Uma única camada**: a caixa à esquerda do título ativa ou desativa essa entrada.
 - **Uma subcategoria**: a caixa em seu cabeçalho alterna **todas as camadas** da subcategoria de uma vez (bulk toggle).
 - **Uma categoria**: idem, mas no conjunto da categoria.
+- **O catálogo inteiro**: os botões **select-all** / **deselect-all** na barra de controle ativam ou desativam *todas* as camadas de uma vez.
 
 O efeito é imediato do lado do plugin (o status passa para `pending_add` / `pending_remove`) mas **nada é escrito ainda no Climweb**. A faixa de dessincronização aparece então — clique em **Synchronize with Climweb** para aplicar.
 

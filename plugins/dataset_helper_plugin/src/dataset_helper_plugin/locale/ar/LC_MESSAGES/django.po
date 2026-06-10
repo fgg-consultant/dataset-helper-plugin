@@ -906,3 +906,33 @@ msgstr "توثيق الإضافة"
 
 msgid "The local catalog is empty. Load the embedded catalog to populate it, then synchronize with Climweb."
 msgstr "الكتالوج المحلي فارغ. حمّل الكتالوج المُضمَّن لملئه ثم زامن مع Climweb."
+
+# ── Added: layer tree controls/detail ──
+
+msgid "All"
+msgstr "الكل"
+
+msgid "Disabled"
+msgstr "معطّلة"
+
+msgid "Search a layer, a provider…"
+msgstr "ابحث عن طبقة أو مزوّد…"
+
+msgid "To add"
+msgstr "للإضافة"
+
+msgid "To remove"
+msgstr "للإزالة"
+
+# ── Added: tree select-all/deselect-all ──
+
+msgid "Select all layers"
+msgstr "تحديد كل الطبقات"
+
+msgid "Deselect all layers"
+msgstr "إلغاء تحديد كل الطبقات"
+
+# ── Added: clear search ──
+
+msgid "Clear search"
+msgstr "مسح البحث"

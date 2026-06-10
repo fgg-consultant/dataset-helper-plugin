@@ -557,3 +557,29 @@ msgid "%(n)s pending change"
 msgid_plural "%(n)s pending changes"
 msgstr[0] "%(n)s changement en attente"
 msgstr[1] "%(n)s changements en attente"
+
+# ── Added: layer tree controls/detail ──
+
+msgid "Climweb options"
+msgstr "Options Climweb"
+
+msgid "GetMap preview"
+msgstr "Aperçu GetMap"
+
+msgid "No layer matches your search."
+msgstr "Aucune couche ne correspond à votre recherche."
+
+msgid "Popup"
+msgstr "Popup"
+
+msgid "Provider"
+msgstr "Fournisseur"
+
+msgid "Service URL"
+msgstr "URL du service"
+
+msgid "WMS legend"
+msgstr "Légende WMS"
+
+msgid "enabled"
+msgstr "activées"
